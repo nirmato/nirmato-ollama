@@ -1,0 +1,11 @@
+naming:
+    InvalidPackageDeclaration:
+        active: false
+complexity:
+    TooManyFunctions:
+        active: true
+        thresholdInFiles: 20
+style:
+    MaxLineLength:
+        active: true
+        maxLineLength: 180

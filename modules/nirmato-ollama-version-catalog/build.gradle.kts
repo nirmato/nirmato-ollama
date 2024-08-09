@@ -3,6 +3,8 @@ plugins {
     `maven-publish`
 }
 
+description = "Gradle Version Catalog"
+
 val modulesToIncludeInBom = setOf(
     "nirmato-ollama-client",
 )
@@ -27,6 +29,8 @@ val librariesToIncludeInBom = setOf(
 
 catalog {
     versionCatalog {
+        version("kotlin", libraries.versions.kotlin.asProvider().get())
+
         val catalog = versionCatalogs.named("libraries")
         for (alias in catalog.libraryAliases.filter { it in librariesToIncludeInBom }) {
             library(alias, alias.toString())

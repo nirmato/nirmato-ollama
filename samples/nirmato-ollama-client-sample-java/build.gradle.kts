@@ -8,6 +8,8 @@ plugins {
     id("build-project-default")
 }
 
+description = "Ollama Client using Ktor Java engine"
+
 kotlin {
     jvm {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)

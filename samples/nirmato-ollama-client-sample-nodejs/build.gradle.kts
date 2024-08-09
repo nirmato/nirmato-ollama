@@ -7,6 +7,8 @@ plugins {
     id("build-project-default")
 }
 
+description = "Ollama Client using Ktor Js engine"
+
 kotlin {
     js {
         nodejs()

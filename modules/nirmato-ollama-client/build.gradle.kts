@@ -17,6 +17,8 @@ plugins {
     id("build-project-default")
 }
 
+description = "Ollama Client"
+
 kotlin {
     explicitApi()
 

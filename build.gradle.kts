@@ -1,5 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
@@ -12,6 +13,8 @@ plugins {
 
     id("build-project-default")
 }
+
+description = "Root Project"
 
 allprojects {
     group = "org.nirmato.ollama"
@@ -33,8 +36,9 @@ plugins.withType<YarnPlugin> {
 }
 
 tasks {
-    dokkaHtmlMultiModule.configure {
+    val dokkaHtmlMultiModule by getting(DokkaMultiModuleTask::class) {
         moduleName.set(rootProject.name)
+        moduleVersion.set("0.1.0") // TODO
     }
 
     val detektAll by registering(Detekt::class) {

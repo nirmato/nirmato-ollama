@@ -100,7 +100,7 @@ internal class CompletionsClientTest {
         }
 
         val response = mutableListOf<GenerateCompletionResponse>()
-        ollama.generateCompletions(completionRequest).onEach { response += it }.launchIn(this).join()
+        ollama.generateCompletionFlow(completionRequest).onEach { response += it }.launchIn(this).join()
 
         println(response.toString())
     }

@@ -20,7 +20,7 @@ import org.nirmato.ollama.api.GenerateCompletionResponse
 import org.nirmato.ollama.internal.HttpRequester
 import org.nirmato.ollama.internal.JsonLenient
 import org.nirmato.ollama.internal.processRequest
-import org.nirmato.ollama.internal.streamRequest
+import org.nirmato.ollama.internal.processRequestFlow
 
 internal class CompletionsClient internal constructor(private val requester: HttpRequester) : CompletionsApi {
     override suspend fun generateCompletion(generateCompletionRequest: GenerateCompletionRequest): GenerateCompletionResponse {
@@ -33,8 +33,8 @@ internal class CompletionsClient internal constructor(private val requester: Htt
         }
     }
 
-    override fun generateCompletions(generateCompletionRequest: GenerateCompletionRequest): Flow<GenerateCompletionResponse> {
-        return requester.streamRequest<GenerateCompletionResponse> {
+    override fun generateCompletionFlow(generateCompletionRequest: GenerateCompletionRequest): Flow<GenerateCompletionResponse> {
+        return requester.processRequestFlow<GenerateCompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")
             setBody(generateCompletionRequest.toStreamRequest())

@@ -20,7 +20,7 @@ import org.nirmato.ollama.api.GenerateChatCompletionResponse
 import org.nirmato.ollama.internal.HttpRequester
 import org.nirmato.ollama.internal.JsonLenient
 import org.nirmato.ollama.internal.processRequest
-import org.nirmato.ollama.internal.streamRequest
+import org.nirmato.ollama.internal.processRequestFlow
 
 internal class ChatClient internal constructor(private val requester: HttpRequester) : ChatApi {
     override suspend fun generateChatCompletion(generateChatCompletionRequest: GenerateChatCompletionRequest): GenerateChatCompletionResponse {
@@ -33,8 +33,8 @@ internal class ChatClient internal constructor(private val requester: HttpReques
         }
     }
 
-    override fun generateChatCompletions(generateChatCompletionRequest: GenerateChatCompletionRequest): Flow<GenerateChatCompletionResponse> {
-        return requester.streamRequest<GenerateChatCompletionResponse> {
+    override fun generateChatCompletionFlow(generateChatCompletionRequest: GenerateChatCompletionRequest): Flow<GenerateChatCompletionResponse> {
+        return requester.processRequestFlow<GenerateChatCompletionResponse> {
             method = HttpMethod.Post
             url(path = "chat")
             setBody(generateChatCompletionRequest.toStreamRequest())

@@ -55,7 +55,7 @@ internal class HttpTransport(private val httpClient: HttpClient) : HttpRequester
     }
 
     @Suppress("TooGenericExceptionCaught")
-    override suspend fun <T : Any> streamRequest(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
+    override suspend fun <T : Any> processRequestFlow(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
         try {
             HttpStatement(builder = HttpRequestBuilder().apply(builder), client = httpClient).execute {
                 when (it.status) {

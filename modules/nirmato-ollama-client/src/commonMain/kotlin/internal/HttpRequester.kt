@@ -21,7 +21,7 @@ internal interface HttpRequester : Closeable {
     /**
      * Perform an HTTP request and get a streamed result.
      */
-    suspend fun <T : Any> streamRequest(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T)
+    suspend fun <T : Any> processRequestFlow(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T)
 }
 
 /**
@@ -34,9 +34,9 @@ internal suspend inline fun <reified T> HttpRequester.processRequest(noinline bu
 /**
  * Perform an HTTP request and get a streamed result.
  */
-internal inline fun <reified T : Any> HttpRequester.streamRequest(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
+internal inline fun <reified T : Any> HttpRequester.processRequestFlow(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
     return flow {
-        streamRequest(builder) { response ->
+        processRequestFlow(builder) { response ->
             streamEventsFrom(response)
         }
     }

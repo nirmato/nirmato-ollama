@@ -22,7 +22,7 @@
 
 Nirmato Ollama is a Kotlin multiplatform client to interact with Ollama API.
 
-The implementation follows the OpenAPI definition is defined in [Ollama API](modules/nirmato-ollama-client/src/commonMain/oas/openapi.yaml). 
+The implementation follows the OpenAPI definition [Ollama API](modules/nirmato-ollama-client/src/commonMain/oas/openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
 > [!WARNING]
 > nirmato-ollama is under development.
@@ -35,23 +35,19 @@ The implementation follows the OpenAPI definition is defined in [Ollama API](mod
 ### Generate a completion
 
 ```kotlin
-runBlocking {
-    val ollama = createOllamaClient {
-        logging = LoggingConfig(logLevel = LogLevel.All)
-        timeout = TimeoutConfig(socket = 30.seconds)
-        host = OllamaHost.Local
-        retry = RetryStrategy(0)
-        engine = CIO.create()
-    }
-    
-    val completionRequest = generateCompletionRequest {
-        model = "tinyllama"
-        prompt = "Why is the sky blue?"
-    }
-    val response = ollama.generateCompletion(completionRequest)
-    
-    println(response.toString())
+val ollama = createOllamaClient {
+    logging = LoggingConfig(logLevel = LogLevel.All)
+    timeout = TimeoutConfig(socket = 30.seconds)
+    host = OllamaHost.Local
+    retry = RetryStrategy(0)
+    engine = CIO.create()
 }
+
+val completionRequest = generateCompletionRequest {
+    model = "tinyllama"
+    prompt = "Why is the sky blue?"
+}
+val response = ollama.generateCompletion(completionRequest)
 ```
 
 ## Getting Started

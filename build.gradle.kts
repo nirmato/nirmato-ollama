@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 plugins {
     alias(libraries.plugins.kotlinx.serialization) apply false
-    alias(libraries.plugins.kotlinx.bcv) apply false
+    alias(libraries.plugins.kotlinx.bcv)
     alias(libraries.plugins.detekt)
     alias(libraries.plugins.kotlin.dokka)
 
@@ -18,12 +18,25 @@ description = "Root Project"
 
 allprojects {
     group = "org.nirmato.ollama"
+    version = "0.1.0"
 
     configurations.all {
         resolutionStrategy {
             failOnNonReproducibleResolution()
         }
     }
+}
+
+apiValidation {
+    ignoredPackages.add("org.nirmato.ollama.internal")
+
+    ignoredProjects.addAll(
+        listOf(
+            "nirmato-ollama-bom",
+            "nirmato-ollama-version-catalog",
+        )
+    )
+
 }
 
 plugins.withType<YarnPlugin> {

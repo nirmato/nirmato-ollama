@@ -12,7 +12,6 @@ plugins {
     alias(libraries.plugins.kotlinx.serialization)
     alias(libraries.plugins.kotlin.dokka)
     alias(libraries.plugins.kotlinx.kover)
-    alias(libraries.plugins.kotlinx.bcv)
 
     id("build-project-default")
 }

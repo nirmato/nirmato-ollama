@@ -6,11 +6,10 @@ import kotlinx.serialization.Serializable
 import org.nirmato.ollama.dsl.OllamaDsl
 
 /**
- * Request to generate a predicted chat completion for a prompt.
+ * Request to generate a predicted completion for a prompt.
  */
 @Serializable
-public data class GenerateChatCompletionRequest(
-
+public data class GenerateRequest(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -21,10 +20,18 @@ public data class GenerateChatCompletionRequest(
     @Required
     val model: String,
 
-    /** The messages of the chat, this can be used to keep a chat memory */
-    @SerialName(value = "messages")
+    /** The prompt to generate a response. */
+    @SerialName(value = "prompt")
     @Required
-    val messages: List<Message>,
+    val prompt: String,
+
+    /** The text after the model response. */
+    @SerialName(value = "suffix")
+    val suffix: String? = null,
+
+    /** (optional) A list of Base64-encoded images to include in the message (for multimodal models such as llava) */
+    @SerialName(value = "images")
+    val images: List<String>? = null,
 
     /** The format to return a response in. Currently, the only accepted value is json. */
     @SerialName(value = "format")
@@ -34,9 +41,28 @@ public data class GenerateChatCompletionRequest(
     @SerialName(value = "options")
     val options: RequestOptions? = null,
 
+    /** The system prompt to (overrides what is defined in the Modelfile). */
+    @SerialName(value = "system")
+    val system: String? = null,
+
+    /** The full prompt or prompt template (overrides what is defined in the Modelfile). */
+    @SerialName(value = "template")
+    val template: String? = null,
+
+    /** The context parameter returned from a previous request to [CompletionsApi.generate], this can be used to keep a short conversational memory. */
+    @SerialName(value = "context")
+    val context: List<Long>? = null,
+
     /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects.  */
     @SerialName(value = "stream")
     val stream: Boolean? = false,
+
+    /**
+     * If `true` no formatting will be applied to the prompt and no context will be returned.
+     * You may choose to use the `raw` parameter if you are specifying a full templated prompt in your request to the API, and are managing history yourself.
+     */
+    @SerialName(value = "raw")
+    val raw: Boolean? = null,
 
     /**
      * How long (in minutes) to keep the model loaded in memory.
@@ -51,27 +77,38 @@ public data class GenerateChatCompletionRequest(
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun generateChatCompletionRequest(block: GenerateChatCompletionRequestBuilder.() -> Unit): GenerateChatCompletionRequest =
-            GenerateChatCompletionRequestBuilder().apply(block).build()
+        public fun generateRequest(block: GenerateRequestBuilder.() -> Unit): GenerateRequest = GenerateRequestBuilder().apply(block).build()
     }
 
-    /** Builder of [GenerateChatCompletionRequest] instances. */
+    /** Builder of [GenerateRequest] instances. */
     @OllamaDsl
-    public class GenerateChatCompletionRequestBuilder {
+    public class GenerateRequestBuilder {
         public var model: String? = null
-        public var messages: List<Message>? = null
+        public var prompt: String? = null
+        public var suffix: String? = null
+        public var images: List<String>? = null
         public var format: ResponseFormat? = null
         public var options: RequestOptions? = null
+        public var system: String? = null
+        public var template: String? = null
+        public var context: List<Long>? = null
         public var stream: Boolean? = false
+        public var raw: Boolean? = null
         public var keepAlive: Int? = null
 
-        /** Create [GenerateChatCompletionRequest] instance. */
-        public fun build(): GenerateChatCompletionRequest = GenerateChatCompletionRequest(
+        /** Create [GenerateRequest] instance. */
+        public fun build(): GenerateRequest = GenerateRequest(
             model = requireNotNull(model) { "model is required" },
-            messages = requireNotNull(messages) { "messages is required" },
+            prompt = requireNotNull(prompt) { "prompt is required" },
+            suffix = suffix,
+            images = images,
             format = format,
             options = options,
+            system = system,
+            template = template,
+            context = context,
             stream = stream,
+            raw = raw,
             keepAlive = keepAlive,
         )
     }

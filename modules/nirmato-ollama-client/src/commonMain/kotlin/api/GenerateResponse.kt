@@ -1,17 +1,14 @@
 package org.nirmato.ollama.api
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * The response class for the chat endpoint.
+ * The response class for the generate endpoint.
  */
 @Serializable
-public data class GenerateChatCompletionResponse(
-
-    @SerialName(value = "message")
-    val message: Message? = null,
-
+public data class GenerateResponse(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -23,14 +20,15 @@ public data class GenerateChatCompletionResponse(
 
     /** Date on which a model was created. */
     @SerialName(value = "created_at")
-    val createdAt: kotlinx.datetime.Instant? = null,
+    val createdAt: Instant? = null,
+
+    /** The response for a given prompt with a provided model. */
+    @SerialName(value = "response")
+    val response: String? = null,
 
     /** Whether the response has completed. */
     @SerialName(value = "done")
     val done: Boolean? = null,
-
-    @SerialName(value = "done_reason")
-    val doneReason: DoneReason? = null,
 
     /** Time spent generating the response. */
     @SerialName(value = "total_duration")
@@ -55,4 +53,8 @@ public data class GenerateChatCompletionResponse(
     /** Time in nanoseconds spent generating the response. */
     @SerialName(value = "eval_duration")
     val evalDuration: Long? = null,
+
+    /** An encoding of the conversation used in this response, this can be sent in the next request to keep a conversational memory. */
+    @SerialName(value = "context")
+    val context: List<Long>? = null,
 )

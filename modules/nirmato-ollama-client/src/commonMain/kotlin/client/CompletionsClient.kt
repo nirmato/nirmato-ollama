@@ -15,29 +15,29 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
 import org.nirmato.ollama.api.CompletionsApi
-import org.nirmato.ollama.api.GenerateRequest
-import org.nirmato.ollama.api.GenerateResponse
+import org.nirmato.ollama.api.GenerateCompletionRequest
+import org.nirmato.ollama.api.GenerateCompletionResponse
 import org.nirmato.ollama.internal.HttpRequester
 import org.nirmato.ollama.internal.JsonLenient
 import org.nirmato.ollama.internal.processRequest
 import org.nirmato.ollama.internal.processRequestFlow
 
 internal class CompletionsClient internal constructor(private val requester: HttpRequester) : CompletionsApi {
-    override suspend fun generate(generateRequest: GenerateRequest): GenerateResponse {
+    override suspend fun generateCompletion(generateCompletionRequest: GenerateCompletionRequest): GenerateCompletionResponse {
         return requester.processRequest {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(generateRequest)
+            setBody(generateCompletionRequest)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
     }
 
-    override fun generateFlow(generateRequest: GenerateRequest): Flow<GenerateResponse> {
-        return requester.processRequestFlow<GenerateResponse> {
+    override fun generateCompletionFlow(generateCompletionRequest: GenerateCompletionRequest): Flow<GenerateCompletionResponse> {
+        return requester.processRequestFlow<GenerateCompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(generateRequest.toStreamRequest())
+            setBody(generateCompletionRequest.toStreamRequest())
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {
@@ -50,8 +50,8 @@ internal class CompletionsClient internal constructor(private val requester: Htt
     /**
      * Adds `stream` parameter to the request.
      */
-    private fun GenerateRequest.toStreamRequest(): JsonElement {
-        val json = JsonLenient.encodeToJsonElement(GenerateRequest.serializer(), this)
+    private fun GenerateCompletionRequest.toStreamRequest(): JsonElement {
+        val json = JsonLenient.encodeToJsonElement(GenerateCompletionRequest.serializer(), this)
         return streamRequestOf(json)
     }
 

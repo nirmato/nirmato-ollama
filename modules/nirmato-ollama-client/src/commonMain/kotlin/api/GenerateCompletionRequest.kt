@@ -9,7 +9,7 @@ import org.nirmato.ollama.dsl.OllamaDsl
  * Request to generate a predicted completion for a prompt.
  */
 @Serializable
-public data class GenerateRequest(
+public data class GenerateCompletionRequest(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -49,7 +49,7 @@ public data class GenerateRequest(
     @SerialName(value = "template")
     val template: String? = null,
 
-    /** The context parameter returned from a previous request to [CompletionsApi.generate], this can be used to keep a short conversational memory. */
+    /** The context parameter returned from a previous request to [CompletionsApi.generateCompletion], this can be used to keep a short conversational memory. */
     @SerialName(value = "context")
     val context: List<Long>? = null,
 
@@ -77,12 +77,12 @@ public data class GenerateRequest(
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun generateRequest(block: GenerateRequestBuilder.() -> Unit): GenerateRequest = GenerateRequestBuilder().apply(block).build()
+        public fun generateCompletionRequest(block: GenerateCompletionRequestBuilder.() -> Unit): GenerateCompletionRequest = GenerateCompletionRequestBuilder().apply(block).build()
     }
 
-    /** Builder of [GenerateRequest] instances. */
+    /** Builder of [GenerateCompletionRequest] instances. */
     @OllamaDsl
-    public class GenerateRequestBuilder {
+    public class GenerateCompletionRequestBuilder {
         public var model: String? = null
         public var prompt: String? = null
         public var suffix: String? = null
@@ -96,8 +96,8 @@ public data class GenerateRequest(
         public var raw: Boolean? = null
         public var keepAlive: Int? = null
 
-        /** Create [GenerateRequest] instance. */
-        public fun build(): GenerateRequest = GenerateRequest(
+        /** Create [GenerateCompletionRequest] instance. */
+        public fun build(): GenerateCompletionRequest = GenerateCompletionRequest(
             model = requireNotNull(model) { "model is required" },
             prompt = requireNotNull(prompt) { "prompt is required" },
             suffix = suffix,

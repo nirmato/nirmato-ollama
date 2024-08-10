@@ -11,8 +11,8 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
-import org.nirmato.ollama.api.GenerateRequest.Companion.generateRequest
-import org.nirmato.ollama.api.GenerateResponse
+import org.nirmato.ollama.api.GenerateCompletionRequest.Companion.generateCompletionRequest
+import org.nirmato.ollama.api.GenerateCompletionResponse
 import org.nirmato.ollama.createOllamaClient
 
 internal class CompletionsClientTest {
@@ -51,11 +51,11 @@ internal class CompletionsClientTest {
             engine = mockEngine
         }
 
-        val completionRequest = generateRequest {
+        val completionRequest = generateCompletionRequest {
             model = "tinyllama"
             prompt = "Why is the sky blue?"
         }
-        val response = ollama.generate(completionRequest)
+        val response = ollama.generateCompletion(completionRequest)
 
         println(response.toString())
     }
@@ -94,13 +94,13 @@ internal class CompletionsClientTest {
             engine = mockEngine
         }
 
-        val completionRequest = generateRequest {
+        val completionRequest = generateCompletionRequest {
             model = "tinyllama"
             prompt = "Why is the sky blue?"
         }
 
-        val response = mutableListOf<GenerateResponse>()
-        ollama.generateFlow(completionRequest).onEach { response += it }.launchIn(this).join()
+        val response = mutableListOf<GenerateCompletionResponse>()
+        ollama.generateCompletionFlow(completionRequest).onEach { response += it }.launchIn(this).join()
 
         println(response.toString())
     }

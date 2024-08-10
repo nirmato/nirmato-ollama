@@ -9,7 +9,7 @@ import org.nirmato.ollama.dsl.OllamaDsl
  * Request to generate a predicted chat completion for a prompt.
  */
 @Serializable
-public data class GenerateChatRequest(
+public data class GenerateChatCompletionRequest(
 
     /**
      * The model name.
@@ -51,12 +51,12 @@ public data class GenerateChatRequest(
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun generateChatRequest(block: GenerateChatRequestBuilder.() -> Unit): GenerateChatRequest = GenerateChatRequestBuilder().apply(block).build()
+        public fun generateChatCompletionRequest(block: GenerateChatCompletionRequestBuilder.() -> Unit): GenerateChatCompletionRequest = GenerateChatCompletionRequestBuilder().apply(block).build()
     }
 
-    /** Builder of [GenerateChatRequest] instances. */
+    /** Builder of [GenerateChatCompletionRequest] instances. */
     @OllamaDsl
-    public class GenerateChatRequestBuilder {
+    public class GenerateChatCompletionRequestBuilder {
         public var model: String? = null
         public var messages: List<Message>? = null
         public var format: ResponseFormat? = null
@@ -64,8 +64,8 @@ public data class GenerateChatRequest(
         public var stream: Boolean? = false
         public var keepAlive: Int? = null
 
-        /** Create [GenerateChatRequest] instance. */
-        public fun build(): GenerateChatRequest = GenerateChatRequest(
+        /** Create [GenerateChatCompletionRequest] instance. */
+        public fun build(): GenerateChatCompletionRequest = GenerateChatCompletionRequest(
             model = requireNotNull(model) { "model is required" },
             messages = requireNotNull(messages) { "messages is required" },
             format = format,

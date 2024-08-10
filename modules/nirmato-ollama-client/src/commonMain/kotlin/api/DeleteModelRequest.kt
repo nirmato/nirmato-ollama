@@ -20,22 +20,20 @@ public data class DeleteModelRequest(
     @SerialName(value = "model")
     @Required
     val model: String,
-)
+) {
+    public companion object {
+        /** A request for creating a model. */
+        public fun deleteModelRequest(block: DeleteModelRequestBuilder.() -> Unit): DeleteModelRequest = DeleteModelRequestBuilder().apply(block).build()
+    }
 
-/**
- * A request for creating a model.
- */
-public fun deleteModelRequest(block: DeleteModelRequestBuilder.() -> Unit): DeleteModelRequest =
-    DeleteModelRequestBuilder().apply(block).build()
+    /** Builder of [DeleteModelRequest] instances. */
+    @OllamaDsl
+    public class DeleteModelRequestBuilder {
+        public var model: String? = null
 
-/**
- * Builder of [DeleteModelRequest] instances.
- */
-@OllamaDsl
-public class DeleteModelRequestBuilder {
-    public var model: String? = null
-
-    public fun build(): DeleteModelRequest = DeleteModelRequest(
-        model = requireNotNull(model) { "model is required" },
-    )
+        /** Create [DeleteModelRequest] instance. */
+        public fun build(): DeleteModelRequest = DeleteModelRequest(
+            model = requireNotNull(model) { "model is required" },
+        )
+    }
 }

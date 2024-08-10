@@ -14,12 +14,12 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 import io.ktor.http.headersOf
 import io.ktor.utils.io.core.toByteArray
-import org.nirmato.ollama.api.copyModelRequest
-import org.nirmato.ollama.api.createModelRequest
-import org.nirmato.ollama.api.deleteModelRequest
-import org.nirmato.ollama.api.modelInfoRequest
-import org.nirmato.ollama.api.pullModelRequest
-import org.nirmato.ollama.api.pushModelRequest
+import org.nirmato.ollama.api.CopyModelRequest.Companion.copyModelRequest
+import org.nirmato.ollama.api.CreateModelRequest.Companion.createModelRequest
+import org.nirmato.ollama.api.DeleteModelRequest.Companion.deleteModelRequest
+import org.nirmato.ollama.api.ModelInfoRequest.Companion.modelInfoRequest
+import org.nirmato.ollama.api.PullModelRequest.Companion.pullModelRequest
+import org.nirmato.ollama.api.PushModelRequest.Companion.pushModelRequest
 import org.nirmato.ollama.createOllamaClient
 import org.nirmato.ollama.infrastructure.OctetByteArray
 

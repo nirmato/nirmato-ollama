@@ -19,22 +19,20 @@ public data class ModelInfoRequest(
     @SerialName(value = "name")
     @Required
     val name: String,
-)
+){
+    public companion object {
+        /** A request to show the model info. */
+        public fun modelInfoRequest(block: ModelInfoRequestBuilder.() -> Unit): ModelInfoRequest = ModelInfoRequestBuilder().apply(block).build()
+    }
 
-/**
- * A request to show the model info.
- */
-public fun modelInfoRequest(block: ModelInfoRequestBuilder.() -> Unit): ModelInfoRequest =
-    ModelInfoRequestBuilder().apply(block).build()
+    /** Builder of [ModelInfoRequest] instances. */
+    @OllamaDsl
+    public class ModelInfoRequestBuilder {
+        public var name: String? = null
 
-/**
- * Builder of [ModelInfoRequest] instances.
- */
-@OllamaDsl
-public class ModelInfoRequestBuilder {
-    public var name: String? = null
-
-    public fun build(): ModelInfoRequest = ModelInfoRequest(
-        name = requireNotNull(name) { "name is required" },
-    )
+        /** Create [ModelInfoRequest] instance. */
+        public fun build(): ModelInfoRequest = ModelInfoRequest(
+            name = requireNotNull(name) { "name is required" },
+        )
+    }
 }

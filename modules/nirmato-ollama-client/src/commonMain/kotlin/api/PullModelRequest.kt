@@ -35,30 +35,28 @@ public data class PullModelRequest(
     /** Ollama password. */
     @SerialName(value = "password")
     val password: String? = null,
-)
+) {
+    public companion object {
+        /** A request for creating a model. */
+        public fun pullModelRequest(block: PullModelRequestBuilder.() -> Unit): PullModelRequest = PullModelRequestBuilder().apply(block).build()
+    }
 
-/**
- * A request for creating a model.
- */
-public fun pullModelRequest(block: PullModelRequestBuilder.() -> Unit): PullModelRequest =
-    PullModelRequestBuilder().apply(block).build()
+    /** Builder of [PullModelRequest] instances. */
+    @OllamaDsl
+    public class PullModelRequestBuilder {
+        public var name: String? = null
+        public var insecure: Boolean? = false
+        public var username: String? = null
+        public var password: String? = null
+        public var stream: Boolean? = false
 
-/**
- * Builder of [PullModelRequest] instances.
- */
-@OllamaDsl
-public class PullModelRequestBuilder {
-    public var name: String? = null
-    public var insecure: Boolean? = false
-    public var username: String? = null
-    public var password: String? = null
-    public var stream: Boolean? = false
-
-    public fun build(): PullModelRequest = PullModelRequest(
-        name = requireNotNull(name) { "model is required" },
-        insecure = insecure,
-        username = username,
-        password = password,
-        stream = stream,
-    )
+        /** Create [PullModelRequest] instance. */
+        public fun build(): PullModelRequest = PullModelRequest(
+            name = requireNotNull(name) { "model is required" },
+            insecure = insecure,
+            username = username,
+            password = password,
+            stream = stream,
+        )
+    }
 }

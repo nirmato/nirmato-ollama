@@ -3,9 +3,9 @@ package org.nirmato.ollama.client.samples
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.runBlocking
 import io.ktor.client.engine.cio.CIO
+import org.nirmato.ollama.api.GenerateChatCompletionRequest.Companion.generateChatCompletionRequest
 import org.nirmato.ollama.api.Message
 import org.nirmato.ollama.api.Message.Role.USER
-import org.nirmato.ollama.api.generateChatCompletionRequest
 import org.nirmato.ollama.client.LogLevel
 import org.nirmato.ollama.client.LoggingConfig
 import org.nirmato.ollama.client.OllamaHost

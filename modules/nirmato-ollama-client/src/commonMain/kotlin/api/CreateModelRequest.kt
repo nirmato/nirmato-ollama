@@ -33,28 +33,26 @@ public data class CreateModelRequest(
     /** Path to the Modelfile */
     @SerialName(value = "path")
     val path: String? = null,
-)
+) {
+    public companion object {
+        /** A request for creating a model. */
+        public fun createModelRequest(block: CreateModelRequestBuilder.() -> Unit): CreateModelRequest = CreateModelRequestBuilder().apply(block).build()
+    }
 
-/**
- * A request for creating a model.
- */
-public fun createModelRequest(block: CreateModelRequestBuilder.() -> Unit): CreateModelRequest =
-    CreateModelRequestBuilder().apply(block).build()
+    /** Builder of [CreateModelRequest] instances. */
+    @OllamaDsl
+    public class CreateModelRequestBuilder {
+        public var name: String? = null
+        public var modelfile: String? = null
+        public var stream: Boolean? = false
+        public var path: String? = null
 
-/**
- * Builder of [CreateModelRequest] instances.
- */
-@OllamaDsl
-public class CreateModelRequestBuilder {
-    public var name: String? = null
-    public var modelfile: String? = null
-    public var stream: Boolean? = false
-    public var path: String? = null
-
-    public fun build(): CreateModelRequest = CreateModelRequest(
-        name = requireNotNull(name) { "name is required" },
-        modelfile = modelfile,
-        stream = stream,
-        path = path,
-    )
+        /** Create [CreateModelRequest] instance. */
+        public fun build(): CreateModelRequest = CreateModelRequest(
+            name = requireNotNull(name) { "name is required" },
+            modelfile = modelfile,
+            stream = stream,
+            path = path,
+        )
+    }
 }

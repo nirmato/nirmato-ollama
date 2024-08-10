@@ -42,30 +42,28 @@ public data class GenerateEmbeddingRequest(
      */
     @SerialName(value = "keep_alive")
     val keepAlive: Int? = null,
-)
+) {
+    public companion object {
+        /** A request to generate an embeddings from a model. */
+        public fun generateEmbeddingRequest(block: GenerateEmbeddingRequestBuilder.() -> Unit): GenerateEmbeddingRequest = GenerateEmbeddingRequestBuilder().apply(block).build()
+    }
 
-/**
- * A request to generate an embeddings from a model.
- */
-public fun generateEmbeddingRequest(block: GenerateEmbeddingRequestBuilder.() -> Unit): GenerateEmbeddingRequest =
-    GenerateEmbeddingRequestBuilder().apply(block).build()
+    /** Builder of [GenerateEmbeddingRequest] instances. */
+    @OllamaDsl
+    public class GenerateEmbeddingRequestBuilder {
+        public var model: String? = null
+        public var input: String? = null
+        public val truncate: Boolean? = null
+        public var options: RequestOptions? = null
+        public var keepAlive: Int? = null
 
-/**
- * Builder of [GenerateEmbeddingRequest] instances.
- */
-@OllamaDsl
-public class GenerateEmbeddingRequestBuilder {
-    public var model: String? = null
-    public var input: String? = null
-    public val truncate: Boolean? = null
-    public var options: RequestOptions? = null
-    public var keepAlive: Int? = null
-
-    public fun build(): GenerateEmbeddingRequest = GenerateEmbeddingRequest(
-        model = requireNotNull(model) { "model is required" },
-        input = requireNotNull(input) { "input is required" },
-        truncate = truncate,
-        options = options,
-        keepAlive = keepAlive,
-    )
+        /** Create [GenerateEmbeddingRequest] instance. */
+        public fun build(): GenerateEmbeddingRequest = GenerateEmbeddingRequest(
+            model = requireNotNull(model) { "model is required" },
+            input = requireNotNull(input) { "input is required" },
+            truncate = truncate,
+            options = options,
+            keepAlive = keepAlive,
+        )
+    }
 }

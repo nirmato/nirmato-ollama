@@ -48,32 +48,31 @@ public data class GenerateChatCompletionRequest(
      */
     @SerialName(value = "keep_alive")
     val keepAlive: Int? = null,
-)
+) {
+    public companion object {
+        /** A request to generate a predicted completion for a prompt. */
+        public fun generateChatCompletionRequest(block: GenerateChatCompletionRequestBuilder.() -> Unit): GenerateChatCompletionRequest =
+            GenerateChatCompletionRequestBuilder().apply(block).build()
+    }
 
-/**
- * A request to generate a predicted completion for a prompt.
- */
-public fun generateChatCompletionRequest(block: GenerateChatCompletionRequestBuilder.() -> Unit): GenerateChatCompletionRequest =
-    GenerateChatCompletionRequestBuilder().apply(block).build()
+    /** Builder of [GenerateChatCompletionRequest] instances. */
+    @OllamaDsl
+    public class GenerateChatCompletionRequestBuilder {
+        public var model: String? = null
+        public var messages: List<Message>? = null
+        public var format: ResponseFormat? = null
+        public var options: RequestOptions? = null
+        public var stream: Boolean? = false
+        public var keepAlive: Int? = null
 
-/**
- * Builder of [GenerateChatCompletionRequest] instances.
- */
-@OllamaDsl
-public class GenerateChatCompletionRequestBuilder {
-    public var model: String? = null
-    public var messages: List<Message>? = null
-    public var format: ResponseFormat? = null
-    public var options: RequestOptions? = null
-    public var stream: Boolean? = false
-    public var keepAlive: Int? = null
-
-    public fun build(): GenerateChatCompletionRequest = GenerateChatCompletionRequest(
-        model = requireNotNull(model) { "model is required" },
-        messages = requireNotNull(messages) { "messages is required" },
-        format = format,
-        options = options,
-        stream = stream,
-        keepAlive = keepAlive,
-    )
+        /** Create [GenerateChatCompletionRequest] instance. */
+        public fun build(): GenerateChatCompletionRequest = GenerateChatCompletionRequest(
+            model = requireNotNull(model) { "model is required" },
+            messages = requireNotNull(messages) { "messages is required" },
+            format = format,
+            options = options,
+            stream = stream,
+            keepAlive = keepAlive,
+        )
+    }
 }

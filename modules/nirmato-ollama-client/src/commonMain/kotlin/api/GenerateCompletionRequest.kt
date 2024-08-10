@@ -74,47 +74,43 @@ public data class GenerateCompletionRequest(
      */
     @SerialName(value = "keep_alive")
     val keepAlive: Int? = null,
-)
+) {
+    public companion object {
+        /** A request to generate a predicted completion for a prompt. */
+        public fun generateCompletionRequest(block: GenerateCompletionRequestBuilder.() -> Unit): GenerateCompletionRequest =
+            GenerateCompletionRequestBuilder().apply(block).build()
+    }
 
-/**
- * A request to generate a predicted completion for a prompt.
- */
-public fun generateCompletionRequest(block: GenerateCompletionRequestBuilder.() -> Unit): GenerateCompletionRequest =
-    GenerateCompletionRequestBuilder().apply(block).build()
+    /** Builder of [GenerateCompletionRequest] instances. */
+    @OllamaDsl
+    public class GenerateCompletionRequestBuilder {
+        public var model: String? = null
+        public var prompt: String? = null
+        public var suffix: String? = null
+        public var images: List<String>? = null
+        public var format: ResponseFormat? = null
+        public var options: RequestOptions? = null
+        public var system: String? = null
+        public var template: String? = null
+        public var context: List<Long>? = null
+        public var stream: Boolean? = false
+        public var raw: Boolean? = null
+        public var keepAlive: Int? = null
 
-/**
- * Builder of [GenerateCompletionRequest] instances.
- */
-@OllamaDsl
-public class GenerateCompletionRequestBuilder {
-    public var model: String? = null
-    public var prompt: String? = null
-    public var suffix: String? = null
-    public var images: List<String>? = null
-    public var format: ResponseFormat? = null
-    public var options: RequestOptions? = null
-    public var system: String? = null
-    public var template: String? = null
-    public var context: List<Long>? = null
-    public var stream: Boolean? = false
-    public var raw: Boolean? = null
-    public var keepAlive: Int? = null
-
-    /**
-     * Create [GenerateCompletionRequest] instance.
-     */
-    public fun build(): GenerateCompletionRequest = GenerateCompletionRequest(
-        model = requireNotNull(model) { "model is required" },
-        prompt = requireNotNull(prompt) { "prompt is required" },
-        suffix = suffix,
-        images = images,
-        format = format,
-        options = options,
-        system = system,
-        template = template,
-        context = context,
-        stream = stream,
-        raw = raw,
-        keepAlive = keepAlive,
-    )
+        /** Create [GenerateCompletionRequest] instance. */
+        public fun build(): GenerateCompletionRequest = GenerateCompletionRequest(
+            model = requireNotNull(model) { "model is required" },
+            prompt = requireNotNull(prompt) { "prompt is required" },
+            suffix = suffix,
+            images = images,
+            format = format,
+            options = options,
+            system = system,
+            template = template,
+            context = context,
+            stream = stream,
+            raw = raw,
+            keepAlive = keepAlive,
+        )
+    }
 }

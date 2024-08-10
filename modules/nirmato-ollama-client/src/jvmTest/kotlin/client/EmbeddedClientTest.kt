@@ -9,7 +9,7 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
-import org.nirmato.ollama.api.generateEmbeddingRequest
+import org.nirmato.ollama.api.GenerateEmbeddingRequest.Companion.generateEmbeddingRequest
 import org.nirmato.ollama.createOllamaClient
 
 internal class EmbeddedClientTest {

@@ -20,24 +20,23 @@ public data class CopyModelRequest(
     @SerialName(value = "destination")
     @Required
     val destination: String,
-)
+) {
+    public companion object {
+        /** A request for copying a model. */
+        public fun copyModelRequest(block: CopyModelRequestBuilder.() -> Unit): CopyModelRequest = CopyModelRequestBuilder().apply(block).build()
+    }
 
-/**
- * A request for copying a model.
- */
-public fun copyModelRequest(block: CopyModelRequestBuilder.() -> Unit): CopyModelRequest =
-    CopyModelRequestBuilder().apply(block).build()
+    /** Builder of [CopyModelRequest] instances. */
+    @OllamaDsl
+    public class CopyModelRequestBuilder {
+        public var source: String? = null
+        public var destination: String? = null
 
-/**
- * Builder of [CopyModelRequest] instances.
- */
-@OllamaDsl
-public class CopyModelRequestBuilder {
-    public var source: String? = null
-    public var destination: String? = null
+        /** Create [CopyModelRequest] instance. */
+        public fun build(): CopyModelRequest = CopyModelRequest(
+            source = requireNotNull(source) { "source is required" },
+            destination = requireNotNull(destination) { "destination is required" },
+        )
+    }
 
-    public fun build(): CopyModelRequest = CopyModelRequest(
-        source = requireNotNull(source) { "source is required" },
-        destination = requireNotNull(destination) { "destination is required" },
-    )
 }

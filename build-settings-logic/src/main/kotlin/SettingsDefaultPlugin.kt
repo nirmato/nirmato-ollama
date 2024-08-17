@@ -6,10 +6,12 @@ import org.gradle.api.Plugin
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.RepositoriesMode
 import org.gradle.kotlin.dsl.assign
+import org.gradle.util.GradleVersion
 
 @Suppress("UnstableApiUsage")
 public class SettingsDefaultPlugin : Plugin<Settings> {
     override fun apply(settings: Settings): Unit = settings.run {
+        checkMinimumGradleVersion()
         configurePluginManagement()
         configureDependencyResolutionManagement()
     }
@@ -48,5 +50,15 @@ public class SettingsDefaultPlugin : Plugin<Settings> {
                 }
             }
         }
+    }
+
+    private fun Settings.checkMinimumGradleVersion() {
+        if (GradleVersion.current() < MIN_GRADLE_VERSION) {
+            error("You need Gradle version $MIN_GRADLE_VERSION or higher, was ${GradleVersion.current()}")
+        }
+    }
+
+    private companion object {
+        val MIN_GRADLE_VERSION: GradleVersion = GradleVersion.version("8.9")
     }
 }

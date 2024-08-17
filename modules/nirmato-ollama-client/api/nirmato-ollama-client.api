@@ -17,12 +17,12 @@ public final class org/nirmato/ollama/api/AuthenticationException : org/nirmato/
 
 public abstract interface class org/nirmato/ollama/api/ChatApi {
 	public abstract fun generateChatCompletion (Lorg/nirmato/ollama/api/GenerateChatCompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun generateChatCompletions (Lorg/nirmato/ollama/api/GenerateChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun generateChatCompletionFlow (Lorg/nirmato/ollama/api/GenerateChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public abstract interface class org/nirmato/ollama/api/CompletionsApi {
 	public abstract fun generateCompletion (Lorg/nirmato/ollama/api/GenerateCompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun generateCompletions (Lorg/nirmato/ollama/api/GenerateCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun generateCompletionFlow (Lorg/nirmato/ollama/api/GenerateCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class org/nirmato/ollama/api/CopyModelRequest {
@@ -51,20 +51,17 @@ public synthetic class org/nirmato/ollama/api/CopyModelRequest$$serializer : kot
 }
 
 public final class org/nirmato/ollama/api/CopyModelRequest$Companion {
+	public final fun copyModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/CopyModelRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/CopyModelRequestBuilder {
+public final class org/nirmato/ollama/api/CopyModelRequest$CopyModelRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/CopyModelRequest;
 	public final fun getDestination ()Ljava/lang/String;
 	public final fun getSource ()Ljava/lang/String;
 	public final fun setDestination (Ljava/lang/String;)V
 	public final fun setSource (Ljava/lang/String;)V
-}
-
-public final class org/nirmato/ollama/api/CopyModelRequestKt {
-	public static final fun copyModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/CopyModelRequest;
 }
 
 public final class org/nirmato/ollama/api/CreateModelRequest {
@@ -99,10 +96,11 @@ public synthetic class org/nirmato/ollama/api/CreateModelRequest$$serializer : k
 }
 
 public final class org/nirmato/ollama/api/CreateModelRequest$Companion {
+	public final fun createModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/CreateModelRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/CreateModelRequestBuilder {
+public final class org/nirmato/ollama/api/CreateModelRequest$CreateModelRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/CreateModelRequest;
 	public final fun getModelfile ()Ljava/lang/String;
@@ -113,10 +111,6 @@ public final class org/nirmato/ollama/api/CreateModelRequestBuilder {
 	public final fun setName (Ljava/lang/String;)V
 	public final fun setPath (Ljava/lang/String;)V
 	public final fun setStream (Ljava/lang/Boolean;)V
-}
-
-public final class org/nirmato/ollama/api/CreateModelRequestKt {
-	public static final fun createModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/CreateModelRequest;
 }
 
 public final class org/nirmato/ollama/api/CreateModelResponse {
@@ -188,18 +182,15 @@ public synthetic class org/nirmato/ollama/api/DeleteModelRequest$$serializer : k
 }
 
 public final class org/nirmato/ollama/api/DeleteModelRequest$Companion {
+	public final fun deleteModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/DeleteModelRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/DeleteModelRequestBuilder {
+public final class org/nirmato/ollama/api/DeleteModelRequest$DeleteModelRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/DeleteModelRequest;
 	public final fun getModel ()Ljava/lang/String;
 	public final fun setModel (Ljava/lang/String;)V
-}
-
-public final class org/nirmato/ollama/api/DeleteModelRequestKt {
-	public static final fun deleteModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/DeleteModelRequest;
 }
 
 public final class org/nirmato/ollama/api/DoneReason : java/lang/Enum {
@@ -258,10 +249,11 @@ public synthetic class org/nirmato/ollama/api/GenerateChatCompletionRequest$$ser
 }
 
 public final class org/nirmato/ollama/api/GenerateChatCompletionRequest$Companion {
+	public final fun generateChatCompletionRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/GenerateChatCompletionRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/GenerateChatCompletionRequestBuilder {
+public final class org/nirmato/ollama/api/GenerateChatCompletionRequest$GenerateChatCompletionRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/GenerateChatCompletionRequest;
 	public final fun getFormat ()Lorg/nirmato/ollama/api/ResponseFormat;
@@ -276,10 +268,6 @@ public final class org/nirmato/ollama/api/GenerateChatCompletionRequestBuilder {
 	public final fun setModel (Ljava/lang/String;)V
 	public final fun setOptions (Lorg/nirmato/ollama/api/RequestOptions;)V
 	public final fun setStream (Ljava/lang/Boolean;)V
-}
-
-public final class org/nirmato/ollama/api/GenerateChatCompletionRequestKt {
-	public static final fun generateChatCompletionRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/GenerateChatCompletionRequest;
 }
 
 public final class org/nirmato/ollama/api/GenerateChatCompletionResponse {
@@ -380,10 +368,11 @@ public synthetic class org/nirmato/ollama/api/GenerateCompletionRequest$$seriali
 }
 
 public final class org/nirmato/ollama/api/GenerateCompletionRequest$Companion {
+	public final fun generateCompletionRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/GenerateCompletionRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/GenerateCompletionRequestBuilder {
+public final class org/nirmato/ollama/api/GenerateCompletionRequest$GenerateCompletionRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/GenerateCompletionRequest;
 	public final fun getContext ()Ljava/util/List;
@@ -410,10 +399,6 @@ public final class org/nirmato/ollama/api/GenerateCompletionRequestBuilder {
 	public final fun setSuffix (Ljava/lang/String;)V
 	public final fun setSystem (Ljava/lang/String;)V
 	public final fun setTemplate (Ljava/lang/String;)V
-}
-
-public final class org/nirmato/ollama/api/GenerateCompletionRequestKt {
-	public static final fun generateCompletionRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/GenerateCompletionRequest;
 }
 
 public final class org/nirmato/ollama/api/GenerateCompletionResponse {
@@ -500,10 +485,11 @@ public synthetic class org/nirmato/ollama/api/GenerateEmbeddingRequest$$serializ
 }
 
 public final class org/nirmato/ollama/api/GenerateEmbeddingRequest$Companion {
+	public final fun generateEmbeddingRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/GenerateEmbeddingRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/GenerateEmbeddingRequestBuilder {
+public final class org/nirmato/ollama/api/GenerateEmbeddingRequest$GenerateEmbeddingRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/GenerateEmbeddingRequest;
 	public final fun getInput ()Ljava/lang/String;
@@ -515,10 +501,6 @@ public final class org/nirmato/ollama/api/GenerateEmbeddingRequestBuilder {
 	public final fun setKeepAlive (Ljava/lang/Integer;)V
 	public final fun setModel (Ljava/lang/String;)V
 	public final fun setOptions (Lorg/nirmato/ollama/api/RequestOptions;)V
-}
-
-public final class org/nirmato/ollama/api/GenerateEmbeddingRequestKt {
-	public static final fun generateEmbeddingRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/GenerateEmbeddingRequest;
 }
 
 public final class org/nirmato/ollama/api/GenerateEmbeddingResponse {
@@ -775,18 +757,15 @@ public synthetic class org/nirmato/ollama/api/ModelInfoRequest$$serializer : kot
 }
 
 public final class org/nirmato/ollama/api/ModelInfoRequest$Companion {
+	public final fun modelInfoRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/ModelInfoRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/ModelInfoRequestBuilder {
+public final class org/nirmato/ollama/api/ModelInfoRequest$ModelInfoRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/ModelInfoRequest;
 	public final fun getName ()Ljava/lang/String;
 	public final fun setName (Ljava/lang/String;)V
-}
-
-public final class org/nirmato/ollama/api/ModelInfoRequestKt {
-	public static final fun modelInfoRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/ModelInfoRequest;
 }
 
 public abstract interface class org/nirmato/ollama/api/ModelsApi {
@@ -1035,10 +1014,11 @@ public synthetic class org/nirmato/ollama/api/PullModelRequest$$serializer : kot
 }
 
 public final class org/nirmato/ollama/api/PullModelRequest$Companion {
+	public final fun pullModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/PullModelRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/PullModelRequestBuilder {
+public final class org/nirmato/ollama/api/PullModelRequest$PullModelRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/PullModelRequest;
 	public final fun getInsecure ()Ljava/lang/Boolean;
@@ -1051,10 +1031,6 @@ public final class org/nirmato/ollama/api/PullModelRequestBuilder {
 	public final fun setPassword (Ljava/lang/String;)V
 	public final fun setStream (Ljava/lang/Boolean;)V
 	public final fun setUsername (Ljava/lang/String;)V
-}
-
-public final class org/nirmato/ollama/api/PullModelRequestKt {
-	public static final fun pullModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/PullModelRequest;
 }
 
 public final class org/nirmato/ollama/api/PullModelResponse {
@@ -1146,10 +1122,11 @@ public synthetic class org/nirmato/ollama/api/PushModelRequest$$serializer : kot
 }
 
 public final class org/nirmato/ollama/api/PushModelRequest$Companion {
+	public final fun pushModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/PushModelRequest;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/PushModelRequestBuilder {
+public final class org/nirmato/ollama/api/PushModelRequest$PushModelRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/PushModelRequest;
 	public final fun getInsecure ()Ljava/lang/Boolean;
@@ -1162,10 +1139,6 @@ public final class org/nirmato/ollama/api/PushModelRequestBuilder {
 	public final fun setPassword (Ljava/lang/String;)V
 	public final fun setStream (Ljava/lang/Boolean;)V
 	public final fun setUsername (Ljava/lang/String;)V
-}
-
-public final class org/nirmato/ollama/api/PushModelRequestKt {
-	public static final fun pushModelRequest (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/api/PushModelRequest;
 }
 
 public final class org/nirmato/ollama/api/PushModelResponse {

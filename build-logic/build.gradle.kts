@@ -29,14 +29,6 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
-
-    sourceSets {
-        main {
-            kotlin {
-                srcDirs("src/main/kotlinX")
-            }
-        }
-    }
 }
 
 gradlePlugin {

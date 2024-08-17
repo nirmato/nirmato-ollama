@@ -1,6 +1,6 @@
 # nirmato-ollama
 
-![![License]()](https://img.shields.io/badge/kotlin--multiplatform-2.0.10-blue.svg?logo=kotlin) ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
+![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.0.10-blue.svg?logo=kotlin) ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
 ![badge][badge-jvm] ![badge][badge-js] ![badge][badge-nodejs] ![badge][badge-wasm-js]
 

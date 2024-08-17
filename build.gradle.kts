@@ -36,7 +36,6 @@ apiValidation {
             "nirmato-ollama-version-catalog",
         )
     )
-
 }
 
 plugins.withType<YarnPlugin> {
@@ -45,6 +44,7 @@ plugins.withType<YarnPlugin> {
         yarnLockMismatchReport = YarnLockMismatchReport.FAIL
         yarnLockAutoReplace = true
         reportNewYarnLock = true
+        ignoreScripts = false
     }
 }
 

@@ -15,19 +15,19 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${getKotlinPluginVersion()}")
 }
 
+sourceSets {
+    main {
+        kotlin {
+            srcDirs("src/main/kotlinX")
+        }
+    }
+}
+
 kotlin {
     explicitApi()
 
     compilerOptions {
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
-    }
-
-    sourceSets {
-        main {
-            kotlin {
-                srcDirs("src/main/kotlinX")
-            }
-        }
     }
 }
 

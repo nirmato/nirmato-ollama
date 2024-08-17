@@ -34,5 +34,5 @@ public data class ModelInfo(
 
     /** The default messages for the model. */
     @SerialName(value = "messages")
-    val messages: List<Message>? = null,
+    val messages: List<MessageResponse>? = null,
 )

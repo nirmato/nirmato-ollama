@@ -4,7 +4,7 @@ import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.runBlocking
 import io.ktor.client.engine.java.Java
 import org.nirmato.ollama.api.GenerateChatCompletionRequest.Companion.generateChatCompletionRequest
-import org.nirmato.ollama.api.Message
+import org.nirmato.ollama.api.MessageRequest
 import org.nirmato.ollama.client.LogLevel
 import org.nirmato.ollama.client.LoggingConfig
 import org.nirmato.ollama.client.OllamaHost
@@ -23,7 +23,7 @@ fun main() = runBlocking {
 
     val generateCompletionRequest = generateChatCompletionRequest {
         model = "tinyllama"
-        messages = listOf(Message(role = Message.Role.USER, content = "Why is the sky blue?"))
+        messages = listOf(MessageRequest(role = MessageRequest.Role.USER, content = "Why is the sky blue?"))
     }
     val response = ollama.generateChatCompletion(generateCompletionRequest)
 

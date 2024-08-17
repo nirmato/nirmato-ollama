@@ -46,9 +46,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
         return requester.processRequest {
             method = HttpMethod.Post
             url(path = "blobs/${digest}")
-            body?.let {
-                setBody(ByteArrayContent(body.value, ContentType.Application.OctetStream))
-            }
+            setBody(ByteArrayContent(body.value, ContentType.Application.OctetStream))
             contentType(ContentType.Application.Json)
         }
     }
@@ -59,6 +57,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
             url(path = "create")
             setBody(createModelRequest)
             contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
         }
     }
 

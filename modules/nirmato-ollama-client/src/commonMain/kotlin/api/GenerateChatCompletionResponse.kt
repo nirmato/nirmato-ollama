@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 public data class GenerateChatCompletionResponse(
 
     @SerialName(value = "message")
-    val message: Message? = null,
+    val message: MessageResponse? = null,
 
     /**
      * The model name.

@@ -8,8 +8,7 @@ import kotlinx.serialization.Serializable
  * A message in the chat endpoint
  */
 @Serializable
-public data class Message(
-
+public data class MessageResponse(
     /** The role of the message */
     @SerialName(value = "role")
     @Required
@@ -26,7 +25,7 @@ public data class Message(
 
     /** A list of tools the model wants to use */
     @SerialName(value = "tool_calls")
-    val toolCalls: List<Function>? = null,
+    val toolCalls: List<ToolFunction>? = null,
 ) {
     /**
      * The role of the message
@@ -47,11 +46,11 @@ public data class Message(
     }
 
     @Serializable
-    public class Function(
+    public class ToolFunction(
         @SerialName(value = "name")
         public val name: String,
 
-        @SerialName(value = "parameters")
-        public val parameters: Map<String, String>? = null,
+        @SerialName(value = "arguments")
+        public val arguments: Map<String, String>? = null,
     )
 }

@@ -15,12 +15,19 @@ public data class Model(
      * Some examples are orca-mini:3b-q4_1 and llama3:70b. The tag is optional and, if not provided, will default to latest.
      * The tag is used to identify a specific version.
      */
+    @SerialName(value = "name")
+    val name: String? = null,
+
     @SerialName(value = "model")
     val model: String? = null,
 
     /** Model modification date. */
     @SerialName(value = "modified_at")
     val modifiedAt: Instant? = null,
+
+    /** Model expiration date. */
+    @SerialName(value = "expires_at")
+    val expiresAt: Instant? = null,
 
     /** Size of the model on disk. */
     @SerialName(value = "size")

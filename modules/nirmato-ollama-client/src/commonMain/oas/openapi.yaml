@@ -224,9 +224,9 @@ paths:
                     name: digest
                     schema:
                         type: string
+                        example: sha256:29fdb92e57cf0827ded04ae6461b5931d01fa595843f55d36f5b275a52087dd2
                     required: true
                     description: the SHA256 digest of the blob
-                    example: sha256:29fdb92e57cf0827ded04ae6461b5931d01fa595843f55d36f5b275a52087dd2
             responses:
                 '200':
                     description: Blob exists on the server
@@ -242,9 +242,9 @@ paths:
                     name: digest
                     schema:
                         type: string
+                        examples: sha256:c8edda1f17edd2f1b60253b773d837bda7b9d249a61245931a4d7c9a8d350250
                     required: true
                     description: The SHA256 digest of the blob
-                    example: sha256:c8edda1f17edd2f1b60253b773d837bda7b9d249a61245931a4d7c9a8d350250
             requestBody:
                 content:
                     application/octet-stream:
@@ -581,6 +581,11 @@ components:
                     description: The messages of the chat, this can be used to keep a chat memory
                     items:
                         $ref: '#/components/schemas/Message'
+                tools:
+                    type: array
+                    description: The for the model to use if supported. Requires stream to be set to false
+                    items:
+                        $ref: '#/components/schemas/ToolFunction'
                 format:
                     $ref: '#/components/schemas/ResponseFormat'
                 options:
@@ -652,6 +657,75 @@ components:
                 - stop # The generation hit a stop token.
                 - length # The maximum num_tokens was reached.
                 - load # The request was sent with an empty body to load the model.
+        ToolFunction:
+            type: object
+            description: A tool function to use in the model.
+            properties:
+                name:
+                    type: string
+                    description: The function name
+                arguments:
+                    type: object
+        ToolSpecification:
+            type: object
+            description: A tool function to use in the model.
+            properties:
+                type:
+                    type: string
+                    description: The function type
+                    example: function
+                function:
+                    $ref: '#/components/schemas/PromptFunctionSpecification'
+        PromptFunctionSpecification:
+            type: object
+            description: The prompt function specification
+            properties:
+                name:
+                    type: string
+                    description: The tool name
+                description:
+                    type: string
+                    description: The tool description
+                parameters:
+                    type: array
+                    items:
+                        type:
+                            $ref: '#/components/schemas/Parameters'
+        Parameters:
+            type: object
+            description: The function parameters
+            properties:
+                type:
+                    type: string
+                    description: The parameter type
+                required:
+                    type: array
+                    items:
+                        type: string
+                properties:
+                    type: array
+                    items:
+                        type:
+                            $ref: '#/components/schemas/Property'
+        Property:
+            type: object
+            description: The function property
+            properties:
+                type:
+                    type: string
+                    description: The property type
+                description:
+                    type: string
+                    items:
+                        type: string
+                enum:
+                    type: array
+                    items:
+                        type: string
+                required:
+                    type: array
+                    items:
+                        type: string
         Message:
             type: object
             description: A message in the chat endpoint.
@@ -666,7 +740,7 @@ components:
                     example: Why is the sky blue?
                 images:
                     type: array
-                    description: (optional) a list of Base64-encoded images to include in the message (for multimodal models such as llava)
+                    description: a list of Base64-encoded images to include in the message (for multimodal models such as llava)
                     items:
                         type: string
                         description: Base64-encoded image (for multimodal models such as llava)
@@ -675,8 +749,9 @@ components:
                     type: array
                     description: A list of tools the model wants to use
                     items:
-                        type: string
-                        description: The tool name to use
+                        type:
+                            $ref: '#/components/schemas/ToolSpecification'
+                        description: The tool to use
             required:
                 - role
                 - content
@@ -763,6 +838,10 @@ components:
             type: object
             description: A model available locally.
             properties:
+                name:
+                    type: string
+                    description: *model_name
+                    example: llama3:8b
                 model:
                     type: string
                     description: *model_name
@@ -771,6 +850,11 @@ components:
                     type: string
                     format: date-time
                     description: Model modification date.
+                    example: 2023-08-02T17:02:23.713454393-07:00
+                expires_at:
+                    type: string
+                    format: date-time
+                    description: Model expiration date.
                     example: 2023-08-02T17:02:23.713454393-07:00
                 size:
                     type: integer
@@ -820,6 +904,10 @@ components:
             type: object
             description: A model that is currently loaded.
             properties:
+                name:
+                    type: string
+                    description: *model_name
+                    example: llama3:8b
                 model:
                     type: string
                     description: *model_name

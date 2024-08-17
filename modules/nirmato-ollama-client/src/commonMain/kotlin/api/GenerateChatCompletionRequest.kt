@@ -3,6 +3,7 @@ package org.nirmato.ollama.api
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.nirmato.ollama.api.MessageResponse.ToolFunction
 import org.nirmato.ollama.dsl.OllamaDsl
 
 /**
@@ -24,7 +25,11 @@ public data class GenerateChatCompletionRequest(
     /** The messages of the chat, this can be used to keep a chat memory */
     @SerialName(value = "messages")
     @Required
-    val messages: List<Message>,
+    val messages: List<MessageRequest>,
+
+    /** The for the model to use if supported. Requires stream to be set to false. */
+    @SerialName(value = "tools")
+    val tools: List<ToolFunction>? = null,
 
     /** The format to return a response in. Currently, the only accepted value is json. */
     @SerialName(value = "format")
@@ -58,7 +63,8 @@ public data class GenerateChatCompletionRequest(
     @OllamaDsl
     public class GenerateChatCompletionRequestBuilder {
         public var model: String? = null
-        public var messages: List<Message>? = null
+        public var messages: List<MessageRequest>? = null
+        public var tools: List<ToolFunction>? = null
         public var format: ResponseFormat? = null
         public var options: RequestOptions? = null
         public var stream: Boolean? = false
@@ -68,6 +74,7 @@ public data class GenerateChatCompletionRequest(
         public fun build(): GenerateChatCompletionRequest = GenerateChatCompletionRequest(
             model = requireNotNull(model) { "model is required" },
             messages = requireNotNull(messages) { "messages is required" },
+            tools = tools,
             format = format,
             options = options,
             stream = stream,

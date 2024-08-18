@@ -43,11 +43,11 @@ val ollama = createOllamaClient {
     engine = CIO.create()
 }
 
-val completionRequest = generateCompletionRequest {
+val completionRequest = completionRequest {
     model = "tinyllama"
     prompt = "Why is the sky blue?"
 }
-val response = ollama.generateCompletion(completionRequest)
+val response = ollama.completion(completionRequest)
 ```
 
 ## Getting Started

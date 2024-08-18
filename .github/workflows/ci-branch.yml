@@ -1,0 +1,14 @@
+name: CI Branch
+
+on:
+    workflow_dispatch:
+    push:
+        branches-ignore:
+            - main
+        paths-ignore:
+            - "**.md"
+            - ".idea/**"
+
+jobs:
+    checks:
+        uses: ./.github/workflows/run-checks.yml

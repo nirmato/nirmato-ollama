@@ -1,0 +1,49 @@
+name: "CodeQL Analysis"
+
+on:
+    workflow_call:
+
+jobs:
+    analyze:
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -   language: java-kotlin
+                        build-mode: manual
+        name: Analyze {{ matrix.language }} code with CodeQL
+        runs-on: 'ubuntu-latest'
+        permissions:
+            # required for all workflows
+            security-events: write
+
+            # required to fetch internal or private CodeQL packs
+            packages: read
+
+            # only required for workflows in private repositories
+            actions: read
+            contents: read
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            -   name: Setup environment
+                uses: ./.github/actions/setup-environment
+                with:
+                    cache-read-only: ${{ github.ref_name != 'main' }}
+
+            -   name: Initialize CodeQL tools for scanning.
+                uses: github/codeql-action/init@v3
+                with:
+                    languages: ${{ matrix.language }}
+                    build-mode: ${{ matrix.build-mode }}
+
+            -   if: matrix.build-mode == 'manual'
+                shell: bash
+                run: |
+                    ./gradlew assemble
+
+            -   name: Perform CodeQL Analysis
+                uses: github/codeql-action/analyze@v3
+                with:
+                    category: "/language:${{matrix.language}}"

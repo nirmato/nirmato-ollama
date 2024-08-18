@@ -74,5 +74,7 @@ tasks {
             println("Gradle wrapper version: $gradleVersion")
         }
     }
-}
 
+    // Fix CodeQL workflow execution
+    val testClasses by registering
+}

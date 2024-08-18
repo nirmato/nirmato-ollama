@@ -1,0 +1,29 @@
+name: Run default tests
+on:
+    workflow_dispatch:
+    workflow_call:
+
+defaults:
+    run:
+        shell: bash
+
+jobs:
+    tests-default:
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ 'ubuntu-latest' ]
+                target: [ 'jvm', 'js' ]
+
+        runs-on: ${{ matrix.os }}
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v4
+
+            -   name: Setup environment
+                uses: ./.github/actions/setup-environment
+                with:
+                    cache-read-only: ${{ github.ref_name != 'main' }}
+
+            - name: Run tests
+              run: ./gradlew ${{ matrix.target }}Test --continue

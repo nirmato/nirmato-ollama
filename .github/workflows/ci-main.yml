@@ -1,0 +1,14 @@
+name: CI Main
+
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - "**.md"
+            - ".idea/**"
+
+jobs:
+    checks:
+        uses: ./.github/workflows/run-checks.yml

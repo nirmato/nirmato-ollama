@@ -1,0 +1,13 @@
+name: Run checks
+on:
+    workflow_dispatch:
+    workflow_call:
+
+jobs:
+    build-project:
+        uses: ./.github/workflows/run-build-project.yml
+
+    default-tests:
+        needs:
+            - build-project
+        uses: ./.github/workflows/run-tests-default.yml

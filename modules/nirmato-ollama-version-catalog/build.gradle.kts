@@ -44,7 +44,7 @@ catalog {
             }
         }
 
-        bundle("wasmium-all", modules)
+        bundle("nirmato-ollama-all", modules)
     }
 }
 

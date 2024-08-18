@@ -1,6 +1,6 @@
 [versions]
 detekt = "1.23.6"
-gradle = "8.9"
+gradle = "8.10"
 gradle-foojay = "0.8.0"
 kotlin = "2.0.10"
 kotlin-dokka = "1.9.20"

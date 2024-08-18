@@ -9,12 +9,12 @@ public interface ChatApi {
      * This is a streaming endpoint, so there will be a series of responses.
      * The final response object will include statistics and additional data from the request.
      */
-    public suspend fun generateChatCompletion(generateChatCompletionRequest: GenerateChatCompletionRequest): GenerateChatCompletionResponse
+    public suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse
 
     /**
      * Generate the next message in a chat with a provided model.
      * This is a streaming endpoint, so there will be a series of responses.
      * The final response object will include statistics and additional data from the request.
      */
-    public fun generateChatCompletionFlow(generateChatCompletionRequest: GenerateChatCompletionRequest): Flow<GenerateChatCompletionResponse>
+    public fun chatCompletionFlow(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse>
 }

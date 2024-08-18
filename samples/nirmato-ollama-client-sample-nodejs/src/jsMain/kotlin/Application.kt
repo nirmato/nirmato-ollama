@@ -2,9 +2,9 @@ package org.nirmato.ollama.client.samples
 
 import kotlin.time.Duration.Companion.seconds
 import io.ktor.client.engine.js.Js
-import org.nirmato.ollama.api.GenerateChatCompletionRequest.Companion.generateChatCompletionRequest
-import org.nirmato.ollama.api.MessageRequest
-import org.nirmato.ollama.api.MessageRequest.Role.USER
+import org.nirmato.ollama.api.ChatCompletionRequest.Companion.chatCompletionRequest
+import org.nirmato.ollama.api.Message
+import org.nirmato.ollama.api.Role
 import org.nirmato.ollama.client.LogLevel
 import org.nirmato.ollama.client.LoggingConfig
 import org.nirmato.ollama.client.OllamaHost
@@ -21,11 +21,11 @@ suspend fun main() {
         engine = Js.create()
     }
 
-    val generateCompletionRequest = generateChatCompletionRequest {
+    val generateCompletionRequest = chatCompletionRequest {
         model = "tinyllama"
-        messages = listOf(MessageRequest(role = USER, content = "Why is the sky blue?"))
+        messages = listOf(Message(role = Role.USER, content = "Why is the sky blue?"))
     }
-    val response = ollama.generateChatCompletion(generateCompletionRequest)
+    val response = ollama.chatCompletion(generateCompletionRequest)
 
     println(response.toString())
 }

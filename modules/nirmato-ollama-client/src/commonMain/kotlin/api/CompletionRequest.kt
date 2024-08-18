@@ -9,7 +9,7 @@ import org.nirmato.ollama.dsl.OllamaDsl
  * Request to generate a predicted completion for a prompt.
  */
 @Serializable
-public data class GenerateCompletionRequest(
+public data class CompletionRequest(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -39,7 +39,7 @@ public data class GenerateCompletionRequest(
 
     /** Additional model parameters listed in the documentation for the Modelfile such as `temperature`. */
     @SerialName(value = "options")
-    val options: RequestOptions? = null,
+    val options: Options? = null,
 
     /** The system prompt to (overrides what is defined in the Modelfile). */
     @SerialName(value = "system")
@@ -49,7 +49,7 @@ public data class GenerateCompletionRequest(
     @SerialName(value = "template")
     val template: String? = null,
 
-    /** The context parameter returned from a previous request to [CompletionsApi.generateCompletion], this can be used to keep a short conversational memory. */
+    /** The context parameter returned from a previous request to [CompletionsApi.completion], this can be used to keep a short conversational memory. */
     @SerialName(value = "context")
     val context: List<Long>? = null,
 
@@ -77,18 +77,18 @@ public data class GenerateCompletionRequest(
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun generateCompletionRequest(block: GenerateCompletionRequestBuilder.() -> Unit): GenerateCompletionRequest = GenerateCompletionRequestBuilder().apply(block).build()
+        public fun completionRequest(block: CompletionRequestBuilder.() -> Unit): CompletionRequest = CompletionRequestBuilder().apply(block).build()
     }
 
-    /** Builder of [GenerateCompletionRequest] instances. */
+    /** Builder of [CompletionRequest] instances. */
     @OllamaDsl
-    public class GenerateCompletionRequestBuilder {
+    public class CompletionRequestBuilder {
         public var model: String? = null
         public var prompt: String? = null
         public var suffix: String? = null
         public var images: List<String>? = null
         public var format: ResponseFormat? = null
-        public var options: RequestOptions? = null
+        public var options: Options? = null
         public var system: String? = null
         public var template: String? = null
         public var context: List<Long>? = null
@@ -96,8 +96,8 @@ public data class GenerateCompletionRequest(
         public var raw: Boolean? = null
         public var keepAlive: Int? = null
 
-        /** Create [GenerateCompletionRequest] instance. */
-        public fun build(): GenerateCompletionRequest = GenerateCompletionRequest(
+        /** Create [CompletionRequest] instance. */
+        public fun build(): CompletionRequest = CompletionRequest(
             model = requireNotNull(model) { "model is required" },
             prompt = requireNotNull(prompt) { "prompt is required" },
             suffix = suffix,

@@ -9,9 +9,9 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
-import org.nirmato.ollama.api.GenerateChatCompletionRequest.Companion.generateChatCompletionRequest
-import org.nirmato.ollama.api.MessageRequest
-import org.nirmato.ollama.api.MessageRequest.Role.USER
+import org.nirmato.ollama.api.ChatCompletionRequest.Companion.chatCompletionRequest
+import org.nirmato.ollama.api.Message
+import org.nirmato.ollama.api.Message.Role.USER
 import org.nirmato.ollama.createOllamaClient
 
 internal class ChatClientTest {
@@ -48,11 +48,11 @@ internal class ChatClientTest {
             engine = mockEngine
         }
 
-        val generateCompletionRequest = generateChatCompletionRequest {
+        val generateCompletionRequest = chatCompletionRequest {
             model = "tinyllama"
-            messages = listOf(MessageRequest(role = USER, content = "Why is the sky blue?"))
+            messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
         }
-        val response = ollama.generateChatCompletion(generateCompletionRequest)
+        val response = ollama.chatCompletion(generateCompletionRequest)
 
         println(response.toString())
     }

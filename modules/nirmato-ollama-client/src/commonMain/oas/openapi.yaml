@@ -31,17 +31,17 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/GenerateCompletionRequest'
+                            $ref: '#/components/schemas/CompletionRequest'
             responses:
                 '200':
                     description: Successful operation.
                     content:
                         application/x-ndjson:
                             schema:
-                                $ref: '#/components/schemas/GenerateCompletionResponse'
+                                $ref: '#/components/schemas/CompletionResponse'
     /chat:
         post:
-            operationId: generateChatCompletion
+            operationId: chatCompletion
             tags:
                 - Chat
             summary: Generate the next message in a chat with a provided model.
@@ -52,14 +52,14 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/GenerateChatCompletionRequest'
+                            $ref: '#/components/schemas/ChatCompletionRequest'
             responses:
                 '200':
                     description: Successful operation.
                     content:
                         application/x-ndjson:
                             schema:
-                                $ref: '#/components/schemas/GenerateChatCompletionResponse'
+                                $ref: '#/components/schemas/ChatCompletionResponse'
     /embed:
         post:
             operationId: generateEmbedding
@@ -70,14 +70,14 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/GenerateEmbeddingRequest'
+                            $ref: '#/components/schemas/EmbeddingRequest'
             responses:
                 '200':
                     description: Successful operation.
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/GenerateEmbeddingResponse'
+                                $ref: '#/components/schemas/EmbeddingResponse'
     /create:
         post:
             operationId: createModel
@@ -130,7 +130,7 @@ paths:
                                 $ref: '#/components/schemas/ProcessResponse'
     /show:
         post:
-            operationId: showModelInfo
+            operationId: showModelInformation
             tags:
                 - Models
             summary: Show details about a model including modelfile, template, parameters, license, and system prompt.
@@ -138,14 +138,14 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/ModelInfoRequest'
+                            $ref: '#/components/schemas/ShowModelInformationRequest'
             responses:
                 '200':
                     description: Successful operation.
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ModelInfo'
+                                $ref: '#/components/schemas/OllamaModelCard'
     /copy:
         post:
             operationId: copyModel
@@ -257,7 +257,7 @@ paths:
 
 components:
     schemas:
-        GenerateCompletionRequest:
+        CompletionRequest:
             type: object
             description: Request class for the generate endpoint.
             properties:
@@ -288,7 +288,7 @@ components:
                 format:
                     $ref: '#/components/schemas/ResponseFormat'
                 options:
-                    $ref: '#/components/schemas/RequestOptions'
+                    $ref: '#/components/schemas/Options'
                 system:
                     type: string
                     description: The system prompt to (overrides what is defined in the Modelfile).
@@ -325,7 +325,7 @@ components:
             required:
                 - model
                 - prompt
-        RequestOptions:
+        Options:
             type: object
             description: Additional model parameters listed in the documentation for the Modelfile, such as `temperature`.
             properties:
@@ -511,7 +511,7 @@ components:
                 Note: it's important to instruct the model to use JSON in the prompt. Otherwise, the model may generate large amounts whitespace.
             enum:
                 - json
-        GenerateCompletionResponse:
+        CompletionResponse:
             type: object
             description: The response class for the generate endpoint.
             properties:
@@ -568,7 +568,7 @@ components:
                         type: integer
                         format: int64
                     example: [ 1, 2, 3 ]
-        GenerateChatCompletionRequest:
+        ChatCompletionRequest:
             type: object
             description: Request to generate a predicted chat completion for a prompt.
             properties:
@@ -585,11 +585,11 @@ components:
                     type: array
                     description: The for the model to use if supported. Requires stream to be set to false
                     items:
-                        $ref: '#/components/schemas/ToolFunction'
+                        $ref: '#/components/schemas/Tool'
                 format:
                     $ref: '#/components/schemas/ResponseFormat'
                 options:
-                    $ref: '#/components/schemas/RequestOptions'
+                    $ref: '#/components/schemas/Options'
                 stream:
                     type: boolean
                     description: *stream
@@ -601,7 +601,7 @@ components:
             required:
                 - model
                 - messages
-        GenerateChatCompletionResponse:
+        ChatCompletionResponse:
             type: object
             description: The response class for the chat endpoint.
             properties:
@@ -657,7 +657,7 @@ components:
                 - stop # The generation hit a stop token.
                 - length # The maximum num_tokens was reached.
                 - load # The request was sent with an empty body to load the model.
-        ToolFunction:
+        ToolCall:
             type: object
             description: A tool function to use in the model.
             properties:
@@ -666,7 +666,7 @@ components:
                     description: The function name
                 arguments:
                     type: object
-        ToolSpecification:
+        Tool:
             type: object
             description: A tool function to use in the model.
             properties:
@@ -675,8 +675,8 @@ components:
                     description: The function type
                     example: function
                 function:
-                    $ref: '#/components/schemas/PromptFunctionSpecification'
-        PromptFunctionSpecification:
+                    $ref: '#/components/schemas/ToolFunction'
+        ToolFunction:
             type: object
             description: The prompt function specification
             properties:
@@ -750,12 +750,12 @@ components:
                     description: A list of tools the model wants to use
                     items:
                         type:
-                            $ref: '#/components/schemas/ToolSpecification'
+                            $ref: '#/components/schemas/ToolCall'
                         description: The tool to use
             required:
                 - role
                 - content
-        GenerateEmbeddingRequest:
+        EmbeddingRequest:
             description: Generate embeddings from a model.
             type: object
             properties:
@@ -764,15 +764,17 @@ components:
                     description: *model_name
                     example: llama3:8b
                 input:
-                    type: string
+                    type: array
                     description: Text to generate embeddings for.
-                    example: 'Here is an article about llamas...'
+                    items:
+                        type: string
+                        example: 'Here is an article about llamas...'
                 truncate:
                     type: boolean
                     description: Truncates the end of each input to fit within context length. Returns error if false and context length is exceeded. Defaults to true.
                     default: true
                 options:
-                    $ref: '#/components/schemas/RequestOptions'
+                    $ref: '#/components/schemas/Options'
                 keep_alive:
                     type: integer
                     nullable: true
@@ -780,7 +782,7 @@ components:
             required:
                 - model
                 - input
-        GenerateEmbeddingResponse:
+        EmbeddingResponse:
             type: object
             description: Returns the embedding information.
             properties:
@@ -932,7 +934,7 @@ components:
                     format: int64
                     description: Size of the model on disk.
                     example: 7323310500
-        ModelInfoRequest:
+        ShowModelInformationRequest:
             description: Request class for the show model info endpoint.
             type: object
             properties:
@@ -942,7 +944,7 @@ components:
                     example: llama3:8b
             required:
                 - model
-        ModelInfo:
+        OllamaModelCard:
             description: Details about a model including modelfile, template, parameters, license, and system prompt.
             type: object
             properties:

@@ -15,29 +15,29 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
 import org.nirmato.ollama.api.ChatApi
-import org.nirmato.ollama.api.GenerateChatCompletionRequest
-import org.nirmato.ollama.api.GenerateChatCompletionResponse
+import org.nirmato.ollama.api.ChatCompletionRequest
+import org.nirmato.ollama.api.ChatCompletionResponse
 import org.nirmato.ollama.internal.HttpRequester
 import org.nirmato.ollama.internal.JsonLenient
 import org.nirmato.ollama.internal.processRequest
 import org.nirmato.ollama.internal.processRequestFlow
 
 internal class ChatClient internal constructor(private val requester: HttpRequester) : ChatApi {
-    override suspend fun generateChatCompletion(generateChatCompletionRequest: GenerateChatCompletionRequest): GenerateChatCompletionResponse {
+    override suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse {
         return requester.processRequest {
             method = HttpMethod.Post
             url(path = "chat")
-            setBody(generateChatCompletionRequest)
+            setBody(chatCompletionRequest)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
     }
 
-    override fun generateChatCompletionFlow(generateChatCompletionRequest: GenerateChatCompletionRequest): Flow<GenerateChatCompletionResponse> {
-        return requester.processRequestFlow<GenerateChatCompletionResponse> {
+    override fun chatCompletionFlow(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse> {
+        return requester.processRequestFlow<ChatCompletionResponse> {
             method = HttpMethod.Post
             url(path = "chat")
-            setBody(generateChatCompletionRequest.toStreamRequest())
+            setBody(chatCompletionRequest.toStreamRequest())
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {
@@ -50,8 +50,8 @@ internal class ChatClient internal constructor(private val requester: HttpReques
     /**
      * Adds `stream` parameter to the request.
      */
-    private fun GenerateChatCompletionRequest.toStreamRequest(): JsonElement {
-        val json = JsonLenient.encodeToJsonElement(GenerateChatCompletionRequest.serializer(), this)
+    private fun ChatCompletionRequest.toStreamRequest(): JsonElement {
+        val json = JsonLenient.encodeToJsonElement(ChatCompletionRequest.serializer(), this)
         return streamRequestOf(json)
     }
 

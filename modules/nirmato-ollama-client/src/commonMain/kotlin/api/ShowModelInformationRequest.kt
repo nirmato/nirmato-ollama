@@ -9,7 +9,7 @@ import org.nirmato.ollama.dsl.OllamaDsl
  * Request class for the show model info.
  */
 @Serializable
-public data class ModelInfoRequest(
+public data class ShowModelInformationRequest(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -22,16 +22,16 @@ public data class ModelInfoRequest(
 ){
     public companion object {
         /** A request to show the model info. */
-        public fun modelInfoRequest(block: ModelInfoRequestBuilder.() -> Unit): ModelInfoRequest = ModelInfoRequestBuilder().apply(block).build()
+        public fun showModelInformationRequest(block: ShowModelInformationRequestBuilder.() -> Unit): ShowModelInformationRequest = ShowModelInformationRequestBuilder().apply(block).build()
     }
 
-    /** Builder of [ModelInfoRequest] instances. */
+    /** Builder of [ShowModelInformationRequest] instances. */
     @OllamaDsl
-    public class ModelInfoRequestBuilder {
+    public class ShowModelInformationRequestBuilder {
         public var name: String? = null
 
-        /** Create [ModelInfoRequest] instance. */
-        public fun build(): ModelInfoRequest = ModelInfoRequest(
+        /** Create [ShowModelInformationRequest] instance. */
+        public fun build(): ShowModelInformationRequest = ShowModelInformationRequest(
             name = requireNotNull(name) { "name is required" },
         )
     }

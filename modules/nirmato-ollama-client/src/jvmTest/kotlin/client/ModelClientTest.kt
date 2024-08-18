@@ -17,7 +17,7 @@ import io.ktor.utils.io.core.toByteArray
 import org.nirmato.ollama.api.CopyModelRequest.Companion.copyModelRequest
 import org.nirmato.ollama.api.CreateModelRequest.Companion.createModelRequest
 import org.nirmato.ollama.api.DeleteModelRequest.Companion.deleteModelRequest
-import org.nirmato.ollama.api.ModelInfoRequest.Companion.modelInfoRequest
+import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
 import org.nirmato.ollama.api.PullModelRequest.Companion.pullModelRequest
 import org.nirmato.ollama.api.PushModelRequest.Companion.pushModelRequest
 import org.nirmato.ollama.createOllamaClient
@@ -176,11 +176,11 @@ internal class ModelClientTest {
             engine = mockEngine
         }
 
-        val modelInfoRequest = modelInfoRequest {
+        val modelInfoRequest = showModelInformationRequest {
             name = "mario"
         }
 
-        val response = ollama.showModelInfo(modelInfoRequest)
+        val response = ollama.showModelInformation(modelInfoRequest)
 
         println(response.toString())
     }

@@ -7,11 +7,7 @@ import kotlinx.serialization.Serializable
  * The response class for the chat endpoint.
  */
 @Serializable
-public data class GenerateChatCompletionResponse(
-
-    @SerialName(value = "message")
-    val message: MessageResponse? = null,
-
+public data class ChatCompletionResponse(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -24,6 +20,9 @@ public data class GenerateChatCompletionResponse(
     /** Date on which a model was created. */
     @SerialName(value = "created_at")
     val createdAt: kotlinx.datetime.Instant? = null,
+
+    @SerialName(value = "message")
+    val message: MessageResponse? = null,
 
     /** Whether the response has completed. */
     @SerialName(value = "done")

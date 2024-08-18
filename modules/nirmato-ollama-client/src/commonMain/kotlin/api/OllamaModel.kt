@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  * A model available locally.
  */
 @Serializable
-public data class Model(
+public data class OllamaModel(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -31,12 +31,12 @@ public data class Model(
 
     /** Size of the model on disk. */
     @SerialName(value = "size")
-    val propertySize: Long? = null,
+    val size: Long? = null,
 
     /** The model's digest. */
     @SerialName(value = "digest")
     val digest: String? = null,
 
     @SerialName(value = "details")
-    val details: ModelDetails? = null,
+    val details: OllamaModelDetails? = null,
 )

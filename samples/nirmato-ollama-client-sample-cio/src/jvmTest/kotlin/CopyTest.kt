@@ -4,7 +4,7 @@ import io.ktor.client.engine.cio.CIO
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.nirmato.ollama.api.CopyModelRequest.Companion.copyModelRequest
-import org.nirmato.ollama.api.ModelInfoRequest.Companion.modelInfoRequest
+import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
 import org.nirmato.ollama.client.LogLevel
 import org.nirmato.ollama.client.LoggingConfig
 import org.nirmato.ollama.client.OllamaHost
@@ -34,11 +34,11 @@ class CopyTest {
 
         val model = ollama.listModels().models?.first { it.name == newModel }
 
-        val modelInfoRequest = modelInfoRequest {
+        val modelInfoRequest = showModelInformationRequest {
             name = model?.name
         }
 
-        val modelInfo = ollama.showModelInfo(modelInfoRequest)
+        val modelInfo = ollama.showModelInformation(modelInfoRequest)
 
         assertEquals("llama", modelInfo.details?.family)
     }

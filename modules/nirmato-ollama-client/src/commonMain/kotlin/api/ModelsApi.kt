@@ -44,7 +44,7 @@ public interface ModelsApi {
     /**
      * List models that are available locally.
      */
-    public suspend fun listModels(): ModelsResponse
+    public suspend fun listModels(): ModelListResponse
 
     /**
      * List models that are running.
@@ -70,5 +70,5 @@ public interface ModelsApi {
      *
      * @param modelInfoRequest
      */
-    public suspend fun showModelInfo(modelInfoRequest: ModelInfoRequest): ModelInfo
+    public suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelCard
 }

@@ -3,14 +3,13 @@ package org.nirmato.ollama.api
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.api.MessageResponse.ToolFunction
 import org.nirmato.ollama.dsl.OllamaDsl
 
 /**
  * Request to generate a predicted chat completion for a prompt.
  */
 @Serializable
-public data class GenerateChatCompletionRequest(
+public data class ChatCompletionRequest(
 
     /**
      * The model name.
@@ -25,11 +24,11 @@ public data class GenerateChatCompletionRequest(
     /** The messages of the chat, this can be used to keep a chat memory */
     @SerialName(value = "messages")
     @Required
-    val messages: List<MessageRequest>,
+    val messages: List<Message>,
 
     /** The for the model to use if supported. Requires stream to be set to false. */
     @SerialName(value = "tools")
-    val tools: List<ToolFunction>? = null,
+    val tools: List<Tool>? = null,
 
     /** The format to return a response in. Currently, the only accepted value is json. */
     @SerialName(value = "format")
@@ -37,7 +36,7 @@ public data class GenerateChatCompletionRequest(
 
     /** Additional model parameters listed in the documentation for the Modelfile such as `temperature`. */
     @SerialName(value = "options")
-    val options: RequestOptions? = null,
+    val options: Options? = null,
 
     /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects.  */
     @SerialName(value = "stream")
@@ -56,22 +55,22 @@ public data class GenerateChatCompletionRequest(
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun generateChatCompletionRequest(block: GenerateChatCompletionRequestBuilder.() -> Unit): GenerateChatCompletionRequest = GenerateChatCompletionRequestBuilder().apply(block).build()
+        public fun chatCompletionRequest(block: ChatCompletionRequestBuilder.() -> Unit): ChatCompletionRequest = ChatCompletionRequestBuilder().apply(block).build()
     }
 
-    /** Builder of [GenerateChatCompletionRequest] instances. */
+    /** Builder of [ChatCompletionRequest] instances. */
     @OllamaDsl
-    public class GenerateChatCompletionRequestBuilder {
+    public class ChatCompletionRequestBuilder {
         public var model: String? = null
-        public var messages: List<MessageRequest>? = null
-        public var tools: List<ToolFunction>? = null
+        public var messages: List<Message>? = null
+        public var tools: List<Tool>? = null
         public var format: ResponseFormat? = null
-        public var options: RequestOptions? = null
+        public var options: Options? = null
         public var stream: Boolean? = false
         public var keepAlive: Int? = null
 
-        /** Create [GenerateChatCompletionRequest] instance. */
-        public fun build(): GenerateChatCompletionRequest = GenerateChatCompletionRequest(
+        /** Create [ChatCompletionRequest] instance. */
+        public fun build(): ChatCompletionRequest = ChatCompletionRequest(
             model = requireNotNull(model) { "model is required" },
             messages = requireNotNull(messages) { "messages is required" },
             tools = tools,

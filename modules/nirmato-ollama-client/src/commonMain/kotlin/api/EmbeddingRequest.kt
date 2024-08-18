@@ -9,7 +9,7 @@ import org.nirmato.ollama.dsl.OllamaDsl
  * Generate embeddings from a model.
  */
 @Serializable
-public data class GenerateEmbeddingRequest(
+public data class EmbeddingRequest(
 
     /**
      * The model name.
@@ -24,14 +24,14 @@ public data class GenerateEmbeddingRequest(
     /** Text to generate embeddings for. */
     @SerialName(value = "input")
     @Required
-    val input: String,
+    val input: List<String>,
 
     /** Truncates the end of each input to fit within context length. Returns error if false and context length is exceeded. Defaults to true. */
     @SerialName(value = "truncate")
     val truncate: Boolean? = false,
 
     @SerialName(value = "options")
-    val options: RequestOptions? = null,
+    val options: Options? = null,
 
     /**
      * How long (in minutes) to keep the model loaded in memory.
@@ -45,20 +45,20 @@ public data class GenerateEmbeddingRequest(
 ) {
     public companion object {
         /** A request to generate an embeddings from a model. */
-        public fun generateEmbeddingRequest(block: GenerateEmbeddingRequestBuilder.() -> Unit): GenerateEmbeddingRequest = GenerateEmbeddingRequestBuilder().apply(block).build()
+        public fun embeddingRequest(block: EmbeddingRequestBuilder.() -> Unit): EmbeddingRequest = EmbeddingRequestBuilder().apply(block).build()
     }
 
-    /** Builder of [GenerateEmbeddingRequest] instances. */
+    /** Builder of [EmbeddingRequest] instances. */
     @OllamaDsl
-    public class GenerateEmbeddingRequestBuilder {
+    public class EmbeddingRequestBuilder {
         public var model: String? = null
-        public var input: String? = null
+        public var input: List<String>? = null
         public val truncate: Boolean? = null
-        public var options: RequestOptions? = null
+        public var options: Options? = null
         public var keepAlive: Int? = null
 
-        /** Create [GenerateEmbeddingRequest] instance. */
-        public fun build(): GenerateEmbeddingRequest = GenerateEmbeddingRequest(
+        /** Create [EmbeddingRequest] instance. */
+        public fun build(): EmbeddingRequest = EmbeddingRequest(
             model = requireNotNull(model) { "model is required" },
             input = requireNotNull(input) { "input is required" },
             truncate = truncate,

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * Additional model parameters listed in the documentation for the Modelfile, such as `temperature`.
  */
 @Serializable
-public data class RequestOptions(
+public data class Options(
     /** Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0)  */
     @SerialName(value = "mirostat")
     val mirostat: Int? = null,

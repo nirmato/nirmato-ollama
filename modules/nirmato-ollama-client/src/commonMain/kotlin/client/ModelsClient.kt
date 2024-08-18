@@ -11,10 +11,10 @@ import org.nirmato.ollama.api.CopyModelRequest
 import org.nirmato.ollama.api.CreateModelRequest
 import org.nirmato.ollama.api.CreateModelResponse
 import org.nirmato.ollama.api.DeleteModelRequest
-import org.nirmato.ollama.api.ModelInfo
-import org.nirmato.ollama.api.ModelInfoRequest
+import org.nirmato.ollama.api.OllamaModelCard
+import org.nirmato.ollama.api.ShowModelInformationRequest
 import org.nirmato.ollama.api.ModelsApi
-import org.nirmato.ollama.api.ModelsResponse
+import org.nirmato.ollama.api.ModelListResponse
 import org.nirmato.ollama.api.ProcessResponse
 import org.nirmato.ollama.api.PullModelRequest
 import org.nirmato.ollama.api.PullModelResponse
@@ -70,7 +70,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
         }
     }
 
-    override suspend fun listModels(): ModelsResponse {
+    override suspend fun listModels(): ModelListResponse {
         return requester.processRequest {
             method = HttpMethod.Get
             url(path = "tags")
@@ -108,7 +108,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
         }
     }
 
-    override suspend fun showModelInfo(modelInfoRequest: ModelInfoRequest): ModelInfo {
+    override suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelCard {
         return requester.processRequest {
             method = HttpMethod.Post
             url(path = "show")

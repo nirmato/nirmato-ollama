@@ -45,5 +45,18 @@ kotlin {
                 implementation(libraries.ktor.serialization.kotlinx.json.jvm)
             }
         }
+
+        val jvmTest by getting {
+            dependencies {
+                implementation(libraries.kotlin.test.junit5)
+                implementation(libraries.kotlinx.coroutines.test.jvm)
+            }
+
+            tasks {
+                named<Test>("jvmTest") {
+                    useJUnitPlatform()
+                }
+            }
+        }
     }
 }

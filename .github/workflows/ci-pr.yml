@@ -2,11 +2,16 @@ name: CI Pull Request
 
 on:
     pull_request:
+        types:
+            - opened
+            - reopened
         branches:
             - main
         paths-ignore:
             - "**.md"
             - ".idea/**"
+            - ".editorconfig"
+            - ".gitignore"
 jobs:
     checks:
         uses: ./.github/workflows/run-checks.yml

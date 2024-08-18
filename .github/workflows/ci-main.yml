@@ -8,6 +8,8 @@ on:
         paths-ignore:
             - "**.md"
             - ".idea/**"
+            - ".editorconfig"
+            - ".gitignore"
 
 jobs:
     checks:

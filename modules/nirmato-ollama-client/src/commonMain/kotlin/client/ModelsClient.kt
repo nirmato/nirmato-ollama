@@ -21,8 +21,8 @@ import org.nirmato.ollama.api.PullModelResponse
 import org.nirmato.ollama.api.PushModelRequest
 import org.nirmato.ollama.api.PushModelResponse
 import org.nirmato.ollama.infrastructure.OctetByteArray
-import org.nirmato.ollama.internal.HttpRequester
-import org.nirmato.ollama.internal.processRequest
+import org.nirmato.ollama.client.internal.HttpRequester
+import org.nirmato.ollama.client.internal.processRequest
 
 internal class ModelsClient internal constructor(private val requester: HttpRequester) : ModelsApi {
     override suspend fun checkBlob(digest: String) {

@@ -17,7 +17,7 @@ plugins {
     id("build-project-default")
 }
 
-description = "Ollama Client"
+description = "Ollama API"
 
 kotlin {
     explicitApi()
@@ -82,7 +82,6 @@ kotlin {
                 srcDirs("src/commonMain/kotlinX")
             }
             dependencies {
-                api(project(":nirmato-ollama-api"))
                 api(libraries.kotlinx.datetime)
 
                 implementation(libraries.kotlinx.coroutines.core)

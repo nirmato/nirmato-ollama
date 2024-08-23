@@ -6,6 +6,7 @@ plugins {
 description = "Gradle Version Catalog"
 
 val modulesToIncludeInBom = setOf(
+    "nirmato-ollama-api",
     "nirmato-ollama-client",
 )
 

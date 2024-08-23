@@ -17,10 +17,10 @@ import io.ktor.http.contentType
 import org.nirmato.ollama.api.ChatApi
 import org.nirmato.ollama.api.ChatCompletionRequest
 import org.nirmato.ollama.api.ChatCompletionResponse
-import org.nirmato.ollama.internal.HttpRequester
-import org.nirmato.ollama.internal.JsonLenient
-import org.nirmato.ollama.internal.processRequest
-import org.nirmato.ollama.internal.processRequestFlow
+import org.nirmato.ollama.client.internal.HttpRequester
+import org.nirmato.ollama.client.internal.JsonLenient
+import org.nirmato.ollama.client.internal.processRequest
+import org.nirmato.ollama.client.internal.processRequestFlow
 
 internal class ChatClient internal constructor(private val requester: HttpRequester) : ChatApi {
     override suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse {

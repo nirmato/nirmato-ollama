@@ -1,4 +1,4 @@
-package org.nirmato.ollama.internal
+package org.nirmato.ollama.client.internal
 
 import kotlinx.coroutines.CancellationException
 import io.ktor.client.HttpClient

@@ -51,7 +51,7 @@ plugins.withType<YarnPlugin> {
 tasks {
     val dokkaHtmlMultiModule by getting(DokkaMultiModuleTask::class) {
         moduleName.set(rootProject.name)
-        moduleVersion.set("0.1.0") // TODO
+        moduleVersion.set("${rootProject.version}")
     }
 
     val detektAll by registering(Detekt::class) {

@@ -7,18 +7,30 @@ defaults:
     run:
         shell: bash
 
+concurrency:
+    group: ${{ github.ref }}
+    cancel-in-progress: true
+
+env:
+    FROM_ORIGINAL_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name == github.repository || github.ref == 'refs/heads/main' }}
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dkotlin.incremental=false"
+
 jobs:
     tests-default:
+        continue-on-error: false
         strategy:
-            fail-fast: false
+            fail-fast: true
             matrix:
                 os: [ 'ubuntu-latest' ]
                 target: [ 'jvm', 'js' ]
 
         runs-on: ${{ matrix.os }}
+        name: Run tests on ${{ matrix.os }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v4
+                with:
+                    fetch-depth: 0
 
             -   name: Setup environment
                 uses: ./.github/actions/setup-environment

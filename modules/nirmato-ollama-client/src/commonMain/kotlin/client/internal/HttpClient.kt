@@ -1,4 +1,4 @@
-package org.nirmato.ollama.internal
+package org.nirmato.ollama.client.internal
 
 import kotlin.time.DurationUnit
 import kotlinx.serialization.json.Json

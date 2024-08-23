@@ -5,8 +5,9 @@ on:
 
 jobs:
     analyze:
+        continue-on-error: false
         strategy:
-            fail-fast: false
+            fail-fast: true
             matrix:
                 include:
                     -   language: java-kotlin
@@ -26,6 +27,8 @@ jobs:
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v4
+                with:
+                    fetch-depth: 0
 
             -   name: Setup environment
                 uses: ./.github/actions/setup-environment

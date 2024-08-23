@@ -17,10 +17,10 @@ import io.ktor.http.contentType
 import org.nirmato.ollama.api.CompletionsApi
 import org.nirmato.ollama.api.CompletionRequest
 import org.nirmato.ollama.api.CompletionResponse
-import org.nirmato.ollama.internal.HttpRequester
-import org.nirmato.ollama.internal.JsonLenient
-import org.nirmato.ollama.internal.processRequest
-import org.nirmato.ollama.internal.processRequestFlow
+import org.nirmato.ollama.client.internal.HttpRequester
+import org.nirmato.ollama.client.internal.JsonLenient
+import org.nirmato.ollama.client.internal.processRequest
+import org.nirmato.ollama.client.internal.processRequestFlow
 
 internal class CompletionsClient internal constructor(private val requester: HttpRequester) : CompletionsApi {
     override suspend fun completion(completionRequest: CompletionRequest): CompletionResponse {

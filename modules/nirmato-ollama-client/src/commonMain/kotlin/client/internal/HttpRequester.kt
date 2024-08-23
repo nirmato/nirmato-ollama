@@ -1,4 +1,4 @@
-package org.nirmato.ollama.internal
+package org.nirmato.ollama.client.internal
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

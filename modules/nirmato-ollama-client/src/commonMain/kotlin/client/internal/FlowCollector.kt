@@ -1,4 +1,4 @@
-package org.nirmato.ollama.internal
+package org.nirmato.ollama.client.internal
 
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.FlowCollector

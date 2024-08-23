@@ -6,6 +6,7 @@ plugins {
 description = "Bill of Materials"
 
 val modulesToIncludeInBom = setOf(
+    "nirmato-ollama-api",
     "nirmato-ollama-client",
 )
 

@@ -11,6 +11,10 @@ on:
             - ".editorconfig"
             - ".gitignore"
 
+concurrency:
+    group: ${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
     checks:
         uses: ./.github/workflows/run-checks.yml

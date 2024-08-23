@@ -10,7 +10,6 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 import org.nirmato.ollama.api.EmbeddingRequest.Companion.embeddingRequest
-import org.nirmato.ollama.createOllamaClient
 
 internal class EmbeddedClientTest {
 
@@ -47,7 +46,7 @@ internal class EmbeddedClientTest {
 
         val generateEmbeddingRequest = embeddingRequest {
             model = "tinyllama"
-            input = "Why is the sky blue?"
+            input = listOf("Why is the sky blue?")
         }
 
         val response = ollama.generateEmbedding(generateEmbeddingRequest)

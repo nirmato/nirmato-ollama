@@ -1,11 +1,8 @@
 name: Run checks
+
 on:
     workflow_dispatch:
     workflow_call:
-
-concurrency:
-    group: ${{ github.ref }}
-    cancel-in-progress: true
 
 jobs:
     build-project:
@@ -14,4 +11,4 @@ jobs:
     default-tests:
         needs:
             - build-project
-        uses: ./.github/workflows/run-tests-default.yml
+        uses: ./.github/workflows/run-tests.yml

@@ -3,7 +3,6 @@ package org.nirmato.ollama.api
 import kotlinx.coroutines.flow.Flow
 
 public interface ChatApi {
-
     /**
      * Generate the next message in a chat with a provided model.
      * This is a streaming endpoint, so there will be a series of responses.

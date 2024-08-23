@@ -13,7 +13,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 import org.nirmato.ollama.api.CompletionRequest.Companion.completionRequest
 import org.nirmato.ollama.api.CompletionResponse
-import org.nirmato.ollama.createOllamaClient
 
 internal class CompletionsClientTest {
 

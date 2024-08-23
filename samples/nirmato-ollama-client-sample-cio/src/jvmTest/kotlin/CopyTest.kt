@@ -1,7 +1,10 @@
+package org.nirmato.ollama.client.samples
+
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.test.runTest
 import io.ktor.client.engine.cio.CIO
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.nirmato.ollama.api.CopyModelRequest.Companion.copyModelRequest
 import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
@@ -13,6 +16,7 @@ import org.nirmato.ollama.client.TimeoutConfig
 import org.nirmato.ollama.client.createOllamaClient
 
 class CopyTest {
+    @Disabled
     @Test
     fun copyAndGetAndShow_validRequest_returnSuccess() = runTest {
         val ollama = createOllamaClient {

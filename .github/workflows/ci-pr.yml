@@ -14,7 +14,7 @@ on:
             - ".gitignore"
 
 concurrency:
-    group: ${{ github.ref }}
+    group: ci-${{ github.workflow }}-${{ github.event.ref }}-${{ github.event.pull_request.id }}"
     cancel-in-progress: true
 
 jobs:

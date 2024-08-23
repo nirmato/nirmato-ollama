@@ -11,8 +11,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 import org.nirmato.ollama.api.ChatCompletionRequest.Companion.chatCompletionRequest
 import org.nirmato.ollama.api.Message
-import org.nirmato.ollama.api.Message.Role.USER
-import org.nirmato.ollama.createOllamaClient
+import org.nirmato.ollama.api.Role
 
 internal class ChatClientTest {
 
@@ -50,7 +49,7 @@ internal class ChatClientTest {
 
         val generateCompletionRequest = chatCompletionRequest {
             model = "tinyllama"
-            messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
+            messages = listOf(Message(role = Role.USER, content = "Why is the sky blue?"))
         }
         val response = ollama.chatCompletion(generateCompletionRequest)
 

@@ -7,12 +7,7 @@ defaults:
     run:
         shell: bash
 
-concurrency:
-    group: ${{ github.ref }}
-    cancel-in-progress: true
-
 env:
-    FROM_ORIGINAL_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name == github.repository || github.ref == 'refs/heads/main' }}
     GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dkotlin.incremental=false"
 
 jobs:
@@ -26,6 +21,9 @@ jobs:
 
         runs-on: ${{ matrix.os }}
         name: Run tests on ${{ matrix.os }}
+        concurrency:
+            group: run-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.target }}
+            cancel-in-progress: true
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v4

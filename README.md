@@ -20,7 +20,7 @@
 
 ## Overview
 
-Nirmato Ollama is a Kotlin multiplatform client to interact with Ollama API.
+Unofficial Ollama API client using Kotlin multiplatform.
 
 The implementation follows the OpenAPI definition [Ollama API](modules/nirmato-ollama-client/src/commonMain/oas/openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 

@@ -9,7 +9,7 @@ plugins {
     alias(libraries.plugins.kotlinx.serialization) apply false
     alias(libraries.plugins.kotlinx.bcv)
     alias(libraries.plugins.detekt)
-    alias(libraries.plugins.kotlin.dokka)
+    alias(libraries.plugins.dokka.gradle.plugin)
 
     id("build-project-default")
 }

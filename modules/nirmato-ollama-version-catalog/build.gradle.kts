@@ -4,11 +4,11 @@ plugins {
     id("build-publishing")
 }
 
-description = "Gradle Version Catalog"
+description = "Version Catalog"
 
 catalog {
     versionCatalog {
-        version("kotlin", libraries.versions.kotlin.asProvider().get())
+        version("kotlin", libraries.versions.kotlin.get())
 
         rootProject.subprojects.forEach { subproject ->
             if (subproject.plugins.hasPlugin("maven-publish") && !subproject.name.endsWith("version-catalog")) {

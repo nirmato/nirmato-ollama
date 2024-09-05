@@ -18,7 +18,6 @@ description = "Root Project"
 
 allprojects {
     group = "org.nirmato.ollama"
-    version = "0.1.0"
 
     configurations.all {
         resolutionStrategy {

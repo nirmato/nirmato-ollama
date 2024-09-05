@@ -21,12 +21,12 @@ import org.nirmato.ollama.api.PullModelResponse
 import org.nirmato.ollama.api.PushModelRequest
 import org.nirmato.ollama.api.PushModelResponse
 import org.nirmato.ollama.infrastructure.OctetByteArray
-import org.nirmato.ollama.client.internal.HttpRequester
-import org.nirmato.ollama.client.internal.processRequest
+import org.nirmato.ollama.client.internal.RequestHandler
+import org.nirmato.ollama.client.internal.handle
 
-internal class ModelsClient internal constructor(private val requester: HttpRequester) : ModelsApi {
+internal class ModelsClient internal constructor(private val requestHandler: RequestHandler) : ModelsApi {
     override suspend fun checkBlob(digest: String) {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Head
             url(path = "blobs/${digest}")
             contentType(ContentType.Application.Json)
@@ -34,7 +34,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun copyModel(copyModelRequest: CopyModelRequest) {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "copy")
             setBody(copyModelRequest)
@@ -43,7 +43,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun createBlob(digest: String, body: OctetByteArray) {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "blobs/${digest}")
             setBody(ByteArrayContent(body.value, ContentType.Application.OctetStream))
@@ -52,7 +52,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun createModel(createModelRequest: CreateModelRequest): CreateModelResponse {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "create")
             setBody(createModelRequest)
@@ -62,7 +62,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun deleteModel(deleteModelRequest: DeleteModelRequest) {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Delete
             url(path = "delete")
             setBody(deleteModelRequest)
@@ -71,7 +71,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun listModels(): ModelListResponse {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Get
             url(path = "tags")
             contentType(ContentType.Application.Json)
@@ -80,7 +80,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun listRunningModels(): ProcessResponse {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Get
             url(path = "ps")
             contentType(ContentType.Application.Json)
@@ -89,7 +89,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun pullModel(pullModelRequest: PullModelRequest): PullModelResponse {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "pull")
             setBody(pullModelRequest)
@@ -99,7 +99,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun pushModel(pushModelRequest: PushModelRequest): PushModelResponse {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "push")
             setBody(pushModelRequest)
@@ -109,7 +109,7 @@ internal class ModelsClient internal constructor(private val requester: HttpRequ
     }
 
     override suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelCard {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "show")
             setBody(modelInfoRequest)

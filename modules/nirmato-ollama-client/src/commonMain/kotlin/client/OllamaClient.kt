@@ -1,39 +1,41 @@
 package org.nirmato.ollama.client
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import org.nirmato.ollama.api.ChatApi
 import org.nirmato.ollama.api.CompletionsApi
 import org.nirmato.ollama.api.EmbeddingsApi
 import org.nirmato.ollama.api.ModelsApi
 import org.nirmato.ollama.api.OllamaApi
-import org.nirmato.ollama.client.internal.HttpRequester
-import org.nirmato.ollama.client.internal.HttpTransport
+import org.nirmato.ollama.client.internal.RequestHandler
+import org.nirmato.ollama.client.internal.KtorRequestHandler
 import org.nirmato.ollama.client.internal.createHttpClient
 
 /**
  * Implementation of [OllamaApi].
  *
- * @param requester http transport layer
+ * @param requestHandler http transport layer
  */
-internal class OllamaClient internal constructor(private val requester: HttpRequester) : OllamaApi,
-    CompletionsApi by CompletionsClient(requester),
-    ModelsApi by ModelsClient(requester),
-    ChatApi by ChatClient(requester),
-    EmbeddingsApi by EmbeddedClient(requester)
+public class OllamaClient internal constructor(private val requestHandler: RequestHandler) : OllamaApi,
+    CompletionsApi by CompletionsClient(requestHandler),
+    ModelsApi by ModelsClient(requestHandler),
+    ChatApi by ChatClient(requestHandler),
+    EmbeddingsApi by EmbeddedClient(requestHandler)
 
 /**
  * Creates an instance of [OllamaApi].
  */
-public fun createOllamaClient(config: OllamaConfig): OllamaApi {
+public fun OllamaClient(config: OllamaConfig): OllamaClient {
     val httpClient = createHttpClient(config)
-    val transporter = HttpTransport(httpClient)
-    return OllamaClient(transporter)
+    val requestHandler = KtorRequestHandler(httpClient)
+    return OllamaClient(requestHandler)
 }
 
 /**
  * Creates an instance of [OllamaApi].
  */
-public fun createOllamaClient(block: OllamaConfigBuilder.() -> Unit): OllamaApi {
+public fun OllamaClient(block: OllamaConfigBuilder.() -> Unit): OllamaClient {
     val config = OllamaConfigBuilder().apply(block).build()
 
-    return createOllamaClient(config)
+    return OllamaClient(config)
 }

@@ -35,14 +35,14 @@ import org.nirmato.ollama.api.RateLimitException
 import org.nirmato.ollama.api.UnknownAPIException
 
 /**
- * Default implementation of [HttpRequester].
+ * Default implementation of [RequestHandler].
  *
  * @property httpClient The HttpClient to use for performing HTTP requests.
  */
-internal class HttpTransport(private val httpClient: HttpClient) : HttpRequester {
+internal class KtorRequestHandler(private val httpClient: HttpClient) : RequestHandler {
 
     @Suppress("TooGenericExceptionCaught")
-    override suspend fun <T : Any> processRequest(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T = try {
+    override suspend fun <T : Any> handle(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T = try {
         val response = httpClient.request(builder)
 
         when (response.status) {
@@ -55,7 +55,7 @@ internal class HttpTransport(private val httpClient: HttpClient) : HttpRequester
     }
 
     @Suppress("TooGenericExceptionCaught")
-    override suspend fun <T : Any> processRequestFlow(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
+    override suspend fun <T : Any> handleFlow(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
         try {
             HttpStatement(builder = HttpRequestBuilder().apply(builder), client = httpClient).execute {
                 when (it.status) {

@@ -42,7 +42,7 @@ internal class CompletionsClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -54,7 +54,7 @@ internal class CompletionsClientTest {
             model = "tinyllama"
             prompt = "Why is the sky blue?"
         }
-        val response = ollama.completion(completionRequest)
+        val response = ollamaClient.completion(completionRequest)
 
         println(response.toString())
     }
@@ -85,7 +85,7 @@ internal class CompletionsClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -99,7 +99,7 @@ internal class CompletionsClientTest {
         }
 
         val response = mutableListOf<CompletionResponse>()
-        ollama.completionFlow(completionRequest).onEach { response += it }.launchIn(this).join()
+        ollamaClient.completionFlow(completionRequest).onEach { response += it }.launchIn(this).join()
 
         println(response.toString())
     }

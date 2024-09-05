@@ -17,14 +17,14 @@ import io.ktor.http.contentType
 import org.nirmato.ollama.api.CompletionsApi
 import org.nirmato.ollama.api.CompletionRequest
 import org.nirmato.ollama.api.CompletionResponse
-import org.nirmato.ollama.client.internal.HttpRequester
+import org.nirmato.ollama.client.internal.RequestHandler
 import org.nirmato.ollama.client.internal.JsonLenient
-import org.nirmato.ollama.client.internal.processRequest
-import org.nirmato.ollama.client.internal.processRequestFlow
+import org.nirmato.ollama.client.internal.handle
+import org.nirmato.ollama.client.internal.handleFlow
 
-internal class CompletionsClient internal constructor(private val requester: HttpRequester) : CompletionsApi {
+internal class CompletionsClient internal constructor(private val requestHandler: RequestHandler) : CompletionsApi {
     override suspend fun completion(completionRequest: CompletionRequest): CompletionResponse {
-        return requester.processRequest {
+        return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "generate")
             setBody(completionRequest)
@@ -34,7 +34,7 @@ internal class CompletionsClient internal constructor(private val requester: Htt
     }
 
     override fun completionFlow(completionRequest: CompletionRequest): Flow<CompletionResponse> {
-        return requester.processRequestFlow<CompletionResponse> {
+        return requestHandler.handleFlow<CompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")
             setBody(completionRequest.toStreamRequest())

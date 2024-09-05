@@ -39,7 +39,7 @@ internal class ChatClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -51,7 +51,7 @@ internal class ChatClientTest {
             model = "tinyllama"
             messages = listOf(Message(role = Role.USER, content = "Why is the sky blue?"))
         }
-        val response = ollama.chatCompletion(generateCompletionRequest)
+        val response = ollamaClient.chatCompletion(generateCompletionRequest)
 
         println(response.toString())
     }

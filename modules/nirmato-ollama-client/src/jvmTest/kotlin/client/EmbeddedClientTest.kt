@@ -36,7 +36,7 @@ internal class EmbeddedClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -49,7 +49,7 @@ internal class EmbeddedClientTest {
             input = listOf("Why is the sky blue?")
         }
 
-        val response = ollama.generateEmbedding(generateEmbeddingRequest)
+        val response = ollamaClient.generateEmbedding(generateEmbeddingRequest)
 
         println(response.toString())
     }

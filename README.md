@@ -98,7 +98,7 @@ dependencies {
 ```xml
 <dependency>
     <groupId>org.nirmato.ollama</groupId>
-    <artifactId>nirmato-ollama-client</artifactId>
+    <artifactId>nirmato-ollama-client-[jvm]</artifactId>
     <version>VERSION</version>
 </dependency>
 ```

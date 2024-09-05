@@ -1,20 +1,27 @@
 plugins {
     id("java-platform")
-    id("maven-publish")
+
+    id("build-publishing")
 }
 
-description = "Bill of Materials"
+description = "BOM"
 
-val modulesToIncludeInBom = setOf(
-    "nirmato-ollama-api",
-    "nirmato-ollama-client",
-)
+val me = project
+rootProject.subprojects {
+    if (name != me.name) {
+        me.evaluationDependsOn(path)
+    }
+}
 
 dependencies {
     constraints {
-        for (subproject in project.rootProject.subprojects) {
-            if (subproject.name in modulesToIncludeInBom) {
-                api(subproject)
+        rootProject.subprojects.forEach { subproject ->
+            if (subproject.plugins.hasPlugin("maven-publish") && subproject.name != name) {
+                subproject.publishing.publications.withType<MavenPublication>().configureEach {
+                    if (!artifactId.endsWith("-metadata") && !artifactId.endsWith("-kotlinMultiplatform")) {
+                        api("$groupId:$artifactId:$version")
+                    }
+                }
             }
         }
     }
@@ -22,34 +29,8 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("bom") {
-            groupId = group.toString()
-            artifactId = project.name
-            version = project.version.toString()
-
+        register<MavenPublication>("bom") {
             from(components["javaPlatform"])
-
-            pom {
-                name.set(artifactId)
-                description.set(project.description)
-                url.set("https://github.com/nirmato/nirmato-ollama")
-                inceptionYear.set("2024")
-
-                licenses {
-                    license {
-                        name.set("Apache License 2.0")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-
-                scm {
-                    val base = "github.com/nirmato/nirmato-ollama"
-
-                    url.set("https://$base")
-                    connection.set("scm:git:git://$base.git")
-                    developerConnection.set("scm:git:ssh://git@$base.git")
-                }
-            }
         }
     }
 }

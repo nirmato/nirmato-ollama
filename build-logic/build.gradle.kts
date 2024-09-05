@@ -13,6 +13,7 @@ configurations.all {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${getKotlinPluginVersion()}")
+    implementation(libraries.dokka.gradle.plugin)
 }
 
 sourceSets {
@@ -33,9 +34,13 @@ kotlin {
 
 gradlePlugin {
     plugins {
-        register("ProjectDefaultPlugin") {
+        register("DefaultProjectPlugin") {
             id = "build-project-default"
-            implementationClass = "build.gradle.plugins.build.ProjectDefaultPlugin"
+            implementationClass = "build.gradle.plugins.build.DefaultProjectPlugin"
+        }
+        register("PublishingPlugin") {
+            id = "build-publishing"
+            implementationClass = "build.gradle.plugins.build.PublishingPlugin"
         }
     }
 }

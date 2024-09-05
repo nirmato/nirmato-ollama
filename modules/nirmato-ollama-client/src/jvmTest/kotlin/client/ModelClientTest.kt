@@ -38,7 +38,7 @@ internal class ModelClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -50,7 +50,7 @@ internal class ModelClientTest {
             name = "mario"
             modelfile = "FROM tinyllama\nSYSTEM You are mario from Super Mario Bros."
         }
-        val response = ollama.createModel(createModelRequest)
+        val response = ollamaClient.createModel(createModelRequest)
 
         println(response.toString())
     }
@@ -63,7 +63,7 @@ internal class ModelClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -71,9 +71,9 @@ internal class ModelClientTest {
             engine = mockEngine
         }
 
-        ollama.createBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4", OctetByteArray("newblob".toByteArray()))
+        ollamaClient.createBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4", OctetByteArray("newblob".toByteArray()))
 
-        ollama.checkBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4")
+        ollamaClient.checkBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4")
     }
 
     @Test
@@ -84,7 +84,7 @@ internal class ModelClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -92,7 +92,7 @@ internal class ModelClientTest {
             engine = mockEngine
         }
 
-        ollama.createBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4", OctetByteArray("newblob".toByteArray()))
+        ollamaClient.createBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4", OctetByteArray("newblob".toByteArray()))
     }
 
     @Test
@@ -125,7 +125,7 @@ internal class ModelClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -133,7 +133,7 @@ internal class ModelClientTest {
             engine = mockEngine
         }
 
-        val response = ollama.listModels()
+        val response = ollamaClient.listModels()
 
         println(response.toString())
     }
@@ -167,7 +167,7 @@ internal class ModelClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -179,7 +179,7 @@ internal class ModelClientTest {
             name = "mario"
         }
 
-        val response = ollama.showModelInformation(modelInfoRequest)
+        val response = ollamaClient.showModelInformation(modelInfoRequest)
 
         println(response.toString())
     }
@@ -193,7 +193,7 @@ internal class ModelClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -206,7 +206,7 @@ internal class ModelClientTest {
             destination = "mario2"
         }
 
-        ollama.copyModel(copyModelRequest)
+        ollamaClient.copyModel(copyModelRequest)
     }
 
     @Test
@@ -217,7 +217,7 @@ internal class ModelClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -229,7 +229,7 @@ internal class ModelClientTest {
             model = "mario2"
         }
 
-        ollama.deleteModel(deleteModelRequest)
+        ollamaClient.deleteModel(deleteModelRequest)
     }
 
     @Test
@@ -248,7 +248,7 @@ internal class ModelClientTest {
             }
         }
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -260,7 +260,7 @@ internal class ModelClientTest {
             name = "tinyllama"
         }
 
-        val response = ollama.pullModel(pullModelRequest)
+        val response = ollamaClient.pullModel(pullModelRequest)
 
         println(response.toString())
     }
@@ -277,7 +277,7 @@ internal class ModelClientTest {
             }
         }.create()
 
-        val ollama = createOllamaClient {
+        val ollamaClient = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
@@ -289,7 +289,7 @@ internal class ModelClientTest {
             model = "mario"
         }
 
-        val response = ollama.pushModel(pushModelRequest)
+        val response = ollamaClient.pushModel(pushModelRequest)
 
         println(response.toString())
     }

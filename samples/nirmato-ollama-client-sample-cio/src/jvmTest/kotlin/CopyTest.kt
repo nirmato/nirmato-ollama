@@ -13,13 +13,13 @@ import org.nirmato.ollama.client.LoggingConfig
 import org.nirmato.ollama.client.OllamaHost
 import org.nirmato.ollama.client.RetryStrategy
 import org.nirmato.ollama.client.TimeoutConfig
-import org.nirmato.ollama.client.createOllamaClient
+import org.nirmato.ollama.client.OllamaClient
 
 class CopyTest {
     @Disabled
     @Test
     fun copyAndGetAndShow_validRequest_returnSuccess() = runTest {
-        val ollama = createOllamaClient {
+        val ollama = OllamaClient {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local

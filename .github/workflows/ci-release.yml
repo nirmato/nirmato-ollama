@@ -1,14 +1,14 @@
 name: CI Release
 
 on:
-    push:
-        tags:
-            - '*'
+    release:
+        types:
+            - published
 
 concurrency:
-    group: ci-${{ github.workflow }}-${{ github.ref }}
+    group: ci-release-${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
 jobs:
-    checks:
-        uses: ./.github/workflows/run-checks.yml
+    release:
+        uses: ./.github/workflows/run-release.yml

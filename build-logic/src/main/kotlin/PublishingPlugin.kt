@@ -100,8 +100,12 @@ public class PublishingPlugin : Plugin<Project> {
 
             repositories {
                 maven {
-                    name = "LocalRepo"
-                    url = project.uri("file://${project.layout.projectDirectory}/local-repo")
+                    name = "GitHubPackages"
+                    url = project.uri("https://maven.pkg.github.com/nirmato/nirmato-ollama")
+                    credentials {
+                        username = getenv("GITHUB_ACTOR")
+                        password = getenv("GITHUB_TOKEN")
+                    }
                 }
             }
         }

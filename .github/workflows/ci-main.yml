@@ -12,7 +12,7 @@ on:
             - ".gitignore"
 
 concurrency:
-    group: ci-${{ github.workflow }}-${{ github.ref }}
+    group: ci-main-${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
 jobs:

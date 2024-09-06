@@ -22,7 +22,7 @@ catalog {
 
 publishing {
     publications {
-        create<MavenPublication>("version-catalog") {
+        create<MavenPublication>("versionCatalog") {
             from(components["versionCatalog"])
         }
     }

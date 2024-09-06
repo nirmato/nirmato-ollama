@@ -6,7 +6,7 @@ on:
 
 jobs:
     build-project:
-        uses: ./.github/workflows/run-build-project.yml
+        uses: ./.github/workflows/run-build.yml
 
     default-tests:
         needs:

@@ -22,12 +22,12 @@
 
 Unofficial Ollama API client using Kotlin multiplatform.
 
-The implementation follows the OpenAPI definition [Ollama API](modules/nirmato-ollama-client/src/commonMain/oas/openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
+The implementation follows the OpenAPI definition [Ollama API](modules/nirmato-ollama-api/src/commonMain/oas/openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
 > [!WARNING]
 > nirmato-ollama is under development.
 >
-> Report any issue or bug <a href="/issues">in the GitHub repository.</a>
+> Report any issue or bug <a href="https://github.com/nirmato/nirmato-ollama/issues">in the GitHub repository.</a>
 > 
 
 ## How to use

@@ -1,5 +1,11 @@
 package org.nirmato.ollama.api
 
+import org.nirmato.ollama.api.CopyModelRequest.*
+import org.nirmato.ollama.api.CreateModelRequest.*
+import org.nirmato.ollama.api.DeleteModelRequest.*
+import org.nirmato.ollama.api.PullModelRequest.*
+import org.nirmato.ollama.api.PushModelRequest.*
+import org.nirmato.ollama.api.ShowModelInformationRequest.*
 import org.nirmato.ollama.infrastructure.OctetByteArray
 
 public interface ModelsApi {
@@ -71,4 +77,35 @@ public interface ModelsApi {
      * @param modelInfoRequest
      */
     public suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelCard
+}
+
+
+public suspend fun ModelsApi.copyModel(block: CopyModelRequestBuilder.() -> Unit) {
+    val copyModelRequest = CopyModelRequestBuilder().apply(block).build()
+    copyModel(copyModelRequest)
+}
+
+public suspend fun ModelsApi.createModel(block: CreateModelRequestBuilder.() -> Unit): CreateModelResponse {
+    val createModelRequest = CreateModelRequestBuilder().apply(block).build()
+    return createModel(createModelRequest)
+}
+
+public suspend fun ModelsApi.deleteModel(block: DeleteModelRequestBuilder.() -> Unit) {
+    val deleteModelRequest = DeleteModelRequestBuilder().apply(block).build()
+    deleteModel(deleteModelRequest)
+}
+
+public suspend fun ModelsApi.pullModel(block: PullModelRequestBuilder.() -> Unit): PullModelResponse {
+    val pullModelRequest = PullModelRequestBuilder().apply(block).build()
+    return pullModel(pullModelRequest)
+}
+
+public suspend fun ModelsApi.pushModel(block: PushModelRequestBuilder.() -> Unit): PushModelResponse {
+    val pushModelRequest = PushModelRequestBuilder().apply(block).build()
+    return pushModel(pushModelRequest)
+}
+
+public suspend fun ModelsApi.showModelInformation(block: ShowModelInformationRequestBuilder.() -> Unit): OllamaModelCard {
+    val modelInfoRequest = ShowModelInformationRequestBuilder().apply(block).build()
+    return showModelInformation(modelInfoRequest)
 }

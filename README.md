@@ -35,7 +35,7 @@ The implementation follows the OpenAPI definition [Ollama API](modules/nirmato-o
 ### Generate a completion
 
 ```kotlin
-val ollama = createOllamaClient {
+val ollama = OllamaClient {
     logging = LoggingConfig(logLevel = LogLevel.All)
     timeout = TimeoutConfig(socket = 30.seconds)
     host = OllamaHost.Local
@@ -43,11 +43,10 @@ val ollama = createOllamaClient {
     engine = CIO.create()
 }
 
-val completionRequest = completionRequest {
+val response = ollama.completion {
     model = "tinyllama"
     prompt = "Why is the sky blue?"
 }
-val response = ollama.completion(completionRequest)
 ```
 
 ## Getting Started

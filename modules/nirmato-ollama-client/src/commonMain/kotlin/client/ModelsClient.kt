@@ -7,28 +7,29 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.content.ByteArrayContent
 import io.ktor.http.contentType
+import org.nirmato.ollama.api.CheckBlobRequest
 import org.nirmato.ollama.api.CopyModelRequest
+import org.nirmato.ollama.api.CreateBlobRequest
 import org.nirmato.ollama.api.CreateModelRequest
 import org.nirmato.ollama.api.CreateModelResponse
 import org.nirmato.ollama.api.DeleteModelRequest
-import org.nirmato.ollama.api.OllamaModelCard
-import org.nirmato.ollama.api.ShowModelInformationRequest
-import org.nirmato.ollama.api.ModelsApi
 import org.nirmato.ollama.api.ModelListResponse
+import org.nirmato.ollama.api.ModelsApi
+import org.nirmato.ollama.api.OllamaModelCard
 import org.nirmato.ollama.api.ProcessResponse
 import org.nirmato.ollama.api.PullModelRequest
 import org.nirmato.ollama.api.PullModelResponse
 import org.nirmato.ollama.api.PushModelRequest
 import org.nirmato.ollama.api.PushModelResponse
-import org.nirmato.ollama.infrastructure.OctetByteArray
+import org.nirmato.ollama.api.ShowModelInformationRequest
 import org.nirmato.ollama.client.internal.RequestHandler
 import org.nirmato.ollama.client.internal.handle
 
 internal class ModelsClient internal constructor(private val requestHandler: RequestHandler) : ModelsApi {
-    override suspend fun checkBlob(digest: String) {
+    override suspend fun checkBlob(checkBlobRequest: CheckBlobRequest) {
         return requestHandler.handle {
             method = HttpMethod.Head
-            url(path = "blobs/${digest}")
+            url(path = "blobs/${checkBlobRequest.digest}")
             contentType(ContentType.Application.Json)
         }
     }
@@ -42,11 +43,11 @@ internal class ModelsClient internal constructor(private val requestHandler: Req
         }
     }
 
-    override suspend fun createBlob(digest: String, body: OctetByteArray) {
+    override suspend fun createBlob(createBlobRequest: CreateBlobRequest) {
         return requestHandler.handle {
             method = HttpMethod.Post
-            url(path = "blobs/${digest}")
-            setBody(ByteArrayContent(body.value, ContentType.Application.OctetStream))
+            url(path = "blobs/${createBlobRequest.digest}")
+            setBody(ByteArrayContent(createBlobRequest.body.value, ContentType.Application.OctetStream))
             contentType(ContentType.Application.Json)
         }
     }

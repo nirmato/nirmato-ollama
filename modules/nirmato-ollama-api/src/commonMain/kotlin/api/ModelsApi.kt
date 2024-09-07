@@ -1,36 +1,29 @@
 package org.nirmato.ollama.api
 
-import org.nirmato.ollama.api.CopyModelRequest.*
-import org.nirmato.ollama.api.CreateModelRequest.*
-import org.nirmato.ollama.api.DeleteModelRequest.*
-import org.nirmato.ollama.api.PullModelRequest.*
-import org.nirmato.ollama.api.PushModelRequest.*
-import org.nirmato.ollama.api.ShowModelInformationRequest.*
-import org.nirmato.ollama.infrastructure.OctetByteArray
+import org.nirmato.ollama.api.CopyModelRequest.CopyModelRequestBuilder
+import org.nirmato.ollama.api.CreateBlobRequest.CreateBlobRequestBuilder
+import org.nirmato.ollama.api.CreateModelRequest.CreateModelRequestBuilder
+import org.nirmato.ollama.api.DeleteModelRequest.DeleteModelRequestBuilder
+import org.nirmato.ollama.api.PullModelRequest.PullModelRequestBuilder
+import org.nirmato.ollama.api.PushModelRequest.PushModelRequestBuilder
+import org.nirmato.ollama.api.ShowModelInformationRequest.ShowModelInformationRequestBuilder
 
 public interface ModelsApi {
     /**
      * Ensures that the file blob used for a FROM or ADAPTER field exists on the server.
      * This is checking your Ollama server and not Ollama.ai.
-     *
-     * @param digest the SHA256 digest of the blob
      */
-    public suspend fun checkBlob(digest: String)
+    public suspend fun checkBlob(checkBlobRequest: CheckBlobRequest)
 
     /**
      * Creates a model with another name from an existing model.
-     *
-     * @param copyModelRequest
      */
     public suspend fun copyModel(copyModelRequest: CopyModelRequest)
 
     /**
      * Create a blob from a file. Returns the server file path.
-     *
-     * @param digest the SHA256 digest of the blob
-     * @param body  (optional)
      */
-    public suspend fun createBlob(digest: String, body: OctetByteArray)
+    public suspend fun createBlob(createBlobRequest: CreateBlobRequest)
 
     /**
      * Create a model from a Modelfile.
@@ -83,6 +76,11 @@ public interface ModelsApi {
 public suspend fun ModelsApi.copyModel(block: CopyModelRequestBuilder.() -> Unit) {
     val copyModelRequest = CopyModelRequestBuilder().apply(block).build()
     copyModel(copyModelRequest)
+}
+
+public suspend fun ModelsApi.createBlob(block: CreateBlobRequestBuilder.() -> Unit) {
+    val createBlobRequest = CreateBlobRequestBuilder().apply(block).build()
+    createBlob(createBlobRequest)
 }
 
 public suspend fun ModelsApi.createModel(block: CreateModelRequestBuilder.() -> Unit): CreateModelResponse {

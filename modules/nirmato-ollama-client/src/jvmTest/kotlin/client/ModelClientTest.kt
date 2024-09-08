@@ -20,6 +20,7 @@ import org.nirmato.ollama.api.DeleteModelRequest.Companion.deleteModelRequest
 import org.nirmato.ollama.api.PullModelRequest.Companion.pullModelRequest
 import org.nirmato.ollama.api.PushModelRequest.Companion.pushModelRequest
 import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
+import org.nirmato.ollama.api.createBlob
 import org.nirmato.ollama.infrastructure.OctetByteArray
 
 internal class ModelClientTest {
@@ -71,28 +72,10 @@ internal class ModelClientTest {
             engine = mockEngine
         }
 
-        ollamaClient.createBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4", OctetByteArray("newblob".toByteArray()))
-
-        ollamaClient.checkBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4")
-    }
-
-    @Test
-    fun createBlob_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respondOk()
-            }
+        ollamaClient.createBlob {
+            digest = "sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4"
+            body = OctetByteArray("newblob".toByteArray())
         }
-
-        val ollamaClient = OllamaClient {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-            engine = mockEngine
-        }
-
-        ollamaClient.createBlob("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4", OctetByteArray("newblob".toByteArray()))
     }
 
     @Test

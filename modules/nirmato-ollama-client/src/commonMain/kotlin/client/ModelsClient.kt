@@ -22,10 +22,10 @@ import org.nirmato.ollama.api.PullModelResponse
 import org.nirmato.ollama.api.PushModelRequest
 import org.nirmato.ollama.api.PushModelResponse
 import org.nirmato.ollama.api.ShowModelInformationRequest
-import org.nirmato.ollama.client.internal.RequestHandler
-import org.nirmato.ollama.client.internal.handle
+import org.nirmato.ollama.client.http.RequestHandler
+import org.nirmato.ollama.client.http.handle
 
-internal class ModelsClient internal constructor(private val requestHandler: RequestHandler) : ModelsApi {
+public class ModelsClient(private val requestHandler: RequestHandler) : ModelsApi {
     override suspend fun checkBlob(checkBlobRequest: CheckBlobRequest) {
         return requestHandler.handle {
             method = HttpMethod.Head

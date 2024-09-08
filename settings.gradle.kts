@@ -13,6 +13,7 @@ rootProject.name = "nirmato-ollama"
 
 includeModule("nirmato-ollama-api")
 includeModule("nirmato-ollama-client")
+includeModule("nirmato-ollama-client-ktor")
 includeModule("nirmato-ollama-bom")
 includeModule("nirmato-ollama-version-catalog")
 

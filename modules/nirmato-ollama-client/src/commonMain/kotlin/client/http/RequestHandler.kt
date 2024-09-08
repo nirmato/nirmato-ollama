@@ -1,16 +1,56 @@
-package org.nirmato.ollama.client.internal
+package org.nirmato.ollama.client.http
 
 import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
 import io.ktor.client.call.body
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.statement.HttpResponse
+import io.ktor.util.reflect.TypeInfo
+import io.ktor.util.reflect.typeInfo
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.cancel
+import io.ktor.utils.io.core.Closeable
 import io.ktor.utils.io.readUTF8Line
+import org.nirmato.ollama.client.JsonLenient
 
 private const val STREAM_PREFIX = "data:"
 private const val STREAM_END_TOKEN = "$STREAM_PREFIX [DONE]"
+
+/**
+ * Perform HTTP requests.
+ */
+public interface RequestHandler : Closeable {
+    /**
+     * Perform an HTTP request.
+     */
+    public suspend fun <T : Any> handle(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T
+
+    /**
+     * Perform an HTTP request and get a streamed result.
+     */
+    public suspend fun <T : Any> handle(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T)
+}
+
+/**
+ * Perform an HTTP request.
+ */
+public suspend inline fun <reified T> RequestHandler.handle(noinline builder: HttpRequestBuilder.() -> Unit): T {
+    return handle(typeInfo<T>(), builder)
+}
+
+/**
+ * Perform an HTTP request and get a streamed result.
+ */
+internal inline fun <reified T : Any> RequestHandler.handleFlow(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
+    return flow {
+        handle(builder) { response ->
+            streamEventsFrom(response)
+        }
+    }
+}
 
 /**
  * Get data as [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).

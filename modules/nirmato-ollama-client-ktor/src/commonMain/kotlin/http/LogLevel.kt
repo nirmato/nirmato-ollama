@@ -1,4 +1,4 @@
-package org.nirmato.ollama.client.internal
+package org.nirmato.ollama.client.http
 
 import org.nirmato.ollama.client.LogLevel
 import io.ktor.client.plugins.logging.LogLevel as KtorLogLevel

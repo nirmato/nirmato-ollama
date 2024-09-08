@@ -14,7 +14,7 @@ public interface CompletionsApi {
      * Generate a response for a given prompt with a provided model.
      * This is a streaming endpoint, so there will be a series of responses. The final response object will include statistics and additional data from the request.
      */
-    public fun completionFlow(completionRequest: CompletionRequest): Flow<CompletionResponse>
+    public suspend fun completionFlow(completionRequest: CompletionRequest): Flow<CompletionResponse>
 }
 
 public suspend fun CompletionsApi.completion(block: CompletionRequestBuilder.() -> Unit): CompletionResponse {
@@ -22,7 +22,7 @@ public suspend fun CompletionsApi.completion(block: CompletionRequestBuilder.() 
     return completion(completionRequest)
 }
 
-public fun CompletionsApi.completionFlow(block: CompletionRequestBuilder.() -> Unit): Flow<CompletionResponse> {
+public suspend fun CompletionsApi.completionFlow(block: CompletionRequestBuilder.() -> Unit): Flow<CompletionResponse> {
     val completionRequest = CompletionRequestBuilder().apply(block).build()
     return completionFlow(completionRequest)
 }

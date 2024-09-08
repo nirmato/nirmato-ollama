@@ -1,4 +1,4 @@
-package org.nirmato.ollama.client.internal
+package org.nirmato.ollama.client.http
 
 import org.nirmato.ollama.client.Logger
 import io.ktor.client.plugins.logging.Logger as KtorLogger

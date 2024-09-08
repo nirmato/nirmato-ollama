@@ -1,7 +1,6 @@
-package org.nirmato.ollama.client.internal
+package org.nirmato.ollama.client.http
 
 import kotlin.time.DurationUnit
-import kotlinx.serialization.json.Json
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.ProxyBuilder
@@ -16,27 +15,18 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
 import io.ktor.util.appendIfNameAbsent
+import org.nirmato.ollama.client.JsonLenient
 import org.nirmato.ollama.client.OllamaConfig
 import org.nirmato.ollama.client.ProxyConfig.Http
 import org.nirmato.ollama.client.ProxyConfig.Socks
-
-/**
- * Internal Json Serializer.
- */
-internal val JsonLenient = Json {
-    isLenient = false
-    ignoreUnknownKeys = true
-    encodeDefaults = true
-    explicitNulls = false
-}
 
 /**
  * Creates an instance of [HttpClient].
  *
  * @param config client config
  */
-internal fun createHttpClient(config: OllamaConfig): HttpClient = config.engine?.let {
-    HttpClient(config.engine) { configure(config) }
+public fun createHttpClient(config: OllamaConfig): HttpClient = config.engine?.let {
+    HttpClient(config.engine!!) { configure(config) }
 } ?: HttpClient { configure(config) }
 
 private fun HttpClientConfig<*>.configure(config: OllamaConfig) {

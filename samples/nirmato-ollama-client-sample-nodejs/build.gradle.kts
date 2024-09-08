@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.config.LanguageVersion
 
 plugins {
     kotlin("multiplatform")
+    alias(libraries.plugins.kotlinx.bcv) apply false
 
     id("build-project-default")
 }
@@ -27,7 +28,7 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                implementation(project(":nirmato-ollama-client"))
+                implementation(project(":nirmato-ollama-client-ktor"))
 
                 implementation(libraries.ktor.client.js)
             }

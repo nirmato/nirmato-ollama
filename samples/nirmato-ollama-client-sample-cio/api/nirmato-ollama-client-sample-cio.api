@@ -1,5 +1,0 @@
-public final class org/nirmato/ollama/client/samples/ApplicationKt {
-	public static final fun main ()V
-	public static synthetic fun main ([Ljava/lang/String;)V
-}
-

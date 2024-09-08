@@ -1,15 +1,13 @@
 package org.nirmato.ollama.client
 
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
 import org.nirmato.ollama.api.ChatApi
 import org.nirmato.ollama.api.CompletionsApi
 import org.nirmato.ollama.api.EmbeddingsApi
 import org.nirmato.ollama.api.ModelsApi
 import org.nirmato.ollama.api.OllamaApi
-import org.nirmato.ollama.client.internal.RequestHandler
-import org.nirmato.ollama.client.internal.KtorRequestHandler
-import org.nirmato.ollama.client.internal.createHttpClient
+import org.nirmato.ollama.client.http.KtorRequestHandler
+import org.nirmato.ollama.client.http.RequestHandler
+import org.nirmato.ollama.client.http.createHttpClient
 
 /**
  * Implementation of [OllamaApi].

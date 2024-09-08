@@ -14,15 +14,14 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
-import org.nirmato.ollama.api.CompletionsApi
 import org.nirmato.ollama.api.CompletionRequest
 import org.nirmato.ollama.api.CompletionResponse
-import org.nirmato.ollama.client.internal.RequestHandler
-import org.nirmato.ollama.client.internal.JsonLenient
-import org.nirmato.ollama.client.internal.handle
-import org.nirmato.ollama.client.internal.handleFlow
+import org.nirmato.ollama.api.CompletionsApi
+import org.nirmato.ollama.client.http.RequestHandler
+import org.nirmato.ollama.client.http.handle
+import org.nirmato.ollama.client.http.handleFlow
 
-internal class CompletionsClient internal constructor(private val requestHandler: RequestHandler) : CompletionsApi {
+public class CompletionsClient(private val requestHandler: RequestHandler) : CompletionsApi {
     override suspend fun completion(completionRequest: CompletionRequest): CompletionResponse {
         return requestHandler.handle {
             method = HttpMethod.Post
@@ -33,7 +32,7 @@ internal class CompletionsClient internal constructor(private val requestHandler
         }
     }
 
-    override fun completionFlow(completionRequest: CompletionRequest): Flow<CompletionResponse> {
+    override suspend fun completionFlow(completionRequest: CompletionRequest): Flow<CompletionResponse> {
         return requestHandler.handleFlow<CompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")

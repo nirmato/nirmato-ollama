@@ -1,4 +1,4 @@
-package org.nirmato.ollama.client.internal
+package org.nirmato.ollama.client.http
 
 import kotlinx.coroutines.CancellationException
 import io.ktor.client.HttpClient
@@ -39,7 +39,7 @@ import org.nirmato.ollama.api.UnknownAPIException
  *
  * @property httpClient The HttpClient to use for performing HTTP requests.
  */
-internal class KtorRequestHandler(private val httpClient: HttpClient) : RequestHandler {
+public class KtorRequestHandler(private val httpClient: HttpClient) : RequestHandler {
 
     @Suppress("TooGenericExceptionCaught")
     override suspend fun <T : Any> handle(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T = try {
@@ -55,7 +55,7 @@ internal class KtorRequestHandler(private val httpClient: HttpClient) : RequestH
     }
 
     @Suppress("TooGenericExceptionCaught")
-    override suspend fun <T : Any> handleFlow(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
+    override suspend fun <T : Any> handle(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
         try {
             HttpStatement(builder = HttpRequestBuilder().apply(builder), client = httpClient).execute {
                 when (it.status) {

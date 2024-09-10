@@ -2,11 +2,9 @@
 
 ![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.0.20-blue.svg?logo=kotlin) ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
-## Overview
-
 Unofficial Ollama API client using Kotlin multiplatform.
 
-The implementation follows the OpenAPI definition [Ollama API](modules/nirmato-ollama-api/src/commonMain/oas/openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
+The implementation follows the OpenAPI definition [Ollama API](modules/api/src/commonMain/oas/openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
 > [!WARNING]
 > nirmato-ollama is under development.

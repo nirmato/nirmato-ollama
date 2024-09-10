@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Function to check the current branch
+check_current_branch() {
+    echo "Checking the current git branch..."
+    CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    if [ "$CURRENT_BRANCH" = "main" ]; then
+        echo "Avoid commiting directly to the '$CURRENT_BRANCH' branch!"
+        echo "ABORTING COMMIT: You must navigate to a feature branch or create a new one"
+        exit 1
+    fi
+}
+
+# Function to run Detekt checks
+run_detekt() {
+    # Only run detekt if kotlin files changed
+    if git diff --cached --name-only | grep --quiet "\.kt$"; then
+        echo "Running detekt check..."
+        OUTPUT="/tmp/detekt-$(date +%s)"
+        ./gradlew detekt --auto-correct -PstagedOnly=true 2>$OUTPUT
+        EXIT_CODE=$?
+        if [ $EXIT_CODE -ne 0 ]; then
+            cat $OUTPUT
+            rm $OUTPUT
+            echo "Detekt failed!"
+            echo "ABORTING COMMIT: Please fix the above issues before committing"
+            exit $EXIT_CODE
+        fi
+        rm $OUTPUT
+    fi
+}
+
+check_current_branch
+run_detekt
+
+exit 0

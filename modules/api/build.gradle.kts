@@ -127,7 +127,11 @@ tasks {
 publishing {
     publications.configureEach {
         with(this as MavenPublication) {
-            artifactId = "${rootProject.name}-${project.name}-$name"
+            artifactId = if(name == "kotlinMultiplatform") {
+                "${rootProject.name}-${project.name}"
+            } else {
+                "${rootProject.name}-${project.name}-$name"
+            }
         }
     }
 }

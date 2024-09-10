@@ -31,8 +31,8 @@ apiValidation {
 
     ignoredProjects.addAll(
         listOf(
-            "nirmato-ollama-bom",
-            "nirmato-ollama-version-catalog",
+            "bom",
+            "version-catalog",
         )
     )
 }

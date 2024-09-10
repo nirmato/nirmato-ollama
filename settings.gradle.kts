@@ -11,11 +11,11 @@ plugins {
 
 rootProject.name = "nirmato-ollama"
 
-includeModule("nirmato-ollama-api")
-includeModule("nirmato-ollama-client")
-includeModule("nirmato-ollama-client-ktor")
-includeModule("nirmato-ollama-bom")
-includeModule("nirmato-ollama-version-catalog")
+includeModule("api")
+includeModule("client")
+includeModule("client-ktor")
+includeModule("bom")
+includeModule("version-catalog")
 
 include("samples:nirmato-ollama-client-sample-cio")
 include("samples:nirmato-ollama-client-sample-nodejs")

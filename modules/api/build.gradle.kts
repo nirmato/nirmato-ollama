@@ -123,3 +123,11 @@ tasks {
         offlineMode.set(true)
     }
 }
+
+publishing {
+    publications.configureEach {
+        with(this as MavenPublication) {
+            artifactId = "${rootProject.name}-${project.name}-$name"
+        }
+    }
+}

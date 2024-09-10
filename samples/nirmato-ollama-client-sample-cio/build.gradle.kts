@@ -30,7 +30,7 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                implementation(project(":nirmato-ollama-client-ktor"))
+                implementation(project(":client-ktor"))
 
                 implementation(libraries.ktor.client.cio)
             }

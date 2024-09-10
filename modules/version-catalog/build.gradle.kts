@@ -11,9 +11,11 @@ catalog {
         version("kotlin", libraries.versions.kotlin.get())
 
         rootProject.subprojects.forEach { subproject ->
-            if (subproject.plugins.hasPlugin("maven-publish") && !subproject.name.endsWith("version-catalog")) {
+            if (subproject.plugins.hasPlugin("maven-publish") && subproject.name != name) {
                 subproject.publishing.publications.withType<MavenPublication>().configureEach {
-                    library(artifactId, "$groupId:$artifactId:$version")
+                    if (!artifactId.endsWith("-metadata") && !artifactId.endsWith("-kotlinMultiplatform")) {
+                        library(artifactId, "$groupId:$artifactId:$version")
+                    }
                 }
             }
         }
@@ -22,7 +24,9 @@ catalog {
 
 publishing {
     publications {
-        create<MavenPublication>("versionCatalog") {
+        register<MavenPublication>("versionCatalog") {
+            artifactId = "${rootProject.name}-${project.name}"
+
             from(components["versionCatalog"])
         }
     }

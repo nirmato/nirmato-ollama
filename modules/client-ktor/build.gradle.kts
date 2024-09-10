@@ -82,8 +82,8 @@ kotlin {
                 srcDirs("src/commonMain/kotlinX")
             }
             dependencies {
-                api(project(":nirmato-ollama-api"))
-                api(project(":nirmato-ollama-client"))
+                api(project(":api"))
+                api(project(":client"))
                 api(libraries.kotlinx.datetime)
 
                 implementation(libraries.kotlinx.coroutines.core)
@@ -123,5 +123,13 @@ tasks {
         }
         failOnWarning.set(true)
         offlineMode.set(true)
+    }
+}
+
+publishing {
+    publications.configureEach {
+        with(this as MavenPublication) {
+            artifactId = "${rootProject.name}-${project.name}-$name"
+        }
     }
 }

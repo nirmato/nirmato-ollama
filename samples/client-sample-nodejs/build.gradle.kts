@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.config.LanguageVersion
 
 plugins {
     kotlin("multiplatform")
-    alias(libraries.plugins.kotlinx.bcv) apply false
 
     id("build-project-default")
 }

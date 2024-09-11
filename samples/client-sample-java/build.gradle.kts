@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     kotlin("multiplatform")
-    alias(libraries.plugins.kotlinx.bcv) apply false
 
     id("build-project-default")
 }

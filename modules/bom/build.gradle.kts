@@ -1,6 +1,5 @@
 plugins {
     id("java-platform")
-
     id("build-publishing")
 }
 

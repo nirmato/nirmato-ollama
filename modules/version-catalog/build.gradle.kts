@@ -1,6 +1,5 @@
 plugins {
     id("version-catalog")
-
     id("build-publishing")
 }
 

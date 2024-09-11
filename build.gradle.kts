@@ -3,6 +3,7 @@ import org.gradle.api.tasks.wrapper.Wrapper.DistributionType
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 plugins {
@@ -19,7 +20,7 @@ description = "Root Project"
 allprojects {
     group = "org.nirmato.ollama"
 
-    configurations.all {
+    configurations.configureEach {
         resolutionStrategy {
             failOnNonReproducibleResolution()
         }
@@ -33,17 +34,24 @@ apiValidation {
         listOf(
             "bom",
             "version-catalog",
+            "client-sample-cio",
+            "client-sample-java",
         )
     )
 }
 
 plugins.withType<YarnPlugin> {
     yarn.apply {
-        lockFileDirectory = rootDir.resolve("gradle/js")
-        yarnLockMismatchReport = YarnLockMismatchReport.FAIL
-        yarnLockAutoReplace = true
-        reportNewYarnLock = true
+        download = false
         ignoreScripts = false
+        lockFileDirectory = rootDir.resolve("gradle/js")
+        reportNewYarnLock = true
+        yarnLockAutoReplace = true
+        yarnLockMismatchReport = YarnLockMismatchReport.FAIL
+
+        resolution("braces", "3.0.3")
+        resolution("follow-redirects", "1.15.6")
+        resolution("webpack", "5.94.0")
     }
 }
 

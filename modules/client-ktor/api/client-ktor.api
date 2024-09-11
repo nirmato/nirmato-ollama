@@ -1,0 +1,34 @@
+public final class org/nirmato/ollama/client/OllamaClient : org/nirmato/ollama/api/ChatApi, org/nirmato/ollama/api/CompletionsApi, org/nirmato/ollama/api/EmbeddingsApi, org/nirmato/ollama/api/ModelsApi, org/nirmato/ollama/api/OllamaApi {
+	public fun chatCompletion (Lorg/nirmato/ollama/api/ChatCompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun chatCompletionFlow (Lorg/nirmato/ollama/api/ChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
+	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun showModelInformation (Lorg/nirmato/ollama/api/ShowModelInformationRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class org/nirmato/ollama/client/OllamaClientKt {
+	public static final fun OllamaClient (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/client/OllamaClient;
+	public static final fun OllamaClient (Lorg/nirmato/ollama/client/OllamaConfig;)Lorg/nirmato/ollama/client/OllamaClient;
+}
+
+public final class org/nirmato/ollama/client/http/HttpClientKt {
+	public static final fun createHttpClient (Lorg/nirmato/ollama/client/OllamaConfig;)Lio/ktor/client/HttpClient;
+}
+
+public final class org/nirmato/ollama/client/http/KtorRequestHandler : org/nirmato/ollama/client/http/RequestHandler {
+	public fun <init> (Lio/ktor/client/HttpClient;)V
+	public fun close ()V
+	public fun handle (Lio/ktor/util/reflect/TypeInfo;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun handle (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

@@ -1,18 +1,12 @@
-import build.gradle.dsl.withCompilerArguments
 import org.jetbrains.dokka.DokkaConfiguration.Visibility
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
-import org.jetbrains.kotlin.config.ApiVersion
-import org.jetbrains.kotlin.config.LanguageVersion
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
-import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 plugins {
-    id(libraries.plugins.kotlin.multiplatform.get().pluginId)
     alias(libraries.plugins.kotlinx.serialization)
     alias(libraries.plugins.dokka.gradle.plugin)
     alias(libraries.plugins.kotlinx.kover)
 
+    id("build-multiplatform")
     id("build-project-default")
     id("build-publishing")
 }
@@ -22,46 +16,9 @@ description = "Ollama Client"
 kotlin {
     explicitApi()
 
-    targets.all {
-        compilations.all {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    withCompilerArguments {
-                        requiresOptIn()
-                        suppressExpectActualClasses()
-                        suppressVersionWarnings()
-                    }
-                }
-            }
-        }
-    }
-
-    jvm {
-        compilations.all {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    withCompilerArguments {
-                        requiresJsr305()
-                    }
-                }
-            }
-        }
-    }
-
-    js {
-        moduleName = project.name
-
-        nodejs()
-        browser()
-    }
-
     sourceSets {
         all {
             languageSettings.apply {
-                apiVersion = ApiVersion.KOTLIN_1_7.toString()
-                languageVersion = LanguageVersion.KOTLIN_2_0.toString()
-                progressiveMode = true
-
                 optIn("kotlin.ExperimentalStdlibApi")
                 optIn("kotlin.RequiresOptIn")
                 optIn("kotlin.contracts.ExperimentalContracts")
@@ -104,14 +61,6 @@ kotlin {
         }
 
         val jvmTest by getting
-    }
-}
-
-plugins.withType<YarnPlugin> {
-    yarn.apply {
-        lockFileDirectory = rootDir.resolve("gradle/js")
-        yarnLockMismatchReport = YarnLockMismatchReport.FAIL
-        yarnLockAutoReplace = true
     }
 }
 

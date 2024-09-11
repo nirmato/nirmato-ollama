@@ -5,7 +5,7 @@ plugins {
     `java-gradle-plugin`
 }
 
-configurations.all {
+configurations.configureEach {
     resolutionStrategy {
         failOnNonReproducibleResolution()
     }
@@ -13,6 +13,7 @@ configurations.all {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${getKotlinPluginVersion()}")
+    implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:${getKotlinPluginVersion()}")
     implementation(libraries.dokka.gradle.plugin)
 }
 
@@ -41,6 +42,14 @@ gradlePlugin {
         register("PublishingPlugin") {
             id = "build-publishing"
             implementationClass = "build.gradle.plugins.build.PublishingPlugin"
+        }
+        register("MultiplatformPlugin") {
+            id = "build-multiplatform"
+            implementationClass = "build.gradle.plugins.build.MultiplatformPlugin"
+        }
+        register("AssemblerPlugin") {
+            id = "build-assembler"
+            implementationClass = "build.gradle.plugins.build.AssemblerPlugin"
         }
     }
 }

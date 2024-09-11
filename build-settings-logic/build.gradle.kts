@@ -5,7 +5,7 @@ plugins {
     `java-gradle-plugin`
 }
 
-configurations.all {
+configurations.configureEach {
     resolutionStrategy {
         failOnNonReproducibleResolution()
     }

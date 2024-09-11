@@ -6,9 +6,9 @@ import io.ktor.client.request.url
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
-import org.nirmato.ollama.api.EmbeddingsApi
 import org.nirmato.ollama.api.EmbeddingRequest
 import org.nirmato.ollama.api.EmbeddingResponse
+import org.nirmato.ollama.api.EmbeddingsApi
 import org.nirmato.ollama.client.http.RequestHandler
 import org.nirmato.ollama.client.http.handle
 

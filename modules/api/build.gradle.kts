@@ -72,15 +72,3 @@ tasks {
         offlineMode.set(true)
     }
 }
-
-publishing {
-    publications.configureEach {
-        with(this as MavenPublication) {
-            artifactId = if(name == "kotlinMultiplatform") {
-                "${rootProject.name}-${project.name}"
-            } else {
-                "${rootProject.name}-${project.name}-$name"
-            }
-        }
-    }
-}

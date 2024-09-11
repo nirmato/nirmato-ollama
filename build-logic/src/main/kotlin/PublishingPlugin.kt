@@ -45,6 +45,18 @@ public class PublishingPlugin : Plugin<Project> {
 
         project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
             fixOverlappingOutputsForSigningTask(project)
+
+            project.configure<PublishingExtension> {
+                publications.configureEach {
+                    if (this is MavenPublication) {
+                        artifactId = if (name == "kotlinMultiplatform") {
+                            "${project.rootProject.name}-${project.name}"
+                        } else {
+                            "${project.rootProject.name}-${project.name}-$name"
+                        }
+                    }
+                }
+            }
         }
 
         project.pluginManager.withPlugin("org.jetbrains.dokka") {
@@ -130,7 +142,7 @@ public class PublishingPlugin : Plugin<Project> {
 // See: https://github.com/gradle/gradle/issues/26132
 // And: https://youtrack.jetbrains.com/issue/KT-46466
 private fun fixOverlappingOutputsForSigningTask(project: Project) {
-    project.tasks.withType<Sign>().configureEach {
+    project.tasks.withType<Sign> {
         val pubName = name.removePrefix("sign").removeSuffix("Publication")
 
         // These tasks only exist for native targets, hence findByName() to avoid trying to find them for other targets

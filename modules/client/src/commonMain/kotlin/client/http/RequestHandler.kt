@@ -29,7 +29,7 @@ public interface RequestHandler : Closeable {
     public suspend fun <T : Any> handle(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T
 
     /**
-     * Perform an HTTP request and get a streamed result.
+     * Perform an HTTP request and transform the result.
      */
     public suspend fun <T : Any> handle(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T)
 }
@@ -42,7 +42,7 @@ public suspend inline fun <reified T> RequestHandler.handle(noinline builder: Ht
 }
 
 /**
- * Perform an HTTP request and get a streamed result.
+ * Perform an HTTP request and transform the result.
  */
 internal inline fun <reified T : Any> RequestHandler.handleFlow(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
     return flow {

@@ -52,6 +52,8 @@ plugins.withType<YarnPlugin> {
         resolution("braces", "3.0.3")
         resolution("follow-redirects", "1.15.6")
         resolution("webpack", "5.94.0")
+        resolution("body-parser", "1.20.3")
+        resolution("send", "0.19.0")
     }
 }
 

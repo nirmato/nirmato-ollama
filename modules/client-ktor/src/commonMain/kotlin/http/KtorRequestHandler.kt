@@ -1,6 +1,7 @@
 package org.nirmato.ollama.client.http
 
 import kotlinx.coroutines.CancellationException
+import kotlinx.io.IOException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.network.sockets.ConnectTimeoutException
@@ -21,7 +22,6 @@ import io.ktor.http.HttpStatusCode.Companion.TooManyRequests
 import io.ktor.http.HttpStatusCode.Companion.Unauthorized
 import io.ktor.http.HttpStatusCode.Companion.UnsupportedMediaType
 import io.ktor.util.reflect.TypeInfo
-import io.ktor.utils.io.errors.IOException
 import org.nirmato.ollama.api.AuthenticationException
 import org.nirmato.ollama.api.GenericIOException
 import org.nirmato.ollama.api.InvalidRequestException

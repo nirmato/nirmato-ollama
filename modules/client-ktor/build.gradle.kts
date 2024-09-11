@@ -41,6 +41,7 @@ kotlin {
             dependencies {
                 api(project(":api"))
                 api(project(":client"))
+                api(libraries.kotlinx.io.core)
                 api(libraries.kotlinx.datetime)
 
                 implementation(libraries.kotlinx.coroutines.core)

@@ -8,13 +8,15 @@ kotlinx-coroutines = "1.8.1"
 kotlinx-datetime = "0.6.1"
 kotlinx-io = "0.5.3"
 kotlinx-kover = "0.8.3"
-kotlinx-serialization = "1.6.3"
-ktor = "2.3.12"
+kotlinx-serialization = "1.7.2"
+ktor = "3.0.0-rc-1"
 dokka-gradle-plugin = "1.9.20"
 
 [libraries]
 dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka-gradle-plugin" }
 foojay-resolver = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-foojay" }
+kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

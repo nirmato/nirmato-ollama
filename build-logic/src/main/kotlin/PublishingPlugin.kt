@@ -63,6 +63,7 @@ public class PublishingPlugin : Plugin<Project> {
             configureDokka(project)
         }
 
+        val localMavenDirectory = project.rootProject.layout.buildDirectory.dir("local-m2")
         project.configure<PublishingExtension> {
             // configureEach reacts on new publications being registered and configures them too
             publications.configureEach {
@@ -112,12 +113,8 @@ public class PublishingPlugin : Plugin<Project> {
 
             repositories {
                 maven {
-                    name = "GitHubPackages"
-                    url = project.uri("https://maven.pkg.github.com/nirmato/nirmato-ollama")
-                    credentials {
-                        username = getenv("GITHUB_ACTOR")
-                        password = getenv("GITHUB_TOKEN")
-                    }
+                    name = "local"
+                    setUrl(localMavenDirectory)
                 }
             }
         }
@@ -142,7 +139,7 @@ public class PublishingPlugin : Plugin<Project> {
 // See: https://github.com/gradle/gradle/issues/26132
 // And: https://youtrack.jetbrains.com/issue/KT-46466
 private fun fixOverlappingOutputsForSigningTask(project: Project) {
-    project.tasks.withType<Sign> {
+    project.tasks.withType<Sign>().configureEach {
         val pubName = name.removePrefix("sign").removeSuffix("Publication")
 
         // These tasks only exist for native targets, hence findByName() to avoid trying to find them for other targets

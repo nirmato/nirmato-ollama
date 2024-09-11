@@ -3,7 +3,6 @@ import org.gradle.api.tasks.wrapper.Wrapper.DistributionType
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 plugins {
@@ -51,9 +50,7 @@ plugins.withType<YarnPlugin> {
 
         resolution("braces", "3.0.3")
         resolution("follow-redirects", "1.15.6")
-        resolution("webpack", "5.94.0")
         resolution("body-parser", "1.20.3")
-        resolution("send", "0.19.0")
     }
 }
 

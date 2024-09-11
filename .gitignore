@@ -148,6 +148,8 @@ gradle-app.setting
 .idea/dictionaries/*
 !.idea/dictionaries/ProjectDictionary.xml
 
+**/.kotlin
+
 .sdkmanrc
 .nvmrc
 TODO

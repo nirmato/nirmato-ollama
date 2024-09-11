@@ -22,7 +22,6 @@ public final class org/nirmato/ollama/api/ChatApiKt {
 
 public final class org/nirmato/ollama/api/ChatCompletionRequest {
 	public static final field Companion Lorg/nirmato/ollama/api/ChatCompletionRequest$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/util/List;Lorg/nirmato/ollama/api/ResponseFormat;Lorg/nirmato/ollama/api/Options;Ljava/lang/Boolean;Ljava/lang/Integer;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lorg/nirmato/ollama/api/ResponseFormat;Lorg/nirmato/ollama/api/Options;Ljava/lang/Boolean;Ljava/lang/Integer;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lorg/nirmato/ollama/api/ResponseFormat;Lorg/nirmato/ollama/api/Options;Ljava/lang/Boolean;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -84,7 +83,6 @@ public final class org/nirmato/ollama/api/ChatCompletionRequest$Companion {
 public final class org/nirmato/ollama/api/ChatCompletionResponse {
 	public static final field Companion Lorg/nirmato/ollama/api/ChatCompletionResponse$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILjava/lang/String;Lkotlinx/datetime/Instant;Lorg/nirmato/ollama/api/MessageResponse;Ljava/lang/Boolean;Lorg/nirmato/ollama/api/DoneReason;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Lkotlinx/datetime/Instant;Lorg/nirmato/ollama/api/MessageResponse;Ljava/lang/Boolean;Lorg/nirmato/ollama/api/DoneReason;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;)V
 	public synthetic fun <init> (Ljava/lang/String;Lkotlinx/datetime/Instant;Lorg/nirmato/ollama/api/MessageResponse;Ljava/lang/Boolean;Lorg/nirmato/ollama/api/DoneReason;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -168,7 +166,6 @@ public final class org/nirmato/ollama/api/CheckBlobRequest$Companion {
 
 public final class org/nirmato/ollama/api/CompletionRequest {
 	public static final field Companion Lorg/nirmato/ollama/api/CompletionRequest$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lorg/nirmato/ollama/api/ResponseFormat;Lorg/nirmato/ollama/api/Options;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lorg/nirmato/ollama/api/ResponseFormat;Lorg/nirmato/ollama/api/Options;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lorg/nirmato/ollama/api/ResponseFormat;Lorg/nirmato/ollama/api/Options;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -250,7 +247,6 @@ public final class org/nirmato/ollama/api/CompletionRequest$CompletionRequestBui
 public final class org/nirmato/ollama/api/CompletionResponse {
 	public static final field Companion Lorg/nirmato/ollama/api/CompletionResponse$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILjava/lang/String;Lkotlinx/datetime/Instant;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/util/List;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Lkotlinx/datetime/Instant;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/util/List;)V
 	public synthetic fun <init> (Ljava/lang/String;Lkotlinx/datetime/Instant;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Integer;Ljava/lang/Long;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -387,7 +383,6 @@ public final class org/nirmato/ollama/api/CreateBlobRequest$CreateBlobRequestBui
 
 public final class org/nirmato/ollama/api/CreateModelRequest {
 	public static final field Companion Lorg/nirmato/ollama/api/CreateModelRequest$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -532,7 +527,6 @@ public final class org/nirmato/ollama/api/DoneReason$Companion {
 
 public final class org/nirmato/ollama/api/EmbeddingRequest {
 	public static final field Companion Lorg/nirmato/ollama/api/EmbeddingRequest$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Ljava/util/List;Ljava/lang/Boolean;Lorg/nirmato/ollama/api/Options;Ljava/lang/Integer;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;Lorg/nirmato/ollama/api/Options;Ljava/lang/Integer;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;Lorg/nirmato/ollama/api/Options;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -853,7 +847,6 @@ public final class org/nirmato/ollama/api/OllamaError$Companion {
 public final class org/nirmato/ollama/api/OllamaErrorDetails {
 	public static final field Companion Lorg/nirmato/ollama/api/OllamaErrorDetails$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -901,7 +894,6 @@ public abstract class org/nirmato/ollama/api/OllamaIOException : org/nirmato/oll
 public final class org/nirmato/ollama/api/OllamaModel {
 	public static final field Companion Lorg/nirmato/ollama/api/OllamaModel$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/OllamaModelDetails;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/OllamaModelDetails;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/OllamaModelDetails;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -1031,7 +1023,6 @@ public final class org/nirmato/ollama/api/OllamaTimeoutException : org/nirmato/o
 public final class org/nirmato/ollama/api/Options {
 	public static final field Companion Lorg/nirmato/ollama/api/Options$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILjava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;)V
 	public synthetic fun <init> (Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/Integer;
@@ -1153,7 +1144,6 @@ public final class org/nirmato/ollama/api/ProcessResponse$Companion {
 public final class org/nirmato/ollama/api/ProcessResponse$ProcessModel {
 	public static final field Companion Lorg/nirmato/ollama/api/ProcessResponse$ProcessModel$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/OllamaModelDetails;Lkotlinx/datetime/Instant;Ljava/lang/Long;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/OllamaModelDetails;Lkotlinx/datetime/Instant;Ljava/lang/Long;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/OllamaModelDetails;Lkotlinx/datetime/Instant;Ljava/lang/Long;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -1194,7 +1184,6 @@ public final class org/nirmato/ollama/api/ProcessResponse$ProcessModel$Companion
 
 public final class org/nirmato/ollama/api/PullModelRequest {
 	public static final field Companion Lorg/nirmato/ollama/api/PullModelRequest$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -1248,7 +1237,6 @@ public final class org/nirmato/ollama/api/PullModelRequest$PullModelRequestBuild
 public final class org/nirmato/ollama/api/PullModelResponse {
 	public static final field Companion Lorg/nirmato/ollama/api/PullModelResponse$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILorg/nirmato/ollama/api/PullModelStatus;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Lorg/nirmato/ollama/api/PullModelStatus;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;)V
 	public synthetic fun <init> (Lorg/nirmato/ollama/api/PullModelStatus;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lorg/nirmato/ollama/api/PullModelStatus;
@@ -1302,7 +1290,6 @@ public final class org/nirmato/ollama/api/PullModelStatus$Companion {
 
 public final class org/nirmato/ollama/api/PushModelRequest {
 	public static final field Companion Lorg/nirmato/ollama/api/PushModelRequest$Companion;
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -1356,7 +1343,6 @@ public final class org/nirmato/ollama/api/PushModelRequest$PushModelRequestBuild
 public final class org/nirmato/ollama/api/PushModelResponse {
 	public static final field Companion Lorg/nirmato/ollama/api/PushModelResponse$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILorg/nirmato/ollama/api/PushModelStatus;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Lorg/nirmato/ollama/api/PushModelStatus;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;)V
 	public synthetic fun <init> (Lorg/nirmato/ollama/api/PushModelStatus;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lorg/nirmato/ollama/api/PushModelStatus;
@@ -1525,7 +1511,6 @@ public final class org/nirmato/ollama/api/Tool$Parameters$Companion {
 public final class org/nirmato/ollama/api/Tool$Property {
 	public static final field Companion Lorg/nirmato/ollama/api/Tool$Property$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getDescription ()Ljava/lang/String;

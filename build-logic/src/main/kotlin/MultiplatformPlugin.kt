@@ -105,22 +105,22 @@ public class MultiplatformPlugin : Plugin<Project> {
             }
 
             this.binaries.executable()
-            this.binaries.library()
+//            this.binaries.library()
         }
     }
 
     // https://youtrack.jetbrains.com/issue/KT-56025
     private fun Project.applyKotlinJsImplicitDependencyWorkaround() {
         val configureJs: Task.() -> Unit = {
-            dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentLibraryCompileSync"))
+//            dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentLibraryCompileSync"))
             dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentExecutableCompileSync"))
-            dependsOn(tasks.getByPath(":${project.name}:jsProductionLibraryCompileSync"))
+//            dependsOn(tasks.getByPath(":${project.name}:jsProductionLibraryCompileSync"))
             dependsOn(tasks.getByPath(":${project.name}:jsProductionExecutableCompileSync"))
             dependsOn(tasks.getByPath(":${project.name}:jsTestTestDevelopmentExecutableCompileSync"))
         }
         tasks.named("jsBrowserProductionWebpack").configure(configureJs)
-        tasks.named("jsBrowserProductionLibraryPrepare").configure(configureJs)
-        tasks.named("jsNodeProductionLibraryPrepare").configure(configureJs)
+//        tasks.named("jsBrowserProductionLibraryPrepare").configure(configureJs)
+//        tasks.named("jsNodeProductionLibraryPrepare").configure(configureJs)
     }
 
     private fun KotlinMultiplatformExtension.configureJvmTarget() {

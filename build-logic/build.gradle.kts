@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 
 plugins {
     `kotlin-dsl`
@@ -12,9 +11,9 @@ configurations.configureEach {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${getKotlinPluginVersion()}")
-    implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:${getKotlinPluginVersion()}")
-    implementation(libraries.dokka.gradle.plugin)
+    api(libraries.kotlin.gradle.plugin)
+    api(libraries.kotlin.compiler.embeddable)
+    api(libraries.dokka.gradle.plugin)
 }
 
 sourceSets {

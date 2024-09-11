@@ -43,4 +43,4 @@ jobs:
                 echo "New version: ${VERSION}"
                 echo "Github Username: ${GITHUB_ACTOR}"
 
-                ./gradlew -Pversion=${VERSION} publishAllPublicationsToGithubPackagesRepository
+                ./gradlew -Pversion=${VERSION} publishToMavenLocal

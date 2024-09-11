@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
-
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
@@ -12,7 +10,7 @@ configurations.configureEach {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${getKotlinPluginVersion()}")
+    api(libraries.kotlin.gradle.plugin)
 }
 
 sourceSets {

@@ -8,6 +8,7 @@ import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.config.ApiVersion
 import org.jetbrains.kotlin.config.LanguageVersion
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
@@ -20,10 +21,12 @@ public class MultiplatformPlugin : Plugin<Project> {
             configureAllTargets()
             configureJvmTarget()
             configureJsTarget()
+            configureWasmJsTarget()
             configureKotlinSourceSets()
         }
 
         project.configureJsPlatform()
+        project.configureWasmJsPlatform()
         project.configureJvmPlatform()
     }
 
@@ -40,6 +43,22 @@ public class MultiplatformPlugin : Plugin<Project> {
             group = "verification"
             description = "Runs all checks for the Kotlin/JS platform."
             dependsOn(jsTest)
+        }
+    }
+
+    private fun Project.configureWasmJsPlatform() {
+        applyKotlinWasmJsImplicitDependencyWorkaround()
+
+        checkWasmJsTask()
+    }
+
+    private fun Project.checkWasmJsTask() {
+        val wasmJsTest = tasks.named("wasmJsTest")
+
+        tasks.register("checkWasmJs") {
+            group = "verification"
+            description = "Runs all checks for the Kotlin/WasmJS platform."
+            dependsOn(wasmJsTest)
         }
     }
 
@@ -93,34 +112,70 @@ public class MultiplatformPlugin : Plugin<Project> {
 
     private fun KotlinMultiplatformExtension.configureJsTarget() {
         js {
-            this.moduleName = this.project.name
+            moduleName = project.name
 
-            this.browser()
-            this.nodejs {
-                this.testTask {
-                    this.useMocha {
-                        this.timeout = "60s"
+            browser()
+            nodejs {
+                testTask {
+                    useMocha {
+                        timeout = "60s"
                     }
                 }
             }
 
-            this.binaries.executable()
-//            this.binaries.library()
+            binaries.executable()
+            binaries.library()
+        }
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    private fun KotlinMultiplatformExtension.configureWasmJsTarget() {
+        wasmJs {
+            moduleName = project.name
+
+            browser()
+            nodejs {
+                testTask {
+                    useMocha {
+                        timeout = "60s"
+                    }
+                }
+            }
+
+            binaries.executable()
+            binaries.library()
         }
     }
 
     // https://youtrack.jetbrains.com/issue/KT-56025
     private fun Project.applyKotlinJsImplicitDependencyWorkaround() {
-        val configureJs: Task.() -> Unit = {
-//            dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentLibraryCompileSync"))
-            dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentExecutableCompileSync"))
-//            dependsOn(tasks.getByPath(":${project.name}:jsProductionLibraryCompileSync"))
-            dependsOn(tasks.getByPath(":${project.name}:jsProductionExecutableCompileSync"))
-            dependsOn(tasks.getByPath(":${project.name}:jsTestTestDevelopmentExecutableCompileSync"))
-        }
+        val configureJs = getJsCompileSyncTasks()
+
         tasks.named("jsBrowserProductionWebpack").configure(configureJs)
-//        tasks.named("jsBrowserProductionLibraryPrepare").configure(configureJs)
-//        tasks.named("jsNodeProductionLibraryPrepare").configure(configureJs)
+        tasks.named("jsBrowserProductionLibraryDistribution").configure(configureJs)
+        tasks.named("jsBrowserDistribution").configure(configureJs)
+
+        tasks.named("jsNodeProductionLibraryDistribution").configure(configureJs)
+    }
+
+    // https://youtrack.jetbrains.com/issue/KT-56025
+    private fun Project.applyKotlinWasmJsImplicitDependencyWorkaround() {
+        val configureWasmJs = getJsCompileSyncTasks()
+
+        tasks.named("wasmJsBrowserProductionWebpack").configure(configureWasmJs)
+        tasks.named("wasmJsBrowserProductionLibraryDistribution").configure(configureWasmJs)
+        tasks.named("wasmJsBrowserDistribution").configure(configureWasmJs)
+
+        tasks.named("wasmJsNodeProductionLibraryDistribution").configure(configureWasmJs)
+    }
+
+    private fun Project.getJsCompileSyncTasks(): Task.() -> Unit = {
+        dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentLibraryCompileSync"))
+        dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentExecutableCompileSync"))
+        dependsOn(tasks.getByPath(":${project.name}:jsProductionLibraryCompileSync"))
+        dependsOn(tasks.getByPath(":${project.name}:jsProductionExecutableCompileSync"))
+        dependsOn(tasks.getByPath(":${project.name}:wasmJsProductionLibraryCompileSync"))
+        dependsOn(tasks.getByPath(":${project.name}:wasmJsProductionExecutableCompileSync"))
     }
 
     private fun KotlinMultiplatformExtension.configureJvmTarget() {

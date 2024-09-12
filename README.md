@@ -10,7 +10,16 @@ The implementation follows the OpenAPI definition [Ollama API](modules/oas/ollam
 > nirmato-ollama is under development.
 >
 > Report any issue or bug <a href="https://github.com/nirmato/nirmato-ollama/issues">in the GitHub repository.</a>
-> 
+>
+
+## Supported Platforms
+
+| Target Platform | Target preset              |
+|:---------------:|----------------------------|
+|   Kotlin/JVM    | <ul><li>`jvm`</li></ul>    |
+|  Kotlin/WasmJS  | <ul><li>`wasmJs`</li></ul> |
+|    Kotlin/JS    | <ul><li>`js`</li></ul>     |
+
 
 ## How to use
 

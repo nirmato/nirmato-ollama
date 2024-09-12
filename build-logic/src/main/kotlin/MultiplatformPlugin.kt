@@ -149,33 +149,45 @@ public class MultiplatformPlugin : Plugin<Project> {
 
     // https://youtrack.jetbrains.com/issue/KT-56025
     private fun Project.applyKotlinJsImplicitDependencyWorkaround() {
-        val configureJs = getJsCompileSyncTasks()
+        val compileSyncTasks = getCompileSyncTasks()
 
-        tasks.named("jsBrowserProductionWebpack").configure(configureJs)
-        tasks.named("jsBrowserProductionLibraryDistribution").configure(configureJs)
-        tasks.named("jsBrowserDistribution").configure(configureJs)
+        tasks.named("jsBrowserProductionWebpack").configure(compileSyncTasks)
+        tasks.named("jsBrowserProductionLibraryDistribution").configure(compileSyncTasks)
+        tasks.named("jsNodeProductionLibraryDistribution").configure(compileSyncTasks)
 
-        tasks.named("jsNodeProductionLibraryDistribution").configure(configureJs)
+        tasks.named("jsNodeTest").configure {
+            dependsOn(tasks.getByPath("wasmJsTestTestDevelopmentExecutableCompileSync"))
+        }
+
+        tasks.named("jsBrowserTest").configure {
+            dependsOn(tasks.getByPath("wasmJsTestTestDevelopmentExecutableCompileSync"))
+        }
     }
 
     // https://youtrack.jetbrains.com/issue/KT-56025
     private fun Project.applyKotlinWasmJsImplicitDependencyWorkaround() {
-        val configureWasmJs = getJsCompileSyncTasks()
+        val compileSyncTasks = getCompileSyncTasks()
 
-        tasks.named("wasmJsBrowserProductionWebpack").configure(configureWasmJs)
-        tasks.named("wasmJsBrowserProductionLibraryDistribution").configure(configureWasmJs)
-        tasks.named("wasmJsBrowserDistribution").configure(configureWasmJs)
+        tasks.named("wasmJsBrowserProductionWebpack").configure(compileSyncTasks)
+        tasks.named("wasmJsBrowserProductionLibraryDistribution").configure(compileSyncTasks)
+        tasks.named("wasmJsBrowserDistribution").configure(compileSyncTasks)
+        tasks.named("wasmJsNodeProductionLibraryDistribution").configure(compileSyncTasks)
 
-        tasks.named("wasmJsNodeProductionLibraryDistribution").configure(configureWasmJs)
+        tasks.named("wasmJsBrowserTest").configure {
+            dependsOn(tasks.getByPath("jsTestTestDevelopmentExecutableCompileSync"))
+        }
+
+        tasks.named("wasmJsNodeTest").configure {
+            dependsOn(tasks.getByPath("jsTestTestDevelopmentExecutableCompileSync"))
+        }
     }
 
-    private fun Project.getJsCompileSyncTasks(): Task.() -> Unit = {
-        dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentLibraryCompileSync"))
-        dependsOn(tasks.getByPath(":${project.name}:jsDevelopmentExecutableCompileSync"))
-        dependsOn(tasks.getByPath(":${project.name}:jsProductionLibraryCompileSync"))
-        dependsOn(tasks.getByPath(":${project.name}:jsProductionExecutableCompileSync"))
-        dependsOn(tasks.getByPath(":${project.name}:wasmJsProductionLibraryCompileSync"))
-        dependsOn(tasks.getByPath(":${project.name}:wasmJsProductionExecutableCompileSync"))
+    private fun Project.getCompileSyncTasks(): Task.() -> Unit = {
+        dependsOn(tasks.getByPath("jsProductionLibraryCompileSync"))
+        dependsOn(tasks.getByPath("jsProductionExecutableCompileSync"))
+
+        dependsOn(tasks.getByPath("wasmJsProductionLibraryCompileSync"))
+        dependsOn(tasks.getByPath("wasmJsProductionExecutableCompileSync"))
     }
 
     private fun KotlinMultiplatformExtension.configureJvmTarget() {

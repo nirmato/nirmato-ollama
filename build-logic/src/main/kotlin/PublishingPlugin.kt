@@ -1,6 +1,5 @@
 package build.gradle.plugins.build
 
-import java.lang.System.getenv
 import java.util.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -121,9 +120,9 @@ public class PublishingPlugin : Plugin<Project> {
 
         project.apply<SigningPlugin>()
         project.configure<SigningExtension> {
-            val signingKeyId = getenv("SIGNING_KEY_ID")
-            val signingSecretKey = getenv("SIGNING_KEY")?.let { String(Base64.getDecoder().decode(it)) }
-            val signingPassword = getenv("SIGNING_PASSWORD") ?: ""
+            val signingKeyId = project.getProperty(projectKey = "gpg.signing.key.id", environmentKey = "GPG_SIGNING_KEY_ID")
+            val signingSecretKey = project.getProperty(projectKey = "gpg.signing.key", environmentKey = "GPG_SIGNING_KEY")?.let { String(Base64.getDecoder().decode(it)) }
+            val signingPassword = project.getProperty(projectKey = "gpg.signing.passphrase", environmentKey = "GPG_SIGNING_PASSPHRASE") ?: ""
 
             if (signingKeyId != null) {
                 useInMemoryPgpKeys(signingKeyId, signingSecretKey, signingPassword)

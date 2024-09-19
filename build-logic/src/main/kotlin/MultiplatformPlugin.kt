@@ -192,13 +192,13 @@ public class MultiplatformPlugin : Plugin<Project> {
 
     private fun KotlinMultiplatformExtension.configureJvmTarget() {
         jvm {
-            this.compilations.configureEach {
-                this.compileTaskProvider.configure {
-                    this.compilerOptions {
-                        this.withCompilerArguments {
-                            this.requiresJsr305()
+            compilations.configureEach {
+                compileTaskProvider.configure {
+                    compilerOptions {
+                        withCompilerArguments {
+                            requiresJsr305()
                         }
-                        this.jvmTarget.set(JvmTarget.JVM_17)
+                        jvmTarget.set(JvmTarget.JVM_17)
                     }
                 }
             }

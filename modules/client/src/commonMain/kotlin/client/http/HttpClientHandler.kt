@@ -22,7 +22,7 @@ private const val STREAM_END_TOKEN = "$STREAM_PREFIX [DONE]"
 /**
  * Perform HTTP requests.
  */
-public interface RequestHandler : Closeable {
+public interface HttpClientHandler : Closeable {
     /**
      * Perform an HTTP request.
      */
@@ -37,14 +37,14 @@ public interface RequestHandler : Closeable {
 /**
  * Perform an HTTP request.
  */
-public suspend inline fun <reified T> RequestHandler.handle(noinline builder: HttpRequestBuilder.() -> Unit): T {
+public suspend inline fun <reified T> HttpClientHandler.handle(noinline builder: HttpRequestBuilder.() -> Unit): T {
     return handle(typeInfo<T>(), builder)
 }
 
 /**
  * Perform an HTTP request and transform the result.
  */
-internal inline fun <reified T : Any> RequestHandler.handleFlow(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
+internal inline fun <reified T : Any> HttpClientHandler.handleFlow(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
     return flow {
         handle(builder) { response ->
             streamEventsFrom(response)

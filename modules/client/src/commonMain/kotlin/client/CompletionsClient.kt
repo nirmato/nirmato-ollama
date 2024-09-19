@@ -17,11 +17,11 @@ import io.ktor.http.contentType
 import org.nirmato.ollama.api.CompletionRequest
 import org.nirmato.ollama.api.CompletionResponse
 import org.nirmato.ollama.api.CompletionsApi
-import org.nirmato.ollama.client.http.RequestHandler
+import org.nirmato.ollama.client.http.HttpClientHandler
 import org.nirmato.ollama.client.http.handle
 import org.nirmato.ollama.client.http.handleFlow
 
-public class CompletionsClient(private val requestHandler: RequestHandler) : CompletionsApi {
+public class CompletionsClient(private val requestHandler: HttpClientHandler) : CompletionsApi {
     override suspend fun completion(completionRequest: CompletionRequest): CompletionResponse {
         return requestHandler.handle {
             method = HttpMethod.Post

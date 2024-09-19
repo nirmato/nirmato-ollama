@@ -62,7 +62,11 @@ kotlin {
             }
         }
 
-        val jvmTest by getting
+        val jvmTest by getting {
+            dependencies {
+                implementation(libraries.ktor.client.cio)
+            }
+        }
     }
 }
 

@@ -3,6 +3,9 @@ package org.nirmato.ollama.client.http
 import kotlin.time.DurationUnit
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.HttpClientEngineConfig
+import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.engine.ProxyBuilder
 import io.ktor.client.engine.http
 import io.ktor.client.plugins.HttpRequestRetry
@@ -20,14 +23,29 @@ import org.nirmato.ollama.client.OllamaConfig
 import org.nirmato.ollama.client.ProxyConfig.Http
 import org.nirmato.ollama.client.ProxyConfig.Socks
 
-/**
- * Creates an instance of [HttpClient].
- *
- * @param config client config
- */
-public fun createHttpClient(config: OllamaConfig): HttpClient = config.engine?.let {
-    HttpClient(config.engine!!) { configure(config) }
-} ?: HttpClient { configure(config) }
+public class OllamaHttpClient(public val client: HttpClient) {
+
+    public constructor(
+        config: OllamaConfig,
+        engine: HttpClientEngine,
+        httpClientConfig: HttpClientConfig<*>.() -> Unit = {},
+    ) : this(
+        HttpClient(engine) {
+            configure(config)
+            httpClientConfig()
+        }
+    )
+
+    public constructor(
+        config: OllamaConfig,
+        httpClientConfig: HttpClientConfig<*>.() -> Unit = {},
+    ) : this(
+        HttpClient {
+            configure(config)
+            httpClientConfig()
+        }
+    )
+}
 
 private fun HttpClientConfig<*>.configure(config: OllamaConfig) {
     engine {
@@ -76,6 +94,22 @@ private fun HttpClientConfig<*>.configure(config: OllamaConfig) {
     }
 
     expectSuccess = true
+}
 
-    config.httpClientConfig(this)
+/**
+ * Creates an asynchronous [OllamaHttpClient] with the specified [HttpClientEngineFactory] and optional [block] configuration.
+ * Note that a specific platform may require a specific engine for processing requests.
+ *
+ * See https://ktor.io/docs/http-client-engines.html
+ */
+public fun <T : HttpClientEngineConfig> OllamaHttpClient(
+    engine: HttpClientEngineFactory<T>,
+    block: HttpClientConfig<T>.() -> Unit = {},
+): OllamaHttpClient = OllamaHttpClient(HttpClient(engine, block))
+
+/**
+ * Returns a new [OllamaHttpClient] by copying this client's configuration and additionally configured by the [block] parameter.
+ */
+public fun OllamaHttpClient.config(block: HttpClientConfig<*>.() -> Unit): OllamaHttpClient {
+    return OllamaHttpClient(client.config(block))
 }

@@ -17,11 +17,11 @@ import io.ktor.http.contentType
 import org.nirmato.ollama.api.ChatApi
 import org.nirmato.ollama.api.ChatCompletionRequest
 import org.nirmato.ollama.api.ChatCompletionResponse
-import org.nirmato.ollama.client.http.RequestHandler
+import org.nirmato.ollama.client.http.HttpClientHandler
 import org.nirmato.ollama.client.http.handle
 import org.nirmato.ollama.client.http.handleFlow
 
-public class ChatClient(private val requestHandler: RequestHandler) : ChatApi {
+public class ChatClient(private val requestHandler: HttpClientHandler) : ChatApi {
     override suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse {
         return requestHandler.handle {
             method = HttpMethod.Post

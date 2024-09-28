@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.ApiVersion
-import org.jetbrains.kotlin.config.LanguageVersion
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
@@ -21,8 +19,8 @@ kotlin {
     sourceSets {
         all {
             languageSettings.apply {
-                apiVersion = ApiVersion.KOTLIN_1_7.toString()
-                languageVersion = LanguageVersion.KOTLIN_2_0.toString()
+                apiVersion = "1.7"
+                languageVersion = "2.0"
                 progressiveMode = true
             }
         }

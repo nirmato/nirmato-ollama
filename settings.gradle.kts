@@ -1,4 +1,4 @@
-import build.gradle.api.includeModule
+import org.gradle.api.initialization.includeModule
 
 pluginManagement {
     includeBuild("build-settings-logic")
@@ -6,6 +6,8 @@ pluginManagement {
 }
 
 plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+
     id("build-settings-default")
 }
 

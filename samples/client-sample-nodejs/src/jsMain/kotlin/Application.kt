@@ -8,18 +8,20 @@ import org.nirmato.ollama.api.chatCompletion
 import org.nirmato.ollama.client.LogLevel
 import org.nirmato.ollama.client.LoggingConfig
 import org.nirmato.ollama.client.OllamaClient
+import org.nirmato.ollama.client.OllamaConfigBuilder
 import org.nirmato.ollama.client.OllamaHost
 import org.nirmato.ollama.client.RetryStrategy
 import org.nirmato.ollama.client.TimeoutConfig
 
 suspend fun main() {
-    val ollama = OllamaClient {
+    val ollamaConfig = OllamaConfigBuilder().apply {
         logging = LoggingConfig(logLevel = LogLevel.All)
         timeout = TimeoutConfig(socket = 30.seconds)
         host = OllamaHost.Local
-        retry = RetryStrategy(maxRetries = 0)
-        engine = Js.create()
-    }
+        retry = RetryStrategy(0)
+    }.build()
+
+    val ollama = OllamaClient(ollamaConfig, Js.create())
 
     val response = ollama.chatCompletion {
         model = "tinyllama"

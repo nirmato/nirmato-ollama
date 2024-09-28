@@ -1,6 +1,4 @@
-package build.gradle.dsl
-
-import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
+package org.jetbrains.kotlin.gradle.dsl
 
 public fun KotlinCommonCompilerOptions.withCompilerArguments(configure: KotlinCommonCompilerOptionsBuilder.() -> Unit) {
     val arguments = KotlinCommonCompilerOptionsBuilder().apply(configure).build()

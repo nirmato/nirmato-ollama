@@ -1,17 +1,20 @@
 package build.gradle.plugins.build
 
-import build.gradle.dsl.withCompilerArguments
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.versionCatalog
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.withCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 
 public class MultiplatformPlugin : Plugin<Project> {
+
     override fun apply(project: Project) {
         project.apply<KotlinMultiplatformPluginWrapper>()
 
@@ -21,6 +24,10 @@ public class MultiplatformPlugin : Plugin<Project> {
             configureJsTarget()
             configureWasmJsTarget()
             configureKotlinSourceSets()
+
+            jvmToolchain {
+                languageVersion.set(JavaLanguageVersion.of(project.versionCatalog.findVersion("jvm-toolchain").get().requiredVersion))
+            }
         }
 
         project.configureJsPlatform()

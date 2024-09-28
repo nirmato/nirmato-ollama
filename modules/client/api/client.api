@@ -1,17 +1,17 @@
 public final class org/nirmato/ollama/client/ChatClient : org/nirmato/ollama/api/ChatApi {
-	public fun <init> (Lorg/nirmato/ollama/client/http/RequestHandler;)V
+	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClientHandler;)V
 	public fun chatCompletion (Lorg/nirmato/ollama/api/ChatCompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun chatCompletionFlow (Lorg/nirmato/ollama/api/ChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class org/nirmato/ollama/client/CompletionsClient : org/nirmato/ollama/api/CompletionsApi {
-	public fun <init> (Lorg/nirmato/ollama/client/http/RequestHandler;)V
+	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClientHandler;)V
 	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class org/nirmato/ollama/client/EmbeddedClient : org/nirmato/ollama/api/EmbeddingsApi {
-	public fun <init> (Lorg/nirmato/ollama/client/http/RequestHandler;)V
+	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClientHandler;)V
 	public fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
@@ -49,7 +49,7 @@ public final class org/nirmato/ollama/client/LoggingConfig {
 }
 
 public final class org/nirmato/ollama/client/ModelsClient : org/nirmato/ollama/api/ModelsApi {
-	public fun <init> (Lorg/nirmato/ollama/client/http/RequestHandler;)V
+	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClientHandler;)V
 	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -64,12 +64,10 @@ public final class org/nirmato/ollama/client/ModelsClient : org/nirmato/ollama/a
 
 public final class org/nirmato/ollama/client/OllamaConfig {
 	public fun <init> ()V
-	public fun <init> (Lorg/nirmato/ollama/client/LoggingConfig;Lorg/nirmato/ollama/client/TimeoutConfig;Ljava/util/Map;Lorg/nirmato/ollama/client/OllamaHost;Lorg/nirmato/ollama/client/ProxyConfig;Lorg/nirmato/ollama/client/RetryStrategy;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)V
-	public synthetic fun <init> (Lorg/nirmato/ollama/client/LoggingConfig;Lorg/nirmato/ollama/client/TimeoutConfig;Ljava/util/Map;Lorg/nirmato/ollama/client/OllamaHost;Lorg/nirmato/ollama/client/ProxyConfig;Lorg/nirmato/ollama/client/RetryStrategy;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun getEngine ()Lio/ktor/client/engine/HttpClientEngine;
+	public fun <init> (Lorg/nirmato/ollama/client/LoggingConfig;Lorg/nirmato/ollama/client/TimeoutConfig;Ljava/util/Map;Lorg/nirmato/ollama/client/OllamaHost;Lorg/nirmato/ollama/client/ProxyConfig;Lorg/nirmato/ollama/client/RetryStrategy;)V
+	public synthetic fun <init> (Lorg/nirmato/ollama/client/LoggingConfig;Lorg/nirmato/ollama/client/TimeoutConfig;Ljava/util/Map;Lorg/nirmato/ollama/client/OllamaHost;Lorg/nirmato/ollama/client/ProxyConfig;Lorg/nirmato/ollama/client/RetryStrategy;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getHeaders ()Ljava/util/Map;
 	public final fun getHost ()Lorg/nirmato/ollama/client/OllamaHost;
-	public final fun getHttpClientConfig ()Lkotlin/jvm/functions/Function1;
 	public final fun getLogging ()Lorg/nirmato/ollama/client/LoggingConfig;
 	public final fun getProxy ()Lorg/nirmato/ollama/client/ProxyConfig;
 	public final fun getRetry ()Lorg/nirmato/ollama/client/RetryStrategy;
@@ -79,18 +77,14 @@ public final class org/nirmato/ollama/client/OllamaConfig {
 public final class org/nirmato/ollama/client/OllamaConfigBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/client/OllamaConfig;
-	public final fun getEngine ()Lio/ktor/client/engine/HttpClientEngine;
 	public final fun getHeaders ()Ljava/util/Map;
 	public final fun getHost ()Lorg/nirmato/ollama/client/OllamaHost;
-	public final fun getHttpClientConfig ()Lkotlin/jvm/functions/Function1;
 	public final fun getLogging ()Lorg/nirmato/ollama/client/LoggingConfig;
 	public final fun getProxy ()Lorg/nirmato/ollama/client/ProxyConfig;
 	public final fun getRetry ()Lorg/nirmato/ollama/client/RetryStrategy;
 	public final fun getTimeout ()Lorg/nirmato/ollama/client/TimeoutConfig;
-	public final fun setEngine (Lio/ktor/client/engine/HttpClientEngine;)V
 	public final fun setHeaders (Ljava/util/Map;)V
 	public final fun setHost (Lorg/nirmato/ollama/client/OllamaHost;)V
-	public final fun setHttpClientConfig (Lkotlin/jvm/functions/Function1;)V
 	public final fun setLogging (Lorg/nirmato/ollama/client/LoggingConfig;)V
 	public final fun setProxy (Lorg/nirmato/ollama/client/ProxyConfig;)V
 	public final fun setRetry (Lorg/nirmato/ollama/client/RetryStrategy;)V
@@ -138,7 +132,7 @@ public final class org/nirmato/ollama/client/TimeoutConfig {
 	public final fun getSocket-FghU774 ()Lkotlin/time/Duration;
 }
 
-public abstract interface class org/nirmato/ollama/client/http/RequestHandler : java/io/Closeable {
+public abstract interface class org/nirmato/ollama/client/http/HttpClientHandler : java/io/Closeable {
 	public abstract fun handle (Lio/ktor/util/reflect/TypeInfo;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun handle (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }

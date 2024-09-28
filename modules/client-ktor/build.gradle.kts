@@ -16,6 +16,10 @@ description = "Ollama Client"
 kotlin {
     explicitApi()
 
+    jvmToolchain {
+        languageVersion = JavaLanguageVersion.of(project.libraries.versions.jvm.toolchain.get())
+    }
+
     sourceSets {
         all {
             languageSettings.apply {

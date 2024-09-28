@@ -1,4 +1,4 @@
-package build.gradle.dsl
+package org.jetbrains.kotlin.gradle.dsl
 
 public class KotlinCommonCompilerOptionsBuilder {
     private val arguments: MutableList<String> = mutableListOf()

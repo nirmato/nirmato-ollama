@@ -3,6 +3,7 @@ package build.gradle.plugins.build
 import java.util.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.getProperty
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension

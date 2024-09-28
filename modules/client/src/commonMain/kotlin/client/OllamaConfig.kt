@@ -2,8 +2,6 @@ package org.nirmato.ollama.client
 
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
-import io.ktor.client.HttpClientConfig
-import io.ktor.client.engine.HttpClientEngine
 import org.nirmato.ollama.dsl.OllamaDsl
 
 /**
@@ -22,10 +20,6 @@ public class OllamaConfig(
     public val proxy: ProxyConfig? = null,
     /** Rate limit retry configuration */
     public val retry: RetryStrategy = RetryStrategy(),
-    /** An optional [HttpClientEngine] to specify which HttpEngine should be used by Ktor. */
-    public val engine: HttpClientEngine? = null,
-    /** An optional [HttpClientConfig<*>] used by Ktor for advanced HttpClient httpClientConfig. */
-    public val httpClientConfig: HttpClientConfig<*>.() -> Unit = {},
 )
 
 /**
@@ -155,8 +149,6 @@ public class OllamaConfigBuilder {
     public var host: OllamaHost = OllamaHost.Local
     public var proxy: ProxyConfig? = null
     public var retry: RetryStrategy = RetryStrategy()
-    public var engine: HttpClientEngine? = null
-    public var httpClientConfig: HttpClientConfig<*>.() -> Unit = {}
 
     public fun build(): OllamaConfig = OllamaConfig(
         logging = logging,
@@ -165,7 +157,5 @@ public class OllamaConfigBuilder {
         host = host,
         proxy = proxy,
         retry = retry,
-        engine = engine,
-        httpClientConfig = httpClientConfig
     )
 }

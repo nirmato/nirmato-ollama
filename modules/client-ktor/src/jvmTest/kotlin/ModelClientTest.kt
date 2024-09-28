@@ -39,13 +39,14 @@ internal class ModelClientTest {
             }
         }
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         val createModelRequest = createModelRequest {
             name = "mario"
@@ -64,13 +65,14 @@ internal class ModelClientTest {
             }
         }
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         ollamaClient.createBlob {
             digest = "sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4"
@@ -108,13 +110,14 @@ internal class ModelClientTest {
             }
         }
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         val response = ollamaClient.listModels()
 
@@ -150,13 +153,14 @@ internal class ModelClientTest {
             }
         }
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         val modelInfoRequest = showModelInformationRequest {
             name = "mario"
@@ -176,13 +180,14 @@ internal class ModelClientTest {
             }
         }
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         val copyModelRequest = copyModelRequest {
             source = "mario"
@@ -200,13 +205,14 @@ internal class ModelClientTest {
             }
         }
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         val deleteModelRequest = deleteModelRequest {
             model = "mario2"
@@ -231,13 +237,14 @@ internal class ModelClientTest {
             }
         }
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         val pullModelRequest = pullModelRequest {
             name = "tinyllama"
@@ -260,13 +267,14 @@ internal class ModelClientTest {
             }
         }.create()
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         val pushModelRequest = pushModelRequest {
             model = "mario"

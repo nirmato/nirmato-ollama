@@ -39,13 +39,14 @@ internal class ChatClientTest {
             }
         }
 
-        val ollamaClient = OllamaClient {
+        val ollamaConfig = OllamaConfigBuilder().apply {
             logging = LoggingConfig(logLevel = LogLevel.All)
             timeout = TimeoutConfig(socket = 30.seconds)
             host = OllamaHost.Local
             retry = RetryStrategy(0)
-            engine = mockEngine
-        }
+        }.build()
+
+        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
 
         val generateCompletionRequest = chatCompletionRequest {
             model = "tinyllama"

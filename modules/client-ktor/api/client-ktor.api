@@ -18,17 +18,31 @@ public final class org/nirmato/ollama/client/OllamaClient : org/nirmato/ollama/a
 
 public final class org/nirmato/ollama/client/OllamaClientKt {
 	public static final fun OllamaClient (Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/client/OllamaClient;
-	public static final fun OllamaClient (Lorg/nirmato/ollama/client/OllamaConfig;)Lorg/nirmato/ollama/client/OllamaClient;
+	public static final fun OllamaClient (Lorg/nirmato/ollama/client/OllamaConfig;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/client/OllamaClient;
+	public static final fun OllamaClient (Lorg/nirmato/ollama/client/OllamaConfig;Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/client/OllamaClient;
+	public static synthetic fun OllamaClient$default (Lorg/nirmato/ollama/client/OllamaConfig;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lorg/nirmato/ollama/client/OllamaClient;
+	public static synthetic fun OllamaClient$default (Lorg/nirmato/ollama/client/OllamaConfig;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lorg/nirmato/ollama/client/OllamaClient;
 }
 
-public final class org/nirmato/ollama/client/http/HttpClientKt {
-	public static final fun createHttpClient (Lorg/nirmato/ollama/client/OllamaConfig;)Lio/ktor/client/HttpClient;
-}
-
-public final class org/nirmato/ollama/client/http/KtorRequestHandler : org/nirmato/ollama/client/http/RequestHandler {
+public final class org/nirmato/ollama/client/http/KtorHttpClientHandler : org/nirmato/ollama/client/http/HttpClientHandler {
 	public fun <init> (Lio/ktor/client/HttpClient;)V
 	public fun close ()V
 	public fun handle (Lio/ktor/util/reflect/TypeInfo;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun handle (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class org/nirmato/ollama/client/http/OllamaHttpClient {
+	public fun <init> (Lio/ktor/client/HttpClient;)V
+	public fun <init> (Lorg/nirmato/ollama/client/OllamaConfig;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (Lorg/nirmato/ollama/client/OllamaConfig;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lorg/nirmato/ollama/client/OllamaConfig;Lkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (Lorg/nirmato/ollama/client/OllamaConfig;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getClient ()Lio/ktor/client/HttpClient;
+}
+
+public final class org/nirmato/ollama/client/http/OllamaHttpClientKt {
+	public static final fun OllamaHttpClient (Lio/ktor/client/engine/HttpClientEngineFactory;Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/client/http/OllamaHttpClient;
+	public static synthetic fun OllamaHttpClient$default (Lio/ktor/client/engine/HttpClientEngineFactory;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lorg/nirmato/ollama/client/http/OllamaHttpClient;
+	public static final fun config (Lorg/nirmato/ollama/client/http/OllamaHttpClient;Lkotlin/jvm/functions/Function1;)Lorg/nirmato/ollama/client/http/OllamaHttpClient;
 }
 

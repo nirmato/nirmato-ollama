@@ -16,6 +16,11 @@
 *.kt            text
 *.kts           text
 *.toml          text
+*.yaml          text
+*.yml           text
+
+*.api           linguist-generated
+*.lock          linguist-generated
 
 .editorconfig   text
 .gitattributes  text
@@ -27,3 +32,4 @@ gradlew         text eol=lf linguist-vendored
 gradlew.bat     text eol=crlf linguist-vendored
 
 .idea/*         linguist-vendored
+.githooks/*     linguist-vendored

@@ -3,9 +3,10 @@ package build.gradle.plugins.build
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.versionCatalog
+import org.gradle.api.getVersion
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -18,27 +19,25 @@ public class MultiplatformPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.apply<KotlinMultiplatformPluginWrapper>()
 
-        project.configure<KotlinMultiplatformExtension> {
-            configureAllTargets()
-            configureJvmTarget()
-            configureJsTarget()
-            configureWasmJsTarget()
-            configureKotlinSourceSets()
+        project.configureJvmToolchain()
 
-            jvmToolchain {
-                languageVersion.set(JavaLanguageVersion.of(project.versionCatalog.findVersion("jvm-toolchain").get().requiredVersion))
-            }
-        }
+        project.configureAllTargets()
+        project.configureJvmTarget(JvmTarget.JVM_17)
+        project.configureJsTarget()
+        project.configureWasmJsTarget()
 
-        project.configureJsPlatform()
-        project.configureWasmJsPlatform()
-        project.configureJvmPlatform()
+        project.configureKotlinSourceSets(
+            apiVersion = "1.7",
+            languageVersion = "2.0",
+        )
     }
 
-    private fun Project.configureJsPlatform() {
-        applyKotlinJsImplicitDependencyWorkaround()
-
-        checkJsTask()
+    private fun Project.configureJvmToolchain() {
+        configure<KotlinMultiplatformExtension> {
+            jvmToolchain {
+                languageVersion.set(JavaLanguageVersion.of(project.getVersion("jvm-toolchain")))
+            }
+        }
     }
 
     private fun Project.checkJsTask() {
@@ -51,12 +50,6 @@ public class MultiplatformPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.configureWasmJsPlatform() {
-        applyKotlinWasmJsImplicitDependencyWorkaround()
-
-        checkWasmJsTask()
-    }
-
     private fun Project.checkWasmJsTask() {
         val wasmJsTest = tasks.named("wasmJsTest")
 
@@ -65,10 +58,6 @@ public class MultiplatformPlugin : Plugin<Project> {
             description = "Runs all checks for the Kotlin/WasmJS platform."
             dependsOn(wasmJsTest)
         }
-    }
-
-    private fun Project.configureJvmPlatform() {
-        checkJvmTask()
     }
 
     private fun Project.checkJvmTask() {
@@ -89,25 +78,29 @@ public class MultiplatformPlugin : Plugin<Project> {
         }
     }
 
-    private fun KotlinMultiplatformExtension.configureKotlinSourceSets() {
-        sourceSets.configureEach {
-            languageSettings.apply {
-                apiVersion = "1.7"
-                languageVersion = "2.0"
-                progressiveMode = true
+    private fun Project.configureKotlinSourceSets(apiVersion: String, languageVersion: String) {
+        configure<KotlinMultiplatformExtension> {
+            sourceSets.configureEach {
+                languageSettings.apply {
+                    this.apiVersion = apiVersion
+                    this.languageVersion = languageVersion
+                    progressiveMode = true
+                }
             }
         }
     }
 
-    private fun KotlinMultiplatformExtension.configureAllTargets() {
-        targets.configureEach {
-            compilations.configureEach {
-                compileTaskProvider.configure {
-                    compilerOptions {
-                        withCompilerArguments {
-                            requiresOptIn()
-                            suppressExpectActualClasses()
-                            suppressVersionWarnings()
+    private fun Project.configureAllTargets() {
+        configure<KotlinMultiplatformExtension> {
+            targets.configureEach {
+                compilations.configureEach {
+                    compileTaskProvider.configure {
+                        compilerOptions {
+                            withCompilerArguments {
+                                requiresOptIn()
+                                suppressExpectActualClasses()
+                                suppressVersionWarnings()
+                            }
                         }
                     }
                 }
@@ -115,41 +108,53 @@ public class MultiplatformPlugin : Plugin<Project> {
         }
     }
 
-    private fun KotlinMultiplatformExtension.configureJsTarget() {
-        js {
-            moduleName = project.name
+    private fun Project.configureJsTarget() {
+        configure<KotlinMultiplatformExtension> {
+            js {
+                moduleName = project.name
 
-            browser()
-            nodejs {
-                testTask {
-                    useMocha {
-                        timeout = "60s"
+                browser()
+                nodejs {
+                    testTask {
+                        useMocha {
+                            timeout = "60s"
+                        }
                     }
                 }
-            }
 
-            binaries.executable()
-            binaries.library()
+                binaries.executable()
+                binaries.library()
+            }
         }
+
+        applyKotlinJsImplicitDependencyWorkaround()
+
+        checkJsTask()
     }
 
     @OptIn(ExperimentalWasmDsl::class)
-    private fun KotlinMultiplatformExtension.configureWasmJsTarget() {
-        wasmJs {
-            moduleName = project.name
+    private fun Project.configureWasmJsTarget() {
+        configure<KotlinMultiplatformExtension> {
+            wasmJs {
+                moduleName = project.name
 
-            browser()
-            nodejs {
-                testTask {
-                    useMocha {
-                        timeout = "60s"
+                browser()
+                nodejs {
+                    testTask {
+                        useMocha {
+                            timeout = "60s"
+                        }
                     }
                 }
-            }
 
-            binaries.executable()
-            binaries.library()
+                binaries.executable()
+                binaries.library()
+            }
         }
+
+        applyKotlinWasmJsImplicitDependencyWorkaround()
+
+        checkWasmJsTask()
     }
 
     // https://youtrack.jetbrains.com/issue/KT-56025
@@ -195,18 +200,22 @@ public class MultiplatformPlugin : Plugin<Project> {
         dependsOn(tasks.getByPath("wasmJsProductionExecutableCompileSync"))
     }
 
-    private fun KotlinMultiplatformExtension.configureJvmTarget() {
-        jvm {
-            compilations.configureEach {
-                compileTaskProvider.configure {
-                    compilerOptions {
-                        withCompilerArguments {
-                            requiresJsr305()
+    private fun Project.configureJvmTarget(jvmTarget: JvmTarget) {
+        configure<KotlinMultiplatformExtension> {
+            jvm {
+                compilations.configureEach {
+                    compileTaskProvider.configure {
+                        compilerOptions {
+                            withCompilerArguments {
+                                requiresJsr305()
+                            }
+                            this.jvmTarget = jvmTarget
                         }
-                        jvmTarget.set(JvmTarget.JVM_17)
                     }
                 }
             }
         }
+
+        checkJvmTask()
     }
 }

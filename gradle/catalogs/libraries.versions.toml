@@ -3,14 +3,14 @@ detekt = "1.23.7"
 gradle = "8.10.2"
 gradle-foojay = "0.8.0"
 jvm-toolchain = "17"
-kotlin = "2.0.20"
+kotlin = "2.0.21"
 kotlinx-bcv = "0.16.3"
-kotlinx-coroutines = "1.8.1"
+kotlinx-coroutines = "1.9.0"
 kotlinx-datetime = "0.6.1"
-kotlinx-io = "0.5.3"
+kotlinx-io = "0.5.4"
 kotlinx-kover = "0.8.3"
-kotlinx-serialization = "1.7.2"
-ktor = "3.0.0-rc-1"
+kotlinx-serialization = "1.7.3"
+ktor = "3.0.0"
 dokka-gradle-plugin = "1.9.20"
 
 [libraries]
@@ -25,65 +25,24 @@ kotlin-test-js = { module = "org.jetbrains.kotlin:kotlin-test-js", version.ref =
 kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
 kotlinx-coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-core-js = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-js", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-core-jvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-core-wasm-js = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-wasm-js", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-slf4j = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-slf4j", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-test-js = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test-js", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-test-jvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test-jvm", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-test-wasm-js = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test-wasm-js", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
-kotlinx-datetime-js = { module = "org.jetbrains.kotlinx:kotlinx-datetime-js", version.ref = "kotlinx-datetime" }
-kotlinx-datetime-jvm = { module = "org.jetbrains.kotlinx:kotlinx-datetime-jvm", version.ref = "kotlinx-datetime" }
-kotlinx-datetime-wasm-js = { module = "org.jetbrains.kotlinx:kotlinx-datetime-js", version.ref = "kotlinx-datetime" }
 kotlinx-io-core = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "kotlinx-io" }
-kotlinx-io-core-js = { module = "org.jetbrains.kotlinx:kotlinx-io-core-js", version.ref = "kotlinx-io" }
-kotlinx-io-core-jvm = { module = "org.jetbrains.kotlinx:kotlinx-io-core-jvm", version.ref = "kotlinx-io" }
-kotlinx-io-core-wasi = { module = "org.jetbrains.kotlinx:kotlinx-io-core-wasi", version.ref = "kotlinx-io" }
-kotlinx-io-core-wasm = { module = "org.jetbrains.kotlinx:kotlinx-io-core-wasm", version.ref = "kotlinx-io" }
-kotlinx-io-core-wasm-js = { module = "org.jetbrains.kotlinx:kotlinx-io-core-wasm-js", version.ref = "kotlinx-io" }
 kotlinx-serialization-bom = { module = "org.jetbrains.kotlinx:kotlinx-serialization-bom", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-core-js = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core-js", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-core-jvm = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-core-wasm-js = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core-wasm-js", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-json-js = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-js", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-json-jvm = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-json-wasm-js = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-wasm-js", version.ref = "kotlinx-serialization" }
+ktor-bom =  { module = "io.ktor:ktor-bom", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
-ktor-client-cio-jvm = { module = "io.ktor:ktor-client-jvm", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-ktor-client-content-negotiation-js = { module = "io.ktor:ktor-client-content-negotiation-js", version.ref = "ktor" }
-ktor-client-content-negotiation-jvm = { module = "io.ktor:ktor-client-content-negotiation-jvm", version.ref = "ktor" }
-ktor-client-content-negotiation-wasm-js = { module = "io.ktor:ktor-client-content-negotiation-wasm-js", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
-ktor-client-core-js = { module = "io.ktor:ktor-client-core-js", version.ref = "ktor" }
-ktor-client-core-jvm = { module = "io.ktor:ktor-client-core-jvm", version.ref = "ktor" }
-ktor-client-core-wasm-js = { module = "io.ktor:ktor-client-core-wasm-js", version.ref = "ktor" }
 ktor-client-curl = { module = "io.ktor:ktor-client-curl", version.ref = "ktor" }
-ktor-client-curl-mingwx64 = { module = "io.ktor:ktor-client-curl-mingwx64", version.ref = "ktor" }
 ktor-client-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor" }
-ktor-client-java-jvm = { module = "io.ktor:ktor-client-jvm", version.ref = "ktor" }
 ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
-ktor-client-js-js = { module = "io.ktor:ktor-client-js-js", version.ref = "ktor" }
 ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktor" }
-ktor-client-json-js = { module = "io.ktor:ktor-client-json-js", version.ref = "ktor" }
-ktor-client-json-jvm = { module = "io.ktor:ktor-client-json-jvm", version.ref = "ktor" }
-ktor-client-json-wasm-js = { module = "io.ktor:ktor-client-json-wasm-js", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
-ktor-client-logging-js = { module = "io.ktor:ktor-client-logging-js", version.ref = "ktor" }
-ktor-client-logging-jvm = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktor" }
-ktor-client-logging-wasm-js = { module = "io.ktor:ktor-client-logging-wasm-js", version.ref = "ktor" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
-ktor-client-mock-js = { module = "io.ktor:ktor-client-mock-js", version.ref = "ktor" }
-ktor-client-mock-jvm = { module = "io.ktor:ktor-client-mock-jvm", version.ref = "ktor" }
-ktor-client-mock-wasm-js = { module = "io.ktor:ktor-client-mock-wasm-js", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-ktor-serialization-kotlinx-json-js = { module = "io.ktor:ktor-serialization-kotlinx-json-js", version.ref = "ktor" }
-ktor-serialization-kotlinx-json-jvm = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm", version.ref = "ktor" }
-ktor-serialization-kotlinx-json-wasm-js = { module = "io.ktor:ktor-serialization-kotlinx-json-wasm-js", version.ref = "ktor" }
 
 [bundles]
 

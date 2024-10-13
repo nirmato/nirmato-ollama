@@ -36,12 +36,11 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation(libraries.kotlinx.coroutines.core.js)
-                implementation(libraries.kotlinx.serialization.json.js)
-                implementation(libraries.ktor.client.content.negotiation.js)
-                implementation(libraries.ktor.client.js.js)
-                implementation(libraries.ktor.client.logging.js)
-                implementation(libraries.ktor.serialization.kotlinx.json.js)
+                implementation(libraries.kotlinx.coroutines.core)
+                implementation(libraries.kotlinx.serialization.json)
+                implementation(libraries.ktor.client.content.negotiation)
+                implementation(libraries.ktor.client.logging)
+                implementation(libraries.ktor.serialization.kotlinx.json)
             }
         }
     }

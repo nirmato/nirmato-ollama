@@ -40,11 +40,11 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(libraries.kotlinx.coroutines.slf4j)
-                implementation(libraries.kotlinx.serialization.json.jvm)
-                implementation(libraries.ktor.client.content.negotiation.jvm)
-                implementation(libraries.ktor.client.java.jvm)
-                implementation(libraries.ktor.client.logging.jvm)
-                implementation(libraries.ktor.serialization.kotlinx.json.jvm)
+                implementation(libraries.kotlinx.serialization.json)
+                implementation(libraries.ktor.client.content.negotiation)
+                implementation(libraries.ktor.client.java)
+                implementation(libraries.ktor.client.logging)
+                implementation(libraries.ktor.serialization.kotlinx.json)
             }
         }
     }

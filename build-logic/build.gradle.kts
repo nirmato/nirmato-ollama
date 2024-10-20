@@ -52,6 +52,10 @@ gradlePlugin {
             id = "build-assembler"
             implementationClass = "build.gradle.plugins.build.AssemblerPlugin"
         }
+        register("DefaultWrapperPlugin") {
+            id = "build-wrapper-default"
+            implementationClass = "build.gradle.plugins.build.DefaultWrapperPlugin"
+        }
     }
 }
 

@@ -1,5 +1,4 @@
 import io.gitlab.arturbosch.detekt.Detekt
-import org.gradle.api.tasks.wrapper.Wrapper.DistributionType
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
@@ -12,6 +11,7 @@ plugins {
     alias(libraries.plugins.dokka.gradle.plugin)
 
     id("build-project-default")
+    id("build-wrapper-default")
 }
 
 description = "Root Project"
@@ -61,7 +61,7 @@ tasks {
     }
 
     val detektAll by registering(Detekt::class) {
-        description = "Run detekt on whole project"
+        description = "Run detekt"
 
         buildUponDefaultConfig = true
         parallel = true
@@ -70,15 +70,6 @@ tasks {
         include("**/*.kt")
         include("**/*.kts")
         exclude("**/resources/**", "**/build/**", "**/build.gradle.kts/**", "**/settings.gradle.kts/**")
-    }
-
-    named<Wrapper>("wrapper") {
-        gradleVersion = libraries.versions.gradle.asProvider().get()
-        distributionType = DistributionType.ALL
-
-        doLast {
-            println("Gradle wrapper version: $gradleVersion")
-        }
     }
 
     // Fix CodeQL workflow execution

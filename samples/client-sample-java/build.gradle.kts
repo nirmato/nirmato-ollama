@@ -1,3 +1,4 @@
+import org.gradle.api.stringProperty
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
@@ -17,7 +18,7 @@ kotlin {
     }
 
     jvmToolchain {
-        languageVersion = JavaLanguageVersion.of(project.libraries.versions.jvm.toolchain.get())
+        languageVersion = project.stringProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
     }
 
     sourceSets {

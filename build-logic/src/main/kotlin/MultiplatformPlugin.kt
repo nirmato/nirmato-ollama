@@ -3,7 +3,7 @@ package build.gradle.plugins.build
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.getVersion
+import org.gradle.api.stringProperty
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
@@ -28,14 +28,14 @@ public class MultiplatformPlugin : Plugin<Project> {
 
         project.configureKotlinSourceSets(
             apiVersion = "1.7",
-            languageVersion = "2.0",
+            languageVersion = "1.7",
         )
     }
 
     private fun Project.configureJvmToolchain() {
         configure<KotlinMultiplatformExtension> {
             jvmToolchain {
-                languageVersion.set(JavaLanguageVersion.of(project.getVersion("jvm-toolchain")))
+                languageVersion = project.stringProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
             }
         }
     }
@@ -84,7 +84,7 @@ public class MultiplatformPlugin : Plugin<Project> {
                 languageSettings.apply {
                     this.apiVersion = apiVersion
                     this.languageVersion = languageVersion
-                    progressiveMode = true
+                    this.progressiveMode = true
                 }
             }
         }

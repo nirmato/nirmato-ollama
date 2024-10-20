@@ -26,10 +26,7 @@ public class MultiplatformPlugin : Plugin<Project> {
         project.configureJsTarget()
         project.configureWasmJsTarget()
 
-        project.configureKotlinSourceSets(
-            apiVersion = "1.7",
-            languageVersion = "1.7",
-        )
+        project.configureKotlinSourceSets()
     }
 
     private fun Project.configureJvmToolchain() {
@@ -78,12 +75,12 @@ public class MultiplatformPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.configureKotlinSourceSets(apiVersion: String, languageVersion: String) {
+    private fun Project.configureKotlinSourceSets() {
         configure<KotlinMultiplatformExtension> {
             sourceSets.configureEach {
                 languageSettings.apply {
-                    this.apiVersion = apiVersion
-                    this.languageVersion = languageVersion
+                    this.apiVersion = project.stringProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
+                    this.languageVersion  = project.stringProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
                     this.progressiveMode = true
                 }
             }

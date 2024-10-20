@@ -1,4 +1,3 @@
-import org.gradle.api.stringProperty
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
@@ -18,14 +17,14 @@ kotlin {
     }
 
     jvmToolchain {
-        languageVersion = project.stringProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
+        languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
     }
 
     sourceSets {
         all {
             languageSettings.apply {
-                apiVersion = "1.7"
-                languageVersion = "2.0"
+                apiVersion = providers.gradleProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
+                languageVersion = providers.gradleProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
                 progressiveMode = true
             }
         }

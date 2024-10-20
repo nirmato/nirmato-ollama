@@ -27,6 +27,10 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
+
+    jvmToolchain {
+        languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
+    }
 }
 
 gradlePlugin {

@@ -9,7 +9,7 @@ kotlinx-io = "0.5.4"
 kotlinx-kover = "0.8.3"
 kotlinx-serialization = "1.7.3"
 ktor = "3.0.0"
-dokka-gradle-plugin = "1.9.20"
+dokka-gradle-plugin = "2.0.0-Beta"
 
 [libraries]
 dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka-gradle-plugin" }

@@ -1,9 +1,5 @@
-import org.jetbrains.dokka.DokkaConfiguration.Visibility
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
-
 plugins {
     alias(libraries.plugins.kotlinx.serialization)
-    alias(libraries.plugins.dokka.gradle.plugin)
     alias(libraries.plugins.kotlinx.kover)
 
     id("build-multiplatform")
@@ -67,15 +63,5 @@ kotlin {
                 implementation(libraries.ktor.client.cio)
             }
         }
-    }
-}
-
-tasks {
-    withType<DokkaTaskPartial>().configureEach {
-        dokkaSourceSets.configureEach {
-            documentedVisibilities.set(Visibility.values().toSet())
-        }
-        failOnWarning.set(true)
-        offlineMode.set(true)
     }
 }

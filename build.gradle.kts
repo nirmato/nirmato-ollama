@@ -1,5 +1,4 @@
 import io.gitlab.arturbosch.detekt.Detekt
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
@@ -8,7 +7,6 @@ plugins {
     alias(libraries.plugins.kotlinx.serialization) apply false
     alias(libraries.plugins.kotlinx.bcv)
     alias(libraries.plugins.detekt)
-    alias(libraries.plugins.dokka.gradle.plugin)
 
     id("build-project-default")
     id("build-wrapper-default")
@@ -55,11 +53,6 @@ plugins.withType<YarnPlugin> {
 }
 
 tasks {
-    val dokkaHtmlMultiModule by getting(DokkaMultiModuleTask::class) {
-        moduleName.set(rootProject.name)
-        moduleVersion.set("${rootProject.version}")
-    }
-
     val detektAll by registering(Detekt::class) {
         description = "Run detekt"
 

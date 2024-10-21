@@ -5,7 +5,9 @@ package build.gradle.plugins.settings
 import org.gradle.api.Plugin
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.RepositoriesMode
+import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
+import org.gradle.toolchains.foojay.FoojayToolchainsPlugin
 import org.gradle.util.GradleVersion
 
 @Suppress("UnstableApiUsage")
@@ -14,6 +16,7 @@ public class SettingsDefaultPlugin : Plugin<Settings> {
         checkMinimumGradleVersion()
         configurePluginManagement()
         configureDependencyResolutionManagement()
+        configureFoojayPlugin()
     }
 
     private fun Settings.configurePluginManagement() {
@@ -50,6 +53,10 @@ public class SettingsDefaultPlugin : Plugin<Settings> {
                 }
             }
         }
+    }
+
+    private fun Settings.configureFoojayPlugin() {
+        settings.apply<FoojayToolchainsPlugin>()
     }
 
     private fun Settings.checkMinimumGradleVersion() {

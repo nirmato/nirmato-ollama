@@ -21,7 +21,7 @@ kotlin {
     }
 
     sourceSets {
-        all {
+        configureEach {
             languageSettings.apply {
                 apiVersion =  providers.gradleProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
                 languageVersion =  providers.gradleProperty("kotlin.sourceSets.languageSettings.languageVersion").get()

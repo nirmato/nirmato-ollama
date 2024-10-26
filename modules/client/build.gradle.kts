@@ -13,7 +13,7 @@ kotlin {
     explicitApi()
 
     sourceSets {
-        all {
+        configureEach {
             languageSettings.apply {
                 optIn("kotlin.ExperimentalStdlibApi")
                 optIn("kotlin.RequiresOptIn")

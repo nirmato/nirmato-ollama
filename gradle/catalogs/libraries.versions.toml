@@ -1,5 +1,6 @@
 [versions]
 detekt = "1.23.7"
+dokka-gradle-plugin = "2.0.0-Beta"
 gradle-foojay = "0.8.0"
 kotlin = "2.0.21"
 kotlinx-bcv = "0.16.3"
@@ -9,7 +10,6 @@ kotlinx-io = "0.5.4"
 kotlinx-kover = "0.8.3"
 kotlinx-serialization = "1.7.3"
 ktor = "3.0.0"
-dokka-gradle-plugin = "2.0.0-Beta"
 
 [libraries]
 dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka-gradle-plugin" }

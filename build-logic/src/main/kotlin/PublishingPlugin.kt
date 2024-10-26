@@ -13,7 +13,6 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.register
@@ -35,7 +34,7 @@ public class PublishingPlugin : Plugin<Project> {
 
             project.configure<PublishingExtension> {
                 publications {
-                    create<MavenPublication>("maven") {
+                    register<MavenPublication>("maven") {
                         // java components have the sourcesJar and the Kotlin artifacts
                         from(project.components["java"])
                     }

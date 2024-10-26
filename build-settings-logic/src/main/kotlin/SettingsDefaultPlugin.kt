@@ -59,13 +59,13 @@ public class SettingsDefaultPlugin : Plugin<Settings> {
         settings.apply<FoojayToolchainsPlugin>()
     }
 
-    private fun Settings.checkMinimumGradleVersion() {
-        if (GradleVersion.current() < MIN_GRADLE_VERSION) {
-            error("You need Gradle version $MIN_GRADLE_VERSION or higher, was ${GradleVersion.current()}")
+    private fun checkMinimumGradleVersion() {
+        if (GradleVersion.current().baseVersion < GradleVersion.version(MINIMUM_GRADLE_VERSION)) {
+            error("You need Gradle version $MINIMUM_GRADLE_VERSION or higher, but was ${GradleVersion.current()}")
         }
     }
 
     private companion object {
-        val MIN_GRADLE_VERSION: GradleVersion = GradleVersion.version("8.9")
+        const val MINIMUM_GRADLE_VERSION: String = "8.9"
     }
 }

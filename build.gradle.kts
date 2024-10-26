@@ -29,7 +29,7 @@ apiValidation {
 
     ignoredProjects.addAll(
         listOf(
-            "bom",
+            "platform",
             "version-catalog",
             "client-sample-cio",
             "client-sample-java",

@@ -14,7 +14,7 @@ rootProject.name = "nirmato-ollama"
 includeModule("api")
 includeModule("client")
 includeModule("client-ktor")
-includeModule("bom")
+includeModule("platform")
 includeModule("version-catalog")
 
 include("samples:client-sample-cio")

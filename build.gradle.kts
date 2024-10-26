@@ -12,7 +12,9 @@ plugins {
     id("build-wrapper-default")
 }
 
-description = "Root Project"
+run {
+    description = "Root Project"
+}
 
 allprojects {
     group = "org.nirmato.ollama"

@@ -2,10 +2,10 @@
 
 ## Compatibility of dependencies
 
-| Nirmato Ollama Version | Kotlin |
-|------------------------|--------|
-| 1.0.x                  | 2.0.0  |
-| < 1.0.0                | 1.7.0  |
+| Version  | Kotlin |
+|----------|--------|
+| 1.0.x    | 2.0.21 |
+| < 1.0.0  | 1.7.0  |
 
 ## Compatibility of Ollama API
 

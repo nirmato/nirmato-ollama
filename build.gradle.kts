@@ -1,7 +1,4 @@
 import io.gitlab.arturbosch.detekt.Detekt
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
-import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
-import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 plugins {
     alias(libraries.plugins.kotlinx.serialization) apply false
@@ -37,21 +34,6 @@ apiValidation {
             "client-sample-java",
         )
     )
-}
-
-plugins.withType<YarnPlugin> {
-    yarn.apply {
-        download = false
-        ignoreScripts = false
-        lockFileDirectory = rootDir.resolve("gradle/js")
-        reportNewYarnLock = true
-        yarnLockAutoReplace = true
-        yarnLockMismatchReport = YarnLockMismatchReport.FAIL
-
-        resolution("braces", "3.0.3")
-        resolution("follow-redirects", "1.15.6")
-        resolution("body-parser", "1.20.3")
-    }
 }
 
 tasks {

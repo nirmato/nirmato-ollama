@@ -43,12 +43,8 @@ internal fun Project.getProperty(projectKey: String, environmentKey: String): St
     }
 }
 
-public fun Project.stringProperties(prefix: String): Provider<MutableMap<String, String>> {
-    return providers.gradlePropertiesPrefixedBy(prefix)
-}
+public fun Project.gradleStringProperties(prefix: String): Provider<MutableMap<String, String>> = providers.gradlePropertiesPrefixedBy(prefix)
 
-public fun Project.stringProperty(name: String): Provider<String> = providers.gradleProperty(name)
+public fun Project.gradleStringProperty(name: String): Provider<String> = providers.gradleProperty(name)
 
-public fun Project.booleanProperty(name: String, defaultValue: Boolean): Provider<Boolean> {
-    return stringProperty(name).map { it.toBoolean() }.orElse(defaultValue)
-}
+public fun Project.gradleBooleanProperty(name: String): Provider<Boolean> = gradleStringProperty(name).map { it.toBoolean() }.orElse(false)

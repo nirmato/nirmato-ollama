@@ -29,6 +29,16 @@ kotlin {
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
 
+    sourceSets {
+        configureEach {
+            languageSettings.apply {
+                this.apiVersion = providers.gradleProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
+                this.languageVersion = providers.gradleProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
+                this.progressiveMode = true
+            }
+        }
+    }
+
     jvmToolchain {
         languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
     }

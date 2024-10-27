@@ -3,16 +3,21 @@ package build.gradle.plugins.build
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.stringProperty
+import org.gradle.api.gradleBooleanProperty
+import org.gradle.api.gradleStringProperty
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.withCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 public class MultiplatformPlugin : Plugin<Project> {
 
@@ -32,7 +37,7 @@ public class MultiplatformPlugin : Plugin<Project> {
     private fun Project.configureJvmToolchain() {
         configure<KotlinMultiplatformExtension> {
             jvmToolchain {
-                languageVersion = project.stringProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
+                languageVersion = project.gradleStringProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
             }
         }
     }
@@ -79,8 +84,8 @@ public class MultiplatformPlugin : Plugin<Project> {
         configure<KotlinMultiplatformExtension> {
             sourceSets.configureEach {
                 languageSettings.apply {
-                    this.apiVersion = project.stringProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
-                    this.languageVersion  = project.stringProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
+                    this.apiVersion = project.gradleStringProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
+                    this.languageVersion = project.gradleStringProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
                     this.progressiveMode = true
                 }
             }
@@ -106,52 +111,73 @@ public class MultiplatformPlugin : Plugin<Project> {
     }
 
     private fun Project.configureJsTarget() {
-        configure<KotlinMultiplatformExtension> {
-            js {
-                moduleName = project.name
+        val jsTargetEnabled = project.gradleBooleanProperty("kotlin.targets.js.enabled").get()
+        if (jsTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                js {
+                    moduleName = project.name
 
-                browser()
-                nodejs {
-                    testTask {
-                        useMocha {
-                            timeout = "60s"
+                    browser()
+                    nodejs {
+                        testTask {
+                            useMocha {
+                                timeout = "60s"
+                            }
                         }
                     }
+
+                    binaries.executable()
+                    binaries.library()
                 }
-
-                binaries.executable()
-                binaries.library()
             }
+
+            plugins.withType<YarnPlugin> {
+                yarn.apply {
+                    download = false
+                    ignoreScripts = false
+                    lockFileDirectory = rootDir.resolve("gradle/js")
+                    reportNewYarnLock = true
+                    yarnLockAutoReplace = true
+                    yarnLockMismatchReport = YarnLockMismatchReport.FAIL
+
+                    resolution("braces", "3.0.3")
+                    resolution("follow-redirects", "1.15.6")
+                    resolution("body-parser", "1.20.3")
+                }
+            }
+
+            applyKotlinJsImplicitDependencyWorkaround()
+
+            checkJsTask()
         }
-
-        applyKotlinJsImplicitDependencyWorkaround()
-
-        checkJsTask()
     }
 
     @OptIn(ExperimentalWasmDsl::class)
     private fun Project.configureWasmJsTarget() {
-        configure<KotlinMultiplatformExtension> {
-            wasmJs {
-                moduleName = project.name
+        val wasmJsTargetEnabled = project.gradleBooleanProperty("kotlin.targets.wasmJs.enabled").get()
+        if (wasmJsTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                wasmJs {
+                    moduleName = project.name
 
-                browser()
-                nodejs {
-                    testTask {
-                        useMocha {
-                            timeout = "60s"
+                    browser()
+                    nodejs {
+                        testTask {
+                            useMocha {
+                                timeout = "60s"
+                            }
                         }
                     }
+
+                    binaries.executable()
+                    binaries.library()
                 }
-
-                binaries.executable()
-                binaries.library()
             }
+
+            applyKotlinWasmJsImplicitDependencyWorkaround()
+
+            checkWasmJsTask()
         }
-
-        applyKotlinWasmJsImplicitDependencyWorkaround()
-
-        checkWasmJsTask()
     }
 
     // https://youtrack.jetbrains.com/issue/KT-56025
@@ -198,21 +224,24 @@ public class MultiplatformPlugin : Plugin<Project> {
     }
 
     private fun Project.configureJvmTarget(jvmTarget: JvmTarget) {
-        configure<KotlinMultiplatformExtension> {
-            jvm {
-                compilations.configureEach {
-                    compileTaskProvider.configure {
-                        compilerOptions {
-                            withCompilerArguments {
-                                requiresJsr305()
+        val jvmTargetEnabled = project.gradleBooleanProperty("kotlin.targets.jvm.enabled").get()
+        if (jvmTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                jvm {
+                    compilations.configureEach {
+                        compileTaskProvider.configure {
+                            compilerOptions {
+                                withCompilerArguments {
+                                    requiresJsr305()
+                                }
+                                this.jvmTarget = jvmTarget
                             }
-                            this.jvmTarget = jvmTarget
                         }
                     }
                 }
             }
-        }
 
-        checkJvmTask()
+            checkJvmTask()
+        }
     }
 }

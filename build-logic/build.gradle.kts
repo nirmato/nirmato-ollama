@@ -11,7 +11,6 @@ configurations.configureEach {
 
 dependencies {
     api(libraries.kotlin.gradle.plugin)
-    api(libraries.dokka.gradle.plugin)
 }
 
 sourceSets {
@@ -27,6 +26,16 @@ kotlin {
 
     compilerOptions {
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+    }
+
+    sourceSets {
+        configureEach {
+            languageSettings.apply {
+                this.apiVersion = providers.gradleProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
+                this.languageVersion = providers.gradleProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
+                this.progressiveMode = true
+            }
+        }
     }
 
     jvmToolchain {

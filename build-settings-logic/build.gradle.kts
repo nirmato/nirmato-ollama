@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
@@ -26,17 +28,11 @@ kotlin {
     explicitApi()
 
     compilerOptions {
-        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
-    }
+        apiVersion = providers.gradleProperty("kotlin.compilerOptions.apiVersion").map(KotlinVersion::fromVersion)
+        languageVersion = providers.gradleProperty("kotlin.compilerOptions.languageVersion").map(KotlinVersion::fromVersion)
+        progressiveMode = true
 
-    sourceSets {
-        configureEach {
-            languageSettings.apply {
-                this.apiVersion = providers.gradleProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
-                this.languageVersion = providers.gradleProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
-                this.progressiveMode = true
-            }
-        }
+        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
 
     jvmToolchain {

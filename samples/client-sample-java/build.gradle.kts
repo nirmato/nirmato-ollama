@@ -1,4 +1,7 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     kotlin("multiplatform")
@@ -9,26 +12,25 @@ plugins {
 description = "Ollama Client using Ktor Java engine"
 
 kotlin {
+    compilerOptions {
+        apiVersion = providers.gradleProperty("kotlin.compilerOptions.apiVersion").map(KotlinVersion::fromVersion)
+        languageVersion = providers.gradleProperty("kotlin.compilerOptions.languageVersion").map(KotlinVersion::fromVersion)
+        progressiveMode = false
+
+        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+    }
+
     jvm {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         mainRun {
             mainClass.set("org.nirmato.ollama.client.samples.ApplicationKt")
         }
     }
 
     jvmToolchain {
-        languageVersion =  providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
+        languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
     }
 
     sourceSets {
-        configureEach {
-            languageSettings.apply {
-                apiVersion =  providers.gradleProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
-                languageVersion =  providers.gradleProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
-                progressiveMode = true
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 implementation(project(":client-ktor"))

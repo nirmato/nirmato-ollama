@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
     alias(libraries.plugins.kotlinx.serialization)
     alias(libraries.plugins.kotlinx.kover)
@@ -12,21 +16,23 @@ description = "Ollama Client"
 kotlin {
     explicitApi()
 
-    sourceSets {
-        configureEach {
-            languageSettings.apply {
-                optIn("kotlin.ExperimentalStdlibApi")
-                optIn("kotlin.RequiresOptIn")
-                optIn("kotlin.contracts.ExperimentalContracts")
-                optIn("kotlin.time.ExperimentalTime")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                optIn("kotlinx.serialization.ExperimentalSerializationApi")
-            }
-        }
+    compilerOptions {
+        optIn.addAll(
+            listOf(
+                "kotlin.ExperimentalStdlibApi",
+                "kotlin.RequiresOptIn",
+                "kotlin.contracts.ExperimentalContracts",
+                "kotlin.time.ExperimentalTime",
+                "kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "kotlinx.serialization.ExperimentalSerializationApi",
+            )
+        )
+    }
 
+    sourceSets {
         matching { it.name.endsWith("Test") }.configureEach {
-            languageSettings.apply {
-                optIn("kotlinx.coroutines.FlowPreview")
+            compilerOptions {
+                optIn.add("kotlinx.coroutines.FlowPreview")
             }
         }
 

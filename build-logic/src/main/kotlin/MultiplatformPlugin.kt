@@ -11,23 +11,27 @@ import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JsSourceMapEmbedMode
+import org.jetbrains.kotlin.gradle.dsl.JsSourceMapNamesPolicy
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptionsBuilder.JvmDefaultOption
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.withCompilerArguments
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.dsl.withCommonCompilerArguments
+import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 public class MultiplatformPlugin : Plugin<Project> {
-
     override fun apply(project: Project) {
         project.apply<KotlinMultiplatformPluginWrapper>()
 
         project.configureJvmToolchain()
 
         project.configureAllTargets()
-        project.configureJvmTarget(JvmTarget.JVM_17)
+        project.configureJvmTarget()
         project.configureJsTarget()
         project.configureWasmJsTarget()
 
@@ -84,9 +88,9 @@ public class MultiplatformPlugin : Plugin<Project> {
         configure<KotlinMultiplatformExtension> {
             sourceSets.configureEach {
                 languageSettings.apply {
-                    this.apiVersion = project.gradleStringProperty("kotlin.sourceSets.languageSettings.apiVersion").get()
-                    this.languageVersion = project.gradleStringProperty("kotlin.sourceSets.languageSettings.languageVersion").get()
-                    this.progressiveMode = true
+                    apiVersion = project.gradleStringProperty("kotlin.compilerOptions.apiVersion").get()
+                    languageVersion = project.gradleStringProperty("kotlin.compilerOptions.languageVersion").get()
+                    progressiveMode = true
                 }
             }
         }
@@ -98,7 +102,11 @@ public class MultiplatformPlugin : Plugin<Project> {
                 compilations.configureEach {
                     compileTaskProvider.configure {
                         compilerOptions {
-                            withCompilerArguments {
+                            apiVersion = providers.gradleProperty("kotlin.compilerOptions.apiVersion").map(KotlinVersion::fromVersion)
+                            languageVersion = providers.gradleProperty("kotlin.compilerOptions.languageVersion").map(KotlinVersion::fromVersion)
+                            progressiveMode = true
+
+                            withCommonCompilerArguments {
                                 requiresOptIn()
                                 suppressExpectActualClasses()
                                 suppressVersionWarnings()
@@ -115,7 +123,17 @@ public class MultiplatformPlugin : Plugin<Project> {
         if (jsTargetEnabled) {
             configure<KotlinMultiplatformExtension> {
                 js {
-                    moduleName = project.name
+                    moduleName = project.name + "-js"
+
+                    compilations.configureEach {
+                        compileTaskProvider.configure {
+                            compilerOptions {
+                                sourceMap = true
+                                sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
+                                sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
+                            }
+                        }
+                    }
 
                     browser()
                     nodejs {
@@ -158,7 +176,17 @@ public class MultiplatformPlugin : Plugin<Project> {
         if (wasmJsTargetEnabled) {
             configure<KotlinMultiplatformExtension> {
                 wasmJs {
-                    moduleName = project.name
+                    moduleName = project.name + "-wasm"
+
+                    compilations.configureEach {
+                        compileTaskProvider.configure {
+                            compilerOptions {
+                                sourceMap = true
+                                sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
+                                sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
+                            }
+                        }
+                    }
 
                     browser()
                     nodejs {
@@ -223,17 +251,21 @@ public class MultiplatformPlugin : Plugin<Project> {
         dependsOn(tasks.getByPath("wasmJsProductionExecutableCompileSync"))
     }
 
-    private fun Project.configureJvmTarget(jvmTarget: JvmTarget) {
+    private fun Project.configureJvmTarget() {
         val jvmTargetEnabled = project.gradleBooleanProperty("kotlin.targets.jvm.enabled").get()
         if (jvmTargetEnabled) {
+            val jvmTarget = project.gradleStringProperty("kotlin.targets.jvm.target").map(JvmTarget::fromTarget).get()
+
             configure<KotlinMultiplatformExtension> {
                 jvm {
                     compilations.configureEach {
                         compileTaskProvider.configure {
                             compilerOptions {
-                                withCompilerArguments {
+                                withJvmCompilerArguments {
                                     requiresJsr305()
+                                    jvmDefault(JvmDefaultOption.ALL_COMPATIBILITY)
                                 }
+                                this.javaParameters = true
                                 this.jvmTarget = jvmTarget
                             }
                         }

@@ -1,6 +1,8 @@
 plugins {
+    `maven-publish`
+
     id("version-catalog")
-    id("build-publishing")
+    id("build-maven-publishing-configurer")
 }
 
 description = "Version Catalog"

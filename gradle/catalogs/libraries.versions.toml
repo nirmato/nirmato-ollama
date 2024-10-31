@@ -12,6 +12,7 @@ kotlinx-serialization = "1.7.3"
 ktor = "3.0.0"
 
 [libraries]
+detekt-gradle-plugin = { module= "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka-gradle-plugin" }
 foojay-resolver = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-foojay" }
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlin" }

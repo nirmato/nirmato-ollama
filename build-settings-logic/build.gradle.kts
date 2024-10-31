@@ -42,9 +42,13 @@ kotlin {
 
 gradlePlugin {
     plugins {
-        register("SettingsDefaultPlugin") {
+        register("DefaultSettingsPlugin") {
             id = "build-settings-default"
-            implementationClass = "build.gradle.plugins.settings.SettingsDefaultPlugin"
+            implementationClass = "build.gradle.plugins.settings.DefaultSettingsPlugin"
+        }
+        register("FoojayConfigurerPlugin") {
+            id = "build-foojay"
+            implementationClass = "build.gradle.plugins.settings.FoojayBuildPlugin"
         }
     }
 }

@@ -1,7 +1,7 @@
 package org.nirmato.ollama.api
 
 import kotlinx.coroutines.flow.Flow
-import org.nirmato.ollama.api.ChatCompletionRequest.*
+import org.nirmato.ollama.api.ChatCompletionRequest.ChatCompletionRequestBuilder
 
 public interface ChatApi {
     /**

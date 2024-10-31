@@ -13,6 +13,7 @@ configurations.configureEach {
 
 dependencies {
     api(libraries.kotlin.gradle.plugin)
+    api(libraries.detekt.gradle.plugin)
 }
 
 sourceSets {
@@ -45,21 +46,25 @@ gradlePlugin {
             id = "build-project-default"
             implementationClass = "build.gradle.plugins.build.DefaultProjectPlugin"
         }
-        register("PublishingPlugin") {
-            id = "build-publishing"
-            implementationClass = "build.gradle.plugins.build.PublishingPlugin"
+        register("MavenPublishingPlugin") {
+            id = "build-maven-publishing-configurer"
+            implementationClass = "build.gradle.plugins.build.MavenPublishConfigurerPlugin"
         }
-        register("MultiplatformPlugin") {
-            id = "build-multiplatform"
-            implementationClass = "build.gradle.plugins.build.MultiplatformPlugin"
+        register("KotlinMultiplatformBuildPlugin") {
+            id = "build-kotlin-multiplatform"
+            implementationClass = "build.gradle.plugins.build.KotlinMultiplatformBuildPlugin"
         }
         register("AssemblerPlugin") {
             id = "build-assembler"
             implementationClass = "build.gradle.plugins.build.AssemblerPlugin"
         }
-        register("DefaultWrapperPlugin") {
-            id = "build-wrapper-default"
-            implementationClass = "build.gradle.plugins.build.DefaultWrapperPlugin"
+        register("WrapperConfigurerPlugin") {
+            id = "build-wrapper-configurer"
+            implementationClass = "build.gradle.plugins.build.WrapperConfigurerPlugin"
+        }
+        register("DetektConfigurerPlugin") {
+            id = "build-detekt-configurer"
+            implementationClass = "build.gradle.plugins.build.DetektConfigurerPlugin"
         }
     }
 }

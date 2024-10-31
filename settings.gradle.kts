@@ -9,6 +9,7 @@ pluginManagement {
 
 plugins {
     id("build-settings-default")
+    id("build-foojay")
 }
 
 rootProject.name = "nirmato-ollama"

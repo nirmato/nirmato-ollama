@@ -2,25 +2,25 @@
 
 package build.gradle.plugins.settings
 
+import org.gradle.api.GradleException
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.RepositoriesMode
-import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
-import org.gradle.toolchains.foojay.FoojayToolchainsPlugin
 import org.gradle.util.GradleVersion
 
-@Suppress("UnstableApiUsage")
-public class SettingsDefaultPlugin : Plugin<Settings> {
+public class DefaultSettingsPlugin : Plugin<Settings> {
     override fun apply(settings: Settings): Unit = settings.run {
         checkMinimumGradleVersion()
+        checkJavaRuntimeVersion()
+
         configurePluginManagement()
         configureDependencyResolutionManagement()
-        configureFoojayPlugin()
     }
 
     private fun Settings.configurePluginManagement() {
-        settings.pluginManagement {
+        pluginManagement {
             repositories {
                 gradlePluginPortal {
                     content {
@@ -55,17 +55,20 @@ public class SettingsDefaultPlugin : Plugin<Settings> {
         }
     }
 
-    private fun Settings.configureFoojayPlugin() {
-        settings.apply<FoojayToolchainsPlugin>()
+    private fun Settings.checkMinimumGradleVersion() {
+        if (GradleVersion.version(gradle.gradleVersion) < GradleVersion.version(MINIMUM_GRADLE_VERSION)) {
+            throw GradleException("You need Gradle version $MINIMUM_GRADLE_VERSION or higher, but was ${GradleVersion.current().baseVersion}")
+        }
     }
 
-    private fun checkMinimumGradleVersion() {
-        if (GradleVersion.current().baseVersion < GradleVersion.version(MINIMUM_GRADLE_VERSION)) {
-            error("You need Gradle version $MINIMUM_GRADLE_VERSION or higher, but was ${GradleVersion.current()}")
+    private fun checkJavaRuntimeVersion() {
+        if (JavaVersion.current() < JavaVersion.toVersion(MINIMUM_JAVA_VERSION)) {
+            throw GradleException("You need Java version $MINIMUM_JAVA_VERSION or higher, but was ${JavaVersion.current()}")
         }
     }
 
     private companion object {
         const val MINIMUM_GRADLE_VERSION: String = "8.9"
+        const val MINIMUM_JAVA_VERSION: String = "17"
     }
 }

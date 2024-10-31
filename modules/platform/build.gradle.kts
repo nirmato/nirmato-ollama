@@ -1,6 +1,8 @@
 plugins {
+    `maven-publish`
+
     id("java-platform")
-    id("build-publishing")
+    id("build-maven-publishing-configurer")
 }
 
 description = "Platform BOM"

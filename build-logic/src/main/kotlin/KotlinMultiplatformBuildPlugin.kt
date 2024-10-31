@@ -24,18 +24,16 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
-public class MultiplatformPlugin : Plugin<Project> {
-    override fun apply(project: Project) {
-        project.apply<KotlinMultiplatformPluginWrapper>()
+public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
+    override fun apply(project: Project): Unit = project.run {
+        apply<KotlinMultiplatformPluginWrapper>()
 
-        project.configureJvmToolchain()
-
-        project.configureAllTargets()
-        project.configureJvmTarget()
-        project.configureJsTarget()
-        project.configureWasmJsTarget()
-
-        project.configureKotlinSourceSets()
+        configureJvmToolchain()
+        configureAllTargets()
+        configureJvmTarget()
+        configureJsTarget()
+        configureWasmJsTarget()
+        configureKotlinSourceSets()
     }
 
     private fun Project.configureJvmToolchain() {
@@ -275,5 +273,9 @@ public class MultiplatformPlugin : Plugin<Project> {
 
             checkJvmTask()
         }
+    }
+
+    public companion object {
+        public const val PLUGIN_ID: String = "build-kotlin-multiplatform"
     }
 }

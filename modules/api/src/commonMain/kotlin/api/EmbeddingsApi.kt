@@ -1,6 +1,6 @@
 package org.nirmato.ollama.api
 
-import org.nirmato.ollama.api.EmbeddingRequest.*
+import org.nirmato.ollama.api.EmbeddingRequest.EmbeddingRequestBuilder
 
 public interface EmbeddingsApi {
     /**

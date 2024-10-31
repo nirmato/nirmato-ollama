@@ -19,10 +19,11 @@ public data class ShowModelInformationRequest(
     @SerialName(value = "name")
     @Required
     val name: String,
-){
+) {
     public companion object {
         /** A request to show the model info. */
-        public fun showModelInformationRequest(block: ShowModelInformationRequestBuilder.() -> Unit): ShowModelInformationRequest = ShowModelInformationRequestBuilder().apply(block).build()
+        public fun showModelInformationRequest(block: ShowModelInformationRequestBuilder.() -> Unit): ShowModelInformationRequest =
+            ShowModelInformationRequestBuilder().apply(block).build()
     }
 
     /** Builder of [ShowModelInformationRequest] instances. */

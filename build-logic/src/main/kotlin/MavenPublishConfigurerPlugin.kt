@@ -35,9 +35,9 @@ public class MavenPublishConfigurerPlugin : Plugin<Project> {
 
         apply<SigningPlugin>()
         configure<SigningExtension> {
-            val signingKeyId = project.getProperty(projectKey = "gpg.signing.key.id", environmentKey = "GPG_SIGNING_KEY_ID")
-            val signingSecretKey = project.getProperty(projectKey = "gpg.signing.key", environmentKey = "GPG_SIGNING_KEY")?.let { String(Base64.getDecoder().decode(it)) }
-            val signingPassword = project.getProperty(projectKey = "gpg.signing.passphrase", environmentKey = "GPG_SIGNING_PASSPHRASE") ?: ""
+            val signingKeyId = project.getProperty(key = "gpg.signing.key.id", environmentKey = "GPG_SIGNING_KEY_ID")
+            val signingSecretKey = project.getProperty(key = "gpg.signing.key", environmentKey = "GPG_SIGNING_KEY")?.let { String(Base64.getDecoder().decode(it)) }
+            val signingPassword = project.getProperty(key = "gpg.signing.passphrase", environmentKey = "GPG_SIGNING_PASSPHRASE") ?: ""
 
             if (signingKeyId != null) {
                 useInMemoryPgpKeys(signingKeyId, signingSecretKey, signingPassword)

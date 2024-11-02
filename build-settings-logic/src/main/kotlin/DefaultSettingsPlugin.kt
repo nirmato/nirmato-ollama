@@ -69,6 +69,6 @@ public class DefaultSettingsPlugin : Plugin<Settings> {
 
     private companion object {
         const val MINIMUM_GRADLE_VERSION: String = "8.9"
-        const val MINIMUM_JAVA_VERSION: String = "17"
+        const val MINIMUM_JAVA_VERSION: String = "11"
     }
 }

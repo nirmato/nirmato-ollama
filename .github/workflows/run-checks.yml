@@ -8,7 +8,7 @@ jobs:
     build-project:
         uses: ./.github/workflows/run-build.yml
 
-    default-tests:
-        needs:
-            - build-project
-        uses: ./.github/workflows/run-tests.yml
+#    default-tests:
+#        needs:
+#            - build-project
+#        uses: .github/workflows/run-tests.yml

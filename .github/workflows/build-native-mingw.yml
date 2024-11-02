@@ -1,4 +1,5 @@
-name: Run default tests
+name: Run build Kotlin/Native for MinGW
+
 on:
     workflow_dispatch:
     workflow_call:
@@ -11,18 +12,16 @@ env:
     GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dkotlin.incremental=false"
 
 jobs:
-    tests-default:
+    build-project:
         continue-on-error: false
         strategy:
             fail-fast: true
             matrix:
-                os: [ 'ubuntu-latest' ]
-                target: [ 'jvm' ]
-
+                os: [ 'windows-latest' ]
         runs-on: ${{ matrix.os }}
-        name: Run tests on ${{ matrix.os }}
+        name: Run build on ${{ matrix.os }}
         concurrency:
-            group: run-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.target }}
+            group: run-build-mingw-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}
             cancel-in-progress: true
         steps:
             -   name: Checkout code
@@ -31,9 +30,11 @@ jobs:
                     fetch-depth: 0
 
             -   name: Setup environment
-                uses: ./.github/actions/setup-environment
+                uses: ./.github/actions/setup
                 with:
                     cache-read-only: ${{ github.ref_name != 'main' }}
 
-            - name: Run tests
-              run: ./gradlew ${{ matrix.target }}Test --continue
+            -   name: Build package for current OS
+                continue-on-error: false
+                run: |
+                    ./gradlew.bat -Vs mingwX64Test

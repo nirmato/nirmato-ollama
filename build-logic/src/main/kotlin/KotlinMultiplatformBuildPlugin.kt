@@ -1,10 +1,14 @@
 package build.gradle.plugins.build
 
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.attributes.java.TargetJvmVersion
+import org.gradle.api.getProperty
 import org.gradle.api.gradleBooleanProperty
 import org.gradle.api.gradleStringProperty
+import org.gradle.api.tasks.StopExecutionException
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
@@ -33,13 +37,25 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         configureJvmTarget()
         configureJsTarget()
         configureWasmJsTarget()
+        configureWindowsTarget()
         configureKotlinSourceSets()
+    }
+
+    private fun Project.configureWindowsTarget() {
+        val windowsTargetEnabled = project.gradleBooleanProperty("kotlin.targets.windows.enabled").get()
+        if (windowsTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                mingwX64()
+            }
+        }
     }
 
     private fun Project.configureJvmToolchain() {
         configure<KotlinMultiplatformExtension> {
             jvmToolchain {
-                languageVersion = project.gradleStringProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
+                languageVersion = project.providers.provider {
+                    JavaLanguageVersion.of(project.getProperty("kotlin.javaToolchain.mainJvmCompiler") ?: throw StopExecutionException("Property \"kotlin.javaToolchain.mainJvmCompiler\" is not found"))
+                }
             }
         }
     }
@@ -214,12 +230,14 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         tasks.named("jsBrowserProductionLibraryDistribution").configure(compileSyncTasks)
         tasks.named("jsNodeProductionLibraryDistribution").configure(compileSyncTasks)
 
-        tasks.named("jsNodeTest").configure {
-            dependsOn(tasks.getByPath("wasmJsTestTestDevelopmentExecutableCompileSync"))
-        }
+        if (project.gradleBooleanProperty("kotlin.targets.wasmJs.enabled").get()) {
+            tasks.named("jsNodeTest").configure {
+                dependsOn(tasks.getByPath("wasmJsTestTestDevelopmentExecutableCompileSync"))
+            }
 
-        tasks.named("jsBrowserTest").configure {
-            dependsOn(tasks.getByPath("wasmJsTestTestDevelopmentExecutableCompileSync"))
+            tasks.named("jsBrowserTest").configure {
+                dependsOn(tasks.getByPath("wasmJsTestTestDevelopmentExecutableCompileSync"))
+            }
         }
     }
 
@@ -232,12 +250,14 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         tasks.named("wasmJsBrowserDistribution").configure(compileSyncTasks)
         tasks.named("wasmJsNodeProductionLibraryDistribution").configure(compileSyncTasks)
 
-        tasks.named("wasmJsBrowserTest").configure {
-            dependsOn(tasks.getByPath("jsTestTestDevelopmentExecutableCompileSync"))
-        }
+        if (project.gradleBooleanProperty("kotlin.targets.js.enabled").get()) {
+            tasks.named("wasmJsBrowserTest").configure {
+                dependsOn(tasks.getByPath("jsTestTestDevelopmentExecutableCompileSync"))
+            }
 
-        tasks.named("wasmJsNodeTest").configure {
-            dependsOn(tasks.getByPath("jsTestTestDevelopmentExecutableCompileSync"))
+            tasks.named("wasmJsNodeTest").configure {
+                dependsOn(tasks.getByPath("jsTestTestDevelopmentExecutableCompileSync"))
+            }
         }
     }
 
@@ -252,7 +272,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
     private fun Project.configureJvmTarget() {
         val jvmTargetEnabled = project.gradleBooleanProperty("kotlin.targets.jvm.enabled").get()
         if (jvmTargetEnabled) {
-            val jvmTarget = project.gradleStringProperty("kotlin.targets.jvm.target").map(JvmTarget::fromTarget).get()
+            val jvmVersion = project.gradleStringProperty("kotlin.targets.jvm.target").map(JavaVersion::toVersion).get()
 
             configure<KotlinMultiplatformExtension> {
                 jvm {
@@ -264,9 +284,13 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                                     jvmDefault(JvmDefaultOption.ALL_COMPATIBILITY)
                                 }
                                 this.javaParameters = true
-                                this.jvmTarget = jvmTarget
+                                this.jvmTarget = JvmTarget.fromTarget(jvmVersion.majorVersion)
                             }
                         }
+                    }
+
+                    attributes {
+                        attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, JavaVersion.toVersion(jvmVersion).majorVersion.toInt())
                     }
                 }
             }

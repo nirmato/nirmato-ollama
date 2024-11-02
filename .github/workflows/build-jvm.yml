@@ -1,4 +1,4 @@
-name: Run default tests
+name: Run build Kotlin/JVM
 
 on:
     workflow_dispatch:
@@ -12,17 +12,17 @@ env:
     GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dkotlin.incremental=false"
 
 jobs:
-    run-release:
+    build-project:
         continue-on-error: false
         strategy:
             fail-fast: true
             matrix:
                 os: [ 'ubuntu-latest' ]
-
+                jvm: [ '23' ]
         runs-on: ${{ matrix.os }}
-        name: Publish artifacts
+        name: Run build on ${{ matrix.os }}
         concurrency:
-            group: run-release-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}
+            group: run-build-jvm-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.jvm }}
             cancel-in-progress: true
         steps:
             -   name: Checkout code
@@ -35,12 +35,7 @@ jobs:
                 with:
                     cache-read-only: ${{ github.ref_name != 'main' }}
 
-            - name: Publish artifacts
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
-                echo "New version: ${VERSION}"
-                echo "Github Username: ${GITHUB_ACTOR}"
-
-                ./gradlew -Vs -Pversion=${VERSION} publishToMavenLocal
+            -   name: Build package for current OS
+                continue-on-error: false
+                run: |
+                    ./gradlew -Vs jvmTest

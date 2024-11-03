@@ -1,4 +1,4 @@
-name: Run build Kotlin/Multiplatform for JVM
+name: Run build Kotlin/Native for MinGW
 
 on:
     workflow_dispatch:
@@ -18,11 +18,10 @@ jobs:
             fail-fast: true
             matrix:
                 os: [ 'ubuntu-latest' ]
-                jvm: [ '23' ]
         runs-on: ${{ matrix.os }}
         name: Run build on ${{ matrix.os }}
         concurrency:
-            group: run-build-jvm-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.jvm }}
+            group: run-build-mingw-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}
             cancel-in-progress: true
         steps:
             -   name: Checkout code
@@ -38,4 +37,4 @@ jobs:
             -   name: Build package for current OS
                 continue-on-error: false
                 run: |
-                    ./gradlew -Vs jvmTest
+                    ./gradlew -Vs linuxX64Test

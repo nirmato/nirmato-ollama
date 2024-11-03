@@ -1,5 +1,23 @@
 package build.gradle.plugins.build
 
+import build.gradle.plugins.build.KarmaBrowserTarget.Chrome
+import build.gradle.plugins.build.KarmaBrowserTarget.ChromeCanary
+import build.gradle.plugins.build.KarmaBrowserTarget.ChromeCanaryHeadless
+import build.gradle.plugins.build.KarmaBrowserTarget.ChromeHeadless
+import build.gradle.plugins.build.KarmaBrowserTarget.Chromium
+import build.gradle.plugins.build.KarmaBrowserTarget.ChromiumHeadless
+import build.gradle.plugins.build.KarmaBrowserTarget.Firefox
+import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxAurora
+import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxAuroraHeadless
+import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxDeveloper
+import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxDeveloperHeadless
+import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxHeadless
+import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxNightly
+import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxNightlyHeadless
+import build.gradle.plugins.build.KarmaBrowserTarget.Ie
+import build.gradle.plugins.build.KarmaBrowserTarget.Opera
+import build.gradle.plugins.build.KarmaBrowserTarget.PhantomJs
+import build.gradle.plugins.build.KarmaBrowserTarget.Safari
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,6 +31,7 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JsSourceMapEmbedMode
@@ -24,6 +43,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.dsl.withCommonCompilerArguments
 import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
@@ -37,16 +58,31 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         configureJvmTarget()
         configureJsTarget()
         configureWasmJsTarget()
-        configureWindowsTarget()
+        configureWindowsTargets()
+        configureLinuxTargets()
         configureKotlinSourceSets()
     }
 
-    private fun Project.configureWindowsTarget() {
+    private fun Project.configureWindowsTargets() {
         val windowsTargetEnabled = project.gradleBooleanProperty("kotlin.targets.windows.enabled").get()
         if (windowsTargetEnabled) {
             configure<KotlinMultiplatformExtension> {
                 mingwX64()
             }
+
+            checkWindowsTask()
+        }
+    }
+
+    private fun Project.configureLinuxTargets() {
+        val linuxTargetEnabled = project.gradleBooleanProperty("kotlin.targets.linux.enabled").get()
+        if (linuxTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                linuxX64()
+                linuxArm64()
+            }
+
+            checkLinuxTask()
         }
     }
 
@@ -54,7 +90,10 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         configure<KotlinMultiplatformExtension> {
             jvmToolchain {
                 languageVersion = project.providers.provider {
-                    JavaLanguageVersion.of(project.getProperty("kotlin.javaToolchain.mainJvmCompiler") ?: throw StopExecutionException("Property \"kotlin.javaToolchain.mainJvmCompiler\" is not found"))
+                    JavaLanguageVersion.of(
+                        project.getProperty("kotlin.javaToolchain.mainJvmCompiler")
+                            ?: throw StopExecutionException("Property \"kotlin.javaToolchain.mainJvmCompiler\" is not found")
+                    )
                 }
             }
         }
@@ -88,6 +127,26 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
             description = "Runs all checks for the Kotlin/JVM platform."
             dependsOn(jvmTest)
             dependsOnJvmApiCheck(project)
+        }
+    }
+
+    private fun Project.checkWindowsTask() {
+        val mingwX64Test = tasks.named("mingwX64Test")
+
+        tasks.register("checkWindows") {
+            group = "verification"
+            description = "Runs all checks for the Kotlin/Native for mingwX64."
+            dependsOn(mingwX64Test)
+        }
+    }
+
+    private fun Project.checkLinuxTask() {
+        val linuxX64Test = tasks.named("linuxX64Test")
+
+        tasks.register("checkLinuxTest") {
+            group = "verification"
+            description = "Runs all checks for the Kotlin/Native for linuxX64."
+            dependsOn(linuxX64Test)
         }
     }
 
@@ -149,7 +208,33 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                         }
                     }
 
-                    browser()
+                    browser {
+                        testTask {
+                            useKarma {
+                                when (karmaBrowserTarget()) {
+                                    Chrome -> useChrome()
+                                    ChromeHeadless -> useChromeHeadless()
+                                    ChromeCanary -> useChromeCanary()
+                                    ChromeCanaryHeadless -> useChromeCanaryHeadless()
+                                    Chromium -> useChromium()
+                                    ChromiumHeadless -> useChromiumHeadless()
+                                    Firefox -> useFirefox()
+                                    FirefoxHeadless -> useFirefoxHeadless()
+                                    FirefoxAurora -> useFirefoxAurora()
+                                    FirefoxAuroraHeadless -> useFirefoxAuroraHeadless()
+                                    FirefoxDeveloper -> useFirefoxDeveloper()
+                                    FirefoxDeveloperHeadless -> useFirefoxDeveloperHeadless()
+                                    FirefoxNightly -> useFirefoxNightly()
+                                    FirefoxNightlyHeadless -> useFirefoxNightlyHeadless()
+                                    PhantomJs -> usePhantomJS()
+                                    Safari -> useSafari()
+                                    Opera -> useOpera()
+                                    Ie -> useIe()
+                                }
+                            }
+                        }
+                    }
+
                     nodejs {
                         testTask {
                             useMocha {
@@ -163,7 +248,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 }
             }
 
-            plugins.withType<YarnPlugin> {
+            rootProject.plugins.withType<YarnPlugin> {
                 yarn.apply {
                     download = false
                     ignoreScripts = false
@@ -178,10 +263,22 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 }
             }
 
+            rootProject.plugins.withType<NodeJsRootPlugin> {
+                rootProject.the<NodeJsRootExtension>().download = false
+            }
+
             applyKotlinJsImplicitDependencyWorkaround()
 
             checkJsTask()
         }
+    }
+
+    private fun Project.karmaBrowserTarget(): KarmaBrowserTarget {
+        val browser = KarmaBrowser.Firefox
+        val channel = KarmaBrowserChannel.Release
+        val headless = true
+
+        return KarmaBrowserTarget.valueOf(browser, channel, headless = headless)
     }
 
     @OptIn(ExperimentalWasmDsl::class)

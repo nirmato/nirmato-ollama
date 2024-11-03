@@ -1,4 +1,4 @@
-name: Run build Kotlin/Multiplatform for JVM
+name: Run build Kotlin/JVM
 
 on:
     workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Run build Kotlin/Native for MinGW
+name: Run build Kotlin/Native for Linux
 
 on:
     workflow_dispatch:

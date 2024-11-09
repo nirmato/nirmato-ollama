@@ -19,7 +19,3 @@ updates:
         directory: "/"
         schedule:
             interval: "weekly"
-        groups:
-            kotlin:
-                patterns:
-                    - "org.jetbrains.kotlin*"

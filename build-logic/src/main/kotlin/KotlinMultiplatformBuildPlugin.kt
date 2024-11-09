@@ -43,10 +43,10 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.dsl.withCommonCompilerArguments
 import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
@@ -143,7 +143,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
     private fun Project.checkLinuxTask() {
         val linuxX64Test = tasks.named("linuxX64Test")
 
-        tasks.register("checkLinuxTest") {
+        tasks.register("checkLinux") {
             group = "verification"
             description = "Runs all checks for the Kotlin/Native for linuxX64."
             dependsOn(linuxX64Test)
@@ -250,8 +250,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
             rootProject.plugins.withType<YarnPlugin> {
                 yarn.apply {
-                    download = false
-                    ignoreScripts = false
                     lockFileDirectory = rootDir.resolve("gradle/js")
                     reportNewYarnLock = true
                     yarnLockAutoReplace = true
@@ -263,8 +261,13 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 }
             }
 
-            rootProject.plugins.withType<NodeJsRootPlugin> {
-                rootProject.the<NodeJsRootExtension>().download = false
+            rootProject.the<YarnRootEnvSpec>().apply {
+                download = false
+                ignoreScripts = false
+            }
+
+            rootProject.the<NodeJsEnvSpec>().apply {
+                download = false
             }
 
             applyKotlinJsImplicitDependencyWorkaround()
@@ -321,7 +324,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
     // https://youtrack.jetbrains.com/issue/KT-56025
     private fun Project.applyKotlinJsImplicitDependencyWorkaround() {
-        val compileSyncTasks = getCompileSyncTasks()
+        val compileSyncTasks = getKotlinJsCompileSyncTasks()
 
         tasks.named("jsBrowserProductionWebpack").configure(compileSyncTasks)
         tasks.named("jsBrowserProductionLibraryDistribution").configure(compileSyncTasks)
@@ -340,7 +343,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
     // https://youtrack.jetbrains.com/issue/KT-56025
     private fun Project.applyKotlinWasmJsImplicitDependencyWorkaround() {
-        val compileSyncTasks = getCompileSyncTasks()
+        val compileSyncTasks = getKotlinWasmCompileSyncTasks()
 
         tasks.named("wasmJsBrowserProductionWebpack").configure(compileSyncTasks)
         tasks.named("wasmJsBrowserProductionLibraryDistribution").configure(compileSyncTasks)
@@ -358,10 +361,12 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.getCompileSyncTasks(): Task.() -> Unit = {
+    private fun Project.getKotlinJsCompileSyncTasks(): Task.() -> Unit = {
         dependsOn(tasks.getByPath("jsProductionLibraryCompileSync"))
         dependsOn(tasks.getByPath("jsProductionExecutableCompileSync"))
+    }
 
+    private fun Project.getKotlinWasmCompileSyncTasks(): Task.() -> Unit = {
         dependsOn(tasks.getByPath("wasmJsProductionLibraryCompileSync"))
         dependsOn(tasks.getByPath("wasmJsProductionExecutableCompileSync"))
     }

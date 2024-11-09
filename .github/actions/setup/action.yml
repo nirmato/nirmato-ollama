@@ -41,7 +41,7 @@ runs:
             id: gradle-yarn-cache
             with:
                 path: |
-                    **/node_modules
+                    build/js/node_modules
                 key: ${{ runner.os }}-yarn-${{ hashFiles('gradle/js/yarn.lock') }}
                 restore-keys: |
                     ${{ runner.os }}-yarn-

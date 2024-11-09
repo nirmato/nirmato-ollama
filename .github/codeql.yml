@@ -8,12 +8,16 @@ on:
         paths-ignore:
             - "**.md"
             - ".idea/**"
+            - ".editorconfig"
+            - ".gitignore"
     pull_request:
         branches:
             - "main"
         paths-ignore:
             - "**.md"
             - ".idea/**"
+            - ".editorconfig"
+            - ".gitignore"
     schedule:
         -   cron: "33 8 1 * *"
 

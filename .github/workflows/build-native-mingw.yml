@@ -1,4 +1,4 @@
-name: Run build Kotlin/Native for MinGW
+name: Run build Kotlin/Multiplatform for MinGW
 
 on:
     workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
                 with:
                     cache-read-only: ${{ github.ref_name != 'main' }}
 
-            -   name: Build package for current OS
+            -   name: Run Check
                 continue-on-error: false
                 run: |
-                    ./gradlew.bat -Vs mingwX64Test
+                    ./gradlew.bat -Vs checkWindows

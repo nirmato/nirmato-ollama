@@ -5,10 +5,5 @@ on:
     workflow_call:
 
 jobs:
-    build-project:
+    build:
         uses: ./.github/workflows/run-build.yml
-
-#    default-tests:
-#        needs:
-#            - build-project
-#        uses: .github/workflows/run-tests.yml

@@ -258,6 +258,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     resolution("braces", "3.0.3")
                     resolution("follow-redirects", "1.15.6")
                     resolution("body-parser", "1.20.3")
+                    resolution("http-proxy-middleware", "2.0.7")
                 }
             }
 

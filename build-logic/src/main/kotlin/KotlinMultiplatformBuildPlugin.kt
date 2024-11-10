@@ -54,13 +54,36 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         apply<KotlinMultiplatformPluginWrapper>()
 
         configureJvmToolchain()
+        configureKotlinSourceSets()
+
         configureAllTargets()
+        configureTargets()
+    }
+
+    private fun Project.configureTargets() {
+        val hostOs = System.getProperty("os.name")
+        val isWindows = hostOs.startsWith("Windows")
+        val isLinux = hostOs.startsWith("Linux")
+        val isMacos = hostOs.startsWith("Mac OS X")
+
         configureJvmTarget()
         configureJsTarget()
         configureWasmJsTarget()
-        configureWindowsTargets()
-        configureLinuxTargets()
-        configureKotlinSourceSets()
+
+        if (isLinux) {
+            configureLinuxTargets()
+        }
+
+        if (isWindows) {
+            configureWindowsTargets()
+        }
+
+        if (isMacos) {
+            configureMacosTargets()
+            configureTvosTargets()
+            configureWatchosTargets()
+            configureIosTargets()
+        }
     }
 
     private fun Project.configureWindowsTargets() {
@@ -70,7 +93,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 mingwX64()
             }
 
-            checkWindowsTask()
+            checkWindowsTasks()
         }
     }
 
@@ -82,7 +105,59 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 linuxArm64()
             }
 
-            checkLinuxTask()
+            checkLinuxTasks()
+        }
+    }
+
+    private fun Project.configureMacosTargets() {
+        val macosTargetEnabled = project.gradleBooleanProperty("kotlin.targets.macos.enabled").get()
+        if (macosTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                macosX64()
+                macosArm64()
+            }
+
+            checkMacosTasks()
+        }
+    }
+
+    private fun Project.configureTvosTargets() {
+        val tvosTargetEnabled = project.gradleBooleanProperty("kotlin.targets.tvos.enabled").get()
+        if (tvosTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                tvosX64()
+                tvosArm64()
+                tvosSimulatorArm64()
+            }
+
+            checkTvosTasks()
+        }
+    }
+
+    private fun Project.configureWatchosTargets() {
+        val watchosTargetEnabled = project.gradleBooleanProperty("kotlin.targets.watchos.enabled").get()
+        if (watchosTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                watchosX64()
+                watchosArm64()
+                watchosDeviceArm64()
+                watchosSimulatorArm64()
+            }
+
+            checkWatchosTasks()
+        }
+    }
+
+    private fun Project.configureIosTargets() {
+        val iosTargetEnabled = project.gradleBooleanProperty("kotlin.targets.ios.enabled").get()
+        if (iosTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                iosX64()
+                iosArm64()
+                iosSimulatorArm64()
+            }
+
+            checkIosTasks()
         }
     }
 
@@ -99,7 +174,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.checkJsTask() {
+    private fun Project.checkJsTasks() {
         val jsTest = tasks.named("jsTest")
 
         tasks.register("checkJs") {
@@ -109,7 +184,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.checkWasmJsTask() {
+    private fun Project.checkWasmJsTasks() {
         val wasmJsTest = tasks.named("wasmJsTest")
 
         tasks.register("checkWasmJs") {
@@ -119,7 +194,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.checkJvmTask() {
+    private fun Project.checkJvmTasks() {
         val jvmTest = tasks.named("jvmTest")
 
         tasks.register("checkJvm") {
@@ -130,23 +205,63 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.checkWindowsTask() {
+    private fun Project.checkWindowsTasks() {
         val mingwX64Test = tasks.named("mingwX64Test")
 
         tasks.register("checkWindows") {
             group = "verification"
-            description = "Runs all checks for the Kotlin/Native for mingwX64."
+            description = "Runs all checks for the Kotlin/Multiplatform for Windows."
             dependsOn(mingwX64Test)
         }
     }
 
-    private fun Project.checkLinuxTask() {
+    private fun Project.checkLinuxTasks() {
         val linuxX64Test = tasks.named("linuxX64Test")
 
         tasks.register("checkLinux") {
             group = "verification"
-            description = "Runs all checks for the Kotlin/Native for linuxX64."
+            description = "Runs all checks for the Kotlin/Multiplatform for Linux."
             dependsOn(linuxX64Test)
+        }
+    }
+
+    private fun Project.checkMacosTasks() {
+        val macosX64Test = tasks.named("macosX64Test")
+
+        tasks.register("checkMacos") {
+            group = "verification"
+            description = "Runs all checks for the Kotlin/Multiplatform for MacOS."
+            dependsOn(macosX64Test)
+        }
+    }
+
+    private fun Project.checkTvosTasks() {
+        val tvosX64Test = tasks.named("tvosX64Test")
+
+        tasks.register("checkTvos") {
+            group = "verification"
+            description = "Runs all checks for the Kotlin/Multiplatform for TvOS."
+            dependsOn(tvosX64Test)
+        }
+    }
+
+    private fun Project.checkWatchosTasks() {
+        val watchosX64Test = tasks.named("watchosX64Test")
+
+        tasks.register("checkWatchos") {
+            group = "verification"
+            description = "Runs all checks for the Kotlin/Multiplatform for WatchOS."
+            dependsOn(watchosX64Test)
+        }
+    }
+
+    private fun Project.checkIosTasks() {
+        val iosX64Test = tasks.named("iosX64Test")
+
+        tasks.register("checkIos") {
+            group = "verification"
+            description = "Runs all checks for the Kotlin/Multiplatform for IOS."
+            dependsOn(iosX64Test)
         }
     }
 
@@ -273,7 +388,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
             applyKotlinJsImplicitDependencyWorkaround()
 
-            checkJsTask()
+            checkJsTasks()
         }
     }
 
@@ -319,7 +434,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
             applyKotlinWasmJsImplicitDependencyWorkaround()
 
-            checkWasmJsTask()
+            checkWasmJsTasks()
         }
     }
 
@@ -398,7 +513,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 }
             }
 
-            checkJvmTask()
+            checkJvmTasks()
         }
     }
 

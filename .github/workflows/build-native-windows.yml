@@ -37,4 +37,4 @@ jobs:
             -   name: Run Check
                 continue-on-error: false
                 run: |
-                    ./gradlew.bat -Vs checkWindows
+                    ./gradlew.bat -Vs detekt checkWindows

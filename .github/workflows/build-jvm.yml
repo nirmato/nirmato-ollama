@@ -18,7 +18,7 @@ jobs:
             fail-fast: true
             matrix:
                 os: [ 'ubuntu-latest' ]
-                jvm: [ '11', '17', '21' ]
+                jvm: [ '21' ]
         runs-on: ${{ matrix.os }}
         name: Run build on ${{ matrix.os }}
         concurrency:
@@ -38,4 +38,4 @@ jobs:
             -   name: Run Check
                 continue-on-error: false
                 run: |
-                    ./gradlew -Vs checkJvm
+                    ./gradlew -Vs detekt checkJvm

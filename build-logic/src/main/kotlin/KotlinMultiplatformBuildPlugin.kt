@@ -393,7 +393,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
     }
 
     private fun Project.karmaBrowserTarget(): KarmaBrowserTarget {
-        val browser = KarmaBrowser.Firefox
+        val browser = KarmaBrowser.Chrome
         val channel = KarmaBrowserChannel.Release
         val headless = true
 

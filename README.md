@@ -2,7 +2,7 @@
 
 ![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.1.0-blue.svg?logo=kotlin) ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
-Unofficial Ollama API client using Kotlin multiplatform.
+Unofficial Ollama API client for Kotlin multiplatform.
 
 The implementation follows the OpenAPI definition [Ollama API](modules/oas/ollama-openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
@@ -24,7 +24,7 @@ The implementation follows the OpenAPI definition [Ollama API](modules/oas/ollam
 |       iOS       | <ul><li>`iosX64`</li><li>`iosArm64`</li><li>`iosSimulatorArm64`</li></ul>                                          |
 |      MacOS      | <ul><li>`macosX64`</li><li>`macosArm64`</li></ul>                                                                  |
 |     WatchOS     | <ul><li>`watchosX64`</li><li>`watchosArm64`</li><li>`watchosDeviceArm64`</li><li>`watchosSimulatorArm64`</li></ul> |
-|      tvOS       | <ul><li>`tvosX64`</li><li>`tvosArm64`</li><li>`tvosSimulatorArm64`</li></ul>                                       |
+|      TvOS       | <ul><li>`tvosX64`</li><li>`tvosArm64`</li><li>`tvosSimulatorArm64`</li></ul>                                       |
 
 ## Compatibility table with Ollama API
 

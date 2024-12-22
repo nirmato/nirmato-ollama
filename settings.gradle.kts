@@ -17,8 +17,9 @@ rootProject.name = "nirmato-ollama"
 includeModule("api")
 includeModule("client")
 includeModule("client-ktor")
-includeModule("platform")
-includeModule("version-catalog")
+
+include("publishing:bom")
+include("publishing:version-catalog")
 
 if(providers.gradleBooleanProperty("kotlin.targets.jvm.enabled").get()) {
     includeSample("client-sample-cio")

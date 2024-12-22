@@ -41,9 +41,9 @@ kotlin {
             dependencies {
                 api(project(":api"))
                 api(project(":client"))
-                api(libraries.kotlinx.io.core)
-                api(libraries.kotlinx.datetime)
 
+                implementation(libraries.kotlinx.io.core)
+                implementation(libraries.kotlinx.datetime)
                 implementation(libraries.kotlinx.coroutines.core)
                 implementation(libraries.kotlinx.serialization.core)
                 implementation(libraries.kotlinx.serialization.json)

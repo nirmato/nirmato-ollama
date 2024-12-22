@@ -40,8 +40,8 @@ kotlin {
             }
             dependencies {
                 api(project(":api"))
-                api(libraries.kotlinx.datetime)
 
+                implementation(libraries.kotlinx.datetime)
                 implementation(libraries.kotlinx.coroutines.core)
                 implementation(libraries.kotlinx.serialization.core)
                 implementation(libraries.kotlinx.serialization.json)

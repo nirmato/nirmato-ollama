@@ -12,30 +12,47 @@ The implementation follows the OpenAPI definition [Ollama API](modules/oas/ollam
 > Report any issue or bug <a href="https://github.com/nirmato/nirmato-ollama/issues">in the GitHub repository.</a>
 >
 
-## Supported Platforms
+## Dependency
 
-| Target Platform | Target preset                                                                                                      |
-|:---------------:|--------------------------------------------------------------------------------------------------------------------|
-|   Kotlin/JVM    | <ul><li>`jvm`</li></ul>                                                                                            |
-|  Kotlin/WasmJS  | <ul><li>`wasmJs`</li></ul>                                                                                         |
-|    Kotlin/JS    | <ul><li>`js`</li></ul>                                                                                             |
-|      Linux      | <ul><li>`linuxX64`</li><li>`linuxArm64`</li></ul>                                                                  |
-|    MingwX64     | <ul><li>`mingwX64`</li></ul>                                                                                       |
-|       iOS       | <ul><li>`iosX64`</li><li>`iosArm64`</li><li>`iosSimulatorArm64`</li></ul>                                          |
-|      MacOS      | <ul><li>`macosX64`</li><li>`macosArm64`</li></ul>                                                                  |
-|     WatchOS     | <ul><li>`watchosX64`</li><li>`watchosArm64`</li><li>`watchosDeviceArm64`</li><li>`watchosSimulatorArm64`</li></ul> |
-|      TvOS       | <ul><li>`tvosX64`</li><li>`tvosArm64`</li><li>`tvosSimulatorArm64`</li></ul>                                       |
+Add the dependency to your project:
 
-## Compatibility table with Ollama API
+> [!WARNING]
+> nirmato-ollama is not yet available in a repository.
+>
 
-| Version | Ollama API |
-|---------|------------|
-| 1.0.x   | 0.3.3      |
-| < 1.0.0 | 0.3.3      |
+### Gradle
 
-## How to use
+```kotlin
+dependencies {
+    api("org.nirmato.ollama:nirmato-ollama-api:0.1.0")
+    
+    // using ktor client implementation
+    implementation("org.nirmato.ollama:nirmato-ollama-ktor:0.1.0")
+}
+```
 
-### Generate a completion
+### Maven
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.nirmato.ollama</groupId>
+        <artifactId>nirmato-ollama-api</artifactId>
+        <version>0.1.0</version>
+    </dependency>
+    
+    <!-- using ktor client implementation -->
+    <dependency>
+        <groupId>org.nirmato.ollama</groupId>
+        <artifactId>nirmato-ollama-ktor</artifactId>
+        <version>0.1.0</version>
+    </dependency>
+</dependencies>
+```
+
+Alternatively, you can [choose](publishing/bom/README.md) individual components of this library.
+
+### Usage
 
 ```kotlin
 val ollama = OllamaClient {
@@ -51,63 +68,6 @@ val response = ollama.completion {
     prompt = "Why is the sky blue?"
 }
 ```
-
-## Getting Started
-
-### Gradle
-
-1. Add GitHub Maven Packages repository to your project's settings.gradle.kts
-
-```kotlin
-repositories {
-    maven {
-        name = "GitHub Apache Maven Packages"
-        url = uri("https://maven.pkg.github.com/nirmato/nirmato-ollama")
-    }
-}
-```
-
-2. Add the dependency in your project `build.gradle.kt`
- 
-```kotlin
-dependencies {
-    implementation("org.nirmato.ollama:nirmato-ollama-client:VERSION")
-}
-```
-
-### Maven
-
-1. Add GitHub Maven Packages repository to your project's pom.xml or your `settings.xml`
-
-```xml
-<repositories>
-    <repository>
-        <id>github</id>
-        <name>GitHub Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/nirmato/nirmato-ollama</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </repository>
-</repositories>
-```
-
-2. Add the dependency in your project in your Maven project
-
-```xml
-<dependency>
-    <groupId>org.nirmato.ollama</groupId>
-    <artifactId>nirmato-ollama-client-[jvm]</artifactId>
-    <version>VERSION</version>
-</dependency>
-```
-
-## Contributions
-
-Please feel free to submit a pull request. Contributions are welcome!
 
 ## Acknowledgements
 

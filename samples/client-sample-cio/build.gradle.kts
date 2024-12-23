@@ -33,7 +33,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":client-ktor"))
+                implementation(project(":modules:client-ktor"))
 
                 implementation(libraries.ktor.client.cio)
             }

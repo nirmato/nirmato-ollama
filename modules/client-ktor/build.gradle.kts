@@ -39,8 +39,8 @@ kotlin {
                 srcDirs("src/commonMain/kotlinX")
             }
             dependencies {
-                api(project(":api"))
-                api(project(":client"))
+                api(project(":modules:api"))
+                api(project(":modules:client"))
 
                 implementation(libraries.kotlinx.io.core)
                 implementation(libraries.kotlinx.datetime)

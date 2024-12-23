@@ -1,5 +1,3 @@
-import org.gradle.api.initialization.includeModule
-import org.gradle.api.initialization.includeSample
 import org.gradle.api.provider.gradleBooleanProperty
 
 pluginManagement {
@@ -14,18 +12,18 @@ plugins {
 
 rootProject.name = "nirmato-ollama"
 
-includeModule("api")
-includeModule("client")
-includeModule("client-ktor")
+include("modules:api")
+include("modules:client")
+include("modules:client-ktor")
 
 include("publishing:bom")
 include("publishing:version-catalog")
 
 if(providers.gradleBooleanProperty("kotlin.targets.jvm.enabled").get()) {
-    includeSample("client-sample-cio")
-    includeSample("client-sample-java")
+    include("samples:client-sample-cio")
+    include("samples:client-sample-java")
 }
 
 if(providers.gradleBooleanProperty("kotlin.targets.js.enabled").get()) {
-    includeSample("client-sample-nodejs")
+    include("samples:client-sample-nodejs")
 }

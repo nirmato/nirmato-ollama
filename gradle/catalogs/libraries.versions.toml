@@ -9,7 +9,7 @@ kotlinx-datetime = "0.6.1"
 kotlinx-io = "0.5.4"
 kotlinx-kover = "0.8.3"
 kotlinx-serialization = "1.7.3"
-ktor = "3.0.1"
+ktor = "3.0.2"
 
 [libraries]
 detekt-gradle-plugin = { module= "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }

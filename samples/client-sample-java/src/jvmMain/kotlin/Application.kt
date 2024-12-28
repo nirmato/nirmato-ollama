@@ -13,6 +13,7 @@ import org.nirmato.ollama.client.OllamaConfigBuilder
 import org.nirmato.ollama.client.OllamaHost
 import org.nirmato.ollama.client.RetryStrategy
 import org.nirmato.ollama.client.TimeoutConfig
+import org.nirmato.ollama.client.http.DefaultHttpClientProvider
 
 fun main() = runBlocking {
     val ollamaConfig = OllamaConfigBuilder().apply {
@@ -22,9 +23,10 @@ fun main() = runBlocking {
         retry = RetryStrategy(0)
     }.build()
 
-    val ollama = OllamaClient(ollamaConfig, Java.create())
+    val httpClientProvider = DefaultHttpClientProvider(Java.create(), ollamaConfig)
+    val ollamaClient = OllamaClient(httpClientProvider)
 
-    val response = ollama.chatCompletion {
+    val response = ollamaClient.chatCompletion {
         model = "tinyllama"
         messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
     }

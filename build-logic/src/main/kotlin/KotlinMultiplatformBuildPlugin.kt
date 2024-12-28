@@ -326,7 +326,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     browser {
                         testTask {
                             useKarma {
-                                when (karmaBrowserTarget()) {
+                                when (defaultKarmaBrowserTarget()) {
                                     Chrome -> useChrome()
                                     ChromeHeadless -> useChromeHeadless()
                                     ChromeCanary -> useChromeCanary()
@@ -374,6 +374,8 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     resolution("follow-redirects", "1.15.6")
                     resolution("body-parser", "1.20.3")
                     resolution("http-proxy-middleware", "2.0.7")
+                    resolution("cross-spawn", "7.0.5")
+                    resolution("path-to-regexp", "0.1.10")
                 }
             }
 
@@ -392,7 +394,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.karmaBrowserTarget(): KarmaBrowserTarget {
+    private fun Project.defaultKarmaBrowserTarget(): KarmaBrowserTarget {
         val browser = KarmaBrowser.Chrome
         val channel = KarmaBrowserChannel.Release
         val headless = true

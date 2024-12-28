@@ -31,6 +31,8 @@ apiValidation {
             "client-sample-java",
         )
     )
+
+    nonPublicMarkers.add("org.nirmato.ollama.annotations.InternalApi")
 }
 
 tasks {

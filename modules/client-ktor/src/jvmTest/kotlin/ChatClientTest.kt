@@ -12,6 +12,7 @@ import io.ktor.http.headers
 import org.nirmato.ollama.api.ChatCompletionRequest.Companion.chatCompletionRequest
 import org.nirmato.ollama.api.Message
 import org.nirmato.ollama.api.Role
+import org.nirmato.ollama.client.http.DefaultHttpClientProvider
 
 internal class ChatClientTest {
 
@@ -46,7 +47,8 @@ internal class ChatClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val generateCompletionRequest = chatCompletionRequest {
             model = "tinyllama"

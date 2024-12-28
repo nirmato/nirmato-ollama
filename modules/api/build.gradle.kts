@@ -39,6 +39,8 @@ kotlin {
                 srcDirs("src/commonMain/kotlinX")
             }
             dependencies {
+                implementation(project(":modules:annotations"))
+
                 implementation(libraries.kotlinx.datetime)
                 implementation(libraries.kotlinx.coroutines.core)
                 implementation(libraries.kotlinx.serialization.core)

@@ -23,31 +23,27 @@ Add the dependency to your project:
 ### Gradle
 
 ```kotlin
-dependencies {
-    api("org.nirmato.ollama:nirmato-ollama-api:0.1.0")
-    
-    // using ktor client implementation
-    implementation("org.nirmato.ollama:nirmato-ollama-ktor:0.1.0")
-}
+implementation("org.nirmato.ollama:nirmato-ollama-api:0.1.0")
+
+// using ktor client implementation
+implementation("org.nirmato.ollama:nirmato-ollama-ktor:0.1.0")
 ```
 
 ### Maven
 
 ```xml
-<dependencies>
-    <dependency>
-        <groupId>org.nirmato.ollama</groupId>
-        <artifactId>nirmato-ollama-api</artifactId>
-        <version>0.1.0</version>
-    </dependency>
-    
-    <!-- using ktor client implementation -->
-    <dependency>
-        <groupId>org.nirmato.ollama</groupId>
-        <artifactId>nirmato-ollama-ktor</artifactId>
-        <version>0.1.0</version>
-    </dependency>
-</dependencies>
+<dependency>
+    <groupId>org.nirmato.ollama</groupId>
+    <artifactId>nirmato-ollama-api</artifactId>
+    <version>0.1.0</version>
+</dependency>
+
+<!-- using ktor client implementation -->
+<dependency>
+    <groupId>org.nirmato.ollama</groupId>
+    <artifactId>nirmato-ollama-ktor</artifactId>
+    <version>0.1.0</version>
+</dependency>
 ```
 
 Alternatively, you can [choose](publishing/bom/README.md) individual components of this library.
@@ -55,13 +51,15 @@ Alternatively, you can [choose](publishing/bom/README.md) individual components 
 ### Usage
 
 ```kotlin
-val ollama = OllamaClient {
+val ollamaConfig = OllamaConfigBuilder().apply {
     logging = LoggingConfig(logLevel = LogLevel.All)
     timeout = TimeoutConfig(socket = 30.seconds)
     host = OllamaHost.Local
     retry = RetryStrategy(0)
-    engine = CIO.create()
-}
+}.build()
+
+val httpClientProvider = DefaultHttpClientProvider(Java.create(), ollamaConfig)
+val ollamaClient = OllamaClient(httpClientProvider)
 
 val response = ollama.completion {
     model = "tinyllama"

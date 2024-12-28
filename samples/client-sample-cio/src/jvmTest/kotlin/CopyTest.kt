@@ -15,6 +15,7 @@ import org.nirmato.ollama.client.RetryStrategy
 import org.nirmato.ollama.client.TimeoutConfig
 import org.nirmato.ollama.client.OllamaClient
 import org.nirmato.ollama.client.OllamaConfigBuilder
+import org.nirmato.ollama.client.http.DefaultHttpClientProvider
 
 class CopyTest {
     @Disabled
@@ -27,7 +28,8 @@ class CopyTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollama = OllamaClient(ollamaConfig, CIO.create())
+        val httpClientProvider = DefaultHttpClientProvider(CIO.create(), ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val newModel = "test-tinyllama:latest"
 
@@ -36,15 +38,15 @@ class CopyTest {
             destination = newModel
         }
 
-        ollama.copyModel(copyModelRequest)
+        ollamaClient.copyModel(copyModelRequest)
 
-        val model = ollama.listModels().models?.first { it.name == newModel }
+        val model = ollamaClient.listModels().models?.first { it.name == newModel }
 
         val modelInfoRequest = showModelInformationRequest {
             name = model?.name
         }
 
-        val modelInfo = ollama.showModelInformation(modelInfoRequest)
+        val modelInfo = ollamaClient.showModelInformation(modelInfoRequest)
 
         assertEquals("llama", modelInfo.details?.family)
     }

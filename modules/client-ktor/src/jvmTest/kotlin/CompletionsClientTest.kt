@@ -13,6 +13,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 import org.nirmato.ollama.api.CompletionRequest.Companion.completionRequest
 import org.nirmato.ollama.api.CompletionResponse
+import org.nirmato.ollama.client.http.DefaultHttpClientProvider
 
 internal class CompletionsClientTest {
 
@@ -49,7 +50,8 @@ internal class CompletionsClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val completionRequest = completionRequest {
             model = "tinyllama"
@@ -93,7 +95,8 @@ internal class CompletionsClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val completionRequest = completionRequest {
             model = "tinyllama"

@@ -13,13 +13,15 @@ A clear and concise description of what the bug is.
 **To Reproduce**
 Sample code snippet to reproduce the problem:
 ```kotlin
-val ollama = OllamaClient {
+val ollamaConfig = OllamaConfigBuilder().apply {
     logging = LoggingConfig(logLevel = LogLevel.All)
     timeout = TimeoutConfig(socket = 30.seconds)
     host = OllamaHost.Local
     retry = RetryStrategy(0)
-    engine = CIO.create()
-}
+}.build()
+
+val httpClientProvider = DefaultHttpClientProvider(Java.create(), ollamaConfig)
+val ollamaClient = OllamaClient(httpClientProvider)
 
 val response = ollama.completion {
     model = "tinyllama"

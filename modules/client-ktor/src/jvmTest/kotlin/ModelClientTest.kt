@@ -21,6 +21,7 @@ import org.nirmato.ollama.api.PullModelRequest.Companion.pullModelRequest
 import org.nirmato.ollama.api.PushModelRequest.Companion.pushModelRequest
 import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
 import org.nirmato.ollama.api.createBlob
+import org.nirmato.ollama.client.http.DefaultHttpClientProvider
 import org.nirmato.ollama.infrastructure.OctetByteArray
 
 internal class ModelClientTest {
@@ -46,7 +47,8 @@ internal class ModelClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val createModelRequest = createModelRequest {
             name = "mario"
@@ -72,7 +74,8 @@ internal class ModelClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         ollamaClient.createBlob {
             digest = "sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4"
@@ -117,7 +120,8 @@ internal class ModelClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val response = ollamaClient.listModels()
 
@@ -160,7 +164,8 @@ internal class ModelClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val modelInfoRequest = showModelInformationRequest {
             name = "mario"
@@ -187,7 +192,8 @@ internal class ModelClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val copyModelRequest = copyModelRequest {
             source = "mario"
@@ -212,7 +218,8 @@ internal class ModelClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val deleteModelRequest = deleteModelRequest {
             model = "mario2"
@@ -244,7 +251,8 @@ internal class ModelClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val pullModelRequest = pullModelRequest {
             name = "tinyllama"
@@ -274,7 +282,8 @@ internal class ModelClientTest {
             retry = RetryStrategy(0)
         }.build()
 
-        val ollamaClient = OllamaClient(ollamaConfig, mockEngine)
+        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
+        val ollamaClient = OllamaClient(httpClientProvider)
 
         val pushModelRequest = pushModelRequest {
             model = "mario"

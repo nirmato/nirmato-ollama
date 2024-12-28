@@ -132,8 +132,25 @@ public final class org/nirmato/ollama/client/TimeoutConfig {
 	public final fun getSocket-FghU774 ()Lkotlin/time/Duration;
 }
 
+public final class org/nirmato/ollama/client/http/DefaultHttpClientHandler : org/nirmato/ollama/client/http/HttpClientHandler {
+	public fun <init> (Lio/ktor/client/HttpClient;)V
+	public fun close ()V
+	public fun handle (Lio/ktor/util/reflect/TypeInfo;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun handle (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public class org/nirmato/ollama/client/http/DefaultHttpClientProvider : org/nirmato/ollama/client/http/HttpClientProvider {
+	public fun <init> (Lio/ktor/client/engine/HttpClientEngine;Lorg/nirmato/ollama/client/OllamaConfig;)V
+	public fun buildClient ()Lio/ktor/client/HttpClient;
+	public fun buildEngine ()Lio/ktor/client/engine/HttpClientEngine;
+}
+
 public abstract interface class org/nirmato/ollama/client/http/HttpClientHandler : java/io/Closeable {
 	public abstract fun handle (Lio/ktor/util/reflect/TypeInfo;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun handle (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class org/nirmato/ollama/client/http/HttpClientProvider {
+	public abstract fun buildClient ()Lio/ktor/client/HttpClient;
 }
 

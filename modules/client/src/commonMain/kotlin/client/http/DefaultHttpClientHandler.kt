@@ -13,14 +13,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.HttpStatement
-import io.ktor.http.HttpStatusCode.Companion.BadRequest
-import io.ktor.http.HttpStatusCode.Companion.Conflict
-import io.ktor.http.HttpStatusCode.Companion.Forbidden
-import io.ktor.http.HttpStatusCode.Companion.NotFound
-import io.ktor.http.HttpStatusCode.Companion.OK
-import io.ktor.http.HttpStatusCode.Companion.TooManyRequests
-import io.ktor.http.HttpStatusCode.Companion.Unauthorized
-import io.ktor.http.HttpStatusCode.Companion.UnsupportedMediaType
+import io.ktor.http.HttpStatusCode
 import io.ktor.util.reflect.TypeInfo
 import org.nirmato.ollama.api.AuthenticationException
 import org.nirmato.ollama.api.GenericIOException
@@ -35,18 +28,18 @@ import org.nirmato.ollama.api.RateLimitException
 import org.nirmato.ollama.api.UnknownAPIException
 
 /**
- * Default implementation of [HttpClientHandler].
+ * Default implementation of [org.nirmato.ollama.client.http.HttpClientHandler].
  *
  * @property httpClient The HttpClient to use for performing HTTP requests.
  */
-public class KtorHttpClientHandler(private val httpClient: HttpClient) : HttpClientHandler {
+public class DefaultHttpClientHandler(private val httpClient: HttpClient) : HttpClientHandler {
 
     @Suppress("TooGenericExceptionCaught")
     override suspend fun <T : Any> handle(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T = try {
         val response = httpClient.request(builder)
 
         when (response.status) {
-            OK -> response.body<T>(info)
+            HttpStatusCode.Companion.OK -> response.body<T>(info)
             else -> throw handleClientException(ClientRequestException(response, ""))
         }
 
@@ -59,7 +52,7 @@ public class KtorHttpClientHandler(private val httpClient: HttpClient) : HttpCli
         try {
             HttpStatement(builder = HttpRequestBuilder().apply(builder), client = httpClient).execute {
                 when (it.status) {
-                    OK -> block(it)
+                    HttpStatusCode.Companion.OK -> block(it)
                     else -> throw handleClientException(ClientRequestException(it, ""))
                 }
             }
@@ -73,7 +66,7 @@ public class KtorHttpClientHandler(private val httpClient: HttpClient) : HttpCli
     }
 
     /**
-     * Handles various exceptions that can occur during an API request and converts them into appropriate [OllamaException] instances.
+     * Handles various exceptions that can occur during an API request and converts them into appropriate [org.nirmato.ollama.api.OllamaException] instances.
      */
     private suspend fun handleException(cause: Throwable) = when (cause) {
         is CancellationException -> cause
@@ -89,7 +82,7 @@ public class KtorHttpClientHandler(private val httpClient: HttpClient) : HttpCli
     }
 
     /**
-     * Converts a [ClientRequestException] into a corresponding [OllamaException] based on the HTTP status code.
+     * Converts a [ClientRequestException] into a corresponding [org.nirmato.ollama.api.OllamaException] based on the HTTP status code.
      * This function helps in handling specific API errors and categorizing them into appropriate exception classes.
      */
     private suspend fun handleClientException(exception: ClientRequestException): OllamaException {
@@ -97,15 +90,15 @@ public class KtorHttpClientHandler(private val httpClient: HttpClient) : HttpCli
         val status = response.status
         val error = response.body<OllamaError>()
         return when (status) {
-            TooManyRequests -> RateLimitException(status, error, exception)
-            BadRequest,
-            NotFound,
-            Conflict,
-            UnsupportedMediaType,
+            HttpStatusCode.Companion.TooManyRequests -> RateLimitException(status, error, exception)
+            HttpStatusCode.Companion.BadRequest,
+            HttpStatusCode.Companion.NotFound,
+            HttpStatusCode.Companion.Conflict,
+            HttpStatusCode.Companion.UnsupportedMediaType,
                 -> InvalidRequestException(status, error, exception)
 
-            Unauthorized -> AuthenticationException(status, error, exception)
-            Forbidden -> PermissionException(status, error, exception)
+            HttpStatusCode.Companion.Unauthorized -> AuthenticationException(status, error, exception)
+            HttpStatusCode.Companion.Forbidden -> PermissionException(status, error, exception)
             else -> UnknownAPIException(status, error, exception)
         }
     }

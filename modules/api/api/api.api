@@ -1,11 +1,13 @@
 public abstract class org/nirmato/ollama/api/ApiException : org/nirmato/ollama/api/OllamaException {
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getError ()Lorg/nirmato/ollama/api/OllamaError;
 	public final fun getStatusCode ()Lio/ktor/http/HttpStatusCode;
 }
 
 public final class org/nirmato/ollama/api/AuthenticationException : org/nirmato/ollama/api/ApiException {
+	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
@@ -644,6 +646,7 @@ public final class org/nirmato/ollama/api/GenericIOException : org/nirmato/ollam
 }
 
 public final class org/nirmato/ollama/api/InvalidRequestException : org/nirmato/ollama/api/ApiException {
+	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
@@ -884,6 +887,7 @@ public final class org/nirmato/ollama/api/OllamaErrorDetails$Companion {
 public abstract class org/nirmato/ollama/api/OllamaException : java/lang/RuntimeException {
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
 
 public abstract class org/nirmato/ollama/api/OllamaIOException : org/nirmato/ollama/api/OllamaException {
@@ -1017,7 +1021,9 @@ public final class org/nirmato/ollama/api/OllamaServerException : org/nirmato/ol
 }
 
 public final class org/nirmato/ollama/api/OllamaTimeoutException : org/nirmato/ollama/api/OllamaIOException {
+	public fun <init> ()V
 	public fun <init> (Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
 
 public final class org/nirmato/ollama/api/Options {
@@ -1108,6 +1114,7 @@ public final class org/nirmato/ollama/api/Options$Companion {
 }
 
 public final class org/nirmato/ollama/api/PermissionException : org/nirmato/ollama/api/ApiException {
+	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
@@ -1393,6 +1400,7 @@ public final class org/nirmato/ollama/api/PushModelStatus$Companion {
 }
 
 public final class org/nirmato/ollama/api/RateLimitException : org/nirmato/ollama/api/ApiException {
+	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
@@ -1580,6 +1588,7 @@ public final class org/nirmato/ollama/api/ToolCall$Companion {
 }
 
 public final class org/nirmato/ollama/api/UnknownAPIException : org/nirmato/ollama/api/ApiException {
+	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }

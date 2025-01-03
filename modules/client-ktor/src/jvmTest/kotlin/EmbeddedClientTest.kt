@@ -2,24 +2,22 @@ package org.nirmato.ollama.client
 
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.test.runTest
-import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 import org.nirmato.ollama.api.EmbeddingRequest.Companion.embeddingRequest
-import org.nirmato.ollama.client.http.DefaultHttpClientProvider
 
 internal class EmbeddedClientTest {
 
     @Test
     fun generateEmbedding_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respond(
-                    content = """{
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respond(
+                        content = """{
                       "model": "all-minilm",
                       "embeddings": [[
                         0.010071029, -0.0017594862, 0.05007221, 0.04692972, 0.054916814,
@@ -29,23 +27,14 @@ internal class EmbeddedClientTest {
                         0.017194884, 0.09032035, -0.051705178, 0.09951512, 0.09072481
                       ]]
                     }""",
-                    status = HttpStatusCode.OK,
-                    headers {
-                        append(HttpHeaders.ContentType, "application/json")
-                    }
-                )
+                        status = HttpStatusCode.OK,
+                        headers {
+                            append(HttpHeaders.ContentType, "application/json")
+                        }
+                    )
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         val generateEmbeddingRequest = embeddingRequest {
             model = "tinyllama"

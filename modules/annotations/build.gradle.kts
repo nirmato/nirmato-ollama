@@ -15,7 +15,6 @@ kotlin {
     explicitApi()
 
     sourceSets {
-        @Suppress("unused")
         val commonMain by getting {
             kotlin {
                 srcDirs("src/commonMain/kotlinX")

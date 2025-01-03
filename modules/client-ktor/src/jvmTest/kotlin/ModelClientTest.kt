@@ -2,10 +2,7 @@ package org.nirmato.ollama.client
 
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.test.runTest
-import io.ktor.client.engine.config
-import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.engine.mock.respondOk
 import io.ktor.http.ContentType
@@ -21,34 +18,25 @@ import org.nirmato.ollama.api.PullModelRequest.Companion.pullModelRequest
 import org.nirmato.ollama.api.PushModelRequest.Companion.pushModelRequest
 import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
 import org.nirmato.ollama.api.createBlob
-import org.nirmato.ollama.client.http.DefaultHttpClientProvider
 import org.nirmato.ollama.infrastructure.OctetByteArray
 
 internal class ModelClientTest {
 
     @Test
     fun createModel_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respond(
-                    content = """{"status":"success"}""",
-                    status = HttpStatusCode.OK,
-                    headers {
-                        append(HttpHeaders.ContentType, "application/json")
-                    }
-                )
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respond(
+                        content = """{"status":"success"}""",
+                        status = HttpStatusCode.OK,
+                        headers {
+                            append(HttpHeaders.ContentType, "application/json")
+                        }
+                    )
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         val createModelRequest = createModelRequest {
             name = "mario"
@@ -61,21 +49,13 @@ internal class ModelClientTest {
 
     @Test
     fun checkBlob_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respondOk()
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respondOk()
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         ollamaClient.createBlob {
             digest = "sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4"
@@ -85,10 +65,11 @@ internal class ModelClientTest {
 
     @Test
     fun listModels_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respond(
-                    content = """{
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respond(
+                        content = """{
                       "models": [
                         {
                           "name": "codellama:13b",
@@ -105,23 +86,14 @@ internal class ModelClientTest {
                         }
                       ]
                     }""",
-                    status = HttpStatusCode.OK,
-                    headers {
-                        append(HttpHeaders.ContentType, "application/json")
-                    }
-                )
+                        status = HttpStatusCode.OK,
+                        headers {
+                            append(HttpHeaders.ContentType, "application/json")
+                        }
+                    )
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         val response = ollamaClient.listModels()
 
@@ -130,10 +102,11 @@ internal class ModelClientTest {
 
     @Test
     fun showModelInfo_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respond(
-                    content = """{
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respond(
+                        content = """{
                       "modelfile": "# Modelfile generated by \"ollama show\"\n",
                       "details": {
                         "parent_model": "",
@@ -149,23 +122,14 @@ internal class ModelClientTest {
                         "general.architecture": "llama",
                       }
                     }""",
-                    status = HttpStatusCode.OK,
-                    headers {
-                        append(HttpHeaders.ContentType, "application/json")
-                    }
-                )
+                        status = HttpStatusCode.OK,
+                        headers {
+                            append(HttpHeaders.ContentType, "application/json")
+                        }
+                    )
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         val modelInfoRequest = showModelInformationRequest {
             name = "mario"
@@ -179,21 +143,13 @@ internal class ModelClientTest {
 
     @Test
     fun copyModel_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respondOk()
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respondOk()
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         val copyModelRequest = copyModelRequest {
             source = "mario"
@@ -205,21 +161,13 @@ internal class ModelClientTest {
 
     @Test
     fun deleteModel_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respondOk()
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respondOk()
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         val deleteModelRequest = deleteModelRequest {
             model = "mario2"
@@ -230,29 +178,21 @@ internal class ModelClientTest {
 
     @Test
     fun pullModel_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respond(
-                    content = """{
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respond(
+                        content = """{
                       "status": "pulling manifest"
                     }""",
-                    status = HttpStatusCode.OK,
-                    headers {
-                        append(HttpHeaders.ContentType, "application/json")
-                    }
-                )
+                        status = HttpStatusCode.OK,
+                        headers {
+                            append(HttpHeaders.ContentType, "application/json")
+                        }
+                    )
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         val pullModelRequest = pullModelRequest {
             name = "tinyllama"
@@ -265,25 +205,17 @@ internal class ModelClientTest {
 
     @Test
     fun pushModel_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.config {
-            addHandler {
-                respond(
-                    "{ \"status\": \"retrieving manifest\" }",
-                    HttpStatusCode.OK,
-                    headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
-                )
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respond(
+                        "{ \"status\": \"retrieving manifest\" }",
+                        HttpStatusCode.OK,
+                        headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
+                    )
+                }
             }
-        }.create()
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
+        }
 
         val pushModelRequest = pushModelRequest {
             model = "mario"

@@ -2,9 +2,7 @@ package org.nirmato.ollama.client
 
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.test.runTest
-import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -12,16 +10,16 @@ import io.ktor.http.headers
 import org.nirmato.ollama.api.ChatCompletionRequest.Companion.chatCompletionRequest
 import org.nirmato.ollama.api.Message
 import org.nirmato.ollama.api.Role
-import org.nirmato.ollama.client.http.DefaultHttpClientProvider
 
 internal class ChatClientTest {
 
     @Test
     fun generateChatCompletion_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
-        val mockEngine = MockEngine.create {
-            addHandler {
-                respond(
-                    content = """{
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            engine {
+                addHandler {
+                    respond(
+                        content = """{
                           "model": "llama3",
                           "created_at": "2023-08-04T19:22:45.499127Z",
                           "done": true,
@@ -32,23 +30,14 @@ internal class ChatClientTest {
                           "eval_count": 282,
                           "eval_duration": 4535599000
                     }""",
-                    status = HttpStatusCode.OK,
-                    headers {
-                        append(HttpHeaders.ContentType, "application/json")
-                    }
-                )
+                        status = HttpStatusCode.OK,
+                        headers {
+                            append(HttpHeaders.ContentType, "application/json")
+                        }
+                    )
+                }
             }
         }
-
-        val ollamaConfig = OllamaConfigBuilder().apply {
-            logging = LoggingConfig(logLevel = LogLevel.All)
-            timeout = TimeoutConfig(socket = 30.seconds)
-            host = OllamaHost.Local
-            retry = RetryStrategy(0)
-        }.build()
-
-        val httpClientProvider = DefaultHttpClientProvider(mockEngine, ollamaConfig)
-        val ollamaClient = OllamaClient(httpClientProvider)
 
         val generateCompletionRequest = chatCompletionRequest {
             model = "tinyllama"

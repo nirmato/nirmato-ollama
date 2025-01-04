@@ -1,13 +1,11 @@
 public abstract class org/nirmato/ollama/api/ApiException : org/nirmato/ollama/api/OllamaException {
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getError ()Lorg/nirmato/ollama/api/OllamaError;
 	public final fun getStatusCode ()Lio/ktor/http/HttpStatusCode;
 }
 
 public final class org/nirmato/ollama/api/AuthenticationException : org/nirmato/ollama/api/ApiException {
-	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
@@ -15,11 +13,6 @@ public final class org/nirmato/ollama/api/AuthenticationException : org/nirmato/
 public abstract interface class org/nirmato/ollama/api/ChatApi {
 	public abstract fun chatCompletion (Lorg/nirmato/ollama/api/ChatCompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun chatCompletionFlow (Lorg/nirmato/ollama/api/ChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public final class org/nirmato/ollama/api/ChatApiKt {
-	public static final fun chatCompletion (Lorg/nirmato/ollama/api/ChatApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun chatCompletionFlow (Lorg/nirmato/ollama/api/ChatApi;Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class org/nirmato/ollama/api/ChatCompletionRequest {
@@ -297,12 +290,7 @@ public final class org/nirmato/ollama/api/CompletionResponse$Companion {
 
 public abstract interface class org/nirmato/ollama/api/CompletionsApi {
 	public abstract fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public final class org/nirmato/ollama/api/CompletionsApiKt {
-	public static final fun completion (Lorg/nirmato/ollama/api/CompletionsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun completionFlow (Lorg/nirmato/ollama/api/CompletionsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class org/nirmato/ollama/api/CopyModelRequest {
@@ -346,13 +334,13 @@ public final class org/nirmato/ollama/api/CopyModelRequest$CopyModelRequestBuild
 
 public final class org/nirmato/ollama/api/CreateBlobRequest {
 	public static final field Companion Lorg/nirmato/ollama/api/CreateBlobRequest$Companion;
-	public fun <init> (Ljava/lang/String;Lorg/nirmato/ollama/infrastructure/OctetByteArray;)V
+	public fun <init> (Ljava/lang/String;Lorg/nirmato/ollama/api/OctetByteArray;)V
 	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Lorg/nirmato/ollama/infrastructure/OctetByteArray;
-	public final fun copy (Ljava/lang/String;Lorg/nirmato/ollama/infrastructure/OctetByteArray;)Lorg/nirmato/ollama/api/CreateBlobRequest;
-	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/CreateBlobRequest;Ljava/lang/String;Lorg/nirmato/ollama/infrastructure/OctetByteArray;ILjava/lang/Object;)Lorg/nirmato/ollama/api/CreateBlobRequest;
+	public final fun component2 ()Lorg/nirmato/ollama/api/OctetByteArray;
+	public final fun copy (Ljava/lang/String;Lorg/nirmato/ollama/api/OctetByteArray;)Lorg/nirmato/ollama/api/CreateBlobRequest;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/CreateBlobRequest;Ljava/lang/String;Lorg/nirmato/ollama/api/OctetByteArray;ILjava/lang/Object;)Lorg/nirmato/ollama/api/CreateBlobRequest;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getBody ()Lorg/nirmato/ollama/infrastructure/OctetByteArray;
+	public final fun getBody ()Lorg/nirmato/ollama/api/OctetByteArray;
 	public final fun getDigest ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -377,9 +365,9 @@ public final class org/nirmato/ollama/api/CreateBlobRequest$Companion {
 public final class org/nirmato/ollama/api/CreateBlobRequest$CreateBlobRequestBuilder {
 	public fun <init> ()V
 	public final fun build ()Lorg/nirmato/ollama/api/CreateBlobRequest;
-	public final fun getBody ()Lorg/nirmato/ollama/infrastructure/OctetByteArray;
+	public final fun getBody ()Lorg/nirmato/ollama/api/OctetByteArray;
 	public final fun getDigest ()Ljava/lang/String;
-	public final fun setBody (Lorg/nirmato/ollama/infrastructure/OctetByteArray;)V
+	public final fun setBody (Lorg/nirmato/ollama/api/OctetByteArray;)V
 	public final fun setDigest (Ljava/lang/String;)V
 }
 
@@ -472,7 +460,7 @@ public final class org/nirmato/ollama/api/CreateModelStatus : java/lang/Enum {
 }
 
 public final class org/nirmato/ollama/api/CreateModelStatus$Companion {
-	public final fun fromValue (Ljava/lang/String;)Lorg/nirmato/ollama/api/CreateModelStatus;
+	public final fun fromValueOrNull (Ljava/lang/String;)Lorg/nirmato/ollama/api/CreateModelStatus;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -523,7 +511,7 @@ public final class org/nirmato/ollama/api/DoneReason : java/lang/Enum {
 }
 
 public final class org/nirmato/ollama/api/DoneReason$Companion {
-	public final fun fromValue (Ljava/lang/String;)Lorg/nirmato/ollama/api/DoneReason;
+	public final fun fromValueOrNull (Ljava/lang/String;)Lorg/nirmato/ollama/api/DoneReason;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -613,10 +601,6 @@ public abstract interface class org/nirmato/ollama/api/EmbeddingsApi {
 	public abstract fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public final class org/nirmato/ollama/api/EmbeddingsApiKt {
-	public static final fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
 public final class org/nirmato/ollama/api/FunctionCall {
 	public static final field Companion Lorg/nirmato/ollama/api/FunctionCall$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
@@ -646,7 +630,6 @@ public final class org/nirmato/ollama/api/GenericIOException : org/nirmato/ollam
 }
 
 public final class org/nirmato/ollama/api/InvalidRequestException : org/nirmato/ollama/api/ApiException {
-	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
@@ -799,14 +782,22 @@ public abstract interface class org/nirmato/ollama/api/ModelsApi {
 	public abstract fun showModelInformation (Lorg/nirmato/ollama/api/ShowModelInformationRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public final class org/nirmato/ollama/api/ModelsApiKt {
-	public static final fun copyModel (Lorg/nirmato/ollama/api/ModelsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun createBlob (Lorg/nirmato/ollama/api/ModelsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun createModel (Lorg/nirmato/ollama/api/ModelsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun deleteModel (Lorg/nirmato/ollama/api/ModelsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun pullModel (Lorg/nirmato/ollama/api/ModelsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun pushModel (Lorg/nirmato/ollama/api/ModelsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun showModelInformation (Lorg/nirmato/ollama/api/ModelsApi;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+public final class org/nirmato/ollama/api/OctetByteArray {
+	public static final field Companion Lorg/nirmato/ollama/api/OctetByteArray$Companion;
+	public fun <init> ([B)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()[B
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class org/nirmato/ollama/api/OctetByteArray$Companion : kotlinx/serialization/KSerializer {
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/OctetByteArray;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/OctetByteArray;)V
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public abstract interface class org/nirmato/ollama/api/OllamaApi : org/nirmato/ollama/api/ChatApi, org/nirmato/ollama/api/CompletionsApi, org/nirmato/ollama/api/EmbeddingsApi, org/nirmato/ollama/api/ModelsApi {
@@ -887,7 +878,6 @@ public final class org/nirmato/ollama/api/OllamaErrorDetails$Companion {
 public abstract class org/nirmato/ollama/api/OllamaException : java/lang/RuntimeException {
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
 
 public abstract class org/nirmato/ollama/api/OllamaIOException : org/nirmato/ollama/api/OllamaException {
@@ -1114,7 +1104,6 @@ public final class org/nirmato/ollama/api/Options$Companion {
 }
 
 public final class org/nirmato/ollama/api/PermissionException : org/nirmato/ollama/api/ApiException {
-	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
@@ -1291,7 +1280,7 @@ public final class org/nirmato/ollama/api/PullModelStatus : java/lang/Enum {
 }
 
 public final class org/nirmato/ollama/api/PullModelStatus$Companion {
-	public final fun fromValue (Ljava/lang/String;)Lorg/nirmato/ollama/api/PullModelStatus;
+	public final fun fromValueOrNull (Ljava/lang/String;)Lorg/nirmato/ollama/api/PullModelStatus;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -1395,12 +1384,11 @@ public final class org/nirmato/ollama/api/PushModelStatus : java/lang/Enum {
 }
 
 public final class org/nirmato/ollama/api/PushModelStatus$Companion {
-	public final fun fromValue (Ljava/lang/String;)Lorg/nirmato/ollama/api/PushModelStatus;
+	public final fun fromValueOrNull (Ljava/lang/String;)Lorg/nirmato/ollama/api/PushModelStatus;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/RateLimitException : org/nirmato/ollama/api/ApiException {
-	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
@@ -1415,7 +1403,7 @@ public final class org/nirmato/ollama/api/ResponseFormat : java/lang/Enum {
 }
 
 public final class org/nirmato/ollama/api/ResponseFormat$Companion {
-	public final fun fromValue (Ljava/lang/String;)Lorg/nirmato/ollama/api/ResponseFormat;
+	public final fun fromValueOrNull (Ljava/lang/String;)Lorg/nirmato/ollama/api/ResponseFormat;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -1588,29 +1576,10 @@ public final class org/nirmato/ollama/api/ToolCall$Companion {
 }
 
 public final class org/nirmato/ollama/api/UnknownAPIException : org/nirmato/ollama/api/ApiException {
-	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;)V
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/OllamaError;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
 
 public abstract interface annotation class org/nirmato/ollama/dsl/OllamaDsl : java/lang/annotation/Annotation {
-}
-
-public final class org/nirmato/ollama/infrastructure/OctetByteArray {
-	public static final field Companion Lorg/nirmato/ollama/infrastructure/OctetByteArray$Companion;
-	public fun <init> ([B)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()[B
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class org/nirmato/ollama/infrastructure/OctetByteArray$Companion : kotlinx/serialization/KSerializer {
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/infrastructure/OctetByteArray;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/infrastructure/OctetByteArray;)V
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 

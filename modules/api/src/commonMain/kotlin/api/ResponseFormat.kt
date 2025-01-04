@@ -30,6 +30,6 @@ public enum class ResponseFormat(public val value: String) {
         /**
          * Returns a valid [ResponseFormat] for [data], null otherwise.
          */
-        public fun fromValue(data: String?): ResponseFormat? = data?.let { value -> values().firstOrNull { it.value == value } }
+        public fun fromValueOrNull(data: String?): ResponseFormat? = data?.let { value -> values().firstOrNull { it.value == value } }
     }
 }

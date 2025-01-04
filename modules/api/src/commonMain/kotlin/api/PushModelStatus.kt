@@ -36,6 +36,6 @@ public enum class PushModelStatus(public val value: String) {
         /**
          * Returns a valid [PushModelStatus] for [data], null otherwise.
          */
-        public fun fromValue(data: String?): PushModelStatus? = data?.let { value -> values().firstOrNull { it.value == value } }
+        public fun fromValueOrNull(data: String?): PushModelStatus? = data?.let { value -> values().firstOrNull { it.value == value } }
     }
 }

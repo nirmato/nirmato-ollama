@@ -42,7 +42,7 @@ public enum class PullModelStatus(public val value: String) {
         /**
          * Returns a valid [PullModelStatus] for [data], null otherwise.
          */
-        public fun fromValue(data: String?): PullModelStatus? = data?.let { value -> values().firstOrNull { it.value == value } }
+        public fun fromValueOrNull(data: String?): PullModelStatus? = data?.let { value -> values().firstOrNull { it.value == value } }
     }
 }
 

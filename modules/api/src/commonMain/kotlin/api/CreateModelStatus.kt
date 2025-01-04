@@ -33,6 +33,6 @@ public enum class CreateModelStatus(public val value: String) {
         /**
          * Returns a valid [CreateModelStatus] for [data], null otherwise.
          */
-        public fun fromValue(data: String?): CreateModelStatus? = data?.let { value -> values().firstOrNull { it.value == value } }
+        public fun fromValueOrNull(data: String?): CreateModelStatus? = data?.let { value -> values().firstOrNull { it.value == value } }
     }
 }

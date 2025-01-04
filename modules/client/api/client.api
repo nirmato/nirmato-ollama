@@ -7,7 +7,7 @@ public final class org/nirmato/ollama/client/ChatClient : org/nirmato/ollama/api
 public final class org/nirmato/ollama/client/CompletionsClient : org/nirmato/ollama/api/CompletionsApi {
 	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClientHandler;)V
 	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class org/nirmato/ollama/client/EmbeddedClient : org/nirmato/ollama/api/EmbeddingsApi {
@@ -39,7 +39,7 @@ public final class org/nirmato/ollama/client/OllamaClient : org/nirmato/ollama/a
 	public fun chatCompletionFlow (Lorg/nirmato/ollama/api/ChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

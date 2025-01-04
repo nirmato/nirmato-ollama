@@ -11,6 +11,6 @@ public enum class KarmaBrowser(public val value: String) {
     ;
 
     public companion object {
-        public fun fromValue(value: String): KarmaBrowser? = values().firstOrNull { it.value == value }
+        public fun fromValueOrNull(value: String): KarmaBrowser? = values().firstOrNull { it.value == value }
     }
 }

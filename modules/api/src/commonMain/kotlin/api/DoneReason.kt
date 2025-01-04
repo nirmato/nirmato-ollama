@@ -33,6 +33,6 @@ public enum class DoneReason(public val value: String) {
         /**
          * Returns a valid [DoneReason] for [data], null otherwise.
          */
-        public fun fromValue(data: String?): DoneReason? = data?.let { value -> values().firstOrNull { it.value == value } }
+        public fun fromValueOrNull(data: String?): DoneReason? = data?.let { value -> values().firstOrNull { it.value == value } }
     }
 }

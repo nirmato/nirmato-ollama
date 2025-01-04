@@ -24,10 +24,10 @@ Add the dependency to your project:
 
 ```kotlin
 dependencies {
-    implementation("org.nirmato.ollama:nirmato-ollama-api:0.1.0")
+    implementation("org.nirmato.ollama:nirmato-ollama-client:0.1.0")
 
-    // using ktor client implementation
-    implementation("org.nirmato.ollama:nirmato-ollama-ktor:0.1.0")
+    // example using ktor CIO engine
+    implementation("io.ktor:ktor-client-cio:3.0.3")
 }
 ```
 
@@ -37,15 +37,15 @@ dependencies {
 <dependencies>
     <dependency>
         <groupId>org.nirmato.ollama</groupId>
-        <artifactId>nirmato-ollama-api</artifactId>
+        <artifactId>nirmato-ollama-client</artifactId>
         <version>0.1.0</version>
     </dependency>
     
-    <!-- using ktor client implementation -->
+    <!-- example using ktor CIO engine -->
     <dependency>
-        <groupId>org.nirmato.ollama</groupId>
-        <artifactId>nirmato-ollama-ktor</artifactId>
-        <version>0.1.0</version>
+        <groupId>io.ktor</groupId>
+        <artifactId>ktor-client-cio</artifactId>
+        <version>3.0.3</version>
     </dependency>
 </dependencies>
 ```

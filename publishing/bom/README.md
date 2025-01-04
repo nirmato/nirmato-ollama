@@ -18,8 +18,7 @@ dependencies {
     implementation(platform("org.nirmato.ollama:nirmato-ollama-bom:[version]"))
 
     // pick the artifacts that you want but don't specify their versions as that's controlled by the BOM
-    implementation("org.nirmato.ollama:nirmato-ollama-api")
-    implementation("org.nirmato.ollama:nirmato-ollama-client-ktor")
+    implementation("org.nirmato.ollama:nirmato-ollama-client")
 }
 ```
 
@@ -49,8 +48,7 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>org.nirmato.ollama</groupId>
-            <artifactId>nirmato-ollama-client-ktor</artifactId>
-            <scope>runtime</scope>
+            <artifactId>nirmato-ollama-client</artifactId>
         </dependency>
     </dependencies>
 </project>
@@ -60,8 +58,8 @@ dependencies {
 
 The `bom` references the following artifacts:
 
-| GroupId                  | ArtifactId                   | Description                                 |
-|:-------------------------|:-----------------------------|:--------------------------------------------|
-| `org.nirmato.ollama`     | `nirmato-ollama-api`         | The Ollama client API                       |
-| `org.nirmato.ollama`     | `nirmato-ollama-client`      | Base for client API implementation          |
-| `org.nirmato.ollama`     | `nirmato-ollama-client-ktor` | Implementation of the client API using Ktor |
+| GroupId                  | ArtifactId                   | Description                |
+|:-------------------------|:-----------------------------|:---------------------------|
+| `org.nirmato.ollama`     | `nirmato-ollama-annotations` | Ollama nirmato annotations |
+| `org.nirmato.ollama`     | `nirmato-ollama-api`         | Ollama client API          |
+| `org.nirmato.ollama`     | `nirmato-ollama-client`      | KMP implementation         |

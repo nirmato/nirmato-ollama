@@ -28,7 +28,7 @@ import org.nirmato.ollama.api.RateLimitException
 import org.nirmato.ollama.api.UnknownAPIException
 
 /**
- * Default implementation of [org.nirmato.ollama.client.http.HttpClientHandler].
+ * Default implementation of [HttpClientHandler].
  *
  * @property httpClient The HttpClient to use for performing HTTP requests.
  */

@@ -1,13 +1,5 @@
 package org.nirmato.ollama.api
 
-import org.nirmato.ollama.api.CopyModelRequest.CopyModelRequestBuilder
-import org.nirmato.ollama.api.CreateBlobRequest.CreateBlobRequestBuilder
-import org.nirmato.ollama.api.CreateModelRequest.CreateModelRequestBuilder
-import org.nirmato.ollama.api.DeleteModelRequest.DeleteModelRequestBuilder
-import org.nirmato.ollama.api.PullModelRequest.PullModelRequestBuilder
-import org.nirmato.ollama.api.PushModelRequest.PushModelRequestBuilder
-import org.nirmato.ollama.api.ShowModelInformationRequest.ShowModelInformationRequestBuilder
-
 public interface ModelsApi {
     /**
      * Ensures that the file blob used for a FROM or ADAPTER field exists on the server.
@@ -70,40 +62,4 @@ public interface ModelsApi {
      * @param modelInfoRequest
      */
     public suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelCard
-}
-
-
-public suspend fun ModelsApi.copyModel(block: CopyModelRequestBuilder.() -> Unit) {
-    val copyModelRequest = CopyModelRequestBuilder().apply(block).build()
-    copyModel(copyModelRequest)
-}
-
-public suspend fun ModelsApi.createBlob(block: CreateBlobRequestBuilder.() -> Unit) {
-    val createBlobRequest = CreateBlobRequestBuilder().apply(block).build()
-    createBlob(createBlobRequest)
-}
-
-public suspend fun ModelsApi.createModel(block: CreateModelRequestBuilder.() -> Unit): CreateModelResponse {
-    val createModelRequest = CreateModelRequestBuilder().apply(block).build()
-    return createModel(createModelRequest)
-}
-
-public suspend fun ModelsApi.deleteModel(block: DeleteModelRequestBuilder.() -> Unit) {
-    val deleteModelRequest = DeleteModelRequestBuilder().apply(block).build()
-    deleteModel(deleteModelRequest)
-}
-
-public suspend fun ModelsApi.pullModel(block: PullModelRequestBuilder.() -> Unit): PullModelResponse {
-    val pullModelRequest = PullModelRequestBuilder().apply(block).build()
-    return pullModel(pullModelRequest)
-}
-
-public suspend fun ModelsApi.pushModel(block: PushModelRequestBuilder.() -> Unit): PushModelResponse {
-    val pushModelRequest = PushModelRequestBuilder().apply(block).build()
-    return pushModel(pushModelRequest)
-}
-
-public suspend fun ModelsApi.showModelInformation(block: ShowModelInformationRequestBuilder.() -> Unit): OllamaModelCard {
-    val modelInfoRequest = ShowModelInformationRequestBuilder().apply(block).build()
-    return showModelInformation(modelInfoRequest)
 }

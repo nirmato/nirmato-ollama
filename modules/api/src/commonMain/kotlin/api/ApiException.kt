@@ -1,6 +1,5 @@
 package org.nirmato.ollama.api
 
-import kotlin.jvm.JvmOverloads
 import io.ktor.http.HttpStatusCode
 
 /**

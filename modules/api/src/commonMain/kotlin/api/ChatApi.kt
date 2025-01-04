@@ -1,7 +1,6 @@
 package org.nirmato.ollama.api
 
 import kotlinx.coroutines.flow.Flow
-import org.nirmato.ollama.api.ChatCompletionRequest.ChatCompletionRequestBuilder
 
 public interface ChatApi {
     /**
@@ -17,14 +16,4 @@ public interface ChatApi {
      * The final response object will include statistics and additional data from the request.
      */
     public fun chatCompletionFlow(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse>
-}
-
-public suspend fun ChatApi.chatCompletion(block: ChatCompletionRequestBuilder.() -> Unit): ChatCompletionResponse {
-    val chatCompletionRequest = ChatCompletionRequestBuilder().apply(block).build()
-    return chatCompletion(chatCompletionRequest)
-}
-
-public fun ChatApi.chatCompletionFlow(block: ChatCompletionRequestBuilder.() -> Unit): Flow<ChatCompletionResponse> {
-    val chatCompletionRequest = ChatCompletionRequestBuilder().apply(block).build()
-    return chatCompletionFlow(chatCompletionRequest)
 }

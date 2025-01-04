@@ -1,7 +1,5 @@
 package org.nirmato.ollama.api
 
-import kotlin.jvm.JvmOverloads
-
 /** Ollama client exception */
 public sealed class OllamaException(message: String? = null, throwable: Throwable? = null) : RuntimeException(message, throwable)
 

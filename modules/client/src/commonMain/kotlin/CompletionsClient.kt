@@ -32,7 +32,7 @@ public class CompletionsClient(private val requestHandler: HttpClientHandler) : 
         }
     }
 
-    override suspend fun completionFlow(completionRequest: CompletionRequest): Flow<CompletionResponse> {
+    override fun completionFlow(completionRequest: CompletionRequest): Flow<CompletionResponse> {
         return requestHandler.handleFlow<CompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")

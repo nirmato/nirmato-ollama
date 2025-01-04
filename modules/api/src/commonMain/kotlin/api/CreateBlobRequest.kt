@@ -4,7 +4,6 @@ import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.nirmato.ollama.dsl.OllamaDsl
-import org.nirmato.ollama.infrastructure.OctetByteArray
 
 @Serializable
 public data class CreateBlobRequest(

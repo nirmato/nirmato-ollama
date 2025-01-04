@@ -2,18 +2,20 @@ package org.nirmato.ollama.client.samples
 
 import kotlinx.coroutines.runBlocking
 import io.ktor.client.engine.java.Java
+import org.nirmato.ollama.api.ChatCompletionRequest.Companion.chatCompletionRequest
 import org.nirmato.ollama.api.Message
 import org.nirmato.ollama.api.Role.USER
-import org.nirmato.ollama.api.chatCompletion
 import org.nirmato.ollama.client.OllamaClient
 
 fun main() = runBlocking {
     val ollamaClient = OllamaClient(Java)
 
-    val response = ollamaClient.chatCompletion {
+    val request = chatCompletionRequest {
         model = "tinyllama"
         messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
     }
+
+    val response = ollamaClient.chatCompletion(request)
 
     println(response.toString())
 }

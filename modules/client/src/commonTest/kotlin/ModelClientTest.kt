@@ -12,13 +12,13 @@ import io.ktor.http.headers
 import io.ktor.http.headersOf
 import io.ktor.utils.io.core.toByteArray
 import org.nirmato.ollama.api.CopyModelRequest.Companion.copyModelRequest
+import org.nirmato.ollama.api.CreateBlobRequest.Companion.createBlobRequest
 import org.nirmato.ollama.api.CreateModelRequest.Companion.createModelRequest
 import org.nirmato.ollama.api.DeleteModelRequest.Companion.deleteModelRequest
+import org.nirmato.ollama.api.OctetByteArray
 import org.nirmato.ollama.api.PullModelRequest.Companion.pullModelRequest
 import org.nirmato.ollama.api.PushModelRequest.Companion.pushModelRequest
 import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
-import org.nirmato.ollama.api.createBlob
-import org.nirmato.ollama.infrastructure.OctetByteArray
 
 internal class ModelClientTest {
 
@@ -57,10 +57,12 @@ internal class ModelClientTest {
             }
         }
 
-        ollamaClient.createBlob {
+        val createBlobRequest = createBlobRequest {
             digest = "sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4"
             body = OctetByteArray("newblob".toByteArray())
         }
+
+        ollamaClient.createBlob(createBlobRequest)
     }
 
     @Test

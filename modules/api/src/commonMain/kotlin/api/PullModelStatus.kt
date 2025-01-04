@@ -2,6 +2,7 @@ package org.nirmato.ollama.api
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.nirmato.ollama.api.PullModelStatus.values
 
 /**
  * Status pulling the model.

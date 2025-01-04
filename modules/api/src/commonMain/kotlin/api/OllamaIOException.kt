@@ -1,7 +1,5 @@
 package org.nirmato.ollama.api
 
-import kotlin.jvm.JvmOverloads
-
 /** An exception thrown in case of an I/O error */
 public sealed class OllamaIOException(throwable: Throwable? = null) : OllamaException(message = throwable?.message, throwable = throwable)
 

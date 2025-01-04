@@ -57,10 +57,12 @@ Alternatively, you can [choose](publishing/bom/README.md) individual components 
 ```kotlin
 val ollamaClient = OllamaClient(CIO)
 
-val response = ollama.completion {
+val request = completionRequest {
     model = "tinyllama"
     prompt = "Why is the sky blue?"
 }
+
+val response = ollama.completion(request)
 ```
 
 ## Acknowledgements

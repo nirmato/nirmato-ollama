@@ -15,11 +15,14 @@ Sample code snippet to reproduce the problem:
 ```kotlin
 val ollamaClient = OllamaClient(CIO)
 
-val response = ollama.completion {
+val request = completionRequest {
     model = "tinyllama"
     prompt = "Why is the sky blue?"
 }
-println(response) // response should be not empty
+
+val response = ollama.completion(request)
+
+println(response)
 ```
 
 **Expected behavior**

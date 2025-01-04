@@ -7,6 +7,6 @@ import io.ktor.client.engine.mock.MockEngineConfig
 
 internal class MockHttpClientEngineFactory : HttpClientEngineFactory<MockEngineConfig> {
     override fun create(block: MockEngineConfig.() -> Unit): HttpClientEngine {
-        return MockEngine.create(block)
+        return MockEngine.Companion.create(block)
     }
 }

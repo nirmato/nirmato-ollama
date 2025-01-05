@@ -19,6 +19,18 @@ public data class EmbeddingResponse(
     val model: String? = null,
 
     /** The embedding for the prompt. */
-    @SerialName(value = "embedding")
-    val embedding: List<Double>? = null,
+    @SerialName(value = "embeddings")
+    val embeddings: List<List<Double>>? = null,
+
+    /** Time spent generating the response. */
+    @SerialName(value = "total_duration")
+    val totalDuration: Long? = null,
+
+    /** Time spent in nanoseconds loading the model. */
+    @SerialName(value = "load_duration")
+    val loadDuration: Long? = null,
+
+    /** Number of tokens in the prompt. */
+    @SerialName(value = "prompt_eval_count")
+    val promptEvalCount: Int? = null,
 )

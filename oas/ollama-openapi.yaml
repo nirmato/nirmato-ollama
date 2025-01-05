@@ -18,8 +18,24 @@ tags:
         description: Get a vector representation of a given input.
     -   name: Models
         description: List and describe the various models available.
+    -   name: Version
+        description: Get Ollama API version.
 
 paths:
+    /generate:
+        post:
+            operationId: getVersion
+            tags:
+                - Version
+            summary: Get Ollama API version.
+            description: Get Ollama API version.
+            responses:
+                '200':
+                    description: Successful operation.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/VersionResponse'
     /generate:
         post:
             operationId: completion
@@ -41,7 +57,7 @@ paths:
                                 $ref: '#/components/schemas/CompletionResponse'
     /chat:
         post:
-            operationId: chatCompletion
+            operationId: chat
             tags:
                 - Chat
             summary: Generate the next message in a chat with a provided model.
@@ -1128,3 +1144,11 @@ components:
                 - starting upload
                 - pushing manifest
                 - success
+        VersionResponse:
+            type: object
+            description: Response class for the version endpoint.
+            properties:
+                version:
+                    type: string
+                    description: The version of the Ollama server.
+                    example: 0.1.0

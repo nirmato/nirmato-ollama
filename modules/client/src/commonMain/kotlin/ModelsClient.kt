@@ -13,15 +13,15 @@ import org.nirmato.ollama.api.CreateBlobRequest
 import org.nirmato.ollama.api.CreateModelRequest
 import org.nirmato.ollama.api.CreateModelResponse
 import org.nirmato.ollama.api.DeleteModelRequest
-import org.nirmato.ollama.api.ModelListResponse
+import org.nirmato.ollama.api.ListModelsResponse
 import org.nirmato.ollama.api.ModelsApi
-import org.nirmato.ollama.api.OllamaModelResponse
 import org.nirmato.ollama.api.ProcessResponse
 import org.nirmato.ollama.api.PullModelRequest
 import org.nirmato.ollama.api.PullModelResponse
 import org.nirmato.ollama.api.PushModelRequest
 import org.nirmato.ollama.api.PushModelResponse
-import org.nirmato.ollama.api.ShowModelInformationRequest
+import org.nirmato.ollama.api.ShowModelRequest
+import org.nirmato.ollama.api.ShowModelResponse
 import org.nirmato.ollama.client.http.HttpClientHandler
 import org.nirmato.ollama.client.http.handle
 
@@ -71,7 +71,7 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
         }
     }
 
-    override suspend fun listModels(): ModelListResponse {
+    override suspend fun listModels(): ListModelsResponse {
         return requestHandler.handle {
             method = HttpMethod.Get
             url(path = "tags")
@@ -109,11 +109,11 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
         }
     }
 
-    override suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelResponse {
+    override suspend fun showModel(showModelRequest: ShowModelRequest): ShowModelResponse {
         return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "show")
-            setBody(modelInfoRequest)
+            setBody(showModelRequest)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }

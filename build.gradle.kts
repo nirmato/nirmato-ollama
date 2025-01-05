@@ -28,7 +28,6 @@ apiValidation {
             "bom",
             "version-catalog",
             "client-sample-cio",
-            "client-sample-java",
         )
     )
 

@@ -1,6 +1,5 @@
 package org.nirmato.ollama.client.http
 
-import javax.management.Query.value
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
@@ -16,9 +15,6 @@ import io.ktor.utils.io.cancel
 import io.ktor.utils.io.core.Closeable
 import io.ktor.utils.io.readUTF8Line
 import org.nirmato.ollama.client.JsonLenient
-
-private const val STREAM_PREFIX = "data:"
-private const val STREAM_END_TOKEN = "$STREAM_PREFIX [DONE]"
 
 /**
  * Perform HTTP requests.

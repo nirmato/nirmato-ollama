@@ -21,10 +21,10 @@ public data class EmbeddingRequest(
     @Required
     val model: String,
 
-    /** Text to generate embeddings for. */
+    /** Text or list of text to generate embeddings for. */
     @SerialName(value = "input")
     @Required
-    val input: List<String>,
+    val input: EmbeddedInput,
 
     /** Truncates the end of each input to fit within context length. Returns error if false and context length is exceeded. Defaults to true. */
     @SerialName(value = "truncate")
@@ -52,7 +52,7 @@ public data class EmbeddingRequest(
     @OllamaDsl
     public class EmbeddingRequestBuilder {
         public var model: String? = null
-        public var input: List<String>? = null
+        public var input: EmbeddedInput? = null
         public val truncate: Boolean? = null
         public var options: Options? = null
         public var keepAlive: Int? = null

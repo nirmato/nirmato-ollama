@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.nirmato.ollama.api.CopyModelRequest.Companion.copyModelRequest
-import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
+import org.nirmato.ollama.api.ShowModelRequest.Companion.showModelRequest
 import org.nirmato.ollama.client.OllamaClient
 
 class CopyTest {
@@ -26,11 +26,11 @@ class CopyTest {
 
         val model = ollamaClient.listModels().models?.first { it.name == newModel }
 
-        val modelInfoRequest = showModelInformationRequest {
+        val modelInfoRequest = showModelRequest {
             name = model?.name
         }
 
-        val modelInfo = ollamaClient.showModelInformation(modelInfoRequest)
+        val modelInfo = ollamaClient.showModel(modelInfoRequest)
 
         assertEquals("llama", modelInfo.details?.family)
     }

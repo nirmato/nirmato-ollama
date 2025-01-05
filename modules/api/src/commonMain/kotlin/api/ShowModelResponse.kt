@@ -4,18 +4,18 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Details about a model including modelfile, template, parameters, license, and system prompt.
+ * Details about a model including model file, template, parameters, license, and system prompt.
  */
 @Serializable
-public data class OllamaModelResponse(
+public data class ShowModelResponse(
 
     /** The model's license. */
     @SerialName(value = "license")
     val license: String? = null,
 
-    /** The modelfile associated with the model. */
+    /** The model file associated with the model. */
     @SerialName(value = "modelfile")
-    val modelfile: String? = null,
+    val modelFile: String? = null,
 
     /** The model parameters. */
     @SerialName(value = "parameters")

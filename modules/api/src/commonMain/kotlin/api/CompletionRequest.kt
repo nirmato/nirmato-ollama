@@ -72,7 +72,7 @@ public data class CompletionRequest(
     val keepAlive: Int? = null,
 
     /** The context parameter returned from a previous request to [CompletionsApi.completion], this can be used to keep a short conversational memory. */
-    @Deprecated(message = "Will be removed in future")
+    @Deprecated(message = "Deprecated property")
     @SerialName(value = "context")
     val context: List<Long>? = null,
 ) {

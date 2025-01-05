@@ -1,12 +1,12 @@
 package org.nirmato.ollama.client
 
 import kotlin.test.Test
-import kotlin.time.Duration.Companion.minutes
 import kotlinx.coroutines.test.runTest
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
+import org.nirmato.ollama.api.EmbeddedInput.EmbeddedText
 import org.nirmato.ollama.api.EmbeddingRequest.Companion.embeddingRequest
 
 internal class EmbeddedClientTest {
@@ -38,7 +38,7 @@ internal class EmbeddedClientTest {
 
         val generateEmbeddingRequest = embeddingRequest {
             model = "tinyllama"
-            input = listOf("Why is the sky blue?")
+            input = EmbeddedText("Why is the sky blue?")
         }
 
         val response = ollamaClient.generateEmbedding(generateEmbeddingRequest)

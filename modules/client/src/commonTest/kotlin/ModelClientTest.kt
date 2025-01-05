@@ -1,7 +1,6 @@
 package org.nirmato.ollama.client
 
 import kotlin.test.Test
-import kotlin.time.Duration.Companion.minutes
 import kotlinx.coroutines.test.runTest
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.engine.mock.respondOk
@@ -18,7 +17,7 @@ import org.nirmato.ollama.api.DeleteModelRequest.Companion.deleteModelRequest
 import org.nirmato.ollama.api.OctetByteArray
 import org.nirmato.ollama.api.PullModelRequest.Companion.pullModelRequest
 import org.nirmato.ollama.api.PushModelRequest.Companion.pushModelRequest
-import org.nirmato.ollama.api.ShowModelInformationRequest.Companion.showModelInformationRequest
+import org.nirmato.ollama.api.ShowModelRequest.Companion.showModelRequest
 
 internal class ModelClientTest {
 
@@ -79,6 +78,7 @@ internal class ModelClientTest {
                                     "size": 7365960935,
                                     "digest": "9f438cb9cd581fc025612d27f7c1a6669ff83a8bb0ed86c94fcf4c5440555697",
                                     "details": {
+                                        "parent_model": "",
                                         "format": "gguf",
                                         "family": "llama",
                                         "families": null,
@@ -133,11 +133,11 @@ internal class ModelClientTest {
             }
         }
 
-        val modelInfoRequest = showModelInformationRequest {
+        val modelInfoRequest = showModelRequest {
             name = "mario"
         }
 
-        val response = ollamaClient.showModelInformation(modelInfoRequest)
+        val response = ollamaClient.showModel(modelInfoRequest)
 
         println(response.toString())
     }

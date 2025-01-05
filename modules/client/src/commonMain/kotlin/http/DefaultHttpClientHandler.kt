@@ -26,12 +26,12 @@ import org.nirmato.ollama.api.AuthenticationException
 import org.nirmato.ollama.api.GenericIOException
 import org.nirmato.ollama.api.InvalidRequestException
 import org.nirmato.ollama.api.OllamaClientException
-import org.nirmato.ollama.api.ResponseFailure
 import org.nirmato.ollama.api.OllamaException
 import org.nirmato.ollama.api.OllamaServerException
 import org.nirmato.ollama.api.OllamaTimeoutException
 import org.nirmato.ollama.api.PermissionException
 import org.nirmato.ollama.api.RateLimitException
+import org.nirmato.ollama.api.ResponseFailure
 import org.nirmato.ollama.api.UnknownAPIException
 
 /**

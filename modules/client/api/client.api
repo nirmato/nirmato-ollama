@@ -30,7 +30,7 @@ public final class org/nirmato/ollama/client/ModelsClient : org/nirmato/ollama/a
 	public fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun showModelInformation (Lorg/nirmato/ollama/api/ShowModelInformationRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class org/nirmato/ollama/client/OllamaClient : org/nirmato/ollama/api/ChatApi, org/nirmato/ollama/api/CompletionsApi, org/nirmato/ollama/api/EmbeddingsApi, org/nirmato/ollama/api/ModelsApi, org/nirmato/ollama/api/OllamaApi {
@@ -45,11 +45,12 @@ public final class org/nirmato/ollama/client/OllamaClient : org/nirmato/ollama/a
 	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getVersion (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun showModelInformation (Lorg/nirmato/ollama/api/ShowModelInformationRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class org/nirmato/ollama/client/OllamaClientKt {

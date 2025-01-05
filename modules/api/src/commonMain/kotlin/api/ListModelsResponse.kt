@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * Response class for the list models endpoint.
  */
 @Serializable
-public data class ModelListResponse(
+public data class ListModelsResponse(
 
     /** List of models available locally. */
     @SerialName(value = "models")

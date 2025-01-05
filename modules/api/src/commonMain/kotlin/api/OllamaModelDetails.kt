@@ -8,6 +8,9 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 public data class OllamaModelDetails(
+    @SerialName(value = "parent_model")
+    val parentModel: String,
+
     /** The format of the model. */
     @SerialName(value = "format")
     val format: String? = null,

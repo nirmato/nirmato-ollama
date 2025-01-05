@@ -21,7 +21,6 @@ include("publishing:version-catalog")
 
 if(providers.gradleBooleanProperty("kotlin.targets.jvm.enabled").get()) {
     include("samples:client-sample-cio")
-    include("samples:client-sample-java")
 }
 
 if(providers.gradleBooleanProperty("kotlin.targets.js.enabled").get()) {

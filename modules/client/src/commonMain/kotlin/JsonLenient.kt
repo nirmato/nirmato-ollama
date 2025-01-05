@@ -1,5 +1,6 @@
 package org.nirmato.ollama.client
 
+import kotlinx.serialization.json.ClassDiscriminatorMode
 import kotlinx.serialization.json.Json
 
 /**
@@ -10,4 +11,5 @@ public val JsonLenient: Json = Json {
     ignoreUnknownKeys = true
     encodeDefaults = true
     explicitNulls = false
+    classDiscriminatorMode = ClassDiscriminatorMode.NONE
 }

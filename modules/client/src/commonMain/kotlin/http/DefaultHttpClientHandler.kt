@@ -13,13 +13,20 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.HttpStatement
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.HttpStatusCode.Companion.BadRequest
+import io.ktor.http.HttpStatusCode.Companion.Conflict
+import io.ktor.http.HttpStatusCode.Companion.Forbidden
+import io.ktor.http.HttpStatusCode.Companion.NotFound
+import io.ktor.http.HttpStatusCode.Companion.OK
+import io.ktor.http.HttpStatusCode.Companion.TooManyRequests
+import io.ktor.http.HttpStatusCode.Companion.Unauthorized
+import io.ktor.http.HttpStatusCode.Companion.UnsupportedMediaType
 import io.ktor.util.reflect.TypeInfo
 import org.nirmato.ollama.api.AuthenticationException
 import org.nirmato.ollama.api.GenericIOException
 import org.nirmato.ollama.api.InvalidRequestException
 import org.nirmato.ollama.api.OllamaClientException
-import org.nirmato.ollama.api.OllamaError
+import org.nirmato.ollama.api.ResponseFailure
 import org.nirmato.ollama.api.OllamaException
 import org.nirmato.ollama.api.OllamaServerException
 import org.nirmato.ollama.api.OllamaTimeoutException
@@ -39,7 +46,7 @@ public class DefaultHttpClientHandler(private val httpClient: HttpClient) : Http
         val response = httpClient.request(builder)
 
         when (response.status) {
-            HttpStatusCode.Companion.OK -> response.body<T>(info)
+            OK -> response.body<T>(info)
             else -> throw handleClientException(ClientRequestException(response, ""))
         }
 
@@ -52,7 +59,7 @@ public class DefaultHttpClientHandler(private val httpClient: HttpClient) : Http
         try {
             HttpStatement(builder = HttpRequestBuilder().apply(builder), client = httpClient).execute {
                 when (it.status) {
-                    HttpStatusCode.Companion.OK -> block(it)
+                    OK -> block(it)
                     else -> throw handleClientException(ClientRequestException(it, ""))
                 }
             }
@@ -72,6 +79,7 @@ public class DefaultHttpClientHandler(private val httpClient: HttpClient) : Http
         is CancellationException -> cause
         is ClientRequestException -> handleClientException(cause)
         is ServerResponseException -> OllamaServerException(cause)
+
         is HttpRequestTimeoutException,
         is SocketTimeoutException,
         is ConnectTimeoutException,
@@ -88,17 +96,18 @@ public class DefaultHttpClientHandler(private val httpClient: HttpClient) : Http
     private suspend fun handleClientException(exception: ClientRequestException): OllamaException {
         val response = exception.response
         val status = response.status
-        val error = response.body<OllamaError>()
+        val error = response.body<ResponseFailure>()
         return when (status) {
-            HttpStatusCode.Companion.TooManyRequests -> RateLimitException(status, error, exception)
-            HttpStatusCode.Companion.BadRequest,
-            HttpStatusCode.Companion.NotFound,
-            HttpStatusCode.Companion.Conflict,
-            HttpStatusCode.Companion.UnsupportedMediaType,
+            TooManyRequests -> RateLimitException(status, error, exception)
+
+            BadRequest,
+            NotFound,
+            Conflict,
+            UnsupportedMediaType,
                 -> InvalidRequestException(status, error, exception)
 
-            HttpStatusCode.Companion.Unauthorized -> AuthenticationException(status, error, exception)
-            HttpStatusCode.Companion.Forbidden -> PermissionException(status, error, exception)
+            Unauthorized -> AuthenticationException(status, error, exception)
+            Forbidden -> PermissionException(status, error, exception)
             else -> UnknownAPIException(status, error, exception)
         }
     }

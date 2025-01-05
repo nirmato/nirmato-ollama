@@ -22,7 +22,11 @@ public data class CompletionResponse(
     @SerialName(value = "created_at")
     val createdAt: Instant? = null,
 
-    /** The response for a given prompt with a provided model. */
+    /**
+     * The response for a given prompt with a provided model.
+     *
+     * Empty if the response was streamed, if not streamed, this will contain the full response
+     */
     @SerialName(value = "response")
     val response: String? = null,
 

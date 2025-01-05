@@ -1,5 +1,6 @@
 package org.nirmato.ollama.client.http
 
+import javax.management.Query.value
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
@@ -62,11 +63,8 @@ internal suspend inline fun <reified T> FlowCollector<T>.streamEventsFrom(respon
         while (currentCoroutineContext().isActive && !channel.isClosedForRead) {
             val line = channel.readUTF8Line() ?: continue
 
-            val value: T = when {
-                line.startsWith(STREAM_PREFIX) -> JsonLenient.decodeFromString(line.removePrefix(STREAM_PREFIX))
-                line.startsWith(STREAM_END_TOKEN) -> break
-                else -> continue
-            }
+            val value: T = JsonLenient.decodeFromString(line)
+
             emit(value)
         }
     } finally {

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class FunctionCall(
+public data class FunctionCall(
     @SerialName(value = "name")
     public val name: String,
 

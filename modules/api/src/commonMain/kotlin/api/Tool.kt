@@ -46,8 +46,5 @@ public class Tool(
 
         @SerialName(value = "enum")
         public val enumValues: List<String>? = null,
-
-        @SerialName(value = "required")
-        public val required: Boolean? = null,
     )
 }

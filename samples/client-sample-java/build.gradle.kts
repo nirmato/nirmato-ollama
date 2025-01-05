@@ -36,6 +36,7 @@ kotlin {
                 implementation(project(":modules:client"))
 
                 implementation(libraries.ktor.client.java)
+                implementation(libraries.kotlinx.datetime)
             }
         }
 

@@ -15,24 +15,24 @@ import org.nirmato.ollama.api.CompletionResponse
 internal class CompletionsClientTest {
 
     @Test
-    fun generateCompletion_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
+    fun generateCompletion_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
                         content = """{
-                      "model": "llama3",
-                      "created_at": "2023-08-04T19:22:45.499127Z",
-                      "response": "The sky is blue because it is the color of the sky.",
-                      "done": true,
-                      "context": [1, 2, 3],
-                      "total_duration": 5043500667,
-                      "load_duration": 5025959,
-                      "prompt_eval_count": 26,
-                      "prompt_eval_duration": 325953000,
-                      "eval_count": 290,
-                      "eval_duration": 4709213000
-                    }""",
+                          "model": "llama3",
+                          "created_at": "2023-08-04T19:22:45.499127Z",
+                          "response": "The sky is blue because it is the color of the sky.",
+                          "done": true,
+                          "context": [1, 2, 3],
+                          "total_duration": 5043500667,
+                          "load_duration": 5025959,
+                          "prompt_eval_count": 26,
+                          "prompt_eval_duration": 325953000,
+                          "eval_count": 290,
+                          "eval_duration": 4709213000
+                        }""",
                         status = HttpStatusCode.OK,
                         headers {
                             append(HttpHeaders.ContentType, "application/json")
@@ -52,24 +52,12 @@ internal class CompletionsClientTest {
     }
 
     @Test
-    fun generateCompletion_validStreamRequest_returnSuccess() = runTest(timeout = 1.minutes) {
+    fun generateCompletion_validStreamRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
-                        content = """{
-                      "model": "llama3",
-                      "created_at": "2023-08-04T19:22:45.499127Z",
-                      "response": "The sky is blue because it is the color of the sky.",
-                      "done": true,
-                      "context": [1, 2, 3],
-                      "total_duration": 5043500667,
-                      "load_duration": 5025959,
-                      "prompt_eval_count": 26,
-                      "prompt_eval_duration": 325953000,
-                      "eval_count": 290,
-                      "eval_duration": 4709213000
-                    }""",
+                        content = """{ "model": "llama3", "created_at": "2023-08-04T19:22:45.499127Z", "response": "The sky is blue because it is the color of the sky.", "done": true, "context": [1, 2, 3], "total_duration": 5043500667, "load_duration": 5025959, "prompt_eval_count": 26, "prompt_eval_duration": 325953000, "eval_count": 290, "eval_duration": 4709213000 }""",
                         status = HttpStatusCode.OK,
                         headers {
                             append(HttpHeaders.ContentType, "application/json")
@@ -84,9 +72,8 @@ internal class CompletionsClientTest {
             prompt = "Why is the sky blue?"
         }
 
-        val response = mutableListOf<CompletionResponse>()
-        ollamaClient.completionFlow(completionRequest).onEach { response += it }.launchIn(this).join()
+        val response = ollamaClient.completionFlow(completionRequest)
 
-        println(response.toString())
+        response.collect { println(it) }
     }
 }

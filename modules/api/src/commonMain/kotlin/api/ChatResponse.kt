@@ -1,5 +1,6 @@
 package org.nirmato.ollama.api
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -7,7 +8,7 @@ import kotlinx.serialization.Serializable
  * The response class for the chat endpoint.
  */
 @Serializable
-public data class ChatCompletionResponse(
+public data class ChatResponse(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -19,10 +20,10 @@ public data class ChatCompletionResponse(
 
     /** Date on which a model was created. */
     @SerialName(value = "created_at")
-    val createdAt: kotlinx.datetime.Instant? = null,
+    val createdAt: Instant? = null,
 
     @SerialName(value = "message")
-    val message: MessageResponse? = null,
+    val message: Message? = null,
 
     /** Whether the response has completed. */
     @SerialName(value = "done")

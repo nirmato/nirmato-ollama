@@ -9,16 +9,16 @@ public sealed class ApiException(
     /** The HTTP status code associated with the error. */
     public val statusCode: HttpStatusCode,
     /** The error that occurred. */
-    public val error: OllamaError,
+    public val failure: ResponseFailure,
     throwable: Throwable? = null,
-) : OllamaException(message = error.detail?.message, throwable = throwable)
+) : OllamaException(message = failure.message, throwable = throwable)
 
 /**
  * Represents an exception thrown when the Ollama API rate limit is exceeded.
  */
 public class RateLimitException(
     statusCode: HttpStatusCode,
-    error: OllamaError,
+    error: ResponseFailure,
     throwable: Throwable? = null,
 ) : ApiException(statusCode, error, throwable)
 
@@ -27,7 +27,7 @@ public class RateLimitException(
  */
 public class InvalidRequestException(
     statusCode: HttpStatusCode,
-    error: OllamaError,
+    error: ResponseFailure,
     throwable: Throwable? = null,
 ) : ApiException(statusCode, error, throwable)
 
@@ -36,7 +36,7 @@ public class InvalidRequestException(
  */
 public class AuthenticationException(
     statusCode: HttpStatusCode,
-    error: OllamaError,
+    error: ResponseFailure,
     throwable: Throwable? = null,
 ) : ApiException(statusCode, error, throwable)
 
@@ -45,7 +45,7 @@ public class AuthenticationException(
  */
 public class PermissionException(
     statusCode: HttpStatusCode,
-    error: OllamaError,
+    error: ResponseFailure,
     throwable: Throwable? = null,
 ) : ApiException(statusCode, error, throwable)
 
@@ -55,6 +55,6 @@ public class PermissionException(
  */
 public class UnknownAPIException(
     statusCode: HttpStatusCode,
-    error: OllamaError,
+    error: ResponseFailure,
     throwable: Throwable? = null,
 ) : ApiException(statusCode, error, throwable)

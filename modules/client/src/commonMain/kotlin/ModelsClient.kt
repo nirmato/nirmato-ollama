@@ -15,7 +15,7 @@ import org.nirmato.ollama.api.CreateModelResponse
 import org.nirmato.ollama.api.DeleteModelRequest
 import org.nirmato.ollama.api.ModelListResponse
 import org.nirmato.ollama.api.ModelsApi
-import org.nirmato.ollama.api.OllamaModelCard
+import org.nirmato.ollama.api.OllamaModelResponse
 import org.nirmato.ollama.api.ProcessResponse
 import org.nirmato.ollama.api.PullModelRequest
 import org.nirmato.ollama.api.PullModelResponse
@@ -109,7 +109,7 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
         }
     }
 
-    override suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelCard {
+    override suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelResponse {
         return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "show")

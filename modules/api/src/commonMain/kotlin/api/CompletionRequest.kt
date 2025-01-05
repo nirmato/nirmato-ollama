@@ -29,13 +29,13 @@ public data class CompletionRequest(
     @SerialName(value = "suffix")
     val suffix: String? = null,
 
-    /** (optional) A list of Base64-encoded images to include in the message (for multimodal models such as llava) */
+    /** A list of Base64-encoded images to include in the message (for multimodal models such as llava) */
     @SerialName(value = "images")
     val images: List<String>? = null,
 
-    /** The format to return a response in. Currently, the only accepted value is json. */
+    /** The format to return a response in. Format can be json or a JSON schema */
     @SerialName(value = "format")
-    val format: ResponseFormat? = null,
+    val format: Format? = null,
 
     /** Additional model parameters listed in the documentation for the Modelfile such as `temperature`. */
     @SerialName(value = "options")
@@ -45,15 +45,11 @@ public data class CompletionRequest(
     @SerialName(value = "system")
     val system: String? = null,
 
-    /** The full prompt or prompt template (overrides what is defined in the Modelfile). */
+    /** The full prompt or prompt template to use (overrides what is defined in the Modelfile). */
     @SerialName(value = "template")
     val template: String? = null,
 
-    /** The context parameter returned from a previous request to [CompletionsApi.completion], this can be used to keep a short conversational memory. */
-    @SerialName(value = "context")
-    val context: List<Long>? = null,
-
-    /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects.  */
+    /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects. */
     @SerialName(value = "stream")
     val stream: Boolean? = false,
 
@@ -65,7 +61,7 @@ public data class CompletionRequest(
     val raw: Boolean? = null,
 
     /**
-     * How long (in minutes) to keep the model loaded in memory.
+     * How long (in minutes) to keep the model loaded into memory following the request (default: 5m)
      *
      * - If set to a positive duration (e.g. 20), the model will stay loaded for the provided duration.
      * - If set to a negative duration (e.g. -1), the model will stay loaded indefinitely.
@@ -74,6 +70,11 @@ public data class CompletionRequest(
      */
     @SerialName(value = "keep_alive")
     val keepAlive: Int? = null,
+
+    /** The context parameter returned from a previous request to [CompletionsApi.completion], this can be used to keep a short conversational memory. */
+    @Deprecated(message = "Will be removed in future")
+    @SerialName(value = "context")
+    val context: List<Long>? = null,
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
@@ -87,7 +88,7 @@ public data class CompletionRequest(
         public var prompt: String? = null
         public var suffix: String? = null
         public var images: List<String>? = null
-        public var format: ResponseFormat? = null
+        public var format: Format? = null
         public var options: Options? = null
         public var system: String? = null
         public var template: String? = null

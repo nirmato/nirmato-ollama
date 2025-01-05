@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * Details about a model including modelfile, template, parameters, license, and system prompt.
  */
 @Serializable
-public data class OllamaModelCard(
+public data class OllamaModelResponse(
 
     /** The model's license. */
     @SerialName(value = "license")
@@ -25,14 +25,6 @@ public data class OllamaModelCard(
     @SerialName(value = "template")
     val template: String? = null,
 
-    /** The system prompt for the model. */
-    @SerialName(value = "system")
-    val system: String? = null,
-
     @SerialName(value = "details")
     val details: OllamaModelDetails? = null,
-
-    /** The default messages for the model. */
-    @SerialName(value = "messages")
-    val messages: List<MessageResponse>? = null,
 )

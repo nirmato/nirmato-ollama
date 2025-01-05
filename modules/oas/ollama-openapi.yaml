@@ -3,7 +3,7 @@ openapi: 3.1.0
 info:
     title: Ollama API
     description: API Spec for Ollama API. Please see https://github.com/ollama/ollama/blob/main/docs/api.md for more details.
-    version: 0.3.3
+    version: 0.5.4
 
 servers:
     -   url: http://localhost:11434/api
@@ -22,7 +22,7 @@ tags:
 paths:
     /generate:
         post:
-            operationId: generateCompletion
+            operationId: completion
             tags:
                 - Completions
             summary: Generate a response for a given prompt with a provided model.
@@ -265,14 +265,13 @@ components:
                     type: string
                     description: &model_name |
                         The model name.
-
                         Model names follow a model:tag format, where model can have an optional namespace such as example/model.
                         Some examples are orca-mini:3b-q4_1 and llama3:70b. The tag is optional and, if not provided, will default to latest.
                         The tag is used to identify a specific version.
                     example: llama3:8b
                 prompt:
                     type: string
-                    description: The prompt to generate a response.
+                    description: The prompt to generate a response for.
                     example: Why is the sky blue?
                 suffix:
                     type: string
@@ -280,12 +279,13 @@ components:
                     example: The roses are red.
                 images:
                     type: array
-                    description: (optional) A list of Base64-encoded images to include in the message (for multimodal models such as llava)
+                    description: A list of base64-encoded images to include in the message (for multimodal models such as llava)
                     items:
                         type: string
                         description: Base64-encoded image (for multimodal models such as llava)
                         example: iVBORw0KGgoAAAANSUhEUgAAAAkAAAANCAIAAAD0YtNRAAAABnRSTlMA/AD+APzoM1ogAAAAWklEQVR4AWP48+8PLkR7uUdzcMvtU8EhdykHKAciEXL3pvw5FQIURaBDJkARoDhY3zEXiCgCHbNBmAlUiyaBkENoxZSDWnOtBmoAQu7TnT+3WuDOA7KBIkAGAGwiNeqjusp/AAAAAElFTkSuQmCC
                 format:
+                    description: The format to return a response in. Currently, the only accepted value is json.
                     $ref: '#/components/schemas/ResponseFormat'
                 options:
                     $ref: '#/components/schemas/Options'
@@ -294,13 +294,7 @@ components:
                     description: The system prompt to (overrides what is defined in the Modelfile).
                 template:
                     type: string
-                    description: The full prompt or prompt template (overrides what is defined in the Modelfile).
-                context:
-                    type: array
-                    description: The context parameter returned from a previous request to [generateCompletion], this can be used to keep a short conversational memory.
-                    items:
-                        type: integer
-                        format: int64
+                    description: The full prompt or prompt template to use (overrides what is defined in the Modelfile).
                 stream:
                     type: boolean
                     description: &stream |
@@ -316,12 +310,19 @@ components:
                     type: integer
                     nullable: true
                     description: &keep_alive |
-                        How long (in minutes) to keep the model loaded in memory.
+                        How long (in minutes) to keep the model loaded into memory following the request (default: 5m)
 
                         - If set to a positive duration (e.g. 20), the model will stay loaded for the provided duration.
                         - If set to a negative duration (e.g. -1), the model will stay loaded indefinitely.
                         - If set to 0, the model will be unloaded immediately once finished.
                         - If not set, the model will stay loaded for 5 minutes by default
+                context:
+                    deprecated: true
+                    type: array
+                    description: The context parameter returned from a previous request to [generateCompletion], this can be used to keep a short conversational memory.
+                    items:
+                        type: integer
+                        format: int64
             required:
                 - model
                 - prompt
@@ -508,7 +509,7 @@ components:
 
                 Enable JSON mode by setting the format parameter to json. This will structure the response as valid JSON.
 
-                Note: it's important to instruct the model to use JSON in the prompt. Otherwise, the model may generate large amounts whitespace.
+                Note: It's important to instruct the model to use JSON in the prompt. Otherwise, the model may generate large amounts whitespace.
             enum:
                 - json
         CompletionResponse:
@@ -526,7 +527,10 @@ components:
                     example: 2023-08-04T19:22:45.499127Z
                 response:
                     type: string
-                    description: The response for a given prompt with a provided model.
+                    description: |
+                        The response for a given prompt with a provided model.
+
+                        Empty if the response was streamed, if not streamed, this will contain the full response
                     example: The sky appears blue because of a phenomenon called Rayleigh scattering.
                 done:
                     type: boolean
@@ -587,6 +591,7 @@ components:
                     items:
                         $ref: '#/components/schemas/Tool'
                 format:
+                    description: The format to return a response in. Currently, the only accepted value is json.
                     $ref: '#/components/schemas/ResponseFormat'
                 options:
                     $ref: '#/components/schemas/Options'

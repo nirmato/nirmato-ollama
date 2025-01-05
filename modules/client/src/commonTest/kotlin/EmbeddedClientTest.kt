@@ -12,21 +12,21 @@ import org.nirmato.ollama.api.EmbeddingRequest.Companion.embeddingRequest
 internal class EmbeddedClientTest {
 
     @Test
-    fun generateEmbedding_validRequest_returnSuccess() = runTest(timeout = 1.minutes) {
+    fun generateEmbedding_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
                         content = """{
-                      "model": "all-minilm",
-                      "embeddings": [[
-                        0.010071029, -0.0017594862, 0.05007221, 0.04692972, 0.054916814,
-                        0.008599704, 0.105441414, -0.025878139, 0.12958129, 0.031952348
-                      ],[
-                        -0.0098027075, 0.06042469, 0.025257962, -0.006364387, 0.07272725,
-                        0.017194884, 0.09032035, -0.051705178, 0.09951512, 0.09072481
-                      ]]
-                    }""",
+                          "model": "all-minilm",
+                          "embeddings": [[
+                            0.010071029, -0.0017594862, 0.05007221, 0.04692972, 0.054916814,
+                            0.008599704, 0.105441414, -0.025878139, 0.12958129, 0.031952348
+                          ],[
+                            -0.0098027075, 0.06042469, 0.025257962, -0.006364387, 0.07272725,
+                            0.017194884, 0.09032035, -0.051705178, 0.09951512, 0.09072481
+                          ]]
+                        }""",
                         status = HttpStatusCode.OK,
                         headers {
                             append(HttpHeaders.ContentType, "application/json")

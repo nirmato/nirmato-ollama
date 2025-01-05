@@ -61,5 +61,5 @@ public interface ModelsApi {
      *
      * @param modelInfoRequest
      */
-    public suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelCard
+    public suspend fun showModelInformation(modelInfoRequest: ShowModelInformationRequest): OllamaModelResponse
 }

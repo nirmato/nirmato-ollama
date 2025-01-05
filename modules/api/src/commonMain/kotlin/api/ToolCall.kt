@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class ToolCall(
+public data class ToolCall(
     @SerialName(value = "function")
     public val function: FunctionCall,
 )

@@ -9,7 +9,7 @@ import org.nirmato.ollama.dsl.OllamaDsl
  * Request to generate a predicted chat completion for a prompt.
  */
 @Serializable
-public data class ChatCompletionRequest(
+public data class ChatRequest(
 
     /**
      * The model name.
@@ -32,7 +32,7 @@ public data class ChatCompletionRequest(
 
     /** The format to return a response in. Currently, the only accepted value is json. */
     @SerialName(value = "format")
-    val format: ResponseFormat? = null,
+    val format: Format? = null,
 
     /** Additional model parameters listed in the documentation for the Modelfile such as `temperature`. */
     @SerialName(value = "options")
@@ -55,22 +55,22 @@ public data class ChatCompletionRequest(
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun chatCompletionRequest(block: ChatCompletionRequestBuilder.() -> Unit): ChatCompletionRequest = ChatCompletionRequestBuilder().apply(block).build()
+        public fun chatRequest(block: ChatRequestBuilder.() -> Unit): ChatRequest = ChatRequestBuilder().apply(block).build()
     }
 
-    /** Builder of [ChatCompletionRequest] instances. */
+    /** Builder of [ChatRequest] instances. */
     @OllamaDsl
-    public class ChatCompletionRequestBuilder {
+    public class ChatRequestBuilder {
         public var model: String? = null
         public var messages: List<Message>? = null
         public var tools: List<Tool>? = null
-        public var format: ResponseFormat? = null
+        public var format: Format? = null
         public var options: Options? = null
         public var stream: Boolean? = false
         public var keepAlive: Int? = null
 
-        /** Create [ChatCompletionRequest] instance. */
-        public fun build(): ChatCompletionRequest = ChatCompletionRequest(
+        /** Create [ChatRequest] instance. */
+        public fun build(): ChatRequest = ChatRequest(
             model = requireNotNull(model) { "model is required" },
             messages = requireNotNull(messages) { "messages is required" },
             tools = tools,

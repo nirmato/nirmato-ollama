@@ -48,7 +48,7 @@ kotlin {
                 implementation(libraries.ktor.client.content.negotiation)
                 implementation(libraries.ktor.client.core)
                 implementation(libraries.ktor.client.logging)
-                implementation("ch.qos.logback:logback-classic:1.5.15")
+                implementation("ch.qos.logback:logback-classic:1.5.16")
                 implementation(libraries.ktor.serialization.kotlinx.json)
             }
         }

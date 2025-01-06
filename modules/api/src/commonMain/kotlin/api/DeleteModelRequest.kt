@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,7 +25,13 @@ public data class DeleteModelRequest(
 ) {
     public companion object {
         /** A request for creating a model. */
-        public fun deleteModelRequest(block: DeleteModelRequestBuilder.() -> Unit): DeleteModelRequest = DeleteModelRequestBuilder().apply(block).build()
+        public fun deleteModelRequest(block: DeleteModelRequestBuilder.() -> Unit): DeleteModelRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return DeleteModelRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [DeleteModelRequest] instances. */

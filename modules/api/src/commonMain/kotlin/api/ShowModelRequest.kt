@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -22,8 +24,13 @@ public data class ShowModelRequest(
 ) {
     public companion object {
         /** A request to show the model info. */
-        public fun showModelRequest(block: ShowModelRequestBuilder.() -> Unit): ShowModelRequest =
-            ShowModelRequestBuilder().apply(block).build()
+        public fun showModelRequest(block: ShowModelRequestBuilder.() -> Unit): ShowModelRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return ShowModelRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [ShowModelRequest] instances. */

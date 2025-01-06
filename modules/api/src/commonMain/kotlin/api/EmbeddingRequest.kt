@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -45,7 +47,13 @@ public data class EmbeddingRequest(
 ) {
     public companion object {
         /** A request to generate an embeddings from a model. */
-        public fun embeddingRequest(block: EmbeddingRequestBuilder.() -> Unit): EmbeddingRequest = EmbeddingRequestBuilder().apply(block).build()
+        public fun embeddingRequest(block: EmbeddingRequestBuilder.() -> Unit): EmbeddingRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return EmbeddingRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [EmbeddingRequest] instances. */

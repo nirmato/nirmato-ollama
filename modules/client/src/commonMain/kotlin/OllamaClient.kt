@@ -1,5 +1,7 @@
 package org.nirmato.ollama.client
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngineConfig

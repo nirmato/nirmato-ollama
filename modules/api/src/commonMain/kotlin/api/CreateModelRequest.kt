@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -36,7 +38,13 @@ public data class CreateModelRequest(
 ) {
     public companion object {
         /** A request for creating a model. */
-        public fun createModelRequest(block: CreateModelRequestBuilder.() -> Unit): CreateModelRequest = CreateModelRequestBuilder().apply(block).build()
+        public fun createModelRequest(block: CreateModelRequestBuilder.() -> Unit): CreateModelRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return CreateModelRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [CreateModelRequest] instances. */

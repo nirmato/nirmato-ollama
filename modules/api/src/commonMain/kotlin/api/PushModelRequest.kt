@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -34,7 +36,13 @@ public data class PushModelRequest(
 ) {
     public companion object {
         /** A request for pushing a model. */
-        public fun pushModelRequest(block: PushModelRequestBuilder.() -> Unit): PushModelRequest = PushModelRequestBuilder().apply(block).build()
+        public fun pushModelRequest(block: PushModelRequestBuilder.() -> Unit): PushModelRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return PushModelRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [PushModelRequest] instances. */

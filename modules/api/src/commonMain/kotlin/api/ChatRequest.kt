@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -55,7 +57,13 @@ public data class ChatRequest(
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun chatRequest(block: ChatRequestBuilder.() -> Unit): ChatRequest = ChatRequestBuilder().apply(block).build()
+        public fun chatRequest(block: ChatRequestBuilder.() -> Unit): ChatRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return ChatRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [ChatRequest] instances. */

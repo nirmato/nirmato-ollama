@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,7 +20,13 @@ public data class CreateBlobRequest(
 ) {
     public companion object {
         /** A request for creating a blob. */
-        public fun createBlobRequest(block: CreateBlobRequestBuilder.() -> Unit): CreateBlobRequest = CreateBlobRequestBuilder().apply(block).build()
+        public fun createBlobRequest(block: CreateBlobRequestBuilder.() -> Unit): CreateBlobRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return CreateBlobRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [CreateBlobRequestBuilder] instances. */

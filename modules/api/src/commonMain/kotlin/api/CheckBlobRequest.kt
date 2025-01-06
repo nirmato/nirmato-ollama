@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,7 +16,13 @@ public data class CheckBlobRequest(
 ) {
     public companion object {
         /** A request for checking a blob. */
-        public fun checkBlobRequest(block: CheckBlobRequestBuilder.() -> Unit): CheckBlobRequest = CheckBlobRequestBuilder().apply(block).build()
+        public fun checkBlobRequest(block: CheckBlobRequestBuilder.() -> Unit): CheckBlobRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return CheckBlobRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [CheckBlobRequestBuilder] instances. */

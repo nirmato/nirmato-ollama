@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -78,7 +80,13 @@ public data class CompletionRequest(
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun completionRequest(block: CompletionRequestBuilder.() -> Unit): CompletionRequest = CompletionRequestBuilder().apply(block).build()
+        public fun completionRequest(block: CompletionRequestBuilder.() -> Unit): CompletionRequest {
+            contract {
+                callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+            }
+
+            return CompletionRequestBuilder().apply(block).build()
+        }
     }
 
     /** Builder of [CompletionRequest] instances. */

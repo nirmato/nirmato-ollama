@@ -1,6 +1,8 @@
 # nirmato-ollama
 
-![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.1.20-blue.svg?logo=kotlin) ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
+![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.1.20-blue.svg?logo=kotlin)
+[![Build Status](https://github.com/nirmato/nirmato-ollama/actions/workflows/ci-main.yml/badge.svg?branch=main)](https://github.com/nirmato/nirmato-ollama/actions/workflows/ci-main.yml)
+![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
 Unofficial Ollama API client for Kotlin multiplatform.
 
@@ -23,31 +25,27 @@ Add the dependency to your project:
 ### Gradle
 
 ```kotlin
-dependencies {
-    implementation("org.nirmato.ollama:nirmato-ollama-client:0.1.0")
+implementation("org.nirmato.ollama:nirmato-ollama-client:0.1.0")
 
-    // example using ktor CIO engine
-    implementation("io.ktor:ktor-client-cio:3.0.3")
-}
+// example using ktor CIO engine
+implementation("io.ktor:ktor-client-cio:3.0.3")
 ```
 
 ### Maven
 
 ```xml
-<dependencies>
-    <dependency>
-        <groupId>org.nirmato.ollama</groupId>
-        <artifactId>nirmato-ollama-client</artifactId>
-        <version>0.1.0</version>
-    </dependency>
-    
-    <!-- example using ktor CIO engine -->
-    <dependency>
-        <groupId>io.ktor</groupId>
-        <artifactId>ktor-client-cio</artifactId>
-        <version>3.0.3</version>
-    </dependency>
-</dependencies>
+<dependency>
+    <groupId>org.nirmato.ollama</groupId>
+    <artifactId>nirmato-ollama-client</artifactId>
+    <version>0.1.0</version>
+</dependency>
+
+<!-- example using ktor CIO engine -->
+<dependency>
+    <groupId>io.ktor</groupId>
+    <artifactId>ktor-client-cio</artifactId>
+    <version>3.0.3</version>
+</dependency>
 ```
 
 Alternatively, you can [choose](publishing/bom/README.md) individual components of this library.
@@ -57,12 +55,12 @@ Alternatively, you can [choose](publishing/bom/README.md) individual components 
 ```kotlin
 val ollamaClient = OllamaClient(CIO)
 
-val request = completionRequest {
+val request = chatRequest {
     model = "tinyllama"
-    prompt = "Why is the sky blue?"
+    messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
 }
 
-val response = ollama.completion(request)
+val response = ollamaClient.chat(request)
 ```
 
 ## Acknowledgements

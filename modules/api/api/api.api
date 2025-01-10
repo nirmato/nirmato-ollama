@@ -744,35 +744,6 @@ public final class org/nirmato/ollama/api/Format$FormatType$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class org/nirmato/ollama/api/FunctionCall {
-	public static final field Companion Lorg/nirmato/ollama/api/FunctionCall$Companion;
-	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Ljava/util/Map;
-	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lorg/nirmato/ollama/api/FunctionCall;
-	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/FunctionCall;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lorg/nirmato/ollama/api/FunctionCall;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getArguments ()Ljava/util/Map;
-	public final fun getName ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class org/nirmato/ollama/api/FunctionCall$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lorg/nirmato/ollama/api/FunctionCall$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/FunctionCall;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/FunctionCall;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class org/nirmato/ollama/api/FunctionCall$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
 public final class org/nirmato/ollama/api/GenericIOException : org/nirmato/ollama/api/OllamaIOException {
 	public fun <init> ()V
 	public fun <init> (Ljava/lang/Throwable;)V
@@ -860,6 +831,33 @@ public abstract interface class org/nirmato/ollama/api/ModelsApi {
 	public abstract fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
+public final class org/nirmato/ollama/api/MonitoringResponse {
+	public static final field Companion Lorg/nirmato/ollama/api/MonitoringResponse$Companion;
+	public fun <init> (Lio/ktor/http/HttpStatusCode;)V
+	public final fun component1 ()Lio/ktor/http/HttpStatusCode;
+	public final fun copy (Lio/ktor/http/HttpStatusCode;)Lorg/nirmato/ollama/api/MonitoringResponse;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/MonitoringResponse;Lio/ktor/http/HttpStatusCode;ILjava/lang/Object;)Lorg/nirmato/ollama/api/MonitoringResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getStatus ()Lio/ktor/http/HttpStatusCode;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class org/nirmato/ollama/api/MonitoringResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lorg/nirmato/ollama/api/MonitoringResponse$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/MonitoringResponse;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/MonitoringResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class org/nirmato/ollama/api/MonitoringResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class org/nirmato/ollama/api/OctetByteArray {
 	public static final field Companion Lorg/nirmato/ollama/api/OctetByteArray$Companion;
 	public fun <init> ([B)V
@@ -879,6 +877,7 @@ public final class org/nirmato/ollama/api/OctetByteArray$Companion : kotlinx/ser
 }
 
 public abstract interface class org/nirmato/ollama/api/OllamaApi : org/nirmato/ollama/api/ChatApi, org/nirmato/ollama/api/CompletionsApi, org/nirmato/ollama/api/EmbeddingsApi, org/nirmato/ollama/api/ModelsApi {
+	public abstract fun getMonitoring (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getVersion (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
@@ -1485,8 +1484,15 @@ public final class org/nirmato/ollama/api/ShowModelResponse$Companion {
 public final class org/nirmato/ollama/api/Tool {
 	public static final field Companion Lorg/nirmato/ollama/api/Tool$Companion;
 	public fun <init> (Ljava/lang/String;Lorg/nirmato/ollama/api/Tool$ToolFunction;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lorg/nirmato/ollama/api/Tool$ToolFunction;
+	public final fun copy (Ljava/lang/String;Lorg/nirmato/ollama/api/Tool$ToolFunction;)Lorg/nirmato/ollama/api/Tool;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/Tool;Ljava/lang/String;Lorg/nirmato/ollama/api/Tool$ToolFunction;ILjava/lang/Object;)Lorg/nirmato/ollama/api/Tool;
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getFunction ()Lorg/nirmato/ollama/api/Tool$ToolFunction;
 	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class org/nirmato/ollama/api/Tool$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1509,9 +1515,17 @@ public final class org/nirmato/ollama/api/Tool$Parameters {
 	public fun <init> ()V
 	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/Map;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/util/List;Ljava/util/Map;)Lorg/nirmato/ollama/api/Tool$Parameters;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/Tool$Parameters;Ljava/lang/String;Ljava/util/List;Ljava/util/Map;ILjava/lang/Object;)Lorg/nirmato/ollama/api/Tool$Parameters;
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getProperties ()Ljava/util/Map;
 	public final fun getRequired ()Ljava/util/List;
 	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class org/nirmato/ollama/api/Tool$Parameters$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1532,11 +1546,21 @@ public final class org/nirmato/ollama/api/Tool$Parameters$Companion {
 public final class org/nirmato/ollama/api/Tool$Property {
 	public static final field Companion Lorg/nirmato/ollama/api/Tool$Property$Companion;
 	public fun <init> ()V
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;)Lorg/nirmato/ollama/api/Tool$Property;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/Tool$Property;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/Boolean;ILjava/lang/Object;)Lorg/nirmato/ollama/api/Tool$Property;
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getDescription ()Ljava/lang/String;
 	public final fun getEnumValues ()Ljava/util/List;
+	public final fun getRequired ()Ljava/lang/Boolean;
 	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class org/nirmato/ollama/api/Tool$Property$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1558,9 +1582,17 @@ public final class org/nirmato/ollama/api/Tool$ToolFunction {
 	public static final field Companion Lorg/nirmato/ollama/api/Tool$ToolFunction$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/Tool$Parameters;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/Tool$Parameters;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lorg/nirmato/ollama/api/Tool$Parameters;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/Tool$Parameters;)Lorg/nirmato/ollama/api/Tool$ToolFunction;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/Tool$ToolFunction;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/Tool$Parameters;ILjava/lang/Object;)Lorg/nirmato/ollama/api/Tool$ToolFunction;
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getDescription ()Ljava/lang/String;
 	public final fun getName ()Ljava/lang/String;
 	public final fun getParameters ()Lorg/nirmato/ollama/api/Tool$Parameters;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class org/nirmato/ollama/api/Tool$ToolFunction$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
@@ -1580,12 +1612,12 @@ public final class org/nirmato/ollama/api/Tool$ToolFunction$Companion {
 
 public final class org/nirmato/ollama/api/ToolCall {
 	public static final field Companion Lorg/nirmato/ollama/api/ToolCall$Companion;
-	public fun <init> (Lorg/nirmato/ollama/api/FunctionCall;)V
-	public final fun component1 ()Lorg/nirmato/ollama/api/FunctionCall;
-	public final fun copy (Lorg/nirmato/ollama/api/FunctionCall;)Lorg/nirmato/ollama/api/ToolCall;
-	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/ToolCall;Lorg/nirmato/ollama/api/FunctionCall;ILjava/lang/Object;)Lorg/nirmato/ollama/api/ToolCall;
+	public fun <init> (Lorg/nirmato/ollama/api/ToolCall$FunctionCall;)V
+	public final fun component1 ()Lorg/nirmato/ollama/api/ToolCall$FunctionCall;
+	public final fun copy (Lorg/nirmato/ollama/api/ToolCall$FunctionCall;)Lorg/nirmato/ollama/api/ToolCall;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/ToolCall;Lorg/nirmato/ollama/api/ToolCall$FunctionCall;ILjava/lang/Object;)Lorg/nirmato/ollama/api/ToolCall;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getFunction ()Lorg/nirmato/ollama/api/FunctionCall;
+	public final fun getFunction ()Lorg/nirmato/ollama/api/ToolCall$FunctionCall;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -1602,6 +1634,35 @@ public final class org/nirmato/ollama/api/ToolCall$$serializer : kotlinx/seriali
 }
 
 public final class org/nirmato/ollama/api/ToolCall$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class org/nirmato/ollama/api/ToolCall$FunctionCall {
+	public static final field Companion Lorg/nirmato/ollama/api/ToolCall$FunctionCall$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lorg/nirmato/ollama/api/ToolCall$FunctionCall;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/ToolCall$FunctionCall;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lorg/nirmato/ollama/api/ToolCall$FunctionCall;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArguments ()Ljava/util/Map;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class org/nirmato/ollama/api/ToolCall$FunctionCall$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lorg/nirmato/ollama/api/ToolCall$FunctionCall$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ToolCall$FunctionCall;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ToolCall$FunctionCall;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class org/nirmato/ollama/api/ToolCall$FunctionCall$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 

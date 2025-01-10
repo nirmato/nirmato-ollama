@@ -15,10 +15,6 @@ public final class org/nirmato/ollama/client/EmbeddedClient : org/nirmato/ollama
 	public fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public final class org/nirmato/ollama/client/JsonLenientKt {
-	public static final fun getJsonLenient ()Lkotlinx/serialization/json/Json;
-}
-
 public final class org/nirmato/ollama/client/ModelsClient : org/nirmato/ollama/api/ModelsApi {
 	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClientHandler;)V
 	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -45,6 +41,7 @@ public final class org/nirmato/ollama/client/OllamaClient : org/nirmato/ollama/a
 	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getMonitoring (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getVersion (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

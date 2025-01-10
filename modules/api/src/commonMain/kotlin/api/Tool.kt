@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class Tool(
+public data class Tool(
     @SerialName(value = "type")
     public val type: String,
 
@@ -13,7 +13,7 @@ public class Tool(
 ) {
 
     @Serializable
-    public class ToolFunction(
+    public data class ToolFunction(
         @SerialName(value = "name")
         public val name: String,
 
@@ -25,7 +25,7 @@ public class Tool(
     )
 
     @Serializable
-    public class Parameters(
+    public data class Parameters(
         @SerialName(value = "type")
         public val type: String? = null,
 
@@ -37,7 +37,7 @@ public class Tool(
     )
 
     @Serializable
-    public class Property(
+    public data class Property(
         @SerialName(value = "type")
         public val type: String? = null,
 
@@ -46,5 +46,8 @@ public class Tool(
 
         @SerialName(value = "enum")
         public val enumValues: List<String>? = null,
+
+        @SerialName(value = "required")
+        public val required: Boolean? = null,
     )
 }

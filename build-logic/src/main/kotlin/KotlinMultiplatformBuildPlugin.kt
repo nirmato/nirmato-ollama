@@ -502,6 +502,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                                 withJvmCompilerArguments {
                                     requiresJsr305()
                                     jvmDefault(JvmDefaultOption.ALL_COMPATIBILITY)
+                                    jdkRelease(jvmVersion)
                                 }
                                 this.javaParameters = true
                                 this.jvmTarget = JvmTarget.fromTarget(jvmVersion.majorVersion)
@@ -510,7 +511,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     }
 
                     attributes {
-                        attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, JavaVersion.toVersion(jvmVersion).majorVersion.toInt())
+                        attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, jvmVersion.majorVersion.toInt())
                     }
                 }
             }

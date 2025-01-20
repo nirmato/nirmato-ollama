@@ -40,10 +40,6 @@ public data class ChatRequest(
     @SerialName(value = "options")
     val options: Options? = null,
 
-    /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects.  */
-    @SerialName(value = "stream")
-    val stream: Boolean? = false,
-
     /**
      * How long (in minutes) to keep the model loaded in memory.
      *
@@ -74,7 +70,6 @@ public data class ChatRequest(
         public var tools: List<Tool>? = null
         public var format: Format? = null
         public var options: Options? = null
-        public var stream: Boolean? = false
         public var keepAlive: Int? = null
 
         /** Create [ChatRequest] instance. */
@@ -84,7 +79,6 @@ public data class ChatRequest(
             tools = tools,
             format = format,
             options = options,
-            stream = stream,
             keepAlive = keepAlive,
         )
     }

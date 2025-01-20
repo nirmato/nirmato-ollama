@@ -14,7 +14,6 @@ import org.nirmato.ollama.api.Format.FormatSchema
 import org.nirmato.ollama.api.Format.FormatType
 import org.nirmato.ollama.api.Message
 import org.nirmato.ollama.api.Options
-import org.nirmato.ollama.api.Role
 import org.nirmato.ollama.api.Role.USER
 import org.nirmato.ollama.api.Tool
 import org.nirmato.ollama.api.Tool.ToolFunction
@@ -54,7 +53,7 @@ internal class ChatClientTest {
 
         val chatRequest = chatRequest {
             model = "mock-model"
-            messages = listOf(Message(role = Role.USER, content = "Why is the sky blue?"))
+            messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
         }
         val response = ollamaClient.chat(chatRequest)
 
@@ -80,7 +79,7 @@ internal class ChatClientTest {
 
         val chatRequest = chatRequest {
             model = "mock-model"
-            messages = listOf(Message(role = Role.USER, content = "Why is the sky blue?"))
+            messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
         }
         val response = ollamaClient.chatFlow(chatRequest)
 

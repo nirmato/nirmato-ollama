@@ -18,7 +18,7 @@ public data class PushModelRequest(
     @Required
     val model: String,
 
-    /** Allow insecure connections to the library.  Only use this if you are pushing to your library during development.  */
+    /** Allow insecure connections to the library. Only use this if you are pushing to your library during development.  */
     @SerialName(value = "insecure")
     val insecure: Boolean? = false,
 
@@ -29,10 +29,6 @@ public data class PushModelRequest(
     /** Ollama password. */
     @SerialName(value = "password")
     val password: String? = null,
-
-    /** If `false` the response will be returned as a single response object, otherwise the response will be streamed as a series of objects.  */
-    @SerialName(value = "stream")
-    val stream: Boolean? = false,
 ) {
     public companion object {
         /** A request for pushing a model. */
@@ -52,7 +48,6 @@ public data class PushModelRequest(
         public var insecure: Boolean? = false
         public var username: String? = null
         public var password: String? = null
-        public var stream: Boolean? = false
 
         /** Create [PushModelRequest] instance. */
         public fun build(): PushModelRequest = PushModelRequest(
@@ -60,7 +55,6 @@ public data class PushModelRequest(
             insecure = insecure,
             username = username,
             password = password,
-            stream = stream,
         )
     }
 }

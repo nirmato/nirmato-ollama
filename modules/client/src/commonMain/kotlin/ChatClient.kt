@@ -1,11 +1,6 @@
 package org.nirmato.ollama.client
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.encodeToJsonElement
-import kotlinx.serialization.json.jsonObject
 import io.ktor.client.request.accept
 import io.ktor.client.request.headers
 import io.ktor.client.request.setBody
@@ -36,7 +31,7 @@ public class ChatClient(private val requestHandler: HttpClientHandler) : ChatApi
         return requestHandler.handleFlow<ChatResponse> {
             method = HttpMethod.Post
             url(path = "chat")
-            setBody(chatRequest.toStreamRequest())
+            setBody(chatRequest.toStreamRequest(true))
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {
@@ -44,20 +39,5 @@ public class ChatClient(private val requestHandler: HttpClientHandler) : ChatApi
                 append(HttpHeaders.Connection, "keep-alive")
             }
         }
-    }
-
-    /**
-     * Adds `stream` parameter to the request.
-     */
-    private fun ChatRequest.toStreamRequest(): JsonElement {
-        val json = JsonLenient.encodeToJsonElement(ChatRequest.serializer(), this)
-        return streamRequestOf(json)
-    }
-
-    private inline fun <reified T> streamRequestOf(serializable: T): JsonElement {
-        val enableStream = "stream" to JsonPrimitive(true)
-        val json = JsonLenient.encodeToJsonElement(serializable)
-        val map = json.jsonObject.toMutableMap().also { it += enableStream }
-        return JsonObject(map)
     }
 }

@@ -1,11 +1,6 @@
 package org.nirmato.ollama.client
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.encodeToJsonElement
-import kotlinx.serialization.json.jsonObject
 import io.ktor.client.request.accept
 import io.ktor.client.request.headers
 import io.ktor.client.request.setBody
@@ -36,7 +31,7 @@ public class CompletionsClient(private val requestHandler: HttpClientHandler) : 
         return requestHandler.handleFlow<CompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(completionRequest.toStreamRequest())
+            setBody(completionRequest.toStreamRequest(true))
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {
@@ -44,20 +39,5 @@ public class CompletionsClient(private val requestHandler: HttpClientHandler) : 
                 append(HttpHeaders.Connection, "keep-alive")
             }
         }
-    }
-
-    /**
-     * Adds `stream` parameter to the request.
-     */
-    private fun CompletionRequest.toStreamRequest(): JsonElement {
-        val json = JsonLenient.encodeToJsonElement(CompletionRequest.serializer(), this)
-        return streamRequestOf(json)
-    }
-
-    private inline fun <reified T> streamRequestOf(serializable: T): JsonElement {
-        val enableStream = "stream" to JsonPrimitive(true)
-        val json = JsonLenient.encodeToJsonElement(serializable)
-        val map = json.jsonObject.toMutableMap().also { it += enableStream }
-        return JsonObject(map)
     }
 }

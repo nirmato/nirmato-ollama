@@ -1,7 +1,5 @@
 package org.nirmato.ollama.client.http
 
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector

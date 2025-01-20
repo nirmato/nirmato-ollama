@@ -4,6 +4,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.single
 import kotlinx.serialization.json.ClassDiscriminatorMode
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.encodeToJsonElement
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.serializer
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngineConfig
@@ -14,7 +20,6 @@ import io.ktor.client.request.accept
 import io.ktor.client.request.url
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
-import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
 import org.nirmato.ollama.api.ChatApi
 import org.nirmato.ollama.api.CompletionsApi
@@ -36,6 +41,21 @@ internal val JsonLenient: Json = Json {
     encodeDefaults = true
     explicitNulls = false
     classDiscriminatorMode = ClassDiscriminatorMode.NONE
+}
+
+/**
+ * Adds `stream` parameter to the request.
+ */
+internal inline fun <reified T> T.toStreamRequest(value: Boolean): JsonElement {
+    val json = JsonLenient.encodeToJsonElement(serializer<T>(), this)
+    return streamRequestOf(json, value)
+}
+
+internal inline fun <reified T> streamRequestOf(serializable: T, value: Boolean): JsonElement {
+    val enableStream = "stream" to JsonPrimitive(value)
+    val json = JsonLenient.encodeToJsonElement(serializable)
+    val map = json.jsonObject.toMutableMap().also { it += enableStream }.toMap()
+    return JsonObject(map)
 }
 
 /**

@@ -51,10 +51,6 @@ public data class CompletionRequest(
     @SerialName(value = "template")
     val template: String? = null,
 
-    /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects. */
-    @SerialName(value = "stream")
-    val stream: Boolean? = false,
-
     /**
      * If `true` no formatting will be applied to the prompt and no context will be returned.
      * You may choose to use the `raw` parameter if you are specifying a full templated prompt in your request to the API, and are managing history yourself.
@@ -101,7 +97,6 @@ public data class CompletionRequest(
         public var system: String? = null
         public var template: String? = null
         public var context: List<Long>? = null
-        public var stream: Boolean? = false
         public var raw: Boolean? = null
         public var keepAlive: Int? = null
 
@@ -116,7 +111,6 @@ public data class CompletionRequest(
             system = system,
             template = template,
             context = context,
-            stream = stream,
             raw = raw,
             keepAlive = keepAlive,
         )

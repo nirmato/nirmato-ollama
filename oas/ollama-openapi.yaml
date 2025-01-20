@@ -3,7 +3,7 @@ openapi: 3.1.0
 info:
     title: Ollama API
     description: API Spec for Ollama API. Please see https://github.com/ollama/ollama/blob/main/docs/api.md for more details.
-    version: 0.5.4
+    version: 0.5.7
 
 servers:
     -   url: http://localhost:11434/api
@@ -14,7 +14,7 @@ tags:
         description: Given a prompt, the model will generate a completion.
     -   name: Chat
         description: Given a list of messages comprising a conversation, the model will return a response.
-    -   name: Embeddings
+    -   name: Embedded
         description: Get a vector representation of a given input.
     -   name: Models
         description: List and describe the various models available.
@@ -22,7 +22,7 @@ tags:
         description: Get Ollama API version.
 
 paths:
-    /generate:
+    /version:
         post:
             operationId: getVersion
             tags:
@@ -78,22 +78,22 @@ paths:
                                 $ref: '#/components/schemas/ChatCompletionResponse'
     /embed:
         post:
-            operationId: generateEmbedding
+            operationId: generateEmbedded
             tags:
-                - Embeddings
-            summary: Generate embeddings from a model.
+                - Embedded
+            summary: Generate embedded from a model.
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/EmbeddingRequest'
+                            $ref: '#/components/schemas/EmbeddedRequest'
             responses:
                 '200':
                     description: Successful operation.
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/EmbeddingResponse'
+                                $ref: '#/components/schemas/EmbeddedResponse'
     /create:
         post:
             operationId: createModel
@@ -776,8 +776,8 @@ components:
             required:
                 - role
                 - content
-        EmbeddingRequest:
-            description: Generate embeddings from a model.
+        EmbeddedRequest:
+            description: Generate embedded from a model.
             type: object
             properties:
                 model:
@@ -803,7 +803,7 @@ components:
             required:
                 - model
                 - input
-        EmbeddingResponse:
+        EmbeddedResponse:
             type: object
             description: Returns the embedding information.
             properties:

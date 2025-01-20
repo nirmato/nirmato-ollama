@@ -9,6 +9,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class CreateModelResponse(
     @SerialName(value = "status")
-    val status: CreateModelStatus? = null,
+    val status: String? = null,
 )
 

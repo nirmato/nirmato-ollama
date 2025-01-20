@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 public data class PushModelResponse(
 
     @SerialName(value = "status")
-    val status: PushModelStatus? = null,
+    val status: String? = null,
 
     /** the model's digest */
     @SerialName(value = "digest")

@@ -11,7 +11,7 @@ import org.nirmato.ollama.dsl.OllamaDsl
  * Generate embeddings from a model.
  */
 @Serializable
-public data class EmbeddingRequest(
+public data class EmbeddedRequest(
 
     /**
      * The model name.
@@ -47,26 +47,26 @@ public data class EmbeddingRequest(
 ) {
     public companion object {
         /** A request to generate an embeddings from a model. */
-        public fun embeddingRequest(block: EmbeddingRequestBuilder.() -> Unit): EmbeddingRequest {
+        public fun embeddedRequest(block: EmbeddedRequestBuilder.() -> Unit): EmbeddedRequest {
             contract {
                 callsInPlace(block, InvocationKind.EXACTLY_ONCE)
             }
 
-            return EmbeddingRequestBuilder().apply(block).build()
+            return EmbeddedRequestBuilder().apply(block).build()
         }
     }
 
-    /** Builder of [EmbeddingRequest] instances. */
+    /** Builder of [EmbeddedRequest] instances. */
     @OllamaDsl
-    public class EmbeddingRequestBuilder {
+    public class EmbeddedRequestBuilder {
         public var model: String? = null
         public var input: EmbeddedInput? = null
         public val truncate: Boolean? = null
         public var options: Options? = null
         public var keepAlive: Int? = null
 
-        /** Create [EmbeddingRequest] instance. */
-        public fun build(): EmbeddingRequest = EmbeddingRequest(
+        /** Create [EmbeddedRequest] instance. */
+        public fun build(): EmbeddedRequest = EmbeddedRequest(
             model = requireNotNull(model) { "model is required" },
             input = requireNotNull(input) { "input is required" },
             truncate = truncate,

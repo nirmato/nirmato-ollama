@@ -4,5 +4,5 @@ public interface EmbeddingsApi {
     /**
      * Generate embeddings from a model.
      */
-    public suspend fun generateEmbedding(generateEmbeddingRequest: EmbeddingRequest): EmbeddingResponse
+    public suspend fun generateEmbedded(generateEmbeddedRequest: EmbeddedRequest): EmbeddedResponse
 }

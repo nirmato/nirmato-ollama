@@ -1,5 +1,6 @@
 package org.nirmato.ollama.client
 
+import kotlinx.coroutines.flow.Flow
 import io.ktor.client.request.accept
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
@@ -24,6 +25,7 @@ import org.nirmato.ollama.api.ShowModelRequest
 import org.nirmato.ollama.api.ShowModelResponse
 import org.nirmato.ollama.client.http.HttpClientHandler
 import org.nirmato.ollama.client.http.handle
+import org.nirmato.ollama.client.http.handleFlow
 
 public class ModelsClient(private val requestHandler: HttpClientHandler) : ModelsApi {
     override suspend fun checkBlob(checkBlobRequest: CheckBlobRequest) {
@@ -57,6 +59,16 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
             method = HttpMethod.Post
             url(path = "create")
             setBody(createModelRequest)
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
+        }
+    }
+
+    override fun createModelFlow(createModelRequest: CreateModelRequest): Flow<CreateModelResponse> {
+        return requestHandler.handleFlow {
+            method = HttpMethod.Post
+            url(path = "create")
+            setBody(createModelRequest.toStreamRequest(true))
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -103,7 +115,17 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
         return requestHandler.handle {
             method = HttpMethod.Post
             url(path = "push")
-            setBody(pushModelRequest)
+            setBody(pushModelRequest.toStreamRequest(false))
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
+        }
+    }
+
+    override fun pushModelFlow(pushModelRequest: PushModelRequest): Flow<PushModelResponse> {
+        return requestHandler.handleFlow {
+            method = HttpMethod.Post
+            url(path = "push")
+            setBody(pushModelRequest.toStreamRequest(true))
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }

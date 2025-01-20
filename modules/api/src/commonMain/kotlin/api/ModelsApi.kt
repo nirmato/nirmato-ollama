@@ -1,5 +1,7 @@
 package org.nirmato.ollama.api
 
+import kotlinx.coroutines.flow.Flow
+
 public interface ModelsApi {
     /**
      * Ensures that the file blob used for a FROM or ADAPTER field exists on the server.
@@ -27,6 +29,9 @@ public interface ModelsApi {
      */
     public suspend fun createModel(createModelRequest: CreateModelRequest): CreateModelResponse
 
+    /** @see #createModel(CreateModelRequest) */
+    public fun createModelFlow(createModelRequest: CreateModelRequest): Flow<CreateModelResponse>
+
     /**
      * Delete a model and its data.
      */
@@ -49,12 +54,14 @@ public interface ModelsApi {
     public suspend fun pullModel(pullModelRequest: PullModelRequest): PullModelResponse
 
     /**
-     * Upload a model to a model library.
-     * Requires registering for ollama.ai and adding a public key first.
+     * Upload a model to a model library. Requires registering for ollama.ai and adding a public key first.
      *
      * @param pushModelRequest
      */
     public suspend fun pushModel(pushModelRequest: PushModelRequest): PushModelResponse
+
+    /** @see #pushModel(PushModelRequest) */
+    public fun pushModelFlow(pushModelRequest: PushModelRequest): Flow<PushModelResponse>
 
     /**
      * Show details about a model including model file, template, parameters, license, and system prompt.

@@ -12,7 +12,7 @@ public final class org/nirmato/ollama/client/CompletionsClient : org/nirmato/oll
 
 public final class org/nirmato/ollama/client/EmbeddedClient : org/nirmato/ollama/api/EmbeddingsApi {
 	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClientHandler;)V
-	public fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun generateEmbedded (Lorg/nirmato/ollama/api/EmbeddedRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class org/nirmato/ollama/client/ModelsClient : org/nirmato/ollama/api/ModelsApi {
@@ -21,11 +21,13 @@ public final class org/nirmato/ollama/client/ModelsClient : org/nirmato/ollama/a
 	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun createModelFlow (Lorg/nirmato/ollama/api/CreateModelRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun pushModelFlow (Lorg/nirmato/ollama/api/PushModelRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
@@ -39,14 +41,16 @@ public final class org/nirmato/ollama/client/OllamaClient : org/nirmato/ollama/a
 	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun createModelFlow (Lorg/nirmato/ollama/api/CreateModelRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun generateEmbedding (Lorg/nirmato/ollama/api/EmbeddingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun generateEmbedded (Lorg/nirmato/ollama/api/EmbeddedRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getMonitoring (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getVersion (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun pushModelFlow (Lorg/nirmato/ollama/api/PushModelRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 

@@ -1,5 +1,6 @@
 package org.nirmato.ollama.client
 
+import kotlin.test.Test
 import kotlinx.coroutines.test.runTest
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.plugins.logging.DEFAULT
@@ -9,7 +10,6 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
-import org.junit.Test
 
 internal class OllamaClientTest {
 

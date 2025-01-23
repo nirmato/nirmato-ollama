@@ -41,6 +41,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptionsBuilder.JvmDefaul
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.dsl.withCommonCompilerArguments
+import org.jetbrains.kotlin.gradle.dsl.withWasmJsCompilerArguments
 import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
@@ -278,7 +279,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 languageSettings.apply {
                     apiVersion = project.gradleStringProperty("kotlin.compilerOptions.apiVersion").get()
                     languageVersion = project.gradleStringProperty("kotlin.compilerOptions.languageVersion").get()
-                    progressiveMode = true
                 }
             }
         }
@@ -293,6 +293,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                             apiVersion = providers.gradleProperty("kotlin.compilerOptions.apiVersion").map(KotlinVersion::fromVersion)
                             languageVersion = providers.gradleProperty("kotlin.compilerOptions.languageVersion").map(KotlinVersion::fromVersion)
                             progressiveMode = true
+                            extraWarnings = true
 
                             withCommonCompilerArguments {
                                 requiresOptIn()

@@ -1,20 +1,8 @@
 package org.nirmato.ollama.client
 
-import kotlinx.serialization.json.ClassDiscriminatorMode
-import kotlinx.serialization.json.Json
+import org.nirmato.ollama.api.ChatApi
 import org.nirmato.ollama.api.OllamaApi
 import org.nirmato.ollama.client.http.HttpClient
-
-/**
- * Internal Json Serializer.
- */
-public val JsonLenient: Json = Json {
-    isLenient = false
-    ignoreUnknownKeys = true
-    encodeDefaults = true
-    explicitNulls = false
-    classDiscriminatorMode = ClassDiscriminatorMode.NONE
-}
 
 /**
  * Implementation of [OllamaApi].
@@ -22,10 +10,17 @@ public val JsonLenient: Json = Json {
  * @param httpClient http transport layer
  */
 public class OllamaClient(private val httpClient: HttpClient) : OllamaApi {
-    public val completions: CompletionsClient by lazy { CompletionsClient(httpClient) }
-    public val models: ModelsClient by lazy { ModelsClient(httpClient) }
-    public val chat: ChatClient by lazy { ChatClient(httpClient) }
-    public val embedded: EmbeddedClient by lazy { EmbeddedClient(httpClient) }
-    public val version: VersionClient by lazy { VersionClient(httpClient) }
-    public val monitoring: MonitoringClient by lazy { MonitoringClient(httpClient) }
+    private val completions: CompletionsClient by lazy { CompletionsClient(httpClient) }
+    private val models: ModelsClient by lazy { ModelsClient(httpClient) }
+    private val chat: ChatClient by lazy { ChatClient(httpClient) }
+    private val embedded: EmbeddedClient by lazy { EmbeddedClient(httpClient) }
+    private val version: VersionClient by lazy { VersionClient(httpClient) }
+    private val monitoring: MonitoringClient by lazy { MonitoringClient(httpClient) }
+
+    public override fun chat(): ChatApi = chat
+    public override fun completions(): CompletionsClient = completions
+    public override fun models(): ModelsClient = models
+    public override fun embedded(): EmbeddedClient = embedded
+    public override fun version(): VersionClient = version
+    public override fun monitoring(): MonitoringClient = monitoring
 }

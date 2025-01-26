@@ -28,15 +28,15 @@ class CopyTest {
             destination = newModel
         }
 
-        ollamaClient.models.copyModel(copyModelRequest)
+        ollamaClient.models().copyModel(copyModelRequest)
 
-        val model = ollamaClient.models.listModels().models?.first { it.name == newModel }
+        val model = ollamaClient.models().listModels().models?.first { it.name == newModel }
 
         val modelInfoRequest = showModelRequest {
             name = model?.name
         }
 
-        val modelInfo = ollamaClient.models.showModel(modelInfoRequest)
+        val modelInfo = ollamaClient.models().showModel(modelInfoRequest)
 
         assertEquals("llama", modelInfo.details?.family)
     }

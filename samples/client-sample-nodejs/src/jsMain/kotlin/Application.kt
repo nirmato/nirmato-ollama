@@ -20,7 +20,7 @@ suspend fun main() {
         messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
     }
 
-    val response = ollamaClient.chat.chat(request)
+    val response = ollamaClient.chat().chat(request)
 
     println(response.toString())
 }

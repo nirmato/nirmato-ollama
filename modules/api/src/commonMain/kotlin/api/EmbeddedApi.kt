@@ -1,6 +1,6 @@
 package org.nirmato.ollama.api
 
-public interface EmbeddingsApi {
+public interface EmbeddedApi {
     /**
      * Generate embeddings from a model.
      */

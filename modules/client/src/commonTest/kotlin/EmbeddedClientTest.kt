@@ -44,7 +44,7 @@ internal class EmbeddedClientTest {
             input = EmbeddedList(listOf(EmbeddedText("Why is the sky blue?"), EmbeddedText("Why is the grass green?")))
         }
 
-        val response = ollamaClient.embedded.generateEmbedded(generateEmbeddedRequest)
+        val response = ollamaClient.embedded().generateEmbedded(generateEmbeddedRequest)
 
         println(response.toString())
     }

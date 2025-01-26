@@ -53,14 +53,14 @@ Alternatively, you can [choose](publishing/bom/README.md) individual components 
 ### Usage
 
 ```kotlin
-val ollamaClient = OllamaClient(CIO)
+val ollamaClient = OllamaClient(KtorHttpClientFactory(CIO).createHttpClient())
 
 val request = chatRequest {
     model = "tinyllama"
     messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
 }
 
-val response = ollamaClient.chat(request)
+val response = ollamaClient.chat().chat(request)
 ```
 
 ## Acknowledgements

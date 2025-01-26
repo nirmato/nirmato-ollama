@@ -45,7 +45,7 @@ internal class CompletionsClientTest {
             model = "tinyllama"
             prompt = "Why is the sky blue?"
         }
-        val response = ollamaClient.completions.completion(completionRequest)
+        val response = ollamaClient.completions().completion(completionRequest)
 
         println(response.toString())
     }
@@ -73,7 +73,7 @@ internal class CompletionsClientTest {
             prompt = "Why is the sky blue?"
         }
 
-        val response = ollamaClient.completions.completionFlow(completionRequest)
+        val response = ollamaClient.completions().completionFlow(completionRequest)
 
         response.collect { println(it) }
     }

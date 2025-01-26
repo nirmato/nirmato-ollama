@@ -38,7 +38,7 @@ internal class VersionClientTest {
 
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
-        val response = ollamaClient.version.getVersion()
+        val response = ollamaClient.version().getVersion()
 
         println(response.toString())
     }

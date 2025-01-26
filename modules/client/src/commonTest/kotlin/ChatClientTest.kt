@@ -57,7 +57,7 @@ internal class ChatClientTest {
             model = "mock-model"
             messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
         }
-        val response = ollamaClient.chat.chat(chatRequest)
+        val response = ollamaClient.chat().chat(chatRequest)
 
         println(response.toString())
     }
@@ -85,7 +85,7 @@ internal class ChatClientTest {
             model = "mock-model"
             messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
         }
-        val response = ollamaClient.chat.chatFlow(chatRequest)
+        val response = ollamaClient.chat().chatFlow(chatRequest)
 
         response.collect { println(it) }
     }
@@ -136,7 +136,7 @@ internal class ChatClientTest {
             )
         }
 
-        val response = ollamaClient.chat.chat(request)
+        val response = ollamaClient.chat().chat(request)
 
         println(response.toString())
     }
@@ -183,7 +183,7 @@ internal class ChatClientTest {
             )
         }
 
-        val response = ollamaClient.chat.chat(request)
+        val response = ollamaClient.chat().chat(request)
 
         println(response.toString())
     }
@@ -243,7 +243,7 @@ internal class ChatClientTest {
             )
         }
 
-        val response = ollamaClient.chat.chat(request)
+        val response = ollamaClient.chat().chat(request)
 
         println(response.toString())
     }
@@ -321,7 +321,7 @@ internal class ChatClientTest {
             )
         }
 
-        val response = ollamaClient.chat.chat(request)
+        val response = ollamaClient.chat().chat(request)
 
         println(response.toString())
     }

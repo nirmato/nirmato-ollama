@@ -38,7 +38,7 @@ internal class MonitoringClientTest {
 
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
-        val response = ollamaClient.monitoring.getMonitoring()
+        val response = ollamaClient.monitoring().getMonitoring()
 
         println(response.toString())
     }

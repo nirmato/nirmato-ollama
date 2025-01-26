@@ -17,9 +17,13 @@ public final class org/nirmato/ollama/client/CompletionsClient : org/nirmato/oll
 	public fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public final class org/nirmato/ollama/client/EmbeddedClient : org/nirmato/ollama/api/EmbeddingsApi {
+public final class org/nirmato/ollama/client/EmbeddedClient : org/nirmato/ollama/api/EmbeddedApi {
 	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClient;)V
 	public fun generateEmbedded (Lorg/nirmato/ollama/api/EmbeddedRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class org/nirmato/ollama/client/JsonLenientKt {
+	public static final fun getJsonLenient ()Lkotlinx/serialization/json/Json;
 }
 
 public final class org/nirmato/ollama/client/ModelsClient : org/nirmato/ollama/api/ModelsApi {
@@ -45,16 +49,17 @@ public final class org/nirmato/ollama/client/MonitoringClient : org/nirmato/olla
 
 public final class org/nirmato/ollama/client/OllamaClient : org/nirmato/ollama/api/OllamaApi {
 	public fun <init> (Lorg/nirmato/ollama/client/http/HttpClient;)V
-	public final fun getChat ()Lorg/nirmato/ollama/client/ChatClient;
-	public final fun getCompletions ()Lorg/nirmato/ollama/client/CompletionsClient;
-	public final fun getEmbedded ()Lorg/nirmato/ollama/client/EmbeddedClient;
-	public final fun getModels ()Lorg/nirmato/ollama/client/ModelsClient;
-	public final fun getMonitoring ()Lorg/nirmato/ollama/client/MonitoringClient;
-	public final fun getVersion ()Lorg/nirmato/ollama/client/VersionClient;
-}
-
-public final class org/nirmato/ollama/client/OllamaClientKt {
-	public static final fun getJsonLenient ()Lkotlinx/serialization/json/Json;
+	public fun chat ()Lorg/nirmato/ollama/api/ChatApi;
+	public synthetic fun completions ()Lorg/nirmato/ollama/api/CompletionsApi;
+	public fun completions ()Lorg/nirmato/ollama/client/CompletionsClient;
+	public synthetic fun embedded ()Lorg/nirmato/ollama/api/EmbeddedApi;
+	public fun embedded ()Lorg/nirmato/ollama/client/EmbeddedClient;
+	public synthetic fun models ()Lorg/nirmato/ollama/api/ModelsApi;
+	public fun models ()Lorg/nirmato/ollama/client/ModelsClient;
+	public synthetic fun monitoring ()Lorg/nirmato/ollama/api/MonitoringApi;
+	public fun monitoring ()Lorg/nirmato/ollama/client/MonitoringClient;
+	public synthetic fun version ()Lorg/nirmato/ollama/api/VersionApi;
+	public fun version ()Lorg/nirmato/ollama/client/VersionClient;
 }
 
 public final class org/nirmato/ollama/client/VersionClient : org/nirmato/ollama/api/VersionApi {

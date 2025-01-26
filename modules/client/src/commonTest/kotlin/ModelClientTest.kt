@@ -44,7 +44,7 @@ internal class ModelClientTest {
             from = "tinyllama"
             system = "You are mario from Super Mario Bros."
         }
-        val response = ollamaClient.models.createModel(createModelRequest)
+        val response = ollamaClient.models().createModel(createModelRequest)
 
         println(response.toString())
     }
@@ -78,7 +78,7 @@ internal class ModelClientTest {
             from = "tinyllama"
             system = "You are mario from Super Mario Bros."
         }
-        val response = ollamaClient.models.createModelFlow(createModelRequest)
+        val response = ollamaClient.models().createModelFlow(createModelRequest)
 
         response.collect { println(it) }
     }
@@ -100,7 +100,7 @@ internal class ModelClientTest {
             body = OctetByteArray("newblob".toByteArray())
         }
 
-        ollamaClient.models.createBlob(createBlobRequest)
+        ollamaClient.models().createBlob(createBlobRequest)
     }
 
     @Test
@@ -138,7 +138,7 @@ internal class ModelClientTest {
 
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
-        val response = ollamaClient.models.listModels()
+        val response = ollamaClient.models().listModels()
 
         println(response.toString())
     }
@@ -182,7 +182,7 @@ internal class ModelClientTest {
 
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
-        val response = ollamaClient.models.listModels()
+        val response = ollamaClient.models().listModels()
 
         println(response.toString())
     }
@@ -224,7 +224,7 @@ internal class ModelClientTest {
             name = "mario"
         }
 
-        val response = ollamaClient.models.showModel(modelInfoRequest)
+        val response = ollamaClient.models().showModel(modelInfoRequest)
 
         println(response.toString())
     }
@@ -247,7 +247,7 @@ internal class ModelClientTest {
             destination = "mario2"
         }
 
-        ollamaClient.models.copyModel(copyModelRequest)
+        ollamaClient.models().copyModel(copyModelRequest)
     }
 
     @Test
@@ -266,7 +266,7 @@ internal class ModelClientTest {
             model = "mario2"
         }
 
-        ollamaClient.models.deleteModel(deleteModelRequest)
+        ollamaClient.models().deleteModel(deleteModelRequest)
     }
 
     @Test
@@ -293,7 +293,7 @@ internal class ModelClientTest {
             name = "tinyllama"
         }
 
-        val response = ollamaClient.models.pullModel(pullModelRequest)
+        val response = ollamaClient.models().pullModel(pullModelRequest)
 
         println(response.toString())
     }
@@ -318,7 +318,7 @@ internal class ModelClientTest {
             model = "mario"
         }
 
-        val response = ollamaClient.models.pushModel(pushModelRequest)
+        val response = ollamaClient.models().pushModel(pushModelRequest)
 
         println(response.toString())
     }

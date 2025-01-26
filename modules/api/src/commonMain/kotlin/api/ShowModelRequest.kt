@@ -31,6 +31,8 @@ public data class ShowModelRequest(
 
             return ShowModelRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): ShowModelRequestBuilder = ShowModelRequestBuilder()
     }
 
     /** Builder of [ShowModelRequest] instances. */

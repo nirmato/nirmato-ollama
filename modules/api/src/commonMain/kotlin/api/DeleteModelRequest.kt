@@ -32,6 +32,8 @@ public data class DeleteModelRequest(
 
             return DeleteModelRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): DeleteModelRequestBuilder = DeleteModelRequestBuilder()
     }
 
     /** Builder of [DeleteModelRequest] instances. */

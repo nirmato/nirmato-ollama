@@ -22,7 +22,7 @@ internal class ChatClientTest {
 
     @Test
     fun chat_withNoStreaming_returnSuccess() = runTest {
-        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+        val mockHttpClientEngineFactory = MockHttpClientFactory(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
@@ -51,18 +51,20 @@ internal class ChatClientTest {
             }
         }
 
+        val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
+
         val chatRequest = chatRequest {
             model = "mock-model"
             messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
         }
-        val response = ollamaClient.chat(chatRequest)
+        val response = ollamaClient.chat.chat(chatRequest)
 
         println(response.toString())
     }
 
     @Test
     fun chat_withStreaming_returnSuccess() = runTest {
-        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+        val mockHttpClientEngineFactory = MockHttpClientFactory(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
@@ -77,18 +79,20 @@ internal class ChatClientTest {
             }
         }
 
+        val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
+
         val chatRequest = chatRequest {
             model = "mock-model"
             messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
         }
-        val response = ollamaClient.chatFlow(chatRequest)
+        val response = ollamaClient.chat.chatFlow(chatRequest)
 
         response.collect { println(it) }
     }
 
     @Test
     fun chat_withImages_returnSuccess() = runTest {
-        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+        val mockHttpClientEngineFactory = MockHttpClientFactory(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
@@ -117,6 +121,8 @@ internal class ChatClientTest {
             }
         }
 
+        val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
+
         val request = chatRequest {
             model = "llava"
             messages = listOf(
@@ -130,14 +136,14 @@ internal class ChatClientTest {
             )
         }
 
-        val response = ollamaClient.chat(request)
+        val response = ollamaClient.chat.chat(request)
 
         println(response.toString())
     }
 
     @Test
     fun chat_withJsonStructuredOutput_returnSuccess() = runTest {
-        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+        val mockHttpClientEngineFactory = MockHttpClientFactory(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
@@ -165,6 +171,8 @@ internal class ChatClientTest {
                 }
             }
         }
+
+        val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val request = chatRequest {
             model = "mock-model"
@@ -175,14 +183,14 @@ internal class ChatClientTest {
             )
         }
 
-        val response = ollamaClient.chat(request)
+        val response = ollamaClient.chat.chat(request)
 
         println(response.toString())
     }
 
     @Test
     fun chat_withSchemaStructuredOutput_returnSuccess() = runTest {
-        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+        val mockHttpClientEngineFactory = MockHttpClientFactory(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
@@ -210,6 +218,8 @@ internal class ChatClientTest {
                 }
             }
         }
+
+        val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val request = chatRequest {
             model = "mock-model"
@@ -233,13 +243,13 @@ internal class ChatClientTest {
             )
         }
 
-        val response = ollamaClient.chat(request)
+        val response = ollamaClient.chat.chat(request)
 
         println(response.toString())
     }
 
     fun chat_withTools_returnSuccess() = runTest {
-        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+        val mockHttpClientEngineFactory = MockHttpClientFactory(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
@@ -278,6 +288,8 @@ internal class ChatClientTest {
             }
         }
 
+        val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
+
         val request = chatRequest {
             model = "llama3.2"
             messages = listOf(
@@ -309,7 +321,7 @@ internal class ChatClientTest {
             )
         }
 
-        val response = ollamaClient.chat(request)
+        val response = ollamaClient.chat.chat(request)
 
         println(response.toString())
     }

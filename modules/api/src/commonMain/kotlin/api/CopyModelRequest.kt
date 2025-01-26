@@ -32,6 +32,8 @@ public data class CopyModelRequest(
 
             return CopyModelRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): CopyModelRequestBuilder = CopyModelRequestBuilder()
     }
 
     /** Builder of [CopyModelRequest] instances. */

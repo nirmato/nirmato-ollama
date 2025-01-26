@@ -9,29 +9,29 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
-import org.nirmato.ollama.api.CompletionRequest
-import org.nirmato.ollama.api.CompletionResponse
-import org.nirmato.ollama.api.CompletionsApi
-import org.nirmato.ollama.client.http.HttpClientHandler
-import org.nirmato.ollama.client.http.handle
+import org.nirmato.ollama.api.ChatApi
+import org.nirmato.ollama.api.ChatRequest
+import org.nirmato.ollama.api.ChatResponse
+import org.nirmato.ollama.client.http.HttpClient
 import org.nirmato.ollama.client.http.handleFlow
+import org.nirmato.ollama.client.http.perform
 
-public class CompletionsClient(private val requestHandler: HttpClientHandler) : CompletionsApi {
-    override suspend fun completion(completionRequest: CompletionRequest): CompletionResponse {
-        return requestHandler.handle {
+public class ChatClient(private val httpClient: HttpClient) : ChatApi {
+    override suspend fun chat(chatRequest: ChatRequest): ChatResponse {
+        return httpClient.perform {
             method = HttpMethod.Post
-            url(path = "generate")
-            setBody(completionRequest)
+            url(path = "chat")
+            setBody(ChatRequest.builder(chatRequest).apply { stream = false }.build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
     }
 
-    override fun completionFlow(completionRequest: CompletionRequest): Flow<CompletionResponse> {
-        return requestHandler.handleFlow<CompletionResponse> {
+    override fun chatFlow(chatRequest: ChatRequest): Flow<ChatResponse> {
+        return httpClient.handleFlow<ChatResponse> {
             method = HttpMethod.Post
-            url(path = "generate")
-            setBody(completionRequest.toStreamRequest(true))
+            url(path = "chat")
+            setBody(ChatRequest.builder(chatRequest).apply { stream = true }.build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {

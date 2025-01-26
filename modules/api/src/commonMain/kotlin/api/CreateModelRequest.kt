@@ -53,6 +53,10 @@ public data class CreateModelRequest(
     /** Quantize a non-quantized (e.g. float16) model. */
     @SerialName(value = "quantize")
     val quantize: Quantize? = null,
+
+    /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects.  */
+    @SerialName(value = "stream")
+    val stream: Boolean? = false,
 ) {
 
     public sealed interface LicenseModel {
@@ -101,11 +105,14 @@ public data class CreateModelRequest(
 
             return CreateModelRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): CreateModelRequestBuilder = CreateModelRequestBuilder()
+        public fun builder(createModelRequest: CreateModelRequest): CreateModelRequestBuilder = CreateModelRequestBuilder(createModelRequest)
     }
 
     /** Builder of [CreateModelRequest] instances. */
     @OllamaDsl
-    public class CreateModelRequestBuilder {
+    public class CreateModelRequestBuilder() {
         public var model: String? = null
         public var from: String? = null
         public var files: Map<String, String>? = null
@@ -116,6 +123,21 @@ public data class CreateModelRequest(
         public var parameters: Map<String, String>? = null
         public var messages: List<Message>? = null
         public var quantize: Quantize? = null
+        public var stream: Boolean? = false
+
+        public constructor(createModelRequest: CreateModelRequest) : this() {
+            model = createModelRequest.model
+            from = createModelRequest.from
+            files = createModelRequest.files
+            adapters = createModelRequest.adapters
+            template = createModelRequest.template
+            license = createModelRequest.license
+            system = createModelRequest.system
+            parameters = createModelRequest.parameters
+            messages = createModelRequest.messages
+            quantize = createModelRequest.quantize
+            stream = createModelRequest.stream
+        }
 
         /** Create [CreateModelRequest] instance. */
         public fun build(): CreateModelRequest = CreateModelRequest(
@@ -129,6 +151,7 @@ public data class CreateModelRequest(
             parameters = parameters,
             messages = messages,
             quantize = quantize,
+            stream = stream,
         )
     }
 }

@@ -47,6 +47,8 @@ public data class PullModelRequest(
 
             return PullModelRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): PullModelRequestBuilder = PullModelRequestBuilder()
     }
 
     /** Builder of [PullModelRequest] instances. */

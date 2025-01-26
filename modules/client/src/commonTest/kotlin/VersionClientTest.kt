@@ -11,16 +11,16 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 
-internal class OllamaClientTest {
+internal class VersionClientTest {
 
     @Test
-    fun monitoring_validRequest_returnSuccess() = runTest {
-        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+    fun version_validRequest_returnSuccess() = runTest {
+        val mockHttpClientEngineFactory = MockHttpClientFactory(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
                     respond(
                         content = """{
-                          "status": "ok"
+                          "version": "1.2.3"
                         }""",
                         status = HttpStatusCode.OK,
                         headers {
@@ -36,7 +36,9 @@ internal class OllamaClientTest {
             }
         }
 
-        val response = ollamaClient.getMonitoring()
+        val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
+
+        val response = ollamaClient.version.getVersion()
 
         println(response.toString())
     }

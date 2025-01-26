@@ -1,6 +1,5 @@
-package org.nirmato.ollama.client.http
+package http
 
-import kotlinx.coroutines.CancellationException
 import kotlinx.io.IOException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -22,6 +21,7 @@ import io.ktor.http.HttpStatusCode.Companion.TooManyRequests
 import io.ktor.http.HttpStatusCode.Companion.Unauthorized
 import io.ktor.http.HttpStatusCode.Companion.UnsupportedMediaType
 import io.ktor.util.reflect.TypeInfo
+import io.ktor.utils.io.CancellationException
 import org.nirmato.ollama.api.AuthenticationException
 import org.nirmato.ollama.api.GenericIOException
 import org.nirmato.ollama.api.InvalidRequestException
@@ -35,14 +35,14 @@ import org.nirmato.ollama.api.ResponseFailure
 import org.nirmato.ollama.api.UnknownAPIException
 
 /**
- * Default implementation of [HttpClientHandler].
+ * Default implementation of [HttpClient].
  *
  * @property httpClient The HttpClient to use for performing HTTP requests.
  */
-public class DefaultHttpClientHandler(private val httpClient: HttpClient) : HttpClientHandler {
+public class DefaultHttpClient(private val httpClient: HttpClient) : org.nirmato.ollama.client.http.HttpClient {
 
     @Suppress("TooGenericExceptionCaught")
-    override suspend fun <T : Any> handle(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T = try {
+    override suspend fun <T : Any> perform(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T = try {
         val response = httpClient.request(builder)
 
         when (response.status) {
@@ -55,7 +55,7 @@ public class DefaultHttpClientHandler(private val httpClient: HttpClient) : Http
     }
 
     @Suppress("TooGenericExceptionCaught")
-    override suspend fun <T : Any> handle(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
+    override suspend fun <T : Any> perform(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
         try {
             HttpStatement(builder = HttpRequestBuilder().apply(builder), client = httpClient).execute {
                 when (it.status) {

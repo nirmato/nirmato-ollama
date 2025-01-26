@@ -9,12 +9,12 @@ import io.ktor.http.contentType
 import org.nirmato.ollama.api.EmbeddedRequest
 import org.nirmato.ollama.api.EmbeddedResponse
 import org.nirmato.ollama.api.EmbeddingsApi
-import org.nirmato.ollama.client.http.HttpClientHandler
-import org.nirmato.ollama.client.http.handle
+import org.nirmato.ollama.client.http.HttpClient
+import org.nirmato.ollama.client.http.perform
 
-public class EmbeddedClient(private val requestHandler: HttpClientHandler) : EmbeddingsApi {
+public class EmbeddedClient(private val httpClient: HttpClient) : EmbeddingsApi {
     override suspend fun generateEmbedded(generateEmbeddedRequest: EmbeddedRequest): EmbeddedResponse {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Post
             url(path = "embed")
             setBody(generateEmbeddedRequest)

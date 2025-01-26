@@ -27,6 +27,8 @@ public data class CreateBlobRequest(
 
             return CreateBlobRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): CreateBlobRequestBuilder = CreateBlobRequestBuilder()
     }
 
     /** Builder of [CreateBlobRequestBuilder] instances. */

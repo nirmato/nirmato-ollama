@@ -54,6 +54,8 @@ public data class EmbeddedRequest(
 
             return EmbeddedRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): EmbeddedRequestBuilder = EmbeddedRequestBuilder()
     }
 
     /** Builder of [EmbeddedRequest] instances. */

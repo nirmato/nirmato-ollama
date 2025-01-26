@@ -12,7 +12,7 @@ public data class CheckBlobRequest(
     /** The SHA256 digest of the blob */
     @SerialName(value = "digest")
     @Required
-    val digest: String,
+    public val digest: String,
 ) {
     public companion object {
         /** A request for checking a blob. */
@@ -23,6 +23,8 @@ public data class CheckBlobRequest(
 
             return CheckBlobRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): CheckBlobRequestBuilder = CheckBlobRequestBuilder()
     }
 
     /** Builder of [CheckBlobRequestBuilder] instances. */

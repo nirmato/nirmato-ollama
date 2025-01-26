@@ -69,6 +69,10 @@ public data class CompletionRequest(
     @SerialName(value = "keep_alive")
     val keepAlive: Int? = null,
 
+    /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects.  */
+    @SerialName(value = "stream")
+    val stream: Boolean? = false,
+
     /** The context parameter returned from a previous request to [CompletionsApi.completion], this can be used to keep a short conversational memory. */
     @Deprecated(message = "Deprecated property")
     @SerialName(value = "context")
@@ -83,11 +87,14 @@ public data class CompletionRequest(
 
             return CompletionRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): CompletionRequestBuilder = CompletionRequestBuilder()
+        public fun builder(completionRequest: CompletionRequest): CompletionRequestBuilder = CompletionRequestBuilder(completionRequest)
     }
 
     /** Builder of [CompletionRequest] instances. */
     @OllamaDsl
-    public class CompletionRequestBuilder {
+    public class CompletionRequestBuilder() {
         public var model: String? = null
         public var prompt: String? = null
         public var suffix: String? = null
@@ -99,6 +106,22 @@ public data class CompletionRequest(
         public var context: List<Long>? = null
         public var raw: Boolean? = null
         public var keepAlive: Int? = null
+        public var stream: Boolean? = null
+
+        public constructor(completionRequest: CompletionRequest) : this() {
+            model = completionRequest.model
+            prompt = completionRequest.prompt
+            suffix = completionRequest.suffix
+            images = completionRequest.images
+            format = completionRequest.format
+            options = completionRequest.options
+            system = completionRequest.system
+            template = completionRequest.template
+            context = completionRequest.context
+            raw = completionRequest.raw
+            keepAlive = completionRequest.keepAlive
+            stream = completionRequest.stream
+        }
 
         /** Create [CompletionRequest] instance. */
         public fun build(): CompletionRequest = CompletionRequest(
@@ -113,6 +136,7 @@ public data class CompletionRequest(
             context = context,
             raw = raw,
             keepAlive = keepAlive,
+            stream = stream,
         )
     }
 }

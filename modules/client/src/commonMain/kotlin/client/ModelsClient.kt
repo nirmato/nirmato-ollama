@@ -23,13 +23,13 @@ import org.nirmato.ollama.api.PushModelRequest
 import org.nirmato.ollama.api.PushModelResponse
 import org.nirmato.ollama.api.ShowModelRequest
 import org.nirmato.ollama.api.ShowModelResponse
-import org.nirmato.ollama.client.http.HttpClientHandler
-import org.nirmato.ollama.client.http.handle
+import org.nirmato.ollama.client.http.HttpClient
 import org.nirmato.ollama.client.http.handleFlow
+import org.nirmato.ollama.client.http.perform
 
-public class ModelsClient(private val requestHandler: HttpClientHandler) : ModelsApi {
+public class ModelsClient(private val httpClient: HttpClient) : ModelsApi {
     override suspend fun checkBlob(checkBlobRequest: CheckBlobRequest) {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Head
             url(path = "blobs/${checkBlobRequest.digest}")
             contentType(ContentType.Application.Json)
@@ -37,7 +37,7 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
     }
 
     override suspend fun copyModel(copyModelRequest: CopyModelRequest) {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Post
             url(path = "copy")
             setBody(copyModelRequest)
@@ -46,7 +46,7 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
     }
 
     override suspend fun createBlob(createBlobRequest: CreateBlobRequest) {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Post
             url(path = "blobs/${createBlobRequest.digest}")
             setBody(ByteArrayContent(createBlobRequest.body.value, ContentType.Application.OctetStream))
@@ -55,7 +55,7 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
     }
 
     override suspend fun createModel(createModelRequest: CreateModelRequest): CreateModelResponse {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Post
             url(path = "create")
             setBody(createModelRequest)
@@ -65,17 +65,17 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
     }
 
     override fun createModelFlow(createModelRequest: CreateModelRequest): Flow<CreateModelResponse> {
-        return requestHandler.handleFlow {
+        return httpClient.handleFlow {
             method = HttpMethod.Post
             url(path = "create")
-            setBody(createModelRequest.toStreamRequest(true))
+            setBody(CreateModelRequest.builder(createModelRequest).apply { stream = true }.build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
     }
 
     override suspend fun deleteModel(deleteModelRequest: DeleteModelRequest) {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Delete
             url(path = "delete")
             setBody(deleteModelRequest)
@@ -84,7 +84,7 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
     }
 
     override suspend fun listModels(): ListModelsResponse {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Get
             url(path = "tags")
             contentType(ContentType.Application.Json)
@@ -93,7 +93,7 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
     }
 
     override suspend fun listRunningModels(): ProcessResponse {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Get
             url(path = "ps")
             contentType(ContentType.Application.Json)
@@ -102,7 +102,7 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
     }
 
     override suspend fun pullModel(pullModelRequest: PullModelRequest): PullModelResponse {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Post
             url(path = "pull")
             setBody(pullModelRequest)
@@ -112,27 +112,27 @@ public class ModelsClient(private val requestHandler: HttpClientHandler) : Model
     }
 
     override suspend fun pushModel(pushModelRequest: PushModelRequest): PushModelResponse {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Post
             url(path = "push")
-            setBody(pushModelRequest.toStreamRequest(false))
+            setBody(PushModelRequest.builder(pushModelRequest).apply { stream = false }.build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
     }
 
     override fun pushModelFlow(pushModelRequest: PushModelRequest): Flow<PushModelResponse> {
-        return requestHandler.handleFlow {
+        return httpClient.handleFlow {
             method = HttpMethod.Post
             url(path = "push")
-            setBody(pushModelRequest.toStreamRequest(true))
+            setBody(PushModelRequest.builder(pushModelRequest).apply { stream = true }.build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
     }
 
     override suspend fun showModel(showModelRequest: ShowModelRequest): ShowModelResponse {
-        return requestHandler.handle {
+        return httpClient.perform {
             method = HttpMethod.Post
             url(path = "show")
             setBody(showModelRequest)

@@ -11,8 +11,7 @@ import org.nirmato.ollama.dsl.OllamaDsl
  * Request to generate a predicted chat completion for a prompt.
  */
 @Serializable
-public data class ChatRequest(
-
+public class ChatRequest(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -21,24 +20,24 @@ public data class ChatRequest(
      */
     @SerialName(value = "model")
     @Required
-    val model: String,
+    public val model: String,
 
     /** The messages of the chat, this can be used to keep a chat memory */
     @SerialName(value = "messages")
     @Required
-    val messages: List<Message>,
+    public val messages: List<Message>,
 
     /** The for the model to use if supported. Requires stream to be set to false. */
     @SerialName(value = "tools")
-    val tools: List<Tool>? = null,
+    public val tools: List<Tool>? = null,
 
     /** The format to return a response in. Currently, the only accepted value is json. */
     @SerialName(value = "format")
-    val format: Format? = null,
+    public val format: Format? = null,
 
     /** Additional model parameters listed in the documentation for the Modelfile such as `temperature`. */
     @SerialName(value = "options")
-    val options: Options? = null,
+    public val options: Options? = null,
 
     /**
      * How long (in minutes) to keep the model loaded in memory.
@@ -49,7 +48,11 @@ public data class ChatRequest(
      * - If not set, the model will stay loaded for 5 minutes by default
      */
     @SerialName(value = "keep_alive")
-    val keepAlive: Int? = null,
+    public val keepAlive: Int? = null,
+
+    /** If `false` the response will be returned as a single response object, otherwise, the response will be streamed as a series of objects.  */
+    @SerialName(value = "stream")
+    public val stream: Boolean? = false,
 ) {
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
@@ -60,17 +63,31 @@ public data class ChatRequest(
 
             return ChatRequestBuilder().apply(block).build()
         }
+
+        public fun builder(): ChatRequestBuilder = ChatRequestBuilder()
+        public fun builder(chatRequest: ChatRequest): ChatRequestBuilder = ChatRequestBuilder(chatRequest)
     }
 
     /** Builder of [ChatRequest] instances. */
     @OllamaDsl
-    public class ChatRequestBuilder {
+    public class ChatRequestBuilder() {
         public var model: String? = null
         public var messages: List<Message>? = null
         public var tools: List<Tool>? = null
         public var format: Format? = null
         public var options: Options? = null
         public var keepAlive: Int? = null
+        public var stream: Boolean? = false
+
+        public constructor(chatRequest: ChatRequest) : this() {
+            model = chatRequest.model
+            messages = chatRequest.messages
+            tools = chatRequest.tools
+            format = chatRequest.format
+            options = chatRequest.options
+            keepAlive = chatRequest.keepAlive
+            stream = chatRequest.stream
+        }
 
         /** Create [ChatRequest] instance. */
         public fun build(): ChatRequest = ChatRequest(
@@ -80,6 +97,7 @@ public data class ChatRequest(
             format = format,
             options = options,
             keepAlive = keepAlive,
+            stream = stream,
         )
     }
 }

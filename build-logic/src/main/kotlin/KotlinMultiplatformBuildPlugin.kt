@@ -312,7 +312,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         if (jsTargetEnabled) {
             configure<KotlinMultiplatformExtension> {
                 js {
-                    moduleName = project.name + "-js"
+                    outputModuleName = project.name + "-js"
 
                     compilations.configureEach {
                         compileTaskProvider.configure {
@@ -370,13 +370,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     reportNewYarnLock = true
                     yarnLockAutoReplace = true
                     yarnLockMismatchReport = YarnLockMismatchReport.FAIL
-
-                    resolution("braces", "~3.0.3")
-                    resolution("follow-redirects", "~1.15.9")
-                    resolution("body-parser", "~1.20.3")
-                    resolution("http-proxy-middleware", "~2.0.7")
-                    resolution("cross-spawn", "~7.0.5")
-                    resolution("path-to-regexp", "~0.1.12")
                 }
             }
 
@@ -409,7 +402,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         if (wasmJsTargetEnabled) {
             configure<KotlinMultiplatformExtension> {
                 wasmJs {
-                    moduleName = project.name + "-wasm"
+                    outputModuleName = project.name + "-wasm"
 
                     compilations.configureEach {
                         compileTaskProvider.configure {

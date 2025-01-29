@@ -41,8 +41,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptionsBuilder.JvmDefaul
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.dsl.withCommonCompilerArguments
-import org.jetbrains.kotlin.gradle.dsl.withWasmJsCompilerArguments
 import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
+import org.jetbrains.kotlin.gradle.dsl.withWasmJsCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
@@ -314,14 +314,10 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 js {
                     outputModuleName = project.name + "-js"
 
-                    compilations.configureEach {
-                        compileTaskProvider.configure {
-                            compilerOptions {
-                                sourceMap = true
-                                sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
-                                sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
-                            }
-                        }
+                    compilerOptions {
+                        sourceMap = true
+                        sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
+                        sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
                     }
 
                     browser {
@@ -353,8 +349,27 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
                     nodejs {
                         testTask {
-                            useMocha {
-                                timeout = "60s"
+                            useKarma {
+                                when (defaultKarmaBrowserTarget()) {
+                                    Chrome -> useChrome()
+                                    ChromeHeadless -> useChromeHeadless()
+                                    ChromeCanary -> useChromeCanary()
+                                    ChromeCanaryHeadless -> useChromeCanaryHeadless()
+                                    Chromium -> useChromium()
+                                    ChromiumHeadless -> useChromiumHeadless()
+                                    Firefox -> useFirefox()
+                                    FirefoxHeadless -> useFirefoxHeadless()
+                                    FirefoxAurora -> useFirefoxAurora()
+                                    FirefoxAuroraHeadless -> useFirefoxAuroraHeadless()
+                                    FirefoxDeveloper -> useFirefoxDeveloper()
+                                    FirefoxDeveloperHeadless -> useFirefoxDeveloperHeadless()
+                                    FirefoxNightly -> useFirefoxNightly()
+                                    FirefoxNightlyHeadless -> useFirefoxNightlyHeadless()
+                                    PhantomJs -> usePhantomJS()
+                                    Safari -> useSafari()
+                                    Opera -> useOpera()
+                                    Ie -> useIe()
+                                }
                             }
                         }
                     }
@@ -404,21 +419,42 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 wasmJs {
                     outputModuleName = project.name + "-wasm"
 
-                    compilations.configureEach {
-                        compileTaskProvider.configure {
-                            compilerOptions {
-                                sourceMap = true
-                                sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
-                                sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
-                            }
+                    compilerOptions {
+                        sourceMap = true
+                        sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
+                        sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
+
+                        withWasmJsCompilerArguments {
+                            wasmDebugInfo()
+                            wasmDebugFriendly()
+                            wasmDebuggerCustomFormatters()
                         }
                     }
 
                     browser()
                     nodejs {
                         testTask {
-                            useMocha {
-                                timeout = "60s"
+                            useKarma {
+                                when (defaultKarmaBrowserTarget()) {
+                                    Chrome -> useChrome()
+                                    ChromeHeadless -> useChromeHeadless()
+                                    ChromeCanary -> useChromeCanary()
+                                    ChromeCanaryHeadless -> useChromeCanaryHeadless()
+                                    Chromium -> useChromium()
+                                    ChromiumHeadless -> useChromiumHeadless()
+                                    Firefox -> useFirefox()
+                                    FirefoxHeadless -> useFirefoxHeadless()
+                                    FirefoxAurora -> useFirefoxAurora()
+                                    FirefoxAuroraHeadless -> useFirefoxAuroraHeadless()
+                                    FirefoxDeveloper -> useFirefoxDeveloper()
+                                    FirefoxDeveloperHeadless -> useFirefoxDeveloperHeadless()
+                                    FirefoxNightly -> useFirefoxNightly()
+                                    FirefoxNightlyHeadless -> useFirefoxNightlyHeadless()
+                                    PhantomJs -> usePhantomJS()
+                                    Safari -> useSafari()
+                                    Opera -> useOpera()
+                                    Ie -> useIe()
+                                }
                             }
                         }
                     }
@@ -490,18 +526,14 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
             configure<KotlinMultiplatformExtension> {
                 jvm {
-                    compilations.configureEach {
-                        compileTaskProvider.configure {
-                            compilerOptions {
-                                withJvmCompilerArguments {
-                                    requiresJsr305()
-                                    jvmDefault(JvmDefaultOption.ALL_COMPATIBILITY)
-                                    jdkRelease(jvmVersion)
-                                }
-                                this.javaParameters = true
-                                this.jvmTarget = JvmTarget.fromTarget(jvmVersion.majorVersion)
-                            }
+                    compilerOptions {
+                        withJvmCompilerArguments {
+                            requiresJsr305()
+                            jvmDefault(JvmDefaultOption.ALL_COMPATIBILITY)
+                            jdkRelease(jvmVersion)
                         }
+                        this.javaParameters = true
+                        this.jvmTarget = JvmTarget.fromTarget(jvmVersion.majorVersion)
                     }
 
                     attributes {

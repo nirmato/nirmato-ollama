@@ -74,7 +74,6 @@ public data class CompletionRequest(
     val stream: Boolean? = false,
 
     /** The context parameter returned from a previous request to [CompletionsApi.completion], this can be used to keep a short conversational memory. */
-    @Deprecated(message = "Deprecated property")
     @SerialName(value = "context")
     val context: List<Long>? = null,
 ) {

@@ -296,8 +296,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                             extraWarnings = true
 
                             withCommonCompilerArguments {
-                                requiresOptIn()
-                                suppressExpectActualClasses()
                                 suppressVersionWarnings()
                             }
                         }
@@ -530,7 +528,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                         withJvmCompilerArguments {
                             requiresJsr305()
                             jvmDefault(JvmDefaultOption.ALL_COMPATIBILITY)
-                            jdkRelease(jvmVersion)
+                            jdkRelease(jvmVersion.majorVersion)
                         }
                         this.javaParameters = true
                         this.jvmTarget = JvmTarget.fromTarget(jvmVersion.majorVersion)

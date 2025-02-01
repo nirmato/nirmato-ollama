@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 @Serializable
 public data class CreateBlobRequest(
@@ -32,10 +32,13 @@ public data class CreateBlobRequest(
     }
 
     /** Builder of [CreateBlobRequestBuilder] instances. */
-    @OllamaDsl
+    @OllamaDslMarker
     public class CreateBlobRequestBuilder {
-        public var digest: String? = null
-        public var body: OctetByteArray? = null
+        private var digest: String? = null
+        private var body: OctetByteArray? = null
+
+        public fun digest(digest: String): CreateBlobRequestBuilder = apply { this.digest = digest }
+        public fun body(body: OctetByteArray): CreateBlobRequestBuilder = apply { this.body = body }
 
         /** Create [CreateBlobRequest] instance. */
         public fun build(): CreateBlobRequest = CreateBlobRequest(

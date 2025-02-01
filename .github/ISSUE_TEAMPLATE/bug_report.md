@@ -16,8 +16,8 @@ Sample code snippet to reproduce the problem:
 val ollamaClient = OllamaClient(KtorHttpClientFactory(CIO).createHttpClient())
 
 val request = chatRequest {
-    model = "tinyllama"
-    messages = listOf(Message(role = USER, content = "Why is the sky blue?"))
+    model("tinyllama")
+    messages(listOf(Message(role = USER, content = "Why is the sky blue?")))
 }
 
 val response = ollamaClient.chat().chat(request)

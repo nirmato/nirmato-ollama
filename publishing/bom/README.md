@@ -18,7 +18,10 @@ dependencies {
     implementation(platform("org.nirmato.ollama:nirmato-ollama-bom:[version]"))
 
     // pick the artifacts that you want but don't specify their versions as that's controlled by the BOM
-    implementation("org.nirmato.ollama:nirmato-ollama-client")
+    implementation("org.nirmato.ollama:nirmato-ollama-annotations")
+    implementation("org.nirmato.ollama:nirmato-ollama-models")
+    implementation("org.nirmato.ollama:nirmato-ollama-cliente-coroutines")
+    implementation("org.nirmato.ollama:nirmato-ollama-cliente-coroutines-ktor")
 }
 ```
 
@@ -44,11 +47,19 @@ dependencies {
     <dependencies>
         <dependency>
             <groupId>org.nirmato.ollama</groupId>
-            <artifactId>nirmato-ollama-api</artifactId>
+            <artifactId>nirmato-ollama-annotations</artifactId>
         </dependency>
         <dependency>
             <groupId>org.nirmato.ollama</groupId>
-            <artifactId>nirmato-ollama-client</artifactId>
+            <artifactId>nirmato-ollama-models</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.nirmato.ollama</groupId>
+            <artifactId>nirmato-ollama-coroutines</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.nirmato.ollama</groupId>
+            <artifactId>nirmato-ollama-coroutines-ktor</artifactId>
         </dependency>
     </dependencies>
 </project>
@@ -58,8 +69,9 @@ dependencies {
 
 The `bom` references the following artifacts:
 
-| GroupId                  | ArtifactId                   | Description                |
-|:-------------------------|:-----------------------------|:---------------------------|
-| `org.nirmato.ollama`     | `nirmato-ollama-annotations` | Ollama nirmato annotations |
-| `org.nirmato.ollama`     | `nirmato-ollama-api`         | Ollama client API          |
-| `org.nirmato.ollama`     | `nirmato-ollama-client`      | KMP implementation         |
+| GroupId                  | ArtifactId                              | Description                          |
+|:-------------------------|:----------------------------------------|:-------------------------------------|
+| `org.nirmato.ollama`     | `nirmato-ollama-annotations`            | Ollama annotations                   |
+| `org.nirmato.ollama`     | `nirmato-ollama-models`                 | Ollama API models                    |
+| `org.nirmato.ollama`     | `nirmato-ollama-client-coroutines`      | Kotlin Multiplatform Coroutines Base |
+| `org.nirmato.ollama`     | `nirmato-ollama-client-coroutines-ktor` | Kotlin Multiplatform Coroutines Ktor |

@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
  * Request to generate a predicted completion for a prompt.
@@ -92,20 +92,20 @@ public data class CompletionRequest(
     }
 
     /** Builder of [CompletionRequest] instances. */
-    @OllamaDsl
+    @OllamaDslMarker
     public class CompletionRequestBuilder() {
-        public var model: String? = null
-        public var prompt: String? = null
-        public var suffix: String? = null
-        public var images: List<String>? = null
-        public var format: Format? = null
-        public var options: Options? = null
-        public var system: String? = null
-        public var template: String? = null
-        public var context: List<Long>? = null
-        public var raw: Boolean? = null
-        public var keepAlive: Int? = null
-        public var stream: Boolean? = null
+        private var model: String? = null
+        private var prompt: String? = null
+        private var suffix: String? = null
+        private var images: List<String>? = null
+        private var format: Format? = null
+        private var options: Options? = null
+        private var system: String? = null
+        private var template: String? = null
+        private var context: List<Long>? = null
+        private var raw: Boolean? = null
+        private var keepAlive: Int? = null
+        private var stream: Boolean? = null
 
         public constructor(completionRequest: CompletionRequest) : this() {
             model = completionRequest.model
@@ -121,6 +121,19 @@ public data class CompletionRequest(
             keepAlive = completionRequest.keepAlive
             stream = completionRequest.stream
         }
+
+        public fun model(model: String): CompletionRequestBuilder = apply { this.model = model }
+        public fun prompt(prompt: String): CompletionRequestBuilder = apply { this.prompt = prompt }
+        public fun suffix(suffix: String): CompletionRequestBuilder = apply { this.suffix = suffix }
+        public fun images(images: List<String>): CompletionRequestBuilder = apply { this.images = images }
+        public fun format(format: Format): CompletionRequestBuilder = apply { this.format = format }
+        public fun options(options: Options): CompletionRequestBuilder = apply { this.options = options }
+        public fun system(system: String): CompletionRequestBuilder = apply { this.system = system }
+        public fun template(template: String): CompletionRequestBuilder = apply { this.template = template }
+        public fun context(context: List<Long>): CompletionRequestBuilder = apply { this.context = context }
+        public fun raw(raw: Boolean): CompletionRequestBuilder = apply { this.raw = raw }
+        public fun keepAlive(keepAlive: Int): CompletionRequestBuilder = apply { this.keepAlive = keepAlive }
+        public fun stream(stream: Boolean): CompletionRequestBuilder = apply { this.stream = stream }
 
         /** Create [CompletionRequest] instance. */
         public fun build(): CompletionRequest = CompletionRequest(

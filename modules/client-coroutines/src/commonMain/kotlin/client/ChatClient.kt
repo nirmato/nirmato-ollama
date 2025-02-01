@@ -21,7 +21,7 @@ public class ChatClient(private val httpClient: HttpClient) : ChatApi {
         return httpClient.perform {
             method = HttpMethod.Post
             url(path = "chat")
-            setBody(ChatRequest.builder(chatRequest).apply { stream = false }.build())
+            setBody(ChatRequest.builder(chatRequest).stream(false).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -31,7 +31,7 @@ public class ChatClient(private val httpClient: HttpClient) : ChatApi {
         return httpClient.handleFlow<ChatResponse> {
             method = HttpMethod.Post
             url(path = "chat")
-            setBody(ChatRequest.builder(chatRequest).apply { stream = true }.build())
+            setBody(ChatRequest.builder(chatRequest).stream(true).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {

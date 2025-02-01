@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 @Serializable
 public data class CheckBlobRequest(
@@ -28,9 +28,11 @@ public data class CheckBlobRequest(
     }
 
     /** Builder of [CheckBlobRequestBuilder] instances. */
-    @OllamaDsl
-    public class CheckBlobRequestBuilder {
-        public var digest: String? = null
+    @OllamaDslMarker
+    public class CheckBlobRequestBuilder() {
+        private var digest: String? = null
+
+        public fun digest(digest: String): CheckBlobRequestBuilder = apply { this.digest = digest }
 
         /** Create [CheckBlobRequest] instance. */
         public fun build(): CheckBlobRequest = CheckBlobRequest(

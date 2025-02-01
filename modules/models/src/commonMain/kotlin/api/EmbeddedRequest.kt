@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
  * Generate embeddings from a model.
@@ -59,13 +59,19 @@ public data class EmbeddedRequest(
     }
 
     /** Builder of [EmbeddedRequest] instances. */
-    @OllamaDsl
-    public class EmbeddedRequestBuilder {
-        public var model: String? = null
-        public var input: EmbeddedInput? = null
-        public val truncate: Boolean? = null
-        public var options: Options? = null
-        public var keepAlive: Int? = null
+    @OllamaDslMarker
+    public class EmbeddedRequestBuilder() {
+        private var model: String? = null
+        private var input: EmbeddedInput? = null
+        private var truncate: Boolean? = null
+        private var options: Options? = null
+        private var keepAlive: Int? = null
+
+        public fun model(model: String): EmbeddedRequestBuilder = apply { this.model = model }
+        public fun input(input: EmbeddedInput): EmbeddedRequestBuilder = apply { this.input = input }
+        public fun truncate(truncate: Boolean): EmbeddedRequestBuilder = apply { this.truncate = truncate }
+        public fun options(options: Options): EmbeddedRequestBuilder = apply { this.options = options }
+        public fun keepAlive(keepAlive: Int): EmbeddedRequestBuilder = apply { this.keepAlive = keepAlive }
 
         /** Create [EmbeddedRequest] instance. */
         public fun build(): EmbeddedRequest = EmbeddedRequest(

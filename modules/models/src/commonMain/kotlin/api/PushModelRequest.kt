@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
  * Request class for pushing a model.
@@ -49,13 +49,13 @@ public data class PushModelRequest(
     }
 
     /** Builder of [PushModelRequest] instances. */
-    @OllamaDsl
+    @OllamaDslMarker
     public class PushModelRequestBuilder() {
-        public var model: String? = null
-        public var insecure: Boolean? = false
-        public var username: String? = null
-        public var password: String? = null
-        public var stream: Boolean? = null
+        private var model: String? = null
+        private var insecure: Boolean? = false
+        private var username: String? = null
+        private var password: String? = null
+        private var stream: Boolean? = null
 
         public constructor(pushModelRequest: PushModelRequest) : this() {
             model = pushModelRequest.model
@@ -64,6 +64,12 @@ public data class PushModelRequest(
             password = pushModelRequest.password
             stream = pushModelRequest.stream
         }
+
+        public fun model(model: String): PushModelRequestBuilder = apply { this.model = model }
+        public fun insecure(insecure: Boolean): PushModelRequestBuilder = apply { this.insecure = insecure }
+        public fun username(username: String): PushModelRequestBuilder = apply { this.username = username }
+        public fun password(password: String): PushModelRequestBuilder = apply { this.password = password }
+        public fun stream(stream: Boolean): PushModelRequestBuilder = apply { this.stream = stream }
 
         /** Create [PushModelRequest] instance. */
         public fun build(): PushModelRequest = PushModelRequest(

@@ -40,8 +40,8 @@ internal class EmbeddedClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val generateEmbeddedRequest = embeddedRequest {
-            model = "tinyllama"
-            input = EmbeddedList(listOf(EmbeddedText("Why is the sky blue?"), EmbeddedText("Why is the grass green?")))
+            model("tinyllama")
+            input(EmbeddedList(listOf(EmbeddedText("Why is the sky blue?"), EmbeddedText("Why is the grass green?"))))
         }
 
         val response = ollamaClient.embedded().generateEmbedded(generateEmbeddedRequest)

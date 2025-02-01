@@ -21,7 +21,7 @@ public class CompletionsClient(private val httpClient: HttpClient) : Completions
         return httpClient.perform {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(CompletionRequest.builder(completionRequest).apply { stream = false }.build())
+            setBody(CompletionRequest.builder(completionRequest).stream(false).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -31,7 +31,7 @@ public class CompletionsClient(private val httpClient: HttpClient) : Completions
         return httpClient.handleFlow<CompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(CompletionRequest.builder(completionRequest).apply { stream = true }.build())
+            setBody(CompletionRequest.builder(completionRequest).stream(true).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {

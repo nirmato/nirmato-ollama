@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
  * Request class for deleting a model.
@@ -37,9 +37,11 @@ public data class DeleteModelRequest(
     }
 
     /** Builder of [DeleteModelRequest] instances. */
-    @OllamaDsl
-    public class DeleteModelRequestBuilder {
+    @OllamaDslMarker
+    public class DeleteModelRequestBuilder() {
         public var model: String? = null
+
+        public fun model(model: String): DeleteModelRequestBuilder = apply { this.model = model }
 
         /** Create [DeleteModelRequest] instance. */
         public fun build(): DeleteModelRequest = DeleteModelRequest(

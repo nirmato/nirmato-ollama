@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
  * Request to generate a predicted chat completion for a prompt.
@@ -69,15 +69,15 @@ public class ChatRequest(
     }
 
     /** Builder of [ChatRequest] instances. */
-    @OllamaDsl
+    @OllamaDslMarker
     public class ChatRequestBuilder() {
-        public var model: String? = null
-        public var messages: List<Message>? = null
-        public var tools: List<Tool>? = null
-        public var format: Format? = null
-        public var options: Options? = null
-        public var keepAlive: Int? = null
-        public var stream: Boolean? = false
+        private var model: String? = null
+        private var messages: List<Message>? = null
+        private var tools: List<Tool>? = null
+        private var format: Format? = null
+        private var options: Options? = null
+        private var keepAlive: Int? = null
+        private var stream: Boolean? = false
 
         public constructor(chatRequest: ChatRequest) : this() {
             model = chatRequest.model
@@ -88,6 +88,14 @@ public class ChatRequest(
             keepAlive = chatRequest.keepAlive
             stream = chatRequest.stream
         }
+
+        public fun model(model: String): ChatRequestBuilder = apply { this.model = model }
+        public fun messages(messages: List<Message>): ChatRequestBuilder = apply { this.messages = messages }
+        public fun tools(tools: List<Tool>): ChatRequestBuilder = apply { this.tools = tools }
+        public fun format(format: Format): ChatRequestBuilder = apply { this.format = format }
+        public fun options(options: Options): ChatRequestBuilder = apply { this.options = options }
+        public fun keepAlive(keepAlive: Int): ChatRequestBuilder = apply { this.keepAlive = keepAlive }
+        public fun stream(stream: Boolean): ChatRequestBuilder = apply { this.stream = stream }
 
         /** Create [ChatRequest] instance. */
         public fun build(): ChatRequest = ChatRequest(

@@ -5,4 +5,4 @@ package org.nirmato.ollama.dsl
  */
 @DslMarker
 @Target(AnnotationTarget.CLASS, AnnotationTarget.TYPEALIAS, AnnotationTarget.TYPE, AnnotationTarget.FUNCTION)
-public annotation class OllamaDsl
+public annotation class OllamaDslMarker

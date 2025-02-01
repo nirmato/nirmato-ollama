@@ -40,9 +40,9 @@ internal class ModelClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val createModelRequest = createModelRequest {
-            model = "mario"
-            from = "tinyllama"
-            system = "You are mario from Super Mario Bros."
+            model("mario")
+            from("tinyllama")
+            system("You are mario from Super Mario Bros.")
         }
         val response = ollamaClient.models().createModel(createModelRequest)
 
@@ -74,9 +74,9 @@ internal class ModelClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val createModelRequest = createModelRequest {
-            model = "mario"
-            from = "tinyllama"
-            system = "You are mario from Super Mario Bros."
+            model("mario")
+            from("tinyllama")
+            system("You are mario from Super Mario Bros.")
         }
         val response = ollamaClient.models().createModelFlow(createModelRequest)
 
@@ -96,8 +96,8 @@ internal class ModelClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val createBlobRequest = createBlobRequest {
-            digest = "sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4"
-            body = OctetByteArray("newblob".toByteArray())
+            digest("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4")
+            body(OctetByteArray("newblob".toByteArray()))
         }
 
         ollamaClient.models().createBlob(createBlobRequest)
@@ -221,7 +221,7 @@ internal class ModelClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val modelInfoRequest = showModelRequest {
-            name = "mario"
+            name("mario")
         }
 
         val response = ollamaClient.models().showModel(modelInfoRequest)
@@ -243,8 +243,8 @@ internal class ModelClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val copyModelRequest = copyModelRequest {
-            source = "mario"
-            destination = "mario2"
+            source("mario")
+            destination("mario2")
         }
 
         ollamaClient.models().copyModel(copyModelRequest)
@@ -290,7 +290,7 @@ internal class ModelClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val pullModelRequest = pullModelRequest {
-            name = "tinyllama"
+            name("tinyllama")
         }
 
         val response = ollamaClient.models().pullModel(pullModelRequest)
@@ -315,7 +315,7 @@ internal class ModelClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val pushModelRequest = pushModelRequest {
-            model = "mario"
+            model("mario")
         }
 
         val response = ollamaClient.models().pushModel(pushModelRequest)

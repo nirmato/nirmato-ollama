@@ -42,8 +42,8 @@ internal class CompletionsClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val completionRequest = completionRequest {
-            model = "tinyllama"
-            prompt = "Why is the sky blue?"
+            model("tinyllama")
+            prompt("Why is the sky blue?")
         }
         val response = ollamaClient.completions().completion(completionRequest)
 
@@ -69,8 +69,8 @@ internal class CompletionsClientTest {
         val ollamaClient = OllamaClient(mockHttpClientEngineFactory.createHttpClient())
 
         val completionRequest = completionRequest {
-            model = "tinyllama"
-            prompt = "Why is the sky blue?"
+            model("tinyllama")
+            prompt("Why is the sky blue?")
         }
 
         val response = ollamaClient.completions().completionFlow(completionRequest)

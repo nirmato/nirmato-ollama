@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
  * Request class for copying a model.
@@ -37,10 +37,13 @@ public data class CopyModelRequest(
     }
 
     /** Builder of [CopyModelRequest] instances. */
-    @OllamaDsl
-    public class CopyModelRequestBuilder {
-        public var source: String? = null
-        public var destination: String? = null
+    @OllamaDslMarker
+    public class CopyModelRequestBuilder() {
+        private var source: String? = null
+        private var destination: String? = null
+
+        public fun source(source: String): CopyModelRequestBuilder = apply { this.source = source }
+        public fun destination(destination: String): CopyModelRequestBuilder = apply { this.destination = destination }
 
         /** Create [CopyModelRequest] instance. */
         public fun build(): CopyModelRequest = CopyModelRequest(

@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
  * Request class for pulling a model.
@@ -52,13 +52,19 @@ public data class PullModelRequest(
     }
 
     /** Builder of [PullModelRequest] instances. */
-    @OllamaDsl
-    public class PullModelRequestBuilder {
-        public var name: String? = null
-        public var insecure: Boolean? = false
-        public var username: String? = null
-        public var password: String? = null
-        public var stream: Boolean? = false
+    @OllamaDslMarker
+    public class PullModelRequestBuilder() {
+        private var name: String? = null
+        private var insecure: Boolean? = false
+        private var username: String? = null
+        private var password: String? = null
+        private var stream: Boolean? = false
+
+        public fun name(name: String): PullModelRequestBuilder = apply { this.name = name }
+        public fun insecure(insecure: Boolean): PullModelRequestBuilder = apply { this.insecure = insecure }
+        public fun username(username: String): PullModelRequestBuilder = apply { this.username = username }
+        public fun password(password: String): PullModelRequestBuilder = apply { this.password = password }
+        public fun stream(stream: Boolean): PullModelRequestBuilder = apply { this.stream = stream }
 
         /** Create [PullModelRequest] instance. */
         public fun build(): PullModelRequest = PullModelRequest(

@@ -5,7 +5,7 @@ import kotlin.contracts.contract
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.dsl.OllamaDsl
+import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
  * Request class for the show model info.
@@ -36,9 +36,11 @@ public data class ShowModelRequest(
     }
 
     /** Builder of [ShowModelRequest] instances. */
-    @OllamaDsl
-    public class ShowModelRequestBuilder {
-        public var name: String? = null
+    @OllamaDslMarker
+    public class ShowModelRequestBuilder() {
+        private var name: String? = null
+
+        public fun name(name: String?): ShowModelRequestBuilder = apply { this.name = name }
 
         /** Create [ShowModelRequest] instance. */
         public fun build(): ShowModelRequest = ShowModelRequest(

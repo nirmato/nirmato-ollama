@@ -68,7 +68,7 @@ public class ModelsClient(private val httpClient: HttpClient) : ModelsApi {
         return httpClient.handleFlow {
             method = HttpMethod.Post
             url(path = "create")
-            setBody(CreateModelRequest.builder(createModelRequest).apply { stream = true }.build())
+            setBody(CreateModelRequest.builder(createModelRequest).stream(true).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -115,7 +115,7 @@ public class ModelsClient(private val httpClient: HttpClient) : ModelsApi {
         return httpClient.perform {
             method = HttpMethod.Post
             url(path = "push")
-            setBody(PushModelRequest.builder(pushModelRequest).apply { stream = false }.build())
+            setBody(PushModelRequest.builder(pushModelRequest).stream(true).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -125,7 +125,7 @@ public class ModelsClient(private val httpClient: HttpClient) : ModelsApi {
         return httpClient.handleFlow {
             method = HttpMethod.Post
             url(path = "push")
-            setBody(PushModelRequest.builder(pushModelRequest).apply { stream = true }.build())
+            setBody(PushModelRequest.builder(pushModelRequest).stream(true).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }

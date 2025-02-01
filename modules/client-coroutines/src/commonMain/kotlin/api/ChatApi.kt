@@ -11,9 +11,7 @@ public interface ChatApi {
     public suspend fun chat(chatRequest: ChatRequest): ChatResponse
 
     /**
-     * Generate the next message in a chat with a provided model.
-     * This is a streaming endpoint, so there will be a series of responses.
-     * The final response object will include statistics and additional data from the request.
+     * @see #chat
      */
     public fun chatFlow(chatRequest: ChatRequest): Flow<ChatResponse>
 }

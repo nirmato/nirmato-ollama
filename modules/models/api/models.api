@@ -10,11 +10,6 @@ public final class org/nirmato/ollama/api/AuthenticationException : org/nirmato/
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/ResponseFailure;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 }
 
-public abstract interface class org/nirmato/ollama/api/ChatApi {
-	public abstract fun chat (Lorg/nirmato/ollama/api/ChatRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun chatFlow (Lorg/nirmato/ollama/api/ChatRequest;)Lkotlinx/coroutines/flow/Flow;
-}
-
 public final class org/nirmato/ollama/api/ChatRequest {
 	public static final field Companion Lorg/nirmato/ollama/api/ChatRequest$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lorg/nirmato/ollama/api/Format;Lorg/nirmato/ollama/api/Options;Ljava/lang/Integer;Ljava/lang/Boolean;)V
@@ -276,11 +271,6 @@ public final class org/nirmato/ollama/api/CompletionResponse$$serializer : kotli
 
 public final class org/nirmato/ollama/api/CompletionResponse$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public abstract interface class org/nirmato/ollama/api/CompletionsApi {
-	public abstract fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun completionFlow (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class org/nirmato/ollama/api/CopyModelRequest {
@@ -565,10 +555,6 @@ public final class org/nirmato/ollama/api/DoneReason : java/lang/Enum {
 public final class org/nirmato/ollama/api/DoneReason$Companion {
 	public final fun fromValueOrNull (Ljava/lang/String;)Lorg/nirmato/ollama/api/DoneReason;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public abstract interface class org/nirmato/ollama/api/EmbeddedApi {
-	public abstract fun generateEmbedded (Lorg/nirmato/ollama/api/EmbeddedRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public abstract interface class org/nirmato/ollama/api/EmbeddedInput {
@@ -863,25 +849,6 @@ public final class org/nirmato/ollama/api/Message$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public abstract interface class org/nirmato/ollama/api/ModelsApi {
-	public abstract fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun createModelFlow (Lorg/nirmato/ollama/api/CreateModelRequest;)Lkotlinx/coroutines/flow/Flow;
-	public abstract fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun pushModelFlow (Lorg/nirmato/ollama/api/PushModelRequest;)Lkotlinx/coroutines/flow/Flow;
-	public abstract fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public abstract interface class org/nirmato/ollama/api/MonitoringApi {
-	public abstract fun getMonitoring (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
 public final class org/nirmato/ollama/api/MonitoringResponse {
 	public static final field Companion Lorg/nirmato/ollama/api/MonitoringResponse$Companion;
 	public fun <init> (Lio/ktor/http/HttpStatusCode;)V
@@ -924,15 +891,6 @@ public final class org/nirmato/ollama/api/OctetByteArray$Companion : kotlinx/ser
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/OctetByteArray;)V
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public abstract interface class org/nirmato/ollama/api/OllamaApi {
-	public abstract fun chat ()Lorg/nirmato/ollama/api/ChatApi;
-	public abstract fun completions ()Lorg/nirmato/ollama/api/CompletionsApi;
-	public abstract fun embedded ()Lorg/nirmato/ollama/api/EmbeddedApi;
-	public abstract fun models ()Lorg/nirmato/ollama/api/ModelsApi;
-	public abstract fun monitoring ()Lorg/nirmato/ollama/api/MonitoringApi;
-	public abstract fun version ()Lorg/nirmato/ollama/api/VersionApi;
 }
 
 public final class org/nirmato/ollama/api/OllamaClientException : org/nirmato/ollama/api/OllamaException {
@@ -1693,10 +1651,6 @@ public final class org/nirmato/ollama/api/ToolCall$FunctionCall$Companion {
 public final class org/nirmato/ollama/api/UnknownAPIException : org/nirmato/ollama/api/ApiException {
 	public fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/ResponseFailure;Ljava/lang/Throwable;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/ResponseFailure;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-}
-
-public abstract interface class org/nirmato/ollama/api/VersionApi {
-	public abstract fun getVersion (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class org/nirmato/ollama/api/VersionResponse {

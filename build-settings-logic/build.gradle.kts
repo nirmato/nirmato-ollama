@@ -12,8 +12,8 @@ configurations.configureEach {
 }
 
 dependencies {
-    api(libraries.kotlin.gradle.plugin)
-    api(libraries.foojay.resolver)
+    implementation(libraries.kotlin.gradle.plugin)
+    implementation(libraries.foojay.resolver)
 }
 
 sourceSets {

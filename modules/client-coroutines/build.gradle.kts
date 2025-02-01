@@ -9,7 +9,7 @@ plugins {
     id("build-maven-publishing-configurer")
 }
 
-description = "Ollama API"
+description = "Ollama Client Coroutines"
 
 kotlin {
     explicitApi()
@@ -39,7 +39,7 @@ kotlin {
                 srcDirs("src/commonMain/kotlinX")
             }
             dependencies {
-                implementation(project(":modules:annotations"))
+                api(project(":modules:models"))
 
                 implementation(libraries.kotlinx.datetime)
                 implementation(libraries.kotlinx.coroutines.core)
@@ -48,6 +48,7 @@ kotlin {
                 implementation(libraries.ktor.client.content.negotiation)
                 implementation(libraries.ktor.client.core)
                 implementation(libraries.ktor.client.logging)
+                implementation("ch.qos.logback:logback-classic:1.5.16")
                 implementation(libraries.ktor.serialization.kotlinx.json)
             }
         }

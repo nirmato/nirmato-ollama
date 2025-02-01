@@ -12,8 +12,8 @@ configurations.configureEach {
 }
 
 dependencies {
-    api(libraries.kotlin.gradle.plugin)
-    api(libraries.detekt.gradle.plugin)
+    implementation(libraries.kotlin.gradle.plugin)
+    implementation(libraries.detekt.gradle.plugin)
 }
 
 sourceSets {

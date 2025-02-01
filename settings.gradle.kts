@@ -13,9 +13,9 @@ plugins {
 rootProject.name = "nirmato-ollama"
 
 include("modules:annotations")
-include("modules:api")
-include("modules:client")
-include("modules:client-ktor")
+include("modules:models")
+include("modules:client-coroutines")
+include("modules:client-coroutines-ktor")
 
 include("publishing:bom")
 include("publishing:version-catalog")

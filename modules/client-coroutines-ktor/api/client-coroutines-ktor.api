@@ -1,6 +1,0 @@
-public final class org/nirmato/ollama/client/ktor/KtorHttpClientFactory : org/nirmato/ollama/client/http/HttpClientFactory {
-	public fun <init> (Lio/ktor/client/engine/HttpClientEngineFactory;Lkotlin/jvm/functions/Function1;)V
-	public synthetic fun <init> (Lio/ktor/client/engine/HttpClientEngineFactory;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun createHttpClient ()Lorg/nirmato/ollama/client/http/HttpClient;
-}
-

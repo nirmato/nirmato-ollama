@@ -13,14 +13,14 @@ A clear and concise description of what the bug is.
 **To Reproduce**
 Sample code snippet to reproduce the problem:
 ```kotlin
-val ollamaClient = OllamaClient(KtorHttpClientFactory(CIO).createHttpClient())
+val ollamaClient = OllamaClient(CIO)
 
 val request = chatRequest {
     model("tinyllama")
     messages(listOf(Message(role = USER, content = "Why is the sky blue?")))
 }
 
-val response = ollamaClient.chat().chat(request)
+val response = ollamaClient.chat(request)
 
 println(response)
 ```

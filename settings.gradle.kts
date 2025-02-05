@@ -14,8 +14,7 @@ rootProject.name = "nirmato-ollama"
 
 include("modules:annotations")
 include("modules:models")
-include("modules:client-coroutines")
-include("modules:client-coroutines-ktor")
+include("modules:client-ktor")
 
 include("publishing:bom")
 include("publishing:version-catalog")

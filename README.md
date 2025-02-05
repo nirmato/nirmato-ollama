@@ -25,7 +25,7 @@ Add the dependency to your project:
 ### Gradle
 
 ```kotlin
-implementation("org.nirmato.ollama:nirmato-ollama-client:0.1.0")
+implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.1.0")
 
 // example using ktor CIO engine
 implementation("io.ktor:ktor-client-cio:3.0.3")
@@ -36,7 +36,7 @@ implementation("io.ktor:ktor-client-cio:3.0.3")
 ```xml
 <dependency>
     <groupId>org.nirmato.ollama</groupId>
-    <artifactId>nirmato-ollama-client</artifactId>
+    <artifactId>nirmato-ollama-client-ktor</artifactId>
     <version>0.1.0</version>
 </dependency>
 
@@ -53,14 +53,14 @@ Alternatively, you can [choose](publishing/bom/README.md) individual components 
 ### Usage
 
 ```kotlin
-val ollamaClient = OllamaClient(KtorHttpClientFactory(CIO).createHttpClient())
+val ollamaClient = OllamaClient(CIO)
 
 val request = chatRequest {
     model("tinyllama")
     messages(listOf(Message(role = USER, content = "Why is the sky blue?")))
 }
 
-val response = ollamaClient.chat().chat(request)
+val response = ollamaClient.chat(request)
 ```
 
 ## Acknowledgements

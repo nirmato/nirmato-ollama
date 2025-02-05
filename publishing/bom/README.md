@@ -55,11 +55,7 @@ dependencies {
         </dependency>
         <dependency>
             <groupId>org.nirmato.ollama</groupId>
-            <artifactId>nirmato-ollama-coroutines</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.nirmato.ollama</groupId>
-            <artifactId>nirmato-ollama-coroutines-ktor</artifactId>
+            <artifactId>nirmato-ollama-client-ktor</artifactId>
         </dependency>
     </dependencies>
 </project>
@@ -69,9 +65,8 @@ dependencies {
 
 The `bom` references the following artifacts:
 
-| GroupId                  | ArtifactId                              | Description                          |
-|:-------------------------|:----------------------------------------|:-------------------------------------|
-| `org.nirmato.ollama`     | `nirmato-ollama-annotations`            | Ollama annotations                   |
-| `org.nirmato.ollama`     | `nirmato-ollama-models`                 | Ollama API models                    |
-| `org.nirmato.ollama`     | `nirmato-ollama-client-coroutines`      | Kotlin Multiplatform Coroutines Base |
-| `org.nirmato.ollama`     | `nirmato-ollama-client-coroutines-ktor` | Kotlin Multiplatform Coroutines Ktor |
+| GroupId                  | ArtifactId                    | Description                       |
+|:-------------------------|:------------------------------|:----------------------------------|
+| `org.nirmato.ollama`     | `nirmato-ollama-annotations`  | Ollama annotations                |
+| `org.nirmato.ollama`     | `nirmato-ollama-models`       | Ollama models                     |
+| `org.nirmato.ollama`     | `nirmato-ollama-client-ktor`  | Ollama client Ktor implementation |

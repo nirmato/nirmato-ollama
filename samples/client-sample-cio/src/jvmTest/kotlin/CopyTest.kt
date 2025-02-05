@@ -8,18 +8,17 @@ import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.nirmato.ollama.api.CopyModelRequest.Companion.copyModelRequest
 import org.nirmato.ollama.api.ShowModelRequest.Companion.showModelRequest
-import org.nirmato.ollama.client.OllamaClient
-import org.nirmato.ollama.client.ktor.KtorHttpClientFactory
+import org.nirmato.ollama.client.ktor.OllamaClient
 
 class CopyTest {
     @Disabled
     @Test
     fun copyAndGetAndShow_validRequest_returnSuccess() = runTest {
-        val ollamaClient = OllamaClient(KtorHttpClientFactory(CIO) {
+        val ollamaClient = OllamaClient(CIO) {
             defaultRequest {
                 url("http://localhost:11434/api/")
             }
-        }.createHttpClient())
+        }
 
         val newModel = "test-tinyllama:latest"
 
@@ -28,15 +27,15 @@ class CopyTest {
             destination(newModel)
         }
 
-        ollamaClient.models().copyModel(copyModelRequest)
+        ollamaClient.copyModel(copyModelRequest)
 
-        val model = ollamaClient.models().listModels().models?.first { it.name == newModel }
+        val model = ollamaClient.listModels().models?.first { it.name == newModel }
 
         val modelInfoRequest = showModelRequest {
             name(model?.name)
         }
 
-        val modelInfo = ollamaClient.models().showModel(modelInfoRequest)
+        val modelInfo = ollamaClient.showModel(modelInfoRequest)
 
         assertEquals("llama", modelInfo.details?.family)
     }

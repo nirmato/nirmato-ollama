@@ -20,8 +20,7 @@ dependencies {
     // pick the artifacts that you want but don't specify their versions as that's controlled by the BOM
     implementation("org.nirmato.ollama:nirmato-ollama-annotations")
     implementation("org.nirmato.ollama:nirmato-ollama-models")
-    implementation("org.nirmato.ollama:nirmato-ollama-cliente-coroutines")
-    implementation("org.nirmato.ollama:nirmato-ollama-cliente-coroutines-ktor")
+    implementation("org.nirmato.ollama:nirmato-ollama-client-ktor")
 }
 ```
 

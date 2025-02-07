@@ -19,6 +19,8 @@ include("modules:client-ktor")
 include("publishing:bom")
 include("publishing:version-catalog")
 
+include("reporting:kover")
+
 if(providers.gradleBooleanProperty("kotlin.targets.jvm.enabled").get()) {
     include("samples:client-sample-cio")
 }

@@ -42,7 +42,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.dsl.withCommonCompilerArguments
 import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
-import org.jetbrains.kotlin.gradle.dsl.withWasmJsCompilerArguments
+import org.jetbrains.kotlin.gradle.dsl.withWasmCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
@@ -56,7 +56,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
         configureJvmToolchain()
         configureKotlinSourceSets()
-
         configureAllTargets()
         configureTargets()
     }
@@ -69,7 +68,22 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
 
         configureJvmTarget()
         configureJsTarget()
+
         configureWasmJsTarget()
+        configureWasmWasiTarget()
+
+        if (project.gradleBooleanProperty("kotlin.targets.wasmJs.enabled").get()
+            || project.gradleBooleanProperty("kotlin.targets.wasmWasi.enabled").get()
+        ) {
+            applyKotlinWasmJsImplicitDependencyWorkaround()
+        }
+
+        if (project.gradleBooleanProperty("kotlin.targets.js.enabled").get()
+            || project.gradleBooleanProperty("kotlin.targets.wasmJs.enabled").get()
+            || project.gradleBooleanProperty("kotlin.targets.wasmWasi.enabled").get()
+        ) {
+            configureYarn()
+        }
 
         if (isLinux) {
             configureLinuxTargets()
@@ -84,6 +98,26 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
             configureTvosTargets()
             configureWatchosTargets()
             configureIosTargets()
+        }
+    }
+
+    private fun Project.configureYarn() {
+        rootProject.plugins.withType<YarnPlugin> {
+            yarn.apply {
+                lockFileDirectory = rootDir.resolve("gradle/js")
+                reportNewYarnLock = true
+                yarnLockAutoReplace = true
+                yarnLockMismatchReport = YarnLockMismatchReport.FAIL
+            }
+        }
+
+        rootProject.the<YarnRootEnvSpec>().apply {
+            download = false
+            ignoreScripts = false
+        }
+
+        rootProject.the<NodeJsEnvSpec>().apply {
+            download = false
         }
     }
 
@@ -195,6 +229,16 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
+    private fun Project.checkWasmWasiTasks() {
+        val wasmWasiTest = tasks.named("wasmJsTest")
+
+        tasks.register("checkWasmWasi") {
+            group = "verification"
+            description = "Runs all checks for the Kotlin/WasmWasi platform."
+            dependsOn(wasmWasiTest)
+        }
+    }
+
     private fun Project.checkJvmTasks() {
         val jvmTest = tasks.named("jvmTest")
 
@@ -202,6 +246,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
             group = "verification"
             description = "Runs all checks for the Kotlin/JVM platform."
             dependsOn(jvmTest)
+
             dependsOnJvmApiCheck(project)
         }
     }
@@ -377,24 +422,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 }
             }
 
-            rootProject.plugins.withType<YarnPlugin> {
-                yarn.apply {
-                    lockFileDirectory = rootDir.resolve("gradle/js")
-                    reportNewYarnLock = true
-                    yarnLockAutoReplace = true
-                    yarnLockMismatchReport = YarnLockMismatchReport.FAIL
-                }
-            }
-
-            rootProject.the<YarnRootEnvSpec>().apply {
-                download = false
-                ignoreScripts = false
-            }
-
-            rootProject.the<NodeJsEnvSpec>().apply {
-                download = false
-            }
-
             applyKotlinJsImplicitDependencyWorkaround()
 
             checkJsTasks()
@@ -422,7 +449,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                         sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
                         sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
 
-                        withWasmJsCompilerArguments {
+                        withWasmCompilerArguments {
                             wasmDebugInfo()
                             wasmDebugFriendly()
                             wasmDebuggerCustomFormatters()
@@ -462,9 +489,39 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 }
             }
 
-            applyKotlinWasmJsImplicitDependencyWorkaround()
-
             checkWasmJsTasks()
+        }
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    private fun Project.configureWasmWasiTarget() {
+        val wasmWasiTargetEnabled = project.gradleBooleanProperty("kotlin.targets.wasmWasi.enabled").get()
+        if (wasmWasiTargetEnabled) {
+            configure<KotlinMultiplatformExtension> {
+                wasmJs {
+                    outputModuleName = project.name + "-wasm-wasi"
+
+                    compilerOptions {
+                        sourceMap = true
+                        sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
+                        sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
+
+                        withWasmCompilerArguments {
+                            wasmDebugInfo()
+                            wasmDebugFriendly()
+                            wasmDebuggerCustomFormatters()
+                        }
+                    }
+
+                    browser()
+                    nodejs()
+
+                    binaries.executable()
+                    binaries.library()
+                }
+            }
+
+            checkWasmWasiTasks()
         }
     }
 

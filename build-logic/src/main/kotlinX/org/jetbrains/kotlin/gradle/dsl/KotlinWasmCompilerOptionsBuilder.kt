@@ -1,9 +1,9 @@
 package org.jetbrains.kotlin.gradle.dsl
 
 /**
- * Taken from https://github.com/JetBrains/kotlin/blob/master/compiler/cli/cli-common/src/org/jetbrains/kotlin/cli/common/arguments/K2WasmCompilerArguments.kt
+ * Taken from https://github.com/JetBrains/kotlin/blob/master/compiler/arguments/src/org/jetbrains/kotlin/arguments/description/WasmCompilerArguments.kt
  */
-public class KotlinWasmJsCompilerOptionsBuilder : KotlinCommonKlibCompilerOptionsBuilder() {
+public class KotlinWasmCompilerOptionsBuilder : KotlinCommonKlibCompilerOptionsBuilder() {
     /** Use the WebAssembly compiler backend. */
     public fun wasmCompilerBackend(): Boolean = arguments.add("-Xwasm")
 

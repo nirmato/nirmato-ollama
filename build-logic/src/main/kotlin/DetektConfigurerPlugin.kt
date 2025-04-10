@@ -1,11 +1,16 @@
 package build.gradle.plugins.build
 
 import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektGenerateConfigTask
 import io.gitlab.arturbosch.detekt.DetektPlugin
+import org.gradle.api.JavaVersion
+import org.gradle.api.JavaVersion.toVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.gradleStringProperty
 import org.gradle.api.tasks.StopExecutionException
 import org.gradle.kotlin.dsl.assign
+import org.gradle.kotlin.dsl.withType
 
 public class DetektConfigurerPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
@@ -25,14 +30,32 @@ public class DetektConfigurerPlugin : Plugin<Project> {
 
             buildUponDefaultConfig = true
             parallel = true
-            config.setFrom(layout.files("gradle/detekt/detekt.yml"))
+            autoCorrect = false
+            config.from(
+                files(
+                    layout.files("/gradle/detekt/detekt.yml"),
+                    layout.files("/gradle/detekt/config/${project.name}.yml"),
+                )
+            )
 
             include("**/*.kt", "**/*.kts")
             exclude("**/resources/**", "**/build/**", "**/build.gradle.kts", "**/settings.gradle.kts")
+
+            val onCI = System.getenv("CI").toBoolean()
+
             reports {
-                xml.required = false
-                html.required = false
+                html.required = !onCI
+                md.required = !onCI
+                sarif.required = true
+                txt.required = false
+                xml.required = onCI
             }
+
+            ignoreFailures = !onCI
+        }
+
+        tasks.withType<DetektGenerateConfigTask>().configureEach {
+            enabled = false
         }
     }
 

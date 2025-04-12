@@ -56,7 +56,7 @@ import org.nirmato.ollama.api.UnknownAPIException
  * Internal Json Serializer.
  */
 internal val JsonLenient: Json = Json {
-    isLenient = false
+    isLenient = true
     ignoreUnknownKeys = true
     encodeDefaults = true
     explicitNulls = false

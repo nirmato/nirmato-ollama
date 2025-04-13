@@ -1,0 +1,15 @@
+name: CI Publish
+
+on:
+    release:
+        types:
+            - prereleased
+            - released
+
+concurrency:
+    group: ci-publish-${{ github.workflow }}-${{ github.event.ref }}
+    cancel-in-progress: true
+
+jobs:
+    publish:
+        uses: ./.github/workflows/run-publish.yml

@@ -55,20 +55,20 @@ public class DefaultSettingsPlugin : Plugin<Settings> {
         }
     }
 
-    private fun Settings.checkMinimumGradleVersion() {
-        if (GradleVersion.version(gradle.gradleVersion) < GradleVersion.version(MINIMUM_GRADLE_VERSION)) {
-            throw GradleException("You need Gradle version $MINIMUM_GRADLE_VERSION or higher, but was ${GradleVersion.current().baseVersion}")
+    private fun checkMinimumGradleVersion() {
+        if (GradleVersion.current() < MINIMUM_GRADLE_VERSION) {
+            throw GradleException("You need Gradle version ${MINIMUM_GRADLE_VERSION.baseVersion} or higher, but was ${GradleVersion.current().baseVersion}")
         }
     }
 
     private fun checkJavaRuntimeVersion() {
-        if (JavaVersion.current() < JavaVersion.toVersion(MINIMUM_JAVA_VERSION)) {
+        if (JavaVersion.current() < MINIMUM_JAVA_VERSION) {
             throw GradleException("You need Java version $MINIMUM_JAVA_VERSION or higher, but was ${JavaVersion.current()}")
         }
     }
 
     private companion object {
-        const val MINIMUM_GRADLE_VERSION: String = "8.9"
-        const val MINIMUM_JAVA_VERSION: String = "11"
+        val MINIMUM_GRADLE_VERSION: GradleVersion = GradleVersion.version("8.13")
+        val MINIMUM_JAVA_VERSION: JavaVersion = JavaVersion.toVersion("11")
     }
 }

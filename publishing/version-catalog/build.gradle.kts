@@ -1,6 +1,4 @@
 plugins {
-    `maven-publish`
-
     id("version-catalog")
     id("build-maven-publishing-configurer")
 }
@@ -23,12 +21,12 @@ catalog {
     }
 }
 
-publishing {
-    publications {
-        register<MavenPublication>("versionCatalog") {
-            artifactId = "${rootProject.name}-${project.name}"
-
-            from(components["versionCatalog"])
-        }
-    }
-}
+//publishing {
+//    publications {
+//        register<MavenPublication>("versionCatalog") {
+//            artifactId = "${rootProject.name}-${project.name}"
+//
+//            from(components["versionCatalog"])
+//        }
+//    }
+//}

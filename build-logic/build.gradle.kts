@@ -14,6 +14,7 @@ configurations.configureEach {
 dependencies {
     implementation(libraries.kotlin.gradle.plugin)
     implementation(libraries.detekt.gradle.plugin)
+    implementation(libraries.gradle.maven.publish.plugin)
 }
 
 sourceSets {

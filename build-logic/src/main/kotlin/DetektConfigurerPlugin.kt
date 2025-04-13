@@ -3,11 +3,8 @@ package build.gradle.plugins.build
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektGenerateConfigTask
 import io.gitlab.arturbosch.detekt.DetektPlugin
-import org.gradle.api.JavaVersion
-import org.gradle.api.JavaVersion.toVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.gradleStringProperty
 import org.gradle.api.tasks.StopExecutionException
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.withType
@@ -34,7 +31,6 @@ public class DetektConfigurerPlugin : Plugin<Project> {
             config.from(
                 files(
                     layout.files("/gradle/detekt/detekt.yml"),
-                    layout.files("/gradle/detekt/config/${project.name}.yml"),
                 )
             )
 

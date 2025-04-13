@@ -1,6 +1,4 @@
 plugins {
-    `maven-publish`
-
     id("java-platform")
     id("build-maven-publishing-configurer")
 }
@@ -28,12 +26,12 @@ dependencies {
     }
 }
 
-publishing {
-    publications {
-        register<MavenPublication>("bom") {
-            artifactId = "${rootProject.name}-${project.name}"
-
-            from(components["javaPlatform"])
-        }
-    }
-}
+//publishing {
+//    publications {
+//        register<MavenPublication>("bom") {
+//            artifactId = "${rootProject.name}-${project.name}"
+//
+//            from(components["javaPlatform"])
+//        }
+//    }
+//}

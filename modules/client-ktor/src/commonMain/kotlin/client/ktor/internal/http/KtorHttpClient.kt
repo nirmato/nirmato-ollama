@@ -65,6 +65,8 @@ internal val JsonLenient: Json = Json {
     prettyPrint = false
 }
 
+internal const val MAX_READ_LINE: Int = 128_000
+
 /**
  * Ktor implementation of [HttpClient].
  *
@@ -187,7 +189,7 @@ internal suspend inline fun <reified T> FlowCollector<T>.streamEventsFrom(respon
     val channel = response.body<ByteReadChannel>()
     try {
         while (currentCoroutineContext().isActive && !channel.isClosedForRead) {
-            val line = channel.readUTF8Line()?.takeUnless { it.isEmpty() } ?: continue
+            val line = channel.readUTF8Line(MAX_READ_LINE)?.takeUnless { it.isEmpty() } ?: continue
 
             val value: T = JsonLenient.decodeFromString(line)
 

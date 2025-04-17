@@ -1,5 +1,7 @@
 package org.nirmato.ollama.client.ktor.internal.http
 
+import kotlin.coroutines.coroutineContext
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
@@ -40,6 +42,7 @@ import io.ktor.utils.io.cancel
 import io.ktor.utils.io.core.Closeable
 import io.ktor.utils.io.readUTF8Line
 import org.nirmato.ollama.api.AuthenticationException
+import org.nirmato.ollama.api.FailureResponse
 import org.nirmato.ollama.api.InvalidRequestException
 import org.nirmato.ollama.api.OllamaClientException
 import org.nirmato.ollama.api.OllamaException
@@ -48,7 +51,6 @@ import org.nirmato.ollama.api.OllamaServerException
 import org.nirmato.ollama.api.OllamaTimeoutException
 import org.nirmato.ollama.api.PermissionException
 import org.nirmato.ollama.api.RateLimitException
-import org.nirmato.ollama.api.FailureResponse
 import org.nirmato.ollama.api.UnknownAPIException
 
 /**
@@ -173,7 +175,7 @@ internal suspend inline fun <reified T> KtorHttpClient.perform(noinline builder:
  * Perform an HTTP request and transform the result.
  */
 internal inline fun <reified T : Any> KtorHttpClient.handleFlow(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
-    return flow {
+    return cancellableFlow {
         perform(builder) { response ->
             streamEventsFrom(response)
         }
@@ -193,5 +195,25 @@ internal suspend inline fun <reified T> FlowCollector<T>.streamEventsFrom(respon
         }
     } finally {
         channel.cancel()
+    }
+}
+
+/**
+ * Creates a cancellable flow from a regular flow.
+ * This is useful for streaming responses that need to be cancelled when no longer needed.
+ *
+ * @param T The type of data in the flow
+ * @param block The suspend lambda that produces values for the flow
+ * @return A new Flow that can be cancelled
+ */
+private fun <T> cancellableFlow(block: suspend FlowCollector<T>.() -> Unit): Flow<T> = flow {
+    try {
+        block()
+    } catch (e: Exception) {
+        if (e is CancellationException) {
+            coroutineContext.cancel()
+        } else {
+            throw e
+        }
     }
 }

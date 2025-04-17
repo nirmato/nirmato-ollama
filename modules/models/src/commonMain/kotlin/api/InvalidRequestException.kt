@@ -7,6 +7,6 @@ import io.ktor.http.HttpStatusCode
  */
 public class InvalidRequestException(
     statusCode: HttpStatusCode,
-    error: ResponseFailure,
+    error: FailureResponse,
     throwable: Throwable? = null,
 ) : ApiException(statusCode, error, throwable)

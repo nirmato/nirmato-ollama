@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
- * Request class for pushing a model.
+ * Request for pushing a model.
  */
 @Serializable
 public data class PushModelRequest(
@@ -34,6 +34,10 @@ public data class PushModelRequest(
     @SerialName(value = "stream")
     val stream: Boolean? = false,
 ) {
+    init {
+        require(model.isNotBlank()) { "Model name cannot be blank" }
+    }
+
     public companion object {
         /** A request for pushing a model. */
         public fun pushModelRequest(block: PushModelRequestBuilder.() -> Unit): PushModelRequest {

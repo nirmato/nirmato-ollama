@@ -6,14 +6,14 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
+import org.nirmato.ollama.api.EmbedRequest.Companion.embedRequest
 import org.nirmato.ollama.api.EmbeddedInput.EmbeddedList
 import org.nirmato.ollama.api.EmbeddedInput.EmbeddedText
-import org.nirmato.ollama.api.EmbeddedRequest.Companion.embeddedRequest
 
-internal class EmbeddedClientTest {
+internal class EmbedClientTest {
 
     @Test
-    fun generateEmbedded_validRequest_returnSuccess() = runTest {
+    fun generateEmbed_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
             engine {
                 addHandler {
@@ -37,7 +37,7 @@ internal class EmbeddedClientTest {
             }
         }
 
-        val generateEmbeddedRequest = embeddedRequest {
+        val generateEmbeddedRequest = embedRequest {
             model("tinyllama")
             input(EmbeddedList(listOf(EmbeddedText("Why is the sky blue?"), EmbeddedText("Why is the grass green?"))))
         }

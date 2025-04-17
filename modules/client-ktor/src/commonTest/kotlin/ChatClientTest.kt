@@ -6,6 +6,7 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import io.ktor.client.engine.mock.respond
+import io.ktor.client.engine.mock.respondOk
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
@@ -17,6 +18,8 @@ import org.nirmato.ollama.api.Options
 import org.nirmato.ollama.api.Role.USER
 import org.nirmato.ollama.api.Tool
 import org.nirmato.ollama.api.Tool.ToolFunction
+import org.nirmato.ollama.api.Tool.ToolParameters
+import org.nirmato.ollama.api.Tool.ToolProperty
 
 internal class ChatClientTest {
 
@@ -301,15 +304,15 @@ internal class ChatClientTest {
                         function = ToolFunction(
                             name = "get_current_weather",
                             description = "Get the current weather for a location",
-                            parameters = Tool.Parameters(
+                            parameters = ToolParameters(
                                 type = "object",
                                 required = listOf("location", "format"),
                                 properties = mapOf(
-                                    "location" to Tool.Property(
+                                    "location" to ToolProperty(
                                         type = "string",
                                         description = "The location to get the weather for, e.g. San Francisco, CA",
                                     ),
-                                    "format" to Tool.Property(
+                                    "format" to ToolProperty(
                                         type = "string",
                                         description = "The format to return the weather in, e.g. 'celsius' or 'fahrenheit'",
                                         enumValues = listOf("celsius", "fahrenheit"),

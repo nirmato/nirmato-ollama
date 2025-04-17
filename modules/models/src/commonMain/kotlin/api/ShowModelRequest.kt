@@ -22,6 +22,10 @@ public data class ShowModelRequest(
     @Required
     val name: String,
 ) {
+    init {
+        require(name.isNotBlank()) { "Model name cannot be blank" }
+    }
+
     public companion object {
         /** A request to show the model info. */
         public fun showModelRequest(block: ShowModelRequestBuilder.() -> Unit): ShowModelRequest {

@@ -3,6 +3,7 @@ package org.jetbrains.kotlin.gradle.dsl
 /**
  * Taken from https://github.com/JetBrains/kotlin/blob/master/compiler/arguments/src/org/jetbrains/kotlin/arguments/description/JsCompilerArguments.kt
  */
+@Suppress("TooManyFunctions")
 public class KotlinJsCompilerOptionsBuilder : KotlinCommonCompilerOptionsBuilder() {
     /** Keep IR. */
     public fun irKeep(): Boolean = arguments.add("-Xir-keep")

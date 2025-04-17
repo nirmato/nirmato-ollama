@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * Details about a model.
  */
 @Serializable
-public data class OllamaModelDetails(
+public data class ModelDetails(
     @SerialName(value = "parent_model")
     val parentModel: String,
 

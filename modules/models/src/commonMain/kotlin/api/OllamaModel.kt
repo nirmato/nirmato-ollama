@@ -38,5 +38,5 @@ public data class OllamaModel(
     val digest: String? = null,
 
     @SerialName(value = "details")
-    val details: OllamaModelDetails? = null,
+    val details: ModelDetails? = null,
 )

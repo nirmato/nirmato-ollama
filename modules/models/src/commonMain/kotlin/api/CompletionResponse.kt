@@ -34,6 +34,10 @@ public data class CompletionResponse(
     @SerialName(value = "done")
     val done: Boolean? = null,
 
+    /** Whether the response has completed. */
+    @SerialName(value = "done_reason")
+    val doneReason: DoneReason? = null,
+
     /** Time spent generating the response. */
     @SerialName(value = "total_duration")
     val totalDuration: Long? = null,

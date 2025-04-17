@@ -40,7 +40,7 @@ public data class ProcessResponse(
         val digest: String? = null,
 
         @SerialName(value = "details")
-        val details: OllamaModelDetails? = null,
+        val details: ModelDetails? = null,
 
         @SerialName(value = "expires_at")
         val expiresAt: Instant? = null,

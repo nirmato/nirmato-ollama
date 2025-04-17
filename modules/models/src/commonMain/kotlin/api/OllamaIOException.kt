@@ -7,4 +7,4 @@ public sealed class OllamaIOException(throwable: Throwable? = null) : OllamaExce
 public class OllamaTimeoutException(throwable: Throwable? = null) : OllamaIOException(throwable = throwable)
 
 /** An exception thrown in case of an I/O error */
-public class GenericIOException(throwable: Throwable? = null) : OllamaIOException(throwable = throwable)
+public class OllamaGenericIOException(throwable: Throwable? = null) : OllamaIOException(throwable = throwable)

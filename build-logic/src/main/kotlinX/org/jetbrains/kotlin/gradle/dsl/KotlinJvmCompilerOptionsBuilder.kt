@@ -3,6 +3,7 @@ package org.jetbrains.kotlin.gradle.dsl
 /**
  * Taken from https://github.com/JetBrains/kotlin/blob/master/compiler/cli/cli-common/src/org/jetbrains/kotlin/cli/common/arguments/K2JVMCompilerArguments.kt
  */
+@Suppress("TooManyFunctions")
 public class KotlinJvmCompilerOptionsBuilder : KotlinCommonCompilerOptionsBuilder() {
     /** Use the old JVM backend. */
     public fun useOldBackend(): Boolean = arguments.add("-Xuse-old-backend")

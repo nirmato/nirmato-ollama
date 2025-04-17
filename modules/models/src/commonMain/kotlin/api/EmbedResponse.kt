@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * Returns the embedding information.
  */
 @Serializable
-public data class EmbeddedResponse(
+public data class EmbedResponse(
 
     /**
      * The model name.

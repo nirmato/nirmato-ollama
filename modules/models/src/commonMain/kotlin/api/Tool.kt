@@ -3,6 +3,9 @@ package org.nirmato.ollama.api
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * A tool definition.
+ */
 @Serializable
 public data class Tool(
     @SerialName(value = "type")
@@ -12,6 +15,9 @@ public data class Tool(
     public val function: ToolFunction,
 ) {
 
+    /**
+     * Function details for a tool definition.
+     */
     @Serializable
     public data class ToolFunction(
         @SerialName(value = "name")
@@ -21,11 +27,14 @@ public data class Tool(
         public val description: String,
 
         @SerialName(value = "parameters")
-        public val parameters: Parameters? = null,
+        public val parameters: ToolParameters? = null,
     )
 
+    /**
+     * Parameters for a tool definition.
+     */
     @Serializable
-    public data class Parameters(
+    public data class ToolParameters(
         @SerialName(value = "type")
         public val type: String? = null,
 
@@ -33,11 +42,14 @@ public data class Tool(
         public val required: List<String>? = null,
 
         @SerialName(value = "properties")
-        public val properties: Map<String, Property>? = null,
+        public val properties: Map<String, ToolProperty>? = null,
     )
 
+    /**
+     * Property definition for tool parameters.
+     */
     @Serializable
-    public data class Property(
+    public data class ToolProperty(
         @SerialName(value = "type")
         public val type: String? = null,
 

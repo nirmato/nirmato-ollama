@@ -11,7 +11,7 @@ import org.nirmato.ollama.dsl.OllamaDslMarker
  * Generate embeddings from a model.
  */
 @Serializable
-public data class EmbeddedRequest(
+public data class EmbedRequest(
 
     /**
      * The model name.
@@ -45,36 +45,40 @@ public data class EmbeddedRequest(
     @SerialName(value = "keep_alive")
     val keepAlive: Int? = null,
 ) {
+    init {
+        require(model.isNotBlank()) { "Model name cannot be blank" }
+    }
+
     public companion object {
         /** A request to generate an embeddings from a model. */
-        public fun embeddedRequest(block: EmbeddedRequestBuilder.() -> Unit): EmbeddedRequest {
+        public fun embedRequest(block: EmbedRequestBuilder.() -> Unit): EmbedRequest {
             contract {
                 callsInPlace(block, InvocationKind.EXACTLY_ONCE)
             }
 
-            return EmbeddedRequestBuilder().apply(block).build()
+            return EmbedRequestBuilder().apply(block).build()
         }
 
-        public fun builder(): EmbeddedRequestBuilder = EmbeddedRequestBuilder()
+        public fun builder(): EmbedRequestBuilder = EmbedRequestBuilder()
     }
 
-    /** Builder of [EmbeddedRequest] instances. */
+    /** Builder of [EmbedRequest] instances. */
     @OllamaDslMarker
-    public class EmbeddedRequestBuilder() {
+    public class EmbedRequestBuilder() {
         private var model: String? = null
         private var input: EmbeddedInput? = null
         private var truncate: Boolean? = null
         private var options: Options? = null
         private var keepAlive: Int? = null
 
-        public fun model(model: String): EmbeddedRequestBuilder = apply { this.model = model }
-        public fun input(input: EmbeddedInput): EmbeddedRequestBuilder = apply { this.input = input }
-        public fun truncate(truncate: Boolean): EmbeddedRequestBuilder = apply { this.truncate = truncate }
-        public fun options(options: Options): EmbeddedRequestBuilder = apply { this.options = options }
-        public fun keepAlive(keepAlive: Int): EmbeddedRequestBuilder = apply { this.keepAlive = keepAlive }
+        public fun model(model: String): EmbedRequestBuilder = apply { this.model = model }
+        public fun input(input: EmbeddedInput): EmbedRequestBuilder = apply { this.input = input }
+        public fun truncate(truncate: Boolean): EmbedRequestBuilder = apply { this.truncate = truncate }
+        public fun options(options: Options): EmbedRequestBuilder = apply { this.options = options }
+        public fun keepAlive(keepAlive: Int): EmbedRequestBuilder = apply { this.keepAlive = keepAlive }
 
-        /** Create [EmbeddedRequest] instance. */
-        public fun build(): EmbeddedRequest = EmbeddedRequest(
+        /** Create [EmbedRequest] instance. */
+        public fun build(): EmbedRequest = EmbedRequest(
             model = requireNotNull(model) { "model is required" },
             input = requireNotNull(input) { "input is required" },
             truncate = truncate,

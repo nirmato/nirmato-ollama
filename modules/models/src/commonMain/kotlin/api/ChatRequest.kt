@@ -54,6 +54,11 @@ public class ChatRequest(
     @SerialName(value = "stream")
     public val stream: Boolean? = false,
 ) {
+    init {
+        require(model.isNotBlank()) { "Model name cannot be blank" }
+        require(messages.isEmpty() || messages.all { it.content.isNotBlank() }) { "All messages must have a content" }
+    }
+
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
         public fun chatRequest(block: ChatRequestBuilder.() -> Unit): ChatRequest {

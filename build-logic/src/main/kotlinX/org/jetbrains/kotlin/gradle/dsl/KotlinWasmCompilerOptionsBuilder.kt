@@ -3,6 +3,7 @@ package org.jetbrains.kotlin.gradle.dsl
 /**
  * Taken from https://github.com/JetBrains/kotlin/blob/master/compiler/arguments/src/org/jetbrains/kotlin/arguments/description/WasmCompilerArguments.kt
  */
+@Suppress("TooManyFunctions")
 public class KotlinWasmCompilerOptionsBuilder : KotlinCommonKlibCompilerOptionsBuilder() {
     /** Use the WebAssembly compiler backend. */
     public fun wasmCompilerBackend(): Boolean = arguments.add("-Xwasm")

@@ -12,15 +12,12 @@ import org.nirmato.ollama.api.CheckBlobRequest
 import org.nirmato.ollama.api.CopyModelRequest
 import org.nirmato.ollama.api.CreateBlobRequest
 import org.nirmato.ollama.api.CreateModelRequest
-import org.nirmato.ollama.api.CreateModelResponse
 import org.nirmato.ollama.api.DeleteModelRequest
 import org.nirmato.ollama.api.ListModelsResponse
 import org.nirmato.ollama.api.ModelsApi
-import org.nirmato.ollama.api.ProcessResponse
+import org.nirmato.ollama.api.ProgressResponse
 import org.nirmato.ollama.api.PullModelRequest
-import org.nirmato.ollama.api.PullModelResponse
 import org.nirmato.ollama.api.PushModelRequest
-import org.nirmato.ollama.api.PushModelResponse
 import org.nirmato.ollama.api.ShowModelRequest
 import org.nirmato.ollama.api.ShowModelResponse
 import org.nirmato.ollama.client.ktor.internal.http.KtorHttpClient
@@ -72,7 +69,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      *
      * @param createModelRequest Create a new model from a Modelfile.
      */
-    public override suspend fun createModel(createModelRequest: CreateModelRequest): CreateModelResponse {
+    public override suspend fun createModel(createModelRequest: CreateModelRequest): ProgressResponse {
         return httpClient.perform {
             method = HttpMethod.Post
             url(path = "create")
@@ -85,7 +82,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
     /**
      * @see #createModel(CreateModelRequest)
      */
-    public override fun createModelStream(createModelRequest: CreateModelRequest): Flow<CreateModelResponse> {
+    public override fun createModelStream(createModelRequest: CreateModelRequest): Flow<ProgressResponse> {
         return httpClient.handleFlow {
             method = HttpMethod.Post
             url(path = "create")
@@ -104,6 +101,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
             url(path = "delete")
             setBody(deleteModelRequest)
             contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
         }
     }
 
@@ -122,7 +120,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
     /**
      * List models that are running.
      */
-    public override suspend fun listRunningModels(): ProcessResponse {
+    public override suspend fun listRunningModels(): ListModelsResponse {
         return httpClient.perform {
             method = HttpMethod.Get
             url(path = "ps")
@@ -135,7 +133,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * Download a model from the ollama library.
      * Cancelled pulls are resumed from where they left off, and multiple calls will share the same download progress.
      */
-    public override suspend fun pullModel(pullModelRequest: PullModelRequest): PullModelResponse {
+    public override suspend fun pullModel(pullModelRequest: PullModelRequest): ProgressResponse {
         return httpClient.perform {
             method = HttpMethod.Post
             url(path = "pull")
@@ -146,11 +144,24 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
     }
 
     /**
+     * @see #pullModel(PullModelRequest)
+     */
+    public override fun pullModelStream(pullModelRequest: PullModelRequest): Flow<ProgressResponse> {
+        return httpClient.handleFlow {
+            method = HttpMethod.Post
+            url(path = "pull")
+            setBody(PullModelRequest.builder(pullModelRequest).stream(true).build())
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
+        }
+    }
+
+    /**
      * Upload a model to a model library. Requires registering for ollama.ai and adding a public key first.
      *
      * @param pushModelRequest
      */
-    public override suspend fun pushModel(pushModelRequest: PushModelRequest): PushModelResponse {
+    public override suspend fun pushModel(pushModelRequest: PushModelRequest): ProgressResponse {
         return httpClient.perform {
             method = HttpMethod.Post
             url(path = "push")
@@ -163,7 +174,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
     /**
      * @see #pushModel(PushModelRequest)
      */
-    public override fun pushModelStream(pushModelRequest: PushModelRequest): Flow<PushModelResponse> {
+    public override fun pushModelStream(pushModelRequest: PushModelRequest): Flow<ProgressResponse> {
         return httpClient.handleFlow {
             method = HttpMethod.Post
             url(path = "push")

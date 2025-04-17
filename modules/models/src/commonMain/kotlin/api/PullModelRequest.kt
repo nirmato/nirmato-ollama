@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import org.nirmato.ollama.dsl.OllamaDslMarker
 
 /**
- * Request class for pulling a model.
+ * Request for pulling a model.
  */
 @Serializable
 public data class PullModelRequest(
@@ -38,6 +38,10 @@ public data class PullModelRequest(
     @SerialName(value = "password")
     val password: String? = null,
 ) {
+    init {
+        require(name.isNotBlank()) { "Model name cannot be blank" }
+    }
+
     public companion object {
         /** A request for creating a model. */
         public fun pullModelRequest(block: PullModelRequestBuilder.() -> Unit): PullModelRequest {
@@ -49,6 +53,7 @@ public data class PullModelRequest(
         }
 
         public fun builder(): PullModelRequestBuilder = PullModelRequestBuilder()
+        public fun builder(pullModelRequest: PullModelRequest): PullModelRequestBuilder = PullModelRequestBuilder(pullModelRequest)
     }
 
     /** Builder of [PullModelRequest] instances. */
@@ -59,6 +64,14 @@ public data class PullModelRequest(
         private var username: String? = null
         private var password: String? = null
         private var stream: Boolean? = false
+
+        public constructor(pullModelRequest: PullModelRequest) : this() {
+            name = pullModelRequest.name
+            insecure = pullModelRequest.insecure
+            username = pullModelRequest.username
+            password = pullModelRequest.password
+            stream = pullModelRequest.stream
+        }
 
         public fun name(name: String): PullModelRequestBuilder = apply { this.name = name }
         public fun insecure(insecure: Boolean): PullModelRequestBuilder = apply { this.insecure = insecure }

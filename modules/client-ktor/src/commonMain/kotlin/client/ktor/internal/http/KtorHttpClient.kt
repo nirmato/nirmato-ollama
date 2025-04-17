@@ -23,7 +23,6 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.HttpStatement
-import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Conflict
 import io.ktor.http.HttpStatusCode.Companion.Forbidden
@@ -32,7 +31,7 @@ import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.HttpStatusCode.Companion.TooManyRequests
 import io.ktor.http.HttpStatusCode.Companion.Unauthorized
 import io.ktor.http.HttpStatusCode.Companion.UnsupportedMediaType
-import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
+import io.ktor.serialization.kotlinx.json.json
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.util.reflect.typeInfo
 import io.ktor.utils.io.ByteReadChannel
@@ -41,26 +40,27 @@ import io.ktor.utils.io.cancel
 import io.ktor.utils.io.core.Closeable
 import io.ktor.utils.io.readUTF8Line
 import org.nirmato.ollama.api.AuthenticationException
-import org.nirmato.ollama.api.GenericIOException
 import org.nirmato.ollama.api.InvalidRequestException
 import org.nirmato.ollama.api.OllamaClientException
 import org.nirmato.ollama.api.OllamaException
+import org.nirmato.ollama.api.OllamaGenericIOException
 import org.nirmato.ollama.api.OllamaServerException
 import org.nirmato.ollama.api.OllamaTimeoutException
 import org.nirmato.ollama.api.PermissionException
 import org.nirmato.ollama.api.RateLimitException
-import org.nirmato.ollama.api.ResponseFailure
+import org.nirmato.ollama.api.FailureResponse
 import org.nirmato.ollama.api.UnknownAPIException
 
 /**
  * Internal Json Serializer.
  */
 internal val JsonLenient: Json = Json {
-    isLenient = true
-    ignoreUnknownKeys = true
+    classDiscriminatorMode = ClassDiscriminatorMode.NONE
     encodeDefaults = true
     explicitNulls = false
-    classDiscriminatorMode = ClassDiscriminatorMode.NONE
+    ignoreUnknownKeys = true
+    isLenient = true
+    prettyPrint = false
 }
 
 /**
@@ -114,7 +114,7 @@ internal class KtorHttpClient(private val httpClient: HttpClient) : Closeable {
         is ConnectTimeoutException,
             -> OllamaTimeoutException(cause)
 
-        is IOException -> GenericIOException(cause)
+        is IOException -> OllamaGenericIOException(cause)
         else -> OllamaClientException(cause)
     }
 
@@ -125,7 +125,8 @@ internal class KtorHttpClient(private val httpClient: HttpClient) : Closeable {
     private suspend fun handleClientException(exception: ClientRequestException): OllamaException {
         val response = exception.response
         val status = response.status
-        val error = response.body<ResponseFailure>()
+        val error = response.body<FailureResponse>()
+
         return when (status) {
             TooManyRequests -> RateLimitException(status, error, exception)
 
@@ -141,14 +142,14 @@ internal class KtorHttpClient(private val httpClient: HttpClient) : Closeable {
         }
     }
 
-    public companion object {
-        public operator fun <T : HttpClientEngineConfig> invoke(
+    companion object {
+        operator fun <T : HttpClientEngineConfig> invoke(
             httpClientEngineFactory: HttpClientEngineFactory<T>,
             block: HttpClientConfig<T>.() -> Unit = {},
         ): KtorHttpClient {
             val httpClient = HttpClient(httpClientEngineFactory) {
                 install(ContentNegotiation) {
-                    register(ContentType.Application.Json, KotlinxSerializationConverter(JsonLenient))
+                    json(JsonLenient)
                 }
 
                 expectSuccess = true

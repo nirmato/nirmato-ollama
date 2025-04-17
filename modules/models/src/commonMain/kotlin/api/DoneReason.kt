@@ -2,7 +2,6 @@ package org.nirmato.ollama.api
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.nirmato.ollama.api.DoneReason.values
 
 /**
  * Reason why the model is done generating a response.

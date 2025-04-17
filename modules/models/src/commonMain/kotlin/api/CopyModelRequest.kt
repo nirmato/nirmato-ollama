@@ -23,6 +23,11 @@ public data class CopyModelRequest(
     @Required
     val destination: String,
 ) {
+    init {
+        require(source.isNotBlank()) { "Model source cannot be blank" }
+        require(destination.isNotBlank()) { "Model destination cannot be blank" }
+    }
+
     public companion object {
         /** A request for copying a model. */
         public fun copyModelRequest(block: CopyModelRequestBuilder.() -> Unit): CopyModelRequest {
@@ -51,5 +56,4 @@ public data class CopyModelRequest(
             destination = requireNotNull(destination) { "destination is required" },
         )
     }
-
 }

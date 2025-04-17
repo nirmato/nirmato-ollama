@@ -27,10 +27,12 @@ public interface ModelsApi {
      *
      * @param createModelRequest Create a new model from a Modelfile.
      */
-    public suspend fun createModel(createModelRequest: CreateModelRequest): CreateModelResponse
+    public suspend fun createModel(createModelRequest: CreateModelRequest): ProgressResponse
 
-    /** @see #createModel(CreateModelRequest) */
-    public fun createModelStream(createModelRequest: CreateModelRequest): Flow<CreateModelResponse>
+    /**
+     * @see #createModel(CreateModelRequest)
+     * */
+    public fun createModelStream(createModelRequest: CreateModelRequest): Flow<ProgressResponse>
 
     /**
      * Delete a model and its data.
@@ -45,23 +47,30 @@ public interface ModelsApi {
     /**
      * List models that are running.
      */
-    public suspend fun listRunningModels(): ProcessResponse
+    public suspend fun listRunningModels(): ListModelsResponse
 
     /**
      * Download a model from the ollama library.
      * Cancelled pulls are resumed from where they left off, and multiple calls will share the same download progress.
      */
-    public suspend fun pullModel(pullModelRequest: PullModelRequest): PullModelResponse
+    public suspend fun pullModel(pullModelRequest: PullModelRequest): ProgressResponse
+
+    /**
+     * @see pullModel
+     */
+    public fun pullModelStream(pullModelRequest: PullModelRequest): Flow<ProgressResponse>
 
     /**
      * Upload a model to a model library. Requires registering for ollama.ai and adding a public key first.
      *
      * @param pushModelRequest
      */
-    public suspend fun pushModel(pushModelRequest: PushModelRequest): PushModelResponse
+    public suspend fun pushModel(pushModelRequest: PushModelRequest): ProgressResponse
 
-    /** @see #pushModel(PushModelRequest) */
-    public fun pushModelStream(pushModelRequest: PushModelRequest): Flow<PushModelResponse>
+    /**
+     * @see #pushModel(PushModelRequest)
+     */
+    public fun pushModelStream(pushModelRequest: PushModelRequest): Flow<ProgressResponse>
 
     /**
      * Show details about a model including model file, template, parameters, license, and system prompt.

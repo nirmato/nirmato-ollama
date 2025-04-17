@@ -4,5 +4,5 @@ public interface EmbedApi {
     /**
      * Generate embeddings from a model.
      */
-    public suspend fun generateEmbed(generateEmbeddedRequest: EmbeddedRequest): EmbeddedResponse
+    public suspend fun generateEmbed(generateEmbedRequest: EmbedRequest): EmbedResponse
 }

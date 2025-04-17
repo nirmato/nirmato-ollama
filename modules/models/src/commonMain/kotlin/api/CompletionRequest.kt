@@ -73,10 +73,14 @@ public data class CompletionRequest(
     @SerialName(value = "stream")
     val stream: Boolean? = false,
 
-    /** The context parameter returned from a previous request to [CompletionsApi.completion], this can be used to keep a short conversational memory. */
+    /** The context parameter returned from a previous request to [CompletionsApi#completion], this can be used to keep a short conversational memory. */
     @SerialName(value = "context")
     val context: List<Long>? = null,
 ) {
+    init {
+        require(model.isNotBlank()) { "Model name cannot be blank" }
+    }
+
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
         public fun completionRequest(block: CompletionRequestBuilder.() -> Unit): CompletionRequest {

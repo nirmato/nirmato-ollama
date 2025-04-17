@@ -26,5 +26,5 @@ public data class ShowModelResponse(
     val template: String? = null,
 
     @SerialName(value = "details")
-    val details: OllamaModelDetails? = null,
+    val details: ModelDetails? = null,
 )

@@ -45,6 +45,7 @@ import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
 import org.jetbrains.kotlin.gradle.dsl.withWasmCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
+import org.jetbrains.kotlin.gradle.targets.js.testing.karma.KotlinKarma
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootEnvSpec
@@ -350,6 +351,29 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
+    private fun KotlinKarma.configureKarma(target: KarmaBrowserTarget) {
+        when (target) {
+            Chrome -> useChrome()
+            ChromeHeadless -> useChromeHeadless()
+            ChromeCanary -> useChromeCanary()
+            ChromeCanaryHeadless -> useChromeCanaryHeadless()
+            Chromium -> useChromium()
+            ChromiumHeadless -> useChromiumHeadless()
+            Firefox -> useFirefox()
+            FirefoxHeadless -> useFirefoxHeadless()
+            FirefoxAurora -> useFirefoxAurora()
+            FirefoxAuroraHeadless -> useFirefoxAuroraHeadless()
+            FirefoxDeveloper -> useFirefoxDeveloper()
+            FirefoxDeveloperHeadless -> useFirefoxDeveloperHeadless()
+            FirefoxNightly -> useFirefoxNightly()
+            FirefoxNightlyHeadless -> useFirefoxNightlyHeadless()
+            PhantomJs -> usePhantomJS()
+            Safari -> useSafari()
+            Opera -> useOpera()
+            Ie -> useIe()
+        }
+    }
+
     private fun Project.configureJsTarget() {
         val jsTargetEnabled = project.gradleBooleanProperty("kotlin.targets.js.enabled").get()
         if (jsTargetEnabled) {
@@ -366,26 +390,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     browser {
                         testTask {
                             useKarma {
-                                when (defaultKarmaBrowserTarget()) {
-                                    Chrome -> useChrome()
-                                    ChromeHeadless -> useChromeHeadless()
-                                    ChromeCanary -> useChromeCanary()
-                                    ChromeCanaryHeadless -> useChromeCanaryHeadless()
-                                    Chromium -> useChromium()
-                                    ChromiumHeadless -> useChromiumHeadless()
-                                    Firefox -> useFirefox()
-                                    FirefoxHeadless -> useFirefoxHeadless()
-                                    FirefoxAurora -> useFirefoxAurora()
-                                    FirefoxAuroraHeadless -> useFirefoxAuroraHeadless()
-                                    FirefoxDeveloper -> useFirefoxDeveloper()
-                                    FirefoxDeveloperHeadless -> useFirefoxDeveloperHeadless()
-                                    FirefoxNightly -> useFirefoxNightly()
-                                    FirefoxNightlyHeadless -> useFirefoxNightlyHeadless()
-                                    PhantomJs -> usePhantomJS()
-                                    Safari -> useSafari()
-                                    Opera -> useOpera()
-                                    Ie -> useIe()
-                                }
+                                configureKarma(defaultKarmaBrowserTarget())
                             }
                         }
                     }
@@ -393,26 +398,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     nodejs {
                         testTask {
                             useKarma {
-                                when (defaultKarmaBrowserTarget()) {
-                                    Chrome -> useChrome()
-                                    ChromeHeadless -> useChromeHeadless()
-                                    ChromeCanary -> useChromeCanary()
-                                    ChromeCanaryHeadless -> useChromeCanaryHeadless()
-                                    Chromium -> useChromium()
-                                    ChromiumHeadless -> useChromiumHeadless()
-                                    Firefox -> useFirefox()
-                                    FirefoxHeadless -> useFirefoxHeadless()
-                                    FirefoxAurora -> useFirefoxAurora()
-                                    FirefoxAuroraHeadless -> useFirefoxAuroraHeadless()
-                                    FirefoxDeveloper -> useFirefoxDeveloper()
-                                    FirefoxDeveloperHeadless -> useFirefoxDeveloperHeadless()
-                                    FirefoxNightly -> useFirefoxNightly()
-                                    FirefoxNightlyHeadless -> useFirefoxNightlyHeadless()
-                                    PhantomJs -> usePhantomJS()
-                                    Safari -> useSafari()
-                                    Opera -> useOpera()
-                                    Ie -> useIe()
-                                }
+                                configureKarma(defaultKarmaBrowserTarget())
                             }
                         }
                     }
@@ -428,7 +414,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.defaultKarmaBrowserTarget(): KarmaBrowserTarget {
+    private fun defaultKarmaBrowserTarget(): KarmaBrowserTarget {
         val browser = KarmaBrowser.Chrome
         val channel = KarmaBrowserChannel.Release
         val headless = true
@@ -460,26 +446,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     nodejs {
                         testTask {
                             useKarma {
-                                when (defaultKarmaBrowserTarget()) {
-                                    Chrome -> useChrome()
-                                    ChromeHeadless -> useChromeHeadless()
-                                    ChromeCanary -> useChromeCanary()
-                                    ChromeCanaryHeadless -> useChromeCanaryHeadless()
-                                    Chromium -> useChromium()
-                                    ChromiumHeadless -> useChromiumHeadless()
-                                    Firefox -> useFirefox()
-                                    FirefoxHeadless -> useFirefoxHeadless()
-                                    FirefoxAurora -> useFirefoxAurora()
-                                    FirefoxAuroraHeadless -> useFirefoxAuroraHeadless()
-                                    FirefoxDeveloper -> useFirefoxDeveloper()
-                                    FirefoxDeveloperHeadless -> useFirefoxDeveloperHeadless()
-                                    FirefoxNightly -> useFirefoxNightly()
-                                    FirefoxNightlyHeadless -> useFirefoxNightlyHeadless()
-                                    PhantomJs -> usePhantomJS()
-                                    Safari -> useSafari()
-                                    Opera -> useOpera()
-                                    Ie -> useIe()
-                                }
+                                configureKarma(defaultKarmaBrowserTarget())
                             }
                         }
                     }

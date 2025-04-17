@@ -7,6 +7,6 @@ import io.ktor.http.HttpStatusCode
  */
 public class AuthenticationException(
     statusCode: HttpStatusCode,
-    error: ResponseFailure,
+    error: FailureResponse,
     throwable: Throwable? = null,
 ) : ApiException(statusCode, error, throwable)

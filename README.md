@@ -8,19 +8,13 @@ Unofficial Ollama API client for Kotlin multiplatform.
 
 The implementation follows the OpenAPI definition [Ollama API](oas/ollama-openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
-> [!WARNING]
-> nirmato-ollama is under development.
->
-> Report any issue or bug <a href="https://github.com/nirmato/nirmato-ollama/issues">in the GitHub repository.</a>
->
+<a href="https://www.buymeacoffee.com/kkadete" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="width: 128px;" >
+</a>
 
 ## Dependency
 
 Add the dependency to your project:
-
-> [!WARNING]
-> nirmato-ollama is not yet available in a repository.
->
 
 ### Gradle
 
@@ -28,7 +22,7 @@ Add the dependency to your project:
 implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.1.0")
 
 // example using ktor CIO engine
-implementation("io.ktor:ktor-client-cio:3.0.3")
+implementation("io.ktor:ktor-client-cio:3.1.2")
 ```
 
 ### Maven
@@ -44,7 +38,7 @@ implementation("io.ktor:ktor-client-cio:3.0.3")
 <dependency>
     <groupId>io.ktor</groupId>
     <artifactId>ktor-client-cio</artifactId>
-    <version>3.0.3</version>
+    <version>3.1.2</version>
 </dependency>
 ```
 

@@ -13,7 +13,3 @@ updates:
                 applies-to: security-updates
                 patterns:
                     - "*"
-    -   package-ecosystem: "gradle"
-        directory: "/gradle/catalogs"
-        schedule:
-            interval: "weekly"

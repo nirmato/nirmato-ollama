@@ -2,15 +2,11 @@ name: "CodeQL Analysis"
 
 on:
     workflow_dispatch:
-    push:
-        branches:
-            - "main"
-        paths-ignore:
-            - "**.md"
-            - ".idea/**"
-            - ".editorconfig"
-            - ".gitignore"
     pull_request:
+        types:
+            - reopened
+            - synchronize
+            - opened
         branches:
             - "main"
         paths-ignore:

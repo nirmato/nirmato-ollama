@@ -10,6 +10,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
 import org.gradle.api.getProperty
+import org.gradle.api.gradleBooleanProperty
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Provider
@@ -35,18 +36,18 @@ import org.gradle.plugins.signing.type.pgp.ArmoredSignatureType
 
 public class MavenPublishConfigurerPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
-//        apply<GradleMavenPublishPlugin>()
+//        apply<MavenPublishPlugin>()
 //
 //        configureKotlinJvmPublishing()
 //        configureKotlinMultiplatformPublishing(project)
 //        configureDokkaPublishing()
 //        configurePublications(project)
-//
-//        if (project.gradleBooleanProperty("org.gradle.publications.signing.enabled").get()) {
-//            configureSigning()
-//        }
 
         configurePublishPlugin(project)
+
+        if (project.gradleBooleanProperty("org.gradle.publications.signing.enabled").get()) {
+            configureSigning()
+        }
     }
 
     private fun configurePublishPlugin(project: Project): Unit = project.run {
@@ -54,8 +55,6 @@ public class MavenPublishConfigurerPlugin : Plugin<Project> {
 
         configure<MavenPublishBaseExtension> {
             publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, false)
-
-            signAllPublications()
 
             coordinates(
                 groupId = group.toString(),
@@ -158,14 +157,6 @@ public class MavenPublishConfigurerPlugin : Plugin<Project> {
                     name = "local"
                     setUrl(localMavenDirectory)
                 }
-                maven {
-                    name = "OSSRH"
-                    setUrl("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
-                    credentials {
-                        username = project.getProperty(key = "mavenCentralUsername", environmentKey = "MAVEN_CENTRAL_USERNAME")
-                        password = project.getProperty(key = "mavenCentralPassword", environmentKey = "MAVEN_CENTRAL_PASSWORD")
-                    }
-                }
             }
         }
     }
@@ -211,7 +202,7 @@ public class MavenPublishConfigurerPlugin : Plugin<Project> {
             logger.info("Signing key id: $signingKeyId")
             if (signingKeyId != null) {
                 val signingKey = project.getProperty(key = "gpg.signing.key", environmentKey = "GPG_SIGNING_KEY")?.let { String(Base64.getDecoder().decode(it)) }
-                val signingPassword = project.getProperty(key = "gpg.signing.passphrase", environmentKey = "GPG_SIGNING_PASSPHRASE") ?: ""
+                val signingPassword = project.getProperty(key = "gpg.signing.passphrase", environmentKey = "GPG_SIGNING_PASSPHRASE").orEmpty()
 
                 useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 

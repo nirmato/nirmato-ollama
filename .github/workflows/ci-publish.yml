@@ -3,8 +3,8 @@ name: CI Publish
 on:
     release:
         types:
-            - prereleased
             - released
+            - prereleased
 
 permissions:
     contents: read
@@ -16,3 +16,4 @@ concurrency:
 jobs:
     publish:
         uses: ./.github/workflows/run-publish.yml
+        secrets: inherit

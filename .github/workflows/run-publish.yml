@@ -1,4 +1,4 @@
-name: Run default tests
+name: Run publish
 
 on:
     workflow_dispatch:
@@ -44,7 +44,7 @@ jobs:
                     GPG_SIGNING_KEY: ${{ secrets.GPG_KEY_CONTENTS }}
                     GPG_SIGNING_PASSPHRASE: ${{ secrets.SIGNING_PASSWORD }}
                 run: |
-                    VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
+                    VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | sed 's/^v//')
                     echo "New version: ${VERSION}"
 
                     ./gradlew -Pversion=${VERSION} publishToMavenCentral

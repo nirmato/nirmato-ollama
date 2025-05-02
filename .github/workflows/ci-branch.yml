@@ -11,6 +11,9 @@ on:
             - ".editorconfig"
             - ".gitignore"
 
+permissions:
+    contents: read
+
 concurrency:
     group: ci-branch-${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true

@@ -6,6 +6,9 @@ on:
             - prereleased
             - released
 
+permissions:
+    contents: read
+
 concurrency:
     group: ci-publish-${{ github.workflow }}-${{ github.event.ref }}
     cancel-in-progress: true

@@ -1,10 +1,7 @@
-name: CI Publish
+name: CI Release
 
 on:
-    release:
-        types:
-            - released
-            - prereleased
+    workflow_dispatch:
 
 permissions:
     contents: read

@@ -19,7 +19,7 @@ Add the dependency to your project:
 ### Gradle
 
 ```kotlin
-implementation("org.nirmato.ollama:client-ktor:0.1.0")
+implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.1.0")
 
 // example using ktor CIO engine
 implementation("io.ktor:ktor-client-cio:3.1.2")
@@ -30,7 +30,7 @@ implementation("io.ktor:ktor-client-cio:3.1.2")
 ```xml
 <dependency>
     <groupId>org.nirmato.ollama</groupId>
-    <artifactId>client-ktor</artifactId>
+    <artifactId>nirmato-ollama-client-ktor</artifactId>
     <version>0.1.0</version>
 </dependency>
 

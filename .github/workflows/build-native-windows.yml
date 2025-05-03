@@ -22,6 +22,7 @@ jobs:
             matrix:
                 os: [ 'windows-latest' ]
         runs-on: ${{ matrix.os }}
+        timeout-minutes: 6
         name: Run build on ${{ matrix.os }}
         concurrency:
             group: run-build-mingw-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}

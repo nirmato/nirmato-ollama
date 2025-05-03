@@ -23,6 +23,7 @@ jobs:
                 os: [ 'ubuntu-latest' ]
                 jvm: [ '21' ]
         runs-on: ${{ matrix.os }}
+        timeout-minutes: 6
         name: Run build on ${{ matrix.os }}
         concurrency:
             group: run-build-jvm-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.jvm }}

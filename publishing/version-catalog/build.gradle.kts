@@ -20,13 +20,3 @@ catalog {
         }
     }
 }
-
-//publishing {
-//    publications {
-//        register<MavenPublication>("versionCatalog") {
-//            artifactId = "${rootProject.name}-${project.name}"
-//
-//            from(components["versionCatalog"])
-//        }
-//    }
-//}

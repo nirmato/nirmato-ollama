@@ -25,13 +25,3 @@ dependencies {
         }
     }
 }
-
-//publishing {
-//    publications {
-//        register<MavenPublication>("bom") {
-//            artifactId = "${rootProject.name}-${project.name}"
-//
-//            from(components["javaPlatform"])
-//        }
-//    }
-//}

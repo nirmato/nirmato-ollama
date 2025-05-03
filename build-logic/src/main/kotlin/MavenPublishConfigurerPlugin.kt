@@ -36,14 +36,12 @@ import org.gradle.plugins.signing.type.pgp.ArmoredSignatureType
 
 public class MavenPublishConfigurerPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
-//        apply<MavenPublishPlugin>()
-//
-//        configureKotlinJvmPublishing()
-//        configureKotlinMultiplatformPublishing(project)
-//        configureDokkaPublishing()
-//        configurePublications(project)
-
         configurePublishPlugin(project)
+
+        configureKotlinJvmPublishing()
+        configureKotlinMultiplatformPublishing(project)
+        configureDokkaPublishing()
+//        configurePublications(project)
 
         if (project.gradleBooleanProperty("org.gradle.publications.signing.enabled").get()) {
             configureSigning()
@@ -163,12 +161,22 @@ public class MavenPublishConfigurerPlugin : Plugin<Project> {
 
     private fun Project.configureKotlinMultiplatformPublishing(project: Project) {
         configure<PublishingExtension> {
-            pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
-                publications.withType<MavenPublication>().configureEach {
-                    artifactId = if (name == "kotlinMultiplatform") {
-                        "${rootProject.name}-${project.name}"
-                    } else {
-                        "${rootProject.name}-${project.name}-$name"
+            publications.withType<MavenPublication>().configureEach {
+                if (project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+                    val name = this.name
+
+                    project.afterEvaluate {
+                        artifactId = if (name == "kotlinMultiplatform") {
+                            "${rootProject.name}-${project.name}"
+                        } else {
+                            "${rootProject.name}-${project.name}-$name"
+                        }
+                    }
+                }
+
+                project.afterEvaluate {
+                    if (artifactId == "version-catalog" || artifactId == "bom") {
+                        artifactId = "${rootProject.name}-${project.name}"
                     }
                 }
             }
@@ -176,7 +184,7 @@ public class MavenPublishConfigurerPlugin : Plugin<Project> {
     }
 
     private fun Project.configureKotlinJvmPublishing() {
-        pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+        if (project.plugins.hasPlugin("org.jetbrains.kotlin.jvm")) {
             // sourcesJar is not added by default by the Kotlin JVM plugin
             configure<JavaPluginExtension> {
                 withSourcesJar()
@@ -269,7 +277,7 @@ private fun Project.fixOverlappingOutputsForSigningTask() {
 }
 
 private fun Project.configureDokkaPublishing() {
-    pluginManager.withPlugin("org.jetbrains.dokka") {
+    if (project.plugins.hasPlugin("org.jetbrains.dokka")) {
         project.configure<PublishingExtension> {
             // configureEach reacts on new publications being registered and configures them too
             publications.configureEach {

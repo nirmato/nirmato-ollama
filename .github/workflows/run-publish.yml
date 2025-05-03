@@ -37,16 +37,11 @@ jobs:
 
             -   name: Publish to MavenCentral
                 env:
-                    MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-                    MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
                     GPG_SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
-                    GPG_SIGNING_KEY: ${{ secrets.GPG_KEY_CONTENTS }}
-                    GPG_SIGNING_PASSPHRASE: ${{ secrets.SIGNING_PASSWORD }}
+                    GPG_SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+                    GPG_SIGNING_PASSPHRASE: ${{ secrets.SIGNING_KEY_PASSWORD }}
                     ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
                     ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-                    ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
-                    ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
-                    ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
                 run: |
                     VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | sed 's/^v//')
                     echo "New version: ${VERSION}"

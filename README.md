@@ -11,11 +11,9 @@ The implementation follows the OpenAPI definition [Ollama API](oas/ollama-openap
     <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="width: 128px;" >
 </a>
 
-## Dependency
+## Usage
 
-Add the dependency to your project:
-
-### Gradle
+Add the dependency to your Gradle configuration:
 
 ```kotlin
 implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.1.1")
@@ -24,7 +22,7 @@ implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.1.1")
 implementation("io.ktor:ktor-client-cio:3.1.2")
 ```
 
-### Maven
+or to your Maven pom:
 
 ```xml
 <dependency>
@@ -43,7 +41,7 @@ implementation("io.ktor:ktor-client-cio:3.1.2")
 
 Alternatively, you can [choose](publishing/bom/README.md) individual components of this library.
 
-### Usage
+An example of calling the Ollama client:
 
 ```kotlin
 val ollamaClient = OllamaClient(CIO)
@@ -55,6 +53,15 @@ val request = chatRequest {
 
 val response = ollamaClient.chat(request)
 ```
+
+## Requirements
+
+- Kotlin 1.8 or later
+- JVM 11 or later
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Acknowledgements
 

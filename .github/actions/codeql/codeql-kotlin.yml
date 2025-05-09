@@ -33,7 +33,7 @@ jobs:
             -   name: Setup environment
                 uses: ./.github/actions/setup
                 with:
-                    cache-read-only: ${{ github.ref_name != 'main' }}
+                    cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
             -   name: Initialize CodeQL tools for scanning.
                 uses: github/codeql-action/init@28deaeda66b76a05916b6923827895f2b14ab387 #v3.28.16

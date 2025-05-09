@@ -13,6 +13,7 @@ on:
             - "**.md"
             - ".idea/**"
             - ".editorconfig"
+            - ".gitattributes"
             - ".gitignore"
 
 permissions:
@@ -24,4 +25,4 @@ concurrency:
 
 jobs:
     checks:
-        uses: ./.github/workflows/run-checks.yml
+        uses: ./.github/workflows/run-build.yml

@@ -9,6 +9,7 @@ on:
             - "**.md"
             - ".idea/**"
             - ".editorconfig"
+            - ".gitattributes"
             - ".gitignore"
 
 permissions:
@@ -19,5 +20,5 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    checks:
-        uses: ./.github/workflows/run-checks.yml
+    build:
+        uses: ./.github/workflows/run-build.yml

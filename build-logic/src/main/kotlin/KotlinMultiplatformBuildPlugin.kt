@@ -465,22 +465,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         val wasmWasiTargetEnabled = project.gradleBooleanProperty("kotlin.targets.wasmWasi.enabled").get()
         if (wasmWasiTargetEnabled) {
             configure<KotlinMultiplatformExtension> {
-                wasmJs {
-                    outputModuleName = project.name + "-wasm-wasi"
-
-                    compilerOptions {
-                        sourceMap = true
-                        sourceMapEmbedSources = JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS
-                        sourceMapNamesPolicy = JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES
-
-                        withWasmCompilerArguments {
-                            wasmDebugInfo()
-                            wasmDebugFriendly()
-                            wasmDebuggerCustomFormatters()
-                        }
-                    }
-
-                    browser()
+                wasmWasi {
                     nodejs()
 
                     binaries.executable()

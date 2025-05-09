@@ -1,4 +1,4 @@
-name: Run build KMP for Linux
+name: Run build KMP for MacOS
 
 on:
     workflow_dispatch:
@@ -43,12 +43,12 @@ jobs:
             -   name: Run check
                 continue-on-error: false
                 run: |
-                    ./gradlew -Vs detekt checkLinux
+                    ./gradlew -Vs detekt checkMacos
 
             -   name: (Fail-only) Upload reports
                 if: failure()
                 uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
                 with:
-                    name: reports-build-linux
+                    name: reports-build-macos
                     path: |
                         **/build/reports/**

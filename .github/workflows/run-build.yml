@@ -8,5 +8,5 @@ permissions:
     contents: read
 
 jobs:
-    build-project:
+    build:
         uses: ./.github/workflows/build-jvm.yml

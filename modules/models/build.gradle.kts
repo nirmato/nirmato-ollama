@@ -57,7 +57,5 @@ kotlin {
                 implementation(libraries.kotlinx.coroutines.test)
             }
         }
-
-        val jvmTest by getting
     }
 }

@@ -7,6 +7,9 @@ inputs:
     cache-read-only:
         description: 'gradle.cache-read-only'
         default: 'false'
+    java-version:
+        description: 'Java version'
+        default: '21'
 
 env:
     GRADLE_OPTS: "--no-daemon -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
@@ -18,7 +21,7 @@ runs:
             uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 #v4.7.1
             with:
                 distribution: 'zulu'
-                java-version: 23
+                java-version: ${{ inputs.java-version }}
 
         -   uses: gradle/actions/setup-gradle@06832c7b30a0129d7fb559bcc6e43d26f6374244 #v4.3.1
             with:
@@ -48,6 +51,24 @@ runs:
             if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
             run: chmod +x ./gradlew
             shell: "bash"
+
+        -   name: Cache Konan
+            uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 #v4.2.3
+            with:
+                path: |
+                    ~/.konan/cache
+                    ~/.konan/dependencies
+                    ~/.konan/kotlin-native-macos*
+                    ~/.konan/kotlin-native-mingw*
+                    ~/.konan/kotlin-native-windows*
+                    ~/.konan/kotlin-native-linux*
+                    ~/.konan/kotlin-native-prebuilt-macos*
+                    ~/.konan/kotlin-native-prebuilt-mingw*
+                    ~/.konan/kotlin-native-prebuilt-windows*
+                    ~/.konan/kotlin-native-prebuilt-linux*
+                key: ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle*') }}
+                restore-keys: |
+                    ${{ runner.os }}-konan-
 
         -   if: matrix.os == 'Windows'
             uses: msys2/setup-msys2@61f9e5e925871ba6c9e3e8da24ede83ea27fa91f #v2.27.0

@@ -807,6 +807,21 @@ public final class org/nirmato/ollama/api/Message$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class org/nirmato/ollama/api/ModelCapability : java/lang/Enum {
+	public static final field Companion Lorg/nirmato/ollama/api/ModelCapability$Companion;
+	public static final field Completion Lorg/nirmato/ollama/api/ModelCapability;
+	public static final field Embedding Lorg/nirmato/ollama/api/ModelCapability;
+	public static final field Insert Lorg/nirmato/ollama/api/ModelCapability;
+	public static final field Tools Lorg/nirmato/ollama/api/ModelCapability;
+	public static final field Vision Lorg/nirmato/ollama/api/ModelCapability;
+	public static fun valueOf (Ljava/lang/String;)Lorg/nirmato/ollama/api/ModelCapability;
+	public static fun values ()[Lorg/nirmato/ollama/api/ModelCapability;
+}
+
+public final class org/nirmato/ollama/api/ModelCapability$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class org/nirmato/ollama/api/ModelDetails {
 	public static final field Companion Lorg/nirmato/ollama/api/ModelDetails$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;)V
@@ -1310,19 +1325,23 @@ public final class org/nirmato/ollama/api/ShowModelRequest$ShowModelRequestBuild
 public final class org/nirmato/ollama/api/ShowModelResponse {
 	public static final field Companion Lorg/nirmato/ollama/api/ShowModelResponse$Companion;
 	public fun <init> ()V
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;Ljava/util/Map;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;Ljava/util/Map;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component3 ()Ljava/lang/String;
 	public final fun component4 ()Ljava/lang/String;
 	public final fun component5 ()Lorg/nirmato/ollama/api/ModelDetails;
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;)Lorg/nirmato/ollama/api/ShowModelResponse;
-	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/ShowModelResponse;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;ILjava/lang/Object;)Lorg/nirmato/ollama/api/ShowModelResponse;
+	public final fun component6 ()Ljava/util/Map;
+	public final fun component7 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;Ljava/util/Map;Ljava/util/List;)Lorg/nirmato/ollama/api/ShowModelResponse;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/ShowModelResponse;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;Ljava/util/Map;Ljava/util/List;ILjava/lang/Object;)Lorg/nirmato/ollama/api/ShowModelResponse;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCapabilities ()Ljava/util/List;
 	public final fun getDetails ()Lorg/nirmato/ollama/api/ModelDetails;
 	public final fun getLicense ()Ljava/lang/String;
 	public final fun getModelFile ()Ljava/lang/String;
+	public final fun getModelInfo ()Ljava/util/Map;
 	public final fun getParameters ()Ljava/lang/String;
 	public final fun getTemplate ()Ljava/lang/String;
 	public fun hashCode ()I

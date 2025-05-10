@@ -28,7 +28,7 @@ jobs:
         timeout-minutes: 15
 
         concurrency:
-            group: run-build-mingw-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}
+            group: run-build-windows-${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}
             cancel-in-progress: true
 
         steps:

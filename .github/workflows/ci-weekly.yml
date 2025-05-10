@@ -2,8 +2,6 @@ name: 'Stale Pull Requests'
 
 on:
     workflow_dispatch:
-    schedule:
-        - cron: '33 8 * * 0'
 
 permissions:
     issues: none

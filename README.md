@@ -3,7 +3,7 @@
 ![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.1.21-blue.svg?logo=kotlin)
 ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
-Unofficial Ollama API client for Kotlin multiplatform.
+Ollama API client for Kotlin multiplatform.
 
 The implementation follows the OpenAPI definition [Ollama API](oas/ollama-openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
@@ -19,7 +19,7 @@ Add the dependency to your Gradle configuration:
 implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.1.1")
 
 // example using ktor CIO engine
-implementation("io.ktor:ktor-client-cio:3.1.2")
+implementation("io.ktor:ktor-client-cio:3.1.3")
 ```
 
 or to your Maven pom:
@@ -35,7 +35,7 @@ or to your Maven pom:
 <dependency>
     <groupId>io.ktor</groupId>
     <artifactId>ktor-client-cio</artifactId>
-    <version>3.1.2</version>
+    <version>3.1.3</version>
 </dependency>
 ```
 

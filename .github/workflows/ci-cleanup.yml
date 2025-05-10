@@ -1,0 +1,18 @@
+name: CI Cleanup
+
+on:
+    workflow_dispatch:
+    schedule:
+        -   cron: '21 8 * * 0' # Runs weekly at 08:33 on Sunday UTC
+
+permissions:
+    contents: read
+    actions: write
+
+concurrency:
+    group: ci-cleanup-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build:
+        uses: ./.github/workflows/run-workflow-cleanup.yml

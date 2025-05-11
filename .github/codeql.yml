@@ -14,8 +14,6 @@ on:
             - ".idea/**"
             - ".editorconfig"
             - ".gitignore"
-    schedule:
-        -   cron: "33 8 1 * *"
 
 jobs:
     analyze:

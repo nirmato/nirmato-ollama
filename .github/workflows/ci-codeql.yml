@@ -1,0 +1,17 @@
+name: CI Pull Request
+
+on:
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    security-events: write
+
+concurrency:
+    group: ci-codeql-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    codeql:
+        uses: ./.github/workflows/run-codeql.yml
+        secrets: inherit

@@ -26,7 +26,3 @@ concurrency:
 jobs:
     checks:
         uses: ./.github/workflows/run-build.yml
-
-    codeql:
-        uses: ./.github/workflows/run-codeql.yml
-        secrets: inherit

@@ -1,0 +1,10 @@
+name: "CodeQL Analysis"
+
+on:
+    workflow_dispatch:
+    workflow_call:
+
+jobs:
+    analyze:
+        uses: ./.github/workflows/codeql_kotlin.yml
+        secrets: inherit

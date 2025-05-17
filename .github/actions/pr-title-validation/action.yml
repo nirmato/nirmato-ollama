@@ -1,0 +1,27 @@
+name: Pull Request Title Validation
+
+runs:
+    using: 'composite'
+    steps:
+        -   name: Checkout
+            uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+        -   name: Validate PR title
+            env:
+                PR_TITLE: ${{ github.event.pull_request.title }}
+            shell: bash
+            run: |
+                # Regex for Conventional Commits specification
+                PR_TITLE_REGEX="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(!)?(\([^\)]*\))?:\s?.+$"
+
+                # Check if PR title matches the regex
+                if [[ ! "$PR_TITLE" =~ $PR_TITLE_REGEX ]]; then
+                  echo "❌ The PR title does not follow the Conventional Commits specification."
+                  echo "PR Title -> $PR_TITLE"
+                  echo "Valid PR title format: <type>(<optional scope>): <subject>"
+                  echo "Example: fix: Bug in insert"
+                  echo "Please check https://www.conventionalcommits.org/en/v1.0.0/#summary"
+                  exit 1
+                else
+                  echo "🎉 The PR title is following the Conventional Commits specification."
+                fi

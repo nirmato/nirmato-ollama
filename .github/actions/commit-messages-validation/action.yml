@@ -1,0 +1,50 @@
+name: Commit Message Validation
+
+runs:
+    using: 'composite'
+    steps:
+        -   name: Checkout
+            uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+            with:
+                fetch-depth: 0
+
+        -   name: Validate commit messages
+            shell: bash
+            run: |
+                # Regex for Conventional Commits specification
+                COMMIT_REGEX="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(!)?(\([^\)]*\))?:\s?.+$"
+
+                # Get all commits in the pull request (from base to head)
+                COMMITS=$(git log --format=%s --no-merges origin/main..${{ github.sha }})
+
+                # Initialize counters and store invalid commits
+                INVALID_COMMITS=()
+                VALID_COMMITS=()
+
+                echo "ℹ️ Checking if commit messages are following the Conventional Commits specification..."
+
+                # Loop through each commit message
+                IFS=$'\n'
+                for COMMIT_MSG in $COMMITS; do
+                  # Check if commit message matches the regex
+                  if [[ ! "$COMMIT_MSG" =~ $COMMIT_REGEX ]]; then
+                    INVALID_COMMITS+=("$COMMIT_MSG")
+                    echo -e "❌ $COMMIT_MSG"
+                  else
+                    VALID_COMMITS+=("$COMMIT_MSG")
+                    echo -e "✅ $COMMIT_MSG"
+                  fi
+                done
+
+                # If there are invalid commits, print the summary
+                if [ ${#INVALID_COMMITS[@]} -gt 0 ]; then
+                  echo ""
+                  echo "🛑 Some commit messages are not following the Conventional Commits specification."
+                  echo ""
+                  echo "Valid commit message format: <type>(<optional scope>): <subject>"
+                  echo "Example: fix: Bug in insert"
+                  echo "Please check https://www.conventionalcommits.org/en/v1.0.0/#summary"
+                  exit 1
+                fi
+
+                echo "🎉 All commit messages are following the Conventional Commits specification."

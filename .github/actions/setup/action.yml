@@ -11,9 +11,6 @@ inputs:
         description: 'Java version'
         default: '21'
 
-env:
-    GRADLE_OPTS: "--no-daemon -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
-
 runs:
     using: 'composite'
     steps:

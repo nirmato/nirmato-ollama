@@ -20,5 +20,8 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    commit-messages-validation:
+        uses: ./.github/actions/commit-messages-validation/action.yml
+
     build:
         uses: ./.github/workflows/run-build.yml

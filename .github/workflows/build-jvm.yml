@@ -18,7 +18,7 @@ jobs:
     build-jvm:
         name: Run build on ${{ matrix.os }}
 
-        continue-on-error: true
+        continue-on-error: false
         strategy:
             fail-fast: true
             matrix:

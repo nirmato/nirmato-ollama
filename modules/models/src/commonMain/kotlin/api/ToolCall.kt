@@ -2,6 +2,7 @@ package org.nirmato.ollama.api
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
 
 /**
  * A tool call in a message.
@@ -20,6 +21,6 @@ public data class ToolCall(
         public val name: String,
 
         @SerialName(value = "arguments")
-        public val arguments: Map<String, String>,
+        public val arguments: Map<String, JsonElement>,
     )
 }

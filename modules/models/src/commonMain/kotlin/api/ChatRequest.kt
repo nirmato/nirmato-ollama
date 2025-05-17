@@ -56,7 +56,7 @@ public class ChatRequest(
 ) {
     init {
         require(model.isNotBlank()) { "Model name cannot be blank" }
-        require(messages.isEmpty() || messages.all { it.content.isNotBlank() }) { "All messages must have a content" }
+        require(messages.isEmpty() || messages.all { it.content.isNotBlank() || it.tools?.isNotEmpty() ?: false }) { "All messages must have a content" }
     }
 
     public companion object {

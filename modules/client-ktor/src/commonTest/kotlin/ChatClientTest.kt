@@ -7,6 +7,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -20,7 +21,6 @@ import org.nirmato.ollama.api.Role.USER
 import org.nirmato.ollama.api.Tool
 import org.nirmato.ollama.api.Tool.ToolFunction
 import org.nirmato.ollama.api.Tool.ToolParameters
-import org.slf4j.MDC.put
 
 internal class ChatClientTest {
 

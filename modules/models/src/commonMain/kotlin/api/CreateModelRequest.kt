@@ -66,32 +66,10 @@ public data class CreateModelRequest(
 
     @Serializable
     public enum class Quantize {
-        @SerialName(value = "q2_K")
-        Q2_K,
-        @SerialName(value = "q3_K_L")
-        Q3_K_L,
-        @SerialName(value = "q3_K_M")
-        Q3_K_M,
-        @SerialName(value = "q3_K_S")
-        Q3_K_S,
-        @SerialName(value = "q4_0")
-        Q4_0,
-        @SerialName(value = "q4_1")
-        Q4_1,
         @SerialName(value = "q4_K_M")
         Q4_K_M,
         @SerialName(value = "q4_K_S")
         Q4_K_S,
-        @SerialName(value = "q5_0")
-        Q5_0,
-        @SerialName(value = "q5_1")
-        Q5_1,
-        @SerialName(value = "q5_K_M")
-        Q5_K_M,
-        @SerialName(value = "q5_K_S")
-        Q5_K_S,
-        @SerialName(value = "q6_K")
-        Q6_K,
         @SerialName(value = "q8_0")
         Q8_0,
     }

@@ -15,17 +15,20 @@ public interface ModelsApi {
     public suspend fun copyModel(copyModelRequest: CopyModelRequest)
 
     /**
-     * Create a blob from a file. Returns the server file path.
+     * Push a file to the Ollama server to create a "blob" (Binary Large Object).
      */
     public suspend fun createBlob(createBlobRequest: CreateBlobRequest)
 
     /**
-     * Create a model from a Modelfile.
-     * It is recommended to set &#x60;modelfile&#x60; to the content of the Modelfile rather than just set &#x60;path&#x60;.
-     * This is a requirement for remote create. Remote model creation should also create any file blobs, fields such as &#x60;FROM&#x60; and &#x60;ADAPTER&#x60;,
-     * explicitly with the server using Create a Blob and the value to the path indicated in the response.
+     * Create a model from:
+     * - Another model;
+     * - A safetensors directory;
+     * - A GGUF file.
      *
-     * @param createModelRequest Create a new model from a Modelfile.
+     * If you are creating a model from a safetensors directory or from a GGUF file, you must [create a blob](#create-a-blob)
+     * for each of the files and then use the file name and SHA256 digest associated with each blob in the `files` field.
+     *
+     * @param createModelRequest Create a new model.
      */
     public suspend fun createModel(createModelRequest: CreateModelRequest): ProgressResponse
 

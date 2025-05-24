@@ -8,23 +8,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 public data class Options(
-    /** Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0)  */
-    @SerialName(value = "mirostat")
-    val mirostat: Int? = null,
-
-    /**
-     * Influences how quickly the algorithm responds to feedback from the generated text.
-     * A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1)
-     */
-    @SerialName(value = "mirostat_eta")
-    val mirostatEta: Float? = null,
-    /**
-     * Controls the balance between coherence and diversity of the output.
-     * A lower value will result in more focused and coherent text. (Default: 5.0)
-     */
-    @SerialName(value = "mirostat_tau")
-    val mirostatTau: Float? = null,
-
     /** Sets the size of the context window used to generate the next token. (Default: 2048) */
     @SerialName(value = "num_ctx")
     val numCtx: Int? = null,
@@ -131,10 +114,6 @@ public data class Options(
     @SerialName(value = "main_gpu")
     val mainGpu: Int? = null,
 
-    /** Enable low VRAM mode. (Default: false)  */
-    @SerialName(value = "low_vram")
-    val lowVram: Boolean? = null,
-
     /** Enable f16 key/value. (Default: false)  */
     @SerialName(value = "f16_kv")
     val f16Kv: Boolean? = null,
@@ -143,17 +122,9 @@ public data class Options(
     @SerialName(value = "logits_all")
     val logitsAll: Boolean? = null,
 
-    /** Enable vocab only. (Default: false)  */
-    @SerialName(value = "vocab_only")
-    val vocabOnly: Boolean? = null,
-
     /** Enable mmap. (Default: false)  */
     @SerialName(value = "use_mmap")
     val useMmap: Boolean? = null,
-
-    /** Enable mlock. (Default: false)  */
-    @SerialName(value = "use_mlock")
-    val useMlock: Boolean? = null,
 
     /**
      * Sets the number of threads to use during computation.

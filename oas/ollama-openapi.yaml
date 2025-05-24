@@ -3,11 +3,11 @@ openapi: 3.1.0
 info:
     title: Ollama API
     description: API Spec for Ollama API. Please see https://github.com/ollama/ollama/blob/main/docs/api.md for more details.
-    version: 0.6.4
+    version: 0.7.1
 
 servers:
     -   url: http://localhost:11434/api
-        description: Ollama server URL
+        description: Ollama local server URL
 
 tags:
     -   name: Completions
@@ -99,14 +99,17 @@ paths:
             operationId: createModel
             tags:
                 - Models
-            summary: Create a model from a Modelfile.
+            summary: Create a model.
             description: |
-                Create a model from a Modelfile.
-                It is recommended to set &#x60;modelfile&#x60; to the content of the Modelfile rather than just set &#x60;path&#x60;.
-                This is a requirement for remote create. Remote model creation should also create any file blobs, fields such as &#x60;FROM&#x60; and &#x60;ADAPTER&#x60;,
-                explicitly with the server using Create a Blob and the value to the path indicated in the response.
+                Create a model from:
+                * Another model;
+                * A safetensors directory; or
+                * A GGUF file.
+
+                If you are creating a model from a safetensors directory or from a GGUF file, you must [create a blob](#create-a-blob)
+                for each of the files and then use the file name and SHA256 digest associated with each blob in the `files` field.
             requestBody:
-                description: Create a new model from a Modelfile.
+                description: Create a new model.
                 content:
                     application/json:
                         schema:
@@ -233,7 +236,7 @@ paths:
             operationId: checkBlob
             tags:
                 - Models
-            summary: Ensures that the file blob used for a FROM or ADAPTER field exists on the server.
+            summary: Ensures that the file blob (Binary Large Object) used with create a model exists on the server. This checks your Ollama server and not ollama.com.
             description: This is checking your Ollama server and not Ollama.ai.
             parameters:
                 -   in: path
@@ -252,7 +255,7 @@ paths:
             operationId: createBlob
             tags:
                 - Models
-            summary: Create a blob from a file. Returns the server file path.
+            summary: Push a file to the Ollama server to create a "blob" (Binary Large Object).
             parameters:
                 -   in: path
                     name: digest
@@ -281,8 +284,8 @@ components:
                     type: string
                     description: &model_name |
                         The model name.
-                        Model names follow a model:tag format, where model can have an optional namespace such as example/model.
-                        Some examples are orca-mini:3b-q4_1 and llama3:70b. The tag is optional and, if not provided, will default to latest.
+                        Model names follow a `model:tag` format, where `model` can have an optional namespace such as `example/model`.
+                        Some examples are `orca-mini:3b-q8_0` and `llama3:70b`. The tag is optional and, if not provided, will default to `latest`.
                         The tag is used to identify a specific version.
                     example: llama3:8b
                 prompt:
@@ -346,24 +349,6 @@ components:
             type: object
             description: Additional model parameters listed in the documentation for the Modelfile, such as `temperature`.
             properties:
-                mirostat:
-                    type: integer
-                    nullable: true
-                    description: |
-                        Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0)
-                mirostat_eta:
-                    type: number
-                    format: float
-                    nullable: true
-                    description: |
-                        Influences how quickly the algorithm responds to feedback from the generated text.
-                        A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1)
-                mirostat_tau:
-                    type: number
-                    format: float
-                    nullable: true
-                    description: |
-                        Controls the balance between coherence and diversity of the output. A lower value will result in more focused and coherent text. (Default: 5.0)
                 num_ctx:
                     type: integer
                     nullable: true
@@ -483,11 +468,6 @@ components:
                     nullable: true
                     description: |
                         The GPU to use for the main model. Default is 0.
-                low_vram:
-                    type: boolean
-                    nullable: true
-                    description: |
-                        Enable low VRAM mode. (Default: false)
                 f16_kv:
                     type: boolean
                     nullable: true
@@ -498,21 +478,11 @@ components:
                     nullable: true
                     description: |
                         Enable logits all. (Default: false)
-                vocab_only:
-                    type: boolean
-                    nullable: true
-                    description: |
-                        Enable vocab only. (Default: false)
                 use_mmap:
                     type: boolean
                     nullable: true
                     description: |
                         Enable mmap. (Default: false)
-                use_mlock:
-                    type: boolean
-                    nullable: true
-                    description: |
-                        Enable mlock. (Default: false)
                 num_thread:
                     type: integer
                     nullable: true
@@ -603,7 +573,7 @@ components:
                         $ref: '#/components/schemas/Message'
                 tools:
                     type: array
-                    description: The for the model to use if supported. Requires stream to be set to false
+                    description: The list of tools in JSON for the model to use if supported.
                     items:
                         $ref: '#/components/schemas/Tool'
                 format:
@@ -753,7 +723,7 @@ components:
             properties:
                 role:
                     type: string
-                    description: The role of the message
+                    description: The role of the message, either `system`, `user`, `assistant`, or `tool`
                     enum: [ "system", "user", "assistant", "tool" ]
                 content:
                     type: string
@@ -768,7 +738,7 @@ components:
                         example: iVBORw0KGgoAAAANSUhEUgAAAAkAAAANCAIAAAD0YtNRAAAABnRSTlMA/AD+APzoM1ogAAAAWklEQVR4AWP48+8PLkR7uUdzcMvtU8EhdykHKAciEXL3pvw5FQIURaBDJkARoDhY3zEXiCgCHbNBmAlUiyaBkENoxZSDWnOtBmoAQu7TnT+3WuDOA7KBIkAGAGwiNeqjusp/AAAAAElFTkSuQmCC
                 tool_calls:
                     type: array
-                    description: A list of tools the model wants to use
+                    description: A list of tools in JSON that the model wants to use
                     items:
                         type:
                             $ref: '#/components/schemas/ToolCall'
@@ -822,17 +792,37 @@ components:
                     type: string
                     description: *model_name
                     example: mario
-                modelfile:
+                from:
                     type: string
-                    description: The contents of the Modelfile.
-                    example: FROM llama3\nSYSTEM You are mario from Super Mario Bros.
+                    description: The name of an existing model to create the new model from.
+                files:
+                    type: string
+                    description: A dictionary of file names to SHA256 digests of blobs to create the model from.
+                adapters:
+                    type: string
+                    description: A dictionary of file names to SHA256 digests of blobs for LORA adapters.
+                template:
+                    type: string
+                    description: The prompt template for the model.
+                license:
+                    type: string
+                    description: A string or list of strings containing the license or licenses for the model.
+                system:
+                    type: string
+                    description: A string containing the system prompt for the model.
+                parameters:
+                    type: string
+                    description: A dictionary of parameters for the model (see [Modelfile](./modelfile.md#valid-parameters-and-values) for a list of parameters).
+                messages:
+                    type: string
+                    description: A list of message objects used to create a conversation.
                 stream:
                     type: boolean
                     description: *stream
                     default: false
-                path:
+                quantize:
                     type: string
-                    description: Path to the Modelfile
+                    description: To quantize a non-quantized (e.g. float16) model.
             required:
                 - model
         ModelsResponse:

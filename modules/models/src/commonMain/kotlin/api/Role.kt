@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * The role of the message
+ * The role of the message, either `system`, `user`, `assistant`, or `tool`.
  */
 @Serializable
 public enum class Role(public val value: String) {

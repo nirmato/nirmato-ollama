@@ -23,7 +23,7 @@ public data class Message(
     @SerialName(value = "images")
     val images: List<String>? = null,
 
-    /** A list of tools the model wants to use. */
+    /** A list of tools in JSON the model wants to use. */
     @SerialName(value = "tool_calls")
     val tools: List<ToolCall>? = null,
 )

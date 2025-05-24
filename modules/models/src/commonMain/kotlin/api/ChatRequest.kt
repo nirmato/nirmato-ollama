@@ -14,8 +14,8 @@ import org.nirmato.ollama.dsl.OllamaDslMarker
 public class ChatRequest(
     /**
      * The model name.
-     * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
-     * Some examples are orca-mini:3b-q4_1 and llama3:70b. The tag is optional and, if not provided, will default to latest.
+     * Model names follow a `model:tag` format, where `model` can have an optional namespace such as `example/model`.
+     * Some examples are `orca-mini:3b-q8_0` and `llama3:70b`. The tag is optional and, if not provided, will default to `latest`.
      * The tag is used to identify a specific version.
      */
     @SerialName(value = "model")
@@ -27,7 +27,7 @@ public class ChatRequest(
     @Required
     public val messages: List<Message>,
 
-    /** The for the model to use if supported. Requires stream to be set to false. */
+    /** The list of tools in JSON for the model to use if supported. */
     @SerialName(value = "tools")
     public val tools: List<Tool>? = null,
 

@@ -45,7 +45,11 @@ Alternatively, you can [choose](publishing/bom/README.md) individual components 
 An example of calling the Ollama client:
 
 ```kotlin
-val ollamaClient = OllamaClient(CIO)
+val ollamaClient = OllamaClient(CIO) {
+    defaultRequest { url("http://localhost:11434/api/") }
+    //Optionaly disable timeout to prevent OllamaTimeoutException
+    //engine { requestTimeout = 0 }
+}
 
 val request = chatRequest {
     model("tinyllama")

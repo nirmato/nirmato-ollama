@@ -4,7 +4,7 @@
 ![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.1.21-blue.svg?logo=kotlin)
 ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
-Ollama API client for Kotlin multiplatform.
+An Ollama Kotlin Multiplatform SDK that provides convenient access to the Ollama REST API.
 
 The implementation follows the OpenAPI definition [Ollama API](oas/ollama-openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
@@ -12,7 +12,7 @@ The implementation follows the OpenAPI definition [Ollama API](oas/ollama-openap
     <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="width: 128px;" >
 </a>
 
-## Usage
+## Installation
 
 Add the dependency to your Gradle configuration:
 
@@ -40,15 +40,27 @@ or to your Maven pom:
 </dependency>
 ```
 
-Alternatively, you can [choose](publishing/bom/README.md) individual components of this library.
+## Requirements
 
-An example of calling the Ollama client:
+- Kotlin 1.8 or later
+- JVM 11 or later
+
+## Usage
+
+An example of calling Ollama:
 
 ```kotlin
 val ollamaClient = OllamaClient(CIO) {
-    defaultRequest { url("http://localhost:11434/api/") }
-    //Optionaly disable timeout to prevent OllamaTimeoutException
-    //engine { requestTimeout = 0 }
+    defaultRequest { 
+        url("http://localhost:11434/api/") 
+    }
+
+    /*
+    // optionally disable timeout to prevent OllamaTimeoutException
+    engine { 
+        requestTimeout = 0 
+    }
+    */
 }
 
 val request = chatRequest {
@@ -59,10 +71,7 @@ val request = chatRequest {
 val response = ollamaClient.chat(request)
 ```
 
-## Requirements
-
-- Kotlin 1.8 or later
-- JVM 11 or later
+See the [samples](samples) directory for complete examples.
 
 ## Contributing
 

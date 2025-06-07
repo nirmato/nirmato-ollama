@@ -7,7 +7,7 @@ plugins {
     id("build-maven-publishing-configurer")
 }
 
-description = "Ollama Ktor client"
+description = "Ollama client support for Ktor"
 
 kotlin {
     explicitApi()
@@ -37,7 +37,7 @@ kotlin {
                 srcDirs("src/commonMain/kotlinX")
             }
             dependencies {
-                api(project(":modules:models"))
+                api(project(":modules:client"))
 
                 implementation(libraries.kotlinx.datetime)
                 implementation(libraries.kotlinx.coroutines.core)

@@ -1,3 +1,0 @@
-public abstract interface annotation class org/nirmato/ollama/annotations/InternalApi : java/lang/annotation/Annotation {
-}
-

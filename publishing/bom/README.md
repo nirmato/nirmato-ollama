@@ -18,8 +18,7 @@ dependencies {
     implementation(platform("org.nirmato.ollama:nirmato-ollama-bom:[version]"))
 
     // pick the artifacts that you want but don't specify their versions as that's controlled by the BOM
-    implementation("org.nirmato.ollama:nirmato-ollama-annotations")
-    implementation("org.nirmato.ollama:nirmato-ollama-models")
+    implementation("org.nirmato.ollama:nirmato-ollama-client")
     implementation("org.nirmato.ollama:nirmato-ollama-client-ktor")
 }
 ```
@@ -46,11 +45,7 @@ dependencies {
     <dependencies>
         <dependency>
             <groupId>org.nirmato.ollama</groupId>
-            <artifactId>nirmato-ollama-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.nirmato.ollama</groupId>
-            <artifactId>nirmato-ollama-models</artifactId>
+            <artifactId>nirmato-ollama-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.nirmato.ollama</groupId>
@@ -64,8 +59,7 @@ dependencies {
 
 The `bom` references the following artifacts:
 
-| GroupId                  | ArtifactId                    | Description                       |
-|:-------------------------|:------------------------------|:----------------------------------|
-| `org.nirmato.ollama`     | `nirmato-ollama-annotations`  | Ollama annotations                |
-| `org.nirmato.ollama`     | `nirmato-ollama-models`       | Ollama models                     |
-| `org.nirmato.ollama`     | `nirmato-ollama-client-ktor`  | Ollama client Ktor implementation |
+| GroupId                  | ArtifactId                   | Description                    |
+|:-------------------------|:-----------------------------|:-------------------------------|
+| `org.nirmato.ollama`     | `nirmato-ollama-client`      | Ollama client API              |
+| `org.nirmato.ollama`     | `nirmato-ollama-client-ktor` | Ollama client support for Ktor |

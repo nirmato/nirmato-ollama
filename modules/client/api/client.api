@@ -1,3 +1,6 @@
+public abstract interface annotation class org/nirmato/ollama/annotations/InternalApi : java/lang/annotation/Annotation {
+}
+
 public abstract class org/nirmato/ollama/api/ApiException : org/nirmato/ollama/api/OllamaException {
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/FailureResponse;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (Lio/ktor/http/HttpStatusCode;Lorg/nirmato/ollama/api/FailureResponse;Ljava/lang/Throwable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V

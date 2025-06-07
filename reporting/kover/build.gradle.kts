@@ -9,9 +9,8 @@ plugins {
 description = "Kover Reporting"
 
 dependencies {
-    kover(project(":modules:annotations"))
+    kover(project(":modules:client"))
     kover(project(":modules:client-ktor"))
-    kover(project(":modules:models"))
 }
 
 kover {

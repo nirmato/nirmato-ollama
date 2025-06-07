@@ -4,13 +4,18 @@
 ![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.1.21-blue.svg?logo=kotlin)
 ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
-An Ollama Kotlin Multiplatform SDK that provides convenient access to the Ollama REST API.
+An Ollama client SDK that allows you to easily interact with Ollama API.
 
-The implementation follows the OpenAPI definition [Ollama API](oas/ollama-openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
+The supported API follows the OpenAPI definition [Ollama API](oas/ollama-openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
 
 <a href="https://www.buymeacoffee.com/kkadete" target="_blank">
     <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="width: 128px;" >
 </a>
+
+## Requirements
+
+- Kotlin 1.8 or higher
+- JVM 11 or higher
 
 ## Installation
 
@@ -40,14 +45,9 @@ or to your Maven pom:
 </dependency>
 ```
 
-## Requirements
-
-- Kotlin 1.8 or later
-- JVM 11 or later
-
 ## Usage
 
-An example of calling Ollama:
+The OllamaClient class contains all the methods needed to interact with the Ollama API. An example of calling Ollama:
 
 ```kotlin
 val ollamaClient = OllamaClient(CIO) {

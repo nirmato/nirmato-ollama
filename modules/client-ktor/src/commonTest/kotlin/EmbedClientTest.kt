@@ -39,12 +39,12 @@ internal class EmbedClientTest {
             }
         }
 
-        val generateEmbeddedRequest = embedRequest {
+        val generateEmbedRequest = embedRequest {
             model("tinyllama")
             input(EmbeddedList(listOf(EmbeddedText("Why is the sky blue?"), EmbeddedText("Why is the grass green?"))))
         }
 
-        val response = ollamaClient.generateEmbed(generateEmbeddedRequest)
+        val response = ollamaClient.generateEmbed(generateEmbedRequest)
 
         println(response.toString())
     }

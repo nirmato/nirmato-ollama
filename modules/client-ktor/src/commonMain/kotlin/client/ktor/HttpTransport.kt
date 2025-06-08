@@ -47,6 +47,13 @@ import org.nirmato.ollama.api.UnknownAPIException
 
 public const val MAX_READ_LINE: Int = 128_000
 
+/**
+ * A transport layer for handling HTTP requests and responses in the Ollama client.
+ * This class provides methods to perform requests, handle exceptions, and stream events from responses.
+ *
+ * @property httpClient The HTTP client used to make requests.
+ * @property clientConfig Configuration settings for the Ollama client.
+ */
 internal class HttpTransport(
     private val httpClient: HttpClient,
     private val clientConfig: OllamaClientConfig,

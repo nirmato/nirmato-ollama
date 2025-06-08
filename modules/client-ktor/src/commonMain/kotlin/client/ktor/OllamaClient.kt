@@ -138,6 +138,13 @@ public class OllamaClient(
     }
 
     public companion object {
+        /**
+         * Creates a new OllamaClient instance using the specified HTTP client engine factory.
+         *
+         * @param httpClientEngineFactory The HTTP client engine factory to use for the client.
+         * @param block Optional configuration block for the client builder.
+         * @return A new OllamaClient instance
+         */
         public operator fun <T : HttpClientEngineConfig> invoke(httpClientEngineFactory: HttpClientEngineFactory<T>, block: Builder<T>.() -> Unit = {}): OllamaClient =
             Builder(httpClientEngineFactory).apply(block).build()
     }

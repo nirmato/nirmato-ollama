@@ -31,6 +31,14 @@ import org.nirmato.ollama.api.ShowModelRequest
 import org.nirmato.ollama.api.ShowModelResponse
 import org.nirmato.ollama.api.VersionResponse
 
+/**
+ * OllamaService is a client for interacting with the Ollama API.
+ *
+ * It provides methods to perform various operations such as chat, chat completion, embedding generation,
+ * model management (create, copy, delete, pull, push), and more.
+ *
+ * @property httpTransport The transport layer used for making HTTP requests.
+ */
 internal class OllamaService(
     private val httpTransport: HttpTransport,
 ) : OllamaApi {
@@ -91,9 +99,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Generate embeddings from a model.
-     */
     override suspend fun generateEmbed(generateEmbedRequest: EmbedRequest): EmbedResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
@@ -104,10 +109,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Ensures that the file blob used for a FROM or ADAPTER field exists on the server.
-     * This is checking your Ollama server and not Ollama.ai.
-     */
     override suspend fun checkBlob(checkBlobRequest: CheckBlobRequest) {
         return httpTransport.handleRequest {
             method = HttpMethod.Head
@@ -116,9 +117,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Creates a model with another name from an existing model.
-     */
     override suspend fun copyModel(copyModelRequest: CopyModelRequest) {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
@@ -128,9 +126,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Create a blob from a file. Returns the server file path.
-     */
     override suspend fun createBlob(createBlobRequest: CreateBlobRequest) {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
@@ -140,14 +135,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Create a model from a Modelfile.
-     * It is recommended to set &#x60;modelfile&#x60; to the content of the Modelfile rather than just set &#x60;path&#x60;.
-     * This is a requirement for remote create. Remote model creation should also create any file blobs, fields such as &#x60;FROM&#x60; and &#x60;ADAPTER&#x60;,
-     * explicitly with the server using Create a Blob and the value to the path indicated in the response.
-     *
-     * @param createModelRequest Create a new model from a Modelfile.
-     */
     override suspend fun createModel(createModelRequest: CreateModelRequest): ProgressResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
@@ -158,9 +145,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * @see #createModel(CreateModelRequest)
-     */
     override fun createModelStream(createModelRequest: CreateModelRequest): Flow<ProgressResponse> {
         val request = if (createModelRequest.stream == false) createModelRequest.copy(stream = true) else createModelRequest
 
@@ -173,9 +157,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Delete a model and its data.
-     */
     override suspend fun deleteModel(deleteModelRequest: DeleteModelRequest) {
         return httpTransport.handleRequest {
             method = HttpMethod.Delete
@@ -186,9 +167,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * List models that are available locally.
-     */
     override suspend fun listModels(): ListModelsResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Get
@@ -198,9 +176,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * List models that are running.
-     */
     override suspend fun listRunningModels(): ListModelsResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Get
@@ -210,10 +185,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Download a model from the ollama library.
-     * Cancelled pulls are resumed from where they left off, and multiple calls will share the same download progress.
-     */
     override suspend fun pullModel(pullModelRequest: PullModelRequest): ProgressResponse {
         val request = if (pullModelRequest.stream == true) pullModelRequest.copy(stream = false) else pullModelRequest
 
@@ -226,9 +197,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * @see #pullModel(PullModelRequest)
-     */
     override fun pullModelStream(pullModelRequest: PullModelRequest): Flow<ProgressResponse> {
         val request = if (pullModelRequest.stream == false) pullModelRequest.copy(stream = true) else pullModelRequest
 
@@ -241,11 +209,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Upload a model to a model library. Requires registering for ollama.ai and adding a public key first.
-     *
-     * @param pushModelRequest
-     */
     override suspend fun pushModel(pushModelRequest: PushModelRequest): ProgressResponse {
         val request = if (pushModelRequest.stream == true) pushModelRequest.copy(stream = false) else pushModelRequest
 
@@ -258,9 +221,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * @see #pushModel(PushModelRequest)
-     */
     override fun pushModelStream(pushModelRequest: PushModelRequest): Flow<ProgressResponse> {
         val request = if (pushModelRequest.stream == false) pushModelRequest.copy(stream = true) else pushModelRequest
 
@@ -273,11 +233,6 @@ internal class OllamaService(
         }
     }
 
-    /**
-     * Show details about a model including model file, template, parameters, license, and system prompt.
-     *
-     * @param showModelRequest
-     */
     override suspend fun showModel(showModelRequest: ShowModelRequest): ShowModelResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post

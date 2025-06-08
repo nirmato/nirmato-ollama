@@ -10,6 +10,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
 import io.ktor.http.headersOf
 import io.ktor.utils.io.core.toByteArray
+import org.nirmato.ollama.api.CheckBlobRequest.Companion.checkBlobRequest
 import org.nirmato.ollama.api.CopyModelRequest.Companion.copyModelRequest
 import org.nirmato.ollama.api.CreateBlobRequest.Companion.createBlobRequest
 import org.nirmato.ollama.api.CreateModelRequest.Companion.createModelRequest
@@ -84,7 +85,7 @@ internal class ModelClientTest {
     }
 
     @Test
-    fun checkBlob_validRequest_returnSuccess() = runTest {
+    fun createBlob_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
             httpClient {
                 engine {
@@ -101,6 +102,25 @@ internal class ModelClientTest {
         }
 
         ollamaClient.createBlob(createBlobRequest)
+    }
+
+    @Test
+    fun checkBlob_validRequest_returnSuccess() = runTest {
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            httpClient {
+                engine {
+                    addHandler {
+                        respondOk()
+                    }
+                }
+            }
+        }
+
+        val checkBlobRequest = checkBlobRequest {
+            digest("sha256:d4dd5fe90054a4539584cd5f7e612a7121a3b8daa9b68a3aae929317251810b4")
+        }
+
+        ollamaClient.checkBlob(checkBlobRequest)
     }
 
     @Test

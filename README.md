@@ -22,7 +22,7 @@ The supported API follows the OpenAPI definition [Ollama API](oas/ollama-openapi
 Add the dependency to your Gradle configuration:
 
 ```kotlin
-implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.1.1")
+implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.2.0")
 
 // example using ktor CIO engine
 implementation("io.ktor:ktor-client-cio:3.1.3")
@@ -34,7 +34,7 @@ or to your Maven pom:
 <dependency>
     <groupId>org.nirmato.ollama</groupId>
     <artifactId>nirmato-ollama-client-ktor</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
 </dependency>
 
 <!-- example using ktor CIO engine -->
@@ -51,16 +51,12 @@ The OllamaClient class contains all the methods needed to interact with the Olla
 
 ```kotlin
 val ollamaClient = OllamaClient(CIO) {
-    defaultRequest { 
-        url("http://localhost:11434/api/") 
+    httpClient {
+        // ktor HttpClient configurations
+        defaultRequest {
+            url("http://localhost:11434/api/")
+        }
     }
-
-    /*
-    // optionally disable timeout to prevent OllamaTimeoutException
-    engine { 
-        requestTimeout = 0 
-    }
-    */
 }
 
 val request = chatRequest {

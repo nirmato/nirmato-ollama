@@ -11,7 +11,7 @@ import org.nirmato.ollama.dsl.OllamaDslMarker
  * Request to generate a predicted chat completion for a prompt.
  */
 @Serializable
-public class ChatRequest(
+public data class ChatRequest(
     /**
      * The model name.
      * Model names follow a `model:tag` format, where `model` can have an optional namespace such as `example/model`.

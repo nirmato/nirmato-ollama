@@ -8,8 +8,48 @@ public interface OllamaApi {
 
     public fun chatStream(chatRequest: ChatRequest): Flow<ChatResponse>
 
+    /**
+     * Sends a chat completion request.
+     *
+     * This is a low-level function that handles the direct HTTP communication with the API.
+     * Most users will prefer the higher-level [chat] functions instead.
+     *
+     * Example:
+     * ```kotlin
+     * val request = chatCompletionRequest {
+     *   model("ollama-model")
+     *   prompt("Why is the sky blue?")
+     * }
+     *
+     * val response = ollamaClient.chatCompletion(request)
+     * ```
+     *
+     * @param chatCompletionRequest The fully configured request object containing all parameters for the API call
+     * @return A [ChatCompletionResponse] containing the model's response
+     */
     public suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse
 
+    /**
+     * Streams chat completion responses chunk by chunk from the Ollama API.
+     *
+     * This function handles the low-level communication with the Server-Sent Events (SSE)
+     * endpoint, allowing you to receive and process model responses in real-time as they're generated.
+     *
+     * Example:
+     * ```kotlin
+     * val request = chatCompletionRequest {
+     *   model("ollama-model")
+     *   prompt("Why is the sky blue?")
+     * }
+     *
+     * val response = ollamaClient.chatCompletionStream(request).collect { chunk ->
+     *   print(chunk.response ?: "")
+     * }
+     * ```
+     *
+     * @param chatCompletionRequest The chat completion request with streaming enabled
+     * @return A [Flow] of [ChatCompletionResponse] objects representing incremental updates
+     */
     public fun chatCompletionStream(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse>
 
     public suspend fun generateEmbed(generateEmbedRequest: EmbedRequest): EmbedResponse

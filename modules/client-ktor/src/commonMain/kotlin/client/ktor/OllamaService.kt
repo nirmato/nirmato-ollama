@@ -1,7 +1,6 @@
 package org.nirmato.ollama.client.ktor
 
 import kotlinx.coroutines.flow.Flow
-import org.nirmato.ollama.api.OllamaApi
 import io.ktor.client.request.accept
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
@@ -11,11 +10,11 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.content.ByteArrayContent
 import io.ktor.http.contentType
 import io.ktor.http.headers
+import org.nirmato.ollama.api.ChatCompletionRequest
+import org.nirmato.ollama.api.ChatCompletionResponse
 import org.nirmato.ollama.api.ChatRequest
 import org.nirmato.ollama.api.ChatResponse
 import org.nirmato.ollama.api.CheckBlobRequest
-import org.nirmato.ollama.api.ChatCompletionRequest
-import org.nirmato.ollama.api.ChatCompletionResponse
 import org.nirmato.ollama.api.CopyModelRequest
 import org.nirmato.ollama.api.CreateBlobRequest
 import org.nirmato.ollama.api.CreateModelRequest
@@ -24,6 +23,7 @@ import org.nirmato.ollama.api.EmbedRequest
 import org.nirmato.ollama.api.EmbedResponse
 import org.nirmato.ollama.api.ListModelsResponse
 import org.nirmato.ollama.api.MonitoringResponse
+import org.nirmato.ollama.api.OllamaApi
 import org.nirmato.ollama.api.ProgressResponse
 import org.nirmato.ollama.api.PullModelRequest
 import org.nirmato.ollama.api.PushModelRequest
@@ -34,11 +34,7 @@ import org.nirmato.ollama.api.VersionResponse
 public class OllamaService(
     public val httpTransport: HttpTransport,
 ) : OllamaApi {
-    /**
-     * Generate the next message in a chat with a provided model.
-     * This is a streaming endpoint, so there will be a series of responses.
-     * The final response object will include statistics and additional data from the request.
-     */
+
     public override suspend fun chat(chatRequest: ChatRequest): ChatResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
@@ -63,10 +59,6 @@ public class OllamaService(
         }
     }
 
-    /**
-     * Generate a response for a given prompt with a provided model.
-     * This is a streaming endpoint, so there will be a series of responses. The final response object will include statistics and additional data from the request.
-     */
     public override suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
@@ -77,9 +69,6 @@ public class OllamaService(
         }
     }
 
-    /**
-     * @see #completion
-     */
     public override fun chatCompletionStream(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse> {
         return httpTransport.handleFlow<ChatCompletionResponse> {
             method = HttpMethod.Post

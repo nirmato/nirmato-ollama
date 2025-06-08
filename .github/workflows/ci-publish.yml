@@ -2,6 +2,10 @@ name: CI Publish
 
 on:
     workflow_dispatch:
+        inputs:
+            version:
+                description: 'Version to publish'
+                required: true
 
 permissions:
     contents: read
@@ -14,3 +18,5 @@ jobs:
     publish:
         uses: ./.github/workflows/run-publish.yml
         secrets: inherit
+        with:
+            version: ${{ github.event.inputs.version }}

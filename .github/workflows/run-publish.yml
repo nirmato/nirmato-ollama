@@ -2,6 +2,11 @@ name: Run publish
 
 on:
     workflow_call:
+        inputs:
+            version:
+                description: 'Version to publish'
+                required: true
+                type: string
 
 defaults:
     run:
@@ -47,8 +52,9 @@ jobs:
                     GPG_SIGNING_PASSPHRASE: ${{ secrets.SIGNING_KEY_PASSWORD }}
                     ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
                     ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+                    VERSION: ${{ github.event.inputs.version }}
                 run: |
-                    VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | sed 's/^v//')
-                    echo "New version: ${VERSION}"
+                    VERSION=$(echo "${VERSION}" | cut -d "/" -f3 | sed 's/^v//')
+                    echo "Release version: ${VERSION}"
 
                     ./gradlew --no-configuration-cache -Pversion=${VERSION} publishToMavenCentral

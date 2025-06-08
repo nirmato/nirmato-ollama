@@ -8,9 +8,9 @@ public interface OllamaApi {
 
     public fun chatStream(chatRequest: ChatRequest): Flow<ChatResponse>
 
-    public suspend fun completion(completionRequest: CompletionRequest): CompletionResponse
+    public suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse
 
-    public fun completionStream(completionRequest: CompletionRequest): Flow<CompletionResponse>
+    public fun chatCompletionStream(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse>
 
     public suspend fun generateEmbed(generateEmbedRequest: EmbedRequest): EmbedResponse
 

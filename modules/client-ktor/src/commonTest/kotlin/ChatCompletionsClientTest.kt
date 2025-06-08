@@ -6,12 +6,12 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
-import org.nirmato.ollama.api.CompletionRequest.Companion.completionRequest
+import org.nirmato.ollama.api.ChatCompletionRequest.Companion.chatCompletionRequest
 
-internal class CompletionsClientTest {
+internal class ChatCompletionsClientTest {
 
     @Test
-    fun completion_validRequest_returnSuccess() = runTest {
+    fun chatCompletion_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
             httpClient {
                 engine {
@@ -41,17 +41,17 @@ internal class CompletionsClientTest {
             }
         }
 
-        val completionRequest = completionRequest {
+        val completionRequest = chatCompletionRequest {
             model("tinyllama")
             prompt("Why is the sky blue?")
         }
-        val response = ollamaClient.completion(completionRequest)
+        val response = ollamaClient.chatCompletion(completionRequest)
 
         println(response.toString())
     }
 
     @Test
-    fun generateCompletion_validStreamRequest_returnSuccess() = runTest {
+    fun chatGenerateCompletion_validStreamRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
             httpClient {
                 engine {
@@ -68,12 +68,12 @@ internal class CompletionsClientTest {
             }
         }
 
-        val completionRequest = completionRequest {
+        val completionRequest = chatCompletionRequest {
             model("tinyllama")
             prompt("Why is the sky blue?")
         }
 
-        val response = ollamaClient.completionStream(completionRequest)
+        val response = ollamaClient.chatCompletionStream(completionRequest)
 
         response.collect { println(it) }
     }

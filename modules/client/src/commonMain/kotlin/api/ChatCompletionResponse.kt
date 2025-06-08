@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  * The response class for the generate endpoint.
  */
 @Serializable
-public data class CompletionResponse(
+public data class ChatCompletionResponse(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.

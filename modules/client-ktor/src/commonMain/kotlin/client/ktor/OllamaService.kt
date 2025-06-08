@@ -14,8 +14,8 @@ import io.ktor.http.headers
 import org.nirmato.ollama.api.ChatRequest
 import org.nirmato.ollama.api.ChatResponse
 import org.nirmato.ollama.api.CheckBlobRequest
-import org.nirmato.ollama.api.CompletionRequest
-import org.nirmato.ollama.api.CompletionResponse
+import org.nirmato.ollama.api.ChatCompletionRequest
+import org.nirmato.ollama.api.ChatCompletionResponse
 import org.nirmato.ollama.api.CopyModelRequest
 import org.nirmato.ollama.api.CreateBlobRequest
 import org.nirmato.ollama.api.CreateModelRequest
@@ -67,11 +67,11 @@ public class OllamaService(
      * Generate a response for a given prompt with a provided model.
      * This is a streaming endpoint, so there will be a series of responses. The final response object will include statistics and additional data from the request.
      */
-    public override suspend fun completion(completionRequest: CompletionRequest): CompletionResponse {
+    public override suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(CompletionRequest.builder(completionRequest).stream(false).build())
+            setBody(ChatCompletionRequest.builder(chatCompletionRequest).stream(false).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -80,11 +80,11 @@ public class OllamaService(
     /**
      * @see #completion
      */
-    public override fun completionStream(completionRequest: CompletionRequest): Flow<CompletionResponse> {
-        return httpTransport.handleFlow<CompletionResponse> {
+    public override fun chatCompletionStream(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse> {
+        return httpTransport.handleFlow<ChatCompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(CompletionRequest.builder(completionRequest).stream(true).build())
+            setBody(ChatCompletionRequest.builder(chatCompletionRequest).stream(true).build())
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {

@@ -38,7 +38,7 @@ paths:
                                 $ref: '#/components/schemas/VersionResponse'
     /generate:
         post:
-            operationId: completion
+            operationId: chatCompletion
             tags:
                 - Completions
             summary: Generate a response for a given prompt with a provided model.

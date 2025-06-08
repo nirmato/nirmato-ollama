@@ -1,9 +1,9 @@
 public abstract interface class org/nirmato/ollama/api/OllamaApi {
 	public abstract fun chat (Lorg/nirmato/ollama/api/ChatRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun chatCompletion (Lorg/nirmato/ollama/api/ChatCompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun chatCompletionStream (Lorg/nirmato/ollama/api/ChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public abstract fun chatStream (Lorg/nirmato/ollama/api/ChatRequest;)Lkotlinx/coroutines/flow/Flow;
 	public abstract fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun completionStream (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public abstract fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -37,11 +37,11 @@ public final class org/nirmato/ollama/client/ktor/OllamaClient : java/lang/AutoC
 	public static final field Companion Lorg/nirmato/ollama/client/ktor/OllamaClient$Companion;
 	public fun <init> (Lio/ktor/client/HttpClient;Lorg/nirmato/ollama/client/ktor/OllamaClientConfig;)V
 	public fun chat (Lorg/nirmato/ollama/api/ChatRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun chatCompletion (Lorg/nirmato/ollama/api/ChatCompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun chatCompletionStream (Lorg/nirmato/ollama/api/ChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun chatStream (Lorg/nirmato/ollama/api/ChatRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun close ()V
-	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun completionStream (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -90,10 +90,10 @@ public final class org/nirmato/ollama/client/ktor/OllamaClientConfig {
 public final class org/nirmato/ollama/client/ktor/OllamaService : org/nirmato/ollama/api/OllamaApi {
 	public fun <init> (Lorg/nirmato/ollama/client/ktor/HttpTransport;)V
 	public fun chat (Lorg/nirmato/ollama/api/ChatRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun chatCompletion (Lorg/nirmato/ollama/api/ChatCompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun chatCompletionStream (Lorg/nirmato/ollama/api/ChatCompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun chatStream (Lorg/nirmato/ollama/api/ChatRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun completionStream (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

@@ -11,7 +11,7 @@ import org.nirmato.ollama.dsl.OllamaDslMarker
  * Request to generate a predicted completion for a prompt.
  */
 @Serializable
-public data class CompletionRequest(
+public data class ChatCompletionRequest(
     /**
      * The model name.
      * Model names follow a model:tag format, where model can have an optional namespace such as example/model.
@@ -83,21 +83,21 @@ public data class CompletionRequest(
 
     public companion object {
         /** A request to generate a predicted completion for a prompt. */
-        public fun completionRequest(block: CompletionRequestBuilder.() -> Unit): CompletionRequest {
+        public fun chatCompletionRequest(block: ChatCompletionRequestBuilder.() -> Unit): ChatCompletionRequest {
             contract {
                 callsInPlace(block, InvocationKind.EXACTLY_ONCE)
             }
 
-            return CompletionRequestBuilder().apply(block).build()
+            return ChatCompletionRequestBuilder().apply(block).build()
         }
 
-        public fun builder(): CompletionRequestBuilder = CompletionRequestBuilder()
-        public fun builder(completionRequest: CompletionRequest): CompletionRequestBuilder = CompletionRequestBuilder(completionRequest)
+        public fun builder(): ChatCompletionRequestBuilder = ChatCompletionRequestBuilder()
+        public fun builder(chatCompletionRequest: ChatCompletionRequest): ChatCompletionRequestBuilder = ChatCompletionRequestBuilder(chatCompletionRequest)
     }
 
-    /** Builder of [CompletionRequest] instances. */
+    /** Builder of [ChatCompletionRequest] instances. */
     @OllamaDslMarker
-    public class CompletionRequestBuilder() {
+    public class ChatCompletionRequestBuilder() {
         private var model: String? = null
         private var prompt: String? = null
         private var suffix: String? = null
@@ -111,36 +111,36 @@ public data class CompletionRequest(
         private var keepAlive: Int? = null
         private var stream: Boolean? = null
 
-        public constructor(completionRequest: CompletionRequest) : this() {
-            model = completionRequest.model
-            prompt = completionRequest.prompt
-            suffix = completionRequest.suffix
-            images = completionRequest.images
-            format = completionRequest.format
-            options = completionRequest.options
-            system = completionRequest.system
-            template = completionRequest.template
-            context = completionRequest.context
-            raw = completionRequest.raw
-            keepAlive = completionRequest.keepAlive
-            stream = completionRequest.stream
+        public constructor(chatCompletionRequest: ChatCompletionRequest) : this() {
+            model = chatCompletionRequest.model
+            prompt = chatCompletionRequest.prompt
+            suffix = chatCompletionRequest.suffix
+            images = chatCompletionRequest.images
+            format = chatCompletionRequest.format
+            options = chatCompletionRequest.options
+            system = chatCompletionRequest.system
+            template = chatCompletionRequest.template
+            context = chatCompletionRequest.context
+            raw = chatCompletionRequest.raw
+            keepAlive = chatCompletionRequest.keepAlive
+            stream = chatCompletionRequest.stream
         }
 
-        public fun model(model: String): CompletionRequestBuilder = apply { this.model = model }
-        public fun prompt(prompt: String): CompletionRequestBuilder = apply { this.prompt = prompt }
-        public fun suffix(suffix: String): CompletionRequestBuilder = apply { this.suffix = suffix }
-        public fun images(images: List<String>): CompletionRequestBuilder = apply { this.images = images }
-        public fun format(format: Format): CompletionRequestBuilder = apply { this.format = format }
-        public fun options(options: Options): CompletionRequestBuilder = apply { this.options = options }
-        public fun system(system: String): CompletionRequestBuilder = apply { this.system = system }
-        public fun template(template: String): CompletionRequestBuilder = apply { this.template = template }
-        public fun context(context: List<Long>): CompletionRequestBuilder = apply { this.context = context }
-        public fun raw(raw: Boolean): CompletionRequestBuilder = apply { this.raw = raw }
-        public fun keepAlive(keepAlive: Int): CompletionRequestBuilder = apply { this.keepAlive = keepAlive }
-        public fun stream(stream: Boolean): CompletionRequestBuilder = apply { this.stream = stream }
+        public fun model(model: String): ChatCompletionRequestBuilder = apply { this.model = model }
+        public fun prompt(prompt: String): ChatCompletionRequestBuilder = apply { this.prompt = prompt }
+        public fun suffix(suffix: String): ChatCompletionRequestBuilder = apply { this.suffix = suffix }
+        public fun images(images: List<String>): ChatCompletionRequestBuilder = apply { this.images = images }
+        public fun format(format: Format): ChatCompletionRequestBuilder = apply { this.format = format }
+        public fun options(options: Options): ChatCompletionRequestBuilder = apply { this.options = options }
+        public fun system(system: String): ChatCompletionRequestBuilder = apply { this.system = system }
+        public fun template(template: String): ChatCompletionRequestBuilder = apply { this.template = template }
+        public fun context(context: List<Long>): ChatCompletionRequestBuilder = apply { this.context = context }
+        public fun raw(raw: Boolean): ChatCompletionRequestBuilder = apply { this.raw = raw }
+        public fun keepAlive(keepAlive: Int): ChatCompletionRequestBuilder = apply { this.keepAlive = keepAlive }
+        public fun stream(stream: Boolean): ChatCompletionRequestBuilder = apply { this.stream = stream }
 
-        /** Create [CompletionRequest] instance. */
-        public fun build(): CompletionRequest = CompletionRequest(
+        /** Create [ChatCompletionRequest] instance. */
+        public fun build(): ChatCompletionRequest = ChatCompletionRequest(
             model = requireNotNull(model) { "model is required" },
             prompt = requireNotNull(prompt) { "prompt is required" },
             suffix = suffix,

@@ -25,4 +25,6 @@ fun main() = runBlocking {
     val response = ollamaClient.chat(request)
 
     println(response.toString())
+
+    ollamaClient.close()
 }

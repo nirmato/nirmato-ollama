@@ -68,8 +68,10 @@ public data class CreateModelRequest(
     public enum class Quantize {
         @SerialName(value = "q4_K_M")
         Q4_K_M,
+
         @SerialName(value = "q4_K_S")
         Q4_K_S,
+
         @SerialName(value = "q8_0")
         Q8_0,
     }

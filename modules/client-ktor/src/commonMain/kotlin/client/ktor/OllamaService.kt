@@ -31,11 +31,11 @@ import org.nirmato.ollama.api.ShowModelRequest
 import org.nirmato.ollama.api.ShowModelResponse
 import org.nirmato.ollama.api.VersionResponse
 
-public class OllamaService(
-    public val httpTransport: HttpTransport,
+internal class OllamaService(
+    private val httpTransport: HttpTransport,
 ) : OllamaApi {
 
-    public override suspend fun chat(chatRequest: ChatRequest): ChatResponse {
+    override suspend fun chat(chatRequest: ChatRequest): ChatResponse {
         val request = if (chatRequest.stream == true) chatRequest.copy(stream = false) else chatRequest
 
         return httpTransport.handleRequest {
@@ -47,7 +47,7 @@ public class OllamaService(
         }
     }
 
-    public override fun chatStream(chatRequest: ChatRequest): Flow<ChatResponse> {
+    override fun chatStream(chatRequest: ChatRequest): Flow<ChatResponse> {
         val request = if (chatRequest.stream == false) chatRequest.copy(stream = true) else chatRequest
 
         return httpTransport.handleFlow<ChatResponse> {
@@ -63,7 +63,7 @@ public class OllamaService(
         }
     }
 
-    public override suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse {
+    override suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse {
         val request = if (chatCompletionRequest.stream == true) chatCompletionRequest.copy(stream = false) else chatCompletionRequest
 
         return httpTransport.handleRequest {
@@ -75,7 +75,7 @@ public class OllamaService(
         }
     }
 
-    public override fun chatCompletionStream(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse> {
+    override fun chatCompletionStream(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse> {
         val request = if (chatCompletionRequest.stream == false) chatCompletionRequest.copy(stream = true) else chatCompletionRequest
 
         return httpTransport.handleFlow<ChatCompletionResponse> {
@@ -94,7 +94,7 @@ public class OllamaService(
     /**
      * Generate embeddings from a model.
      */
-    public override suspend fun generateEmbed(generateEmbedRequest: EmbedRequest): EmbedResponse {
+    override suspend fun generateEmbed(generateEmbedRequest: EmbedRequest): EmbedResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "embed")
@@ -108,7 +108,7 @@ public class OllamaService(
      * Ensures that the file blob used for a FROM or ADAPTER field exists on the server.
      * This is checking your Ollama server and not Ollama.ai.
      */
-    public override suspend fun checkBlob(checkBlobRequest: CheckBlobRequest) {
+    override suspend fun checkBlob(checkBlobRequest: CheckBlobRequest) {
         return httpTransport.handleRequest {
             method = HttpMethod.Head
             url(path = "blobs/${checkBlobRequest.digest}")
@@ -119,7 +119,7 @@ public class OllamaService(
     /**
      * Creates a model with another name from an existing model.
      */
-    public override suspend fun copyModel(copyModelRequest: CopyModelRequest) {
+    override suspend fun copyModel(copyModelRequest: CopyModelRequest) {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "copy")
@@ -131,7 +131,7 @@ public class OllamaService(
     /**
      * Create a blob from a file. Returns the server file path.
      */
-    public override suspend fun createBlob(createBlobRequest: CreateBlobRequest) {
+    override suspend fun createBlob(createBlobRequest: CreateBlobRequest) {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "blobs/${createBlobRequest.digest}")
@@ -148,7 +148,7 @@ public class OllamaService(
      *
      * @param createModelRequest Create a new model from a Modelfile.
      */
-    public override suspend fun createModel(createModelRequest: CreateModelRequest): ProgressResponse {
+    override suspend fun createModel(createModelRequest: CreateModelRequest): ProgressResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "create")
@@ -161,7 +161,7 @@ public class OllamaService(
     /**
      * @see #createModel(CreateModelRequest)
      */
-    public override fun createModelStream(createModelRequest: CreateModelRequest): Flow<ProgressResponse> {
+    override fun createModelStream(createModelRequest: CreateModelRequest): Flow<ProgressResponse> {
         val request = if (createModelRequest.stream == false) createModelRequest.copy(stream = true) else createModelRequest
 
         return httpTransport.handleFlow {
@@ -176,7 +176,7 @@ public class OllamaService(
     /**
      * Delete a model and its data.
      */
-    public override suspend fun deleteModel(deleteModelRequest: DeleteModelRequest) {
+    override suspend fun deleteModel(deleteModelRequest: DeleteModelRequest) {
         return httpTransport.handleRequest {
             method = HttpMethod.Delete
             url(path = "delete")
@@ -189,7 +189,7 @@ public class OllamaService(
     /**
      * List models that are available locally.
      */
-    public override suspend fun listModels(): ListModelsResponse {
+    override suspend fun listModels(): ListModelsResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Get
             url(path = "tags")
@@ -201,7 +201,7 @@ public class OllamaService(
     /**
      * List models that are running.
      */
-    public override suspend fun listRunningModels(): ListModelsResponse {
+    override suspend fun listRunningModels(): ListModelsResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Get
             url(path = "ps")
@@ -214,7 +214,7 @@ public class OllamaService(
      * Download a model from the ollama library.
      * Cancelled pulls are resumed from where they left off, and multiple calls will share the same download progress.
      */
-    public override suspend fun pullModel(pullModelRequest: PullModelRequest): ProgressResponse {
+    override suspend fun pullModel(pullModelRequest: PullModelRequest): ProgressResponse {
         val request = if (pullModelRequest.stream == true) pullModelRequest.copy(stream = false) else pullModelRequest
 
         return httpTransport.handleRequest {
@@ -229,7 +229,7 @@ public class OllamaService(
     /**
      * @see #pullModel(PullModelRequest)
      */
-    public override fun pullModelStream(pullModelRequest: PullModelRequest): Flow<ProgressResponse> {
+    override fun pullModelStream(pullModelRequest: PullModelRequest): Flow<ProgressResponse> {
         val request = if (pullModelRequest.stream == false) pullModelRequest.copy(stream = true) else pullModelRequest
 
         return httpTransport.handleFlow {
@@ -246,7 +246,7 @@ public class OllamaService(
      *
      * @param pushModelRequest
      */
-    public override suspend fun pushModel(pushModelRequest: PushModelRequest): ProgressResponse {
+    override suspend fun pushModel(pushModelRequest: PushModelRequest): ProgressResponse {
         val request = if (pushModelRequest.stream == true) pushModelRequest.copy(stream = false) else pushModelRequest
 
         return httpTransport.handleRequest {
@@ -261,7 +261,7 @@ public class OllamaService(
     /**
      * @see #pushModel(PushModelRequest)
      */
-    public override fun pushModelStream(pushModelRequest: PushModelRequest): Flow<ProgressResponse> {
+    override fun pushModelStream(pushModelRequest: PushModelRequest): Flow<ProgressResponse> {
         val request = if (pushModelRequest.stream == false) pushModelRequest.copy(stream = true) else pushModelRequest
 
         return httpTransport.handleFlow {
@@ -278,7 +278,7 @@ public class OllamaService(
      *
      * @param showModelRequest
      */
-    public override suspend fun showModel(showModelRequest: ShowModelRequest): ShowModelResponse {
+    override suspend fun showModel(showModelRequest: ShowModelRequest): ShowModelResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "show")
@@ -288,7 +288,7 @@ public class OllamaService(
         }
     }
 
-    public override suspend fun getMonitoring(): MonitoringResponse {
+    override suspend fun getMonitoring(): MonitoringResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Get
             url(path = "version")
@@ -296,7 +296,7 @@ public class OllamaService(
         }
     }
 
-    public override suspend fun getVersion(): VersionResponse {
+    override suspend fun getVersion(): VersionResponse {
         return httpTransport.handleRequest {
             method = HttpMethod.Get
             url(path = "version")

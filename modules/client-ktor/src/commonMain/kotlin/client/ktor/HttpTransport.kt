@@ -47,12 +47,12 @@ import org.nirmato.ollama.api.UnknownAPIException
 
 public const val MAX_READ_LINE: Int = 128_000
 
-public class HttpTransport(
+internal class HttpTransport(
     private val httpClient: HttpClient,
-    public val clientConfig: OllamaClientConfig,
+    private val clientConfig: OllamaClientConfig,
 ) {
     @Suppress("TooGenericExceptionCaught")
-    public suspend fun <T : Any> handleRequest(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T = try {
+    suspend fun <T : Any> handleRequest(info: TypeInfo, builder: HttpRequestBuilder.() -> Unit): T = try {
         val response = httpClient.request(builder)
 
         when (response.status) {
@@ -67,12 +67,12 @@ public class HttpTransport(
     /**
      * Perform an HTTP request.
      */
-    public suspend inline fun <reified T> handleRequest(noinline builder: HttpRequestBuilder.() -> Unit): T {
+    suspend inline fun <reified T> handleRequest(noinline builder: HttpRequestBuilder.() -> Unit): T {
         return handleRequest(typeInfo<T>(), builder)
     }
 
     @Suppress("TooGenericExceptionCaught")
-    public suspend fun <T : Any> handleRequest(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
+    suspend fun <T : Any> handleRequest(builder: HttpRequestBuilder.() -> Unit, block: suspend (response: HttpResponse) -> T) {
         try {
             HttpStatement(builder = HttpRequestBuilder().apply(builder), client = httpClient).execute {
                 when (it.status) {
@@ -88,7 +88,7 @@ public class HttpTransport(
     /**
      * Perform an HTTP request and transform the result.
      */
-    public inline fun <reified T : Any> handleFlow(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
+    inline fun <reified T : Any> handleFlow(noinline builder: HttpRequestBuilder.() -> Unit): Flow<T> {
         return cancellableFlow {
             handleRequest(builder) { response ->
                 streamEventsFrom(response)
@@ -97,7 +97,7 @@ public class HttpTransport(
     }
 
     @Suppress("LoopWithTooManyJumpStatements")
-    public suspend inline fun <reified T> FlowCollector<T>.streamEventsFrom(response: HttpResponse) {
+    suspend inline fun <reified T> FlowCollector<T>.streamEventsFrom(response: HttpResponse) {
         val channel = response.body<ByteReadChannel>()
         try {
             while (currentCoroutineContext().isActive && !channel.isClosedForRead) {
@@ -120,7 +120,7 @@ public class HttpTransport(
      * @param block The suspend lambda that produces values for the flow
      * @return A new Flow that can be cancelled
      */
-    public fun <T> cancellableFlow(block: suspend FlowCollector<T>.() -> Unit): Flow<T> = flow {
+    fun <T> cancellableFlow(block: suspend FlowCollector<T>.() -> Unit): Flow<T> = flow {
         try {
             block()
         } catch (e: Exception) {
@@ -135,7 +135,7 @@ public class HttpTransport(
     /**
      * Handles various exceptions that can occur during an API request and converts them into appropriate [OllamaException] instances.
      */
-    protected suspend fun handleException(cause: Throwable): RuntimeException = when (cause) {
+    private suspend fun handleException(cause: Throwable): RuntimeException = when (cause) {
         is CancellationException -> cause
         is ClientRequestException -> handleClientException(cause)
         is ServerResponseException -> OllamaServerException(cause)
@@ -153,7 +153,7 @@ public class HttpTransport(
      * Converts a [ClientRequestException] into a corresponding [OllamaException] based on the HTTP status code.
      * This function helps in handling specific API errors and categorizing them into appropriate exception classes.
      */
-    protected suspend fun handleClientException(exception: ClientRequestException): OllamaException {
+    private suspend fun handleClientException(exception: ClientRequestException): OllamaException {
         val response = exception.response
         val status = response.status
         val error = response.body<FailureResponse>()

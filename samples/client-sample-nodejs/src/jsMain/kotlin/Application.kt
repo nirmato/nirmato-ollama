@@ -24,4 +24,6 @@ suspend fun main() {
     val response = ollamaClient.chat(request)
 
     println(response.toString())
+
+    ollamaClient.close()
 }

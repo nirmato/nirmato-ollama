@@ -3,7 +3,7 @@
 This library is composed of multiple modules where each module is published as a separate artifact. We also publish a
 single top-level artifact that automatically brings in all the artifacts of this library, so the simplest way to depend
 on the entire library is to add a single dependency to the top-level artifact as described in
-[dependency details](../../README.md#dependency).
+[dependency details](../../README.md#Installation).
 
 In addition to the above, we also publish a bill of materials, BOM, which references all the artifact versions in that
 release. The main use-case for the BOM is if you prefer to pick and choose individual components instead of

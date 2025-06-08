@@ -13,6 +13,11 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import org.nirmato.ollama.api.OllamaApi
 
+/**
+ * Client for interacting with the Ollama API.
+ *
+ * This client provides methods for all Ollama API endpoints.
+ */
 public class OllamaClient(
     private val httpClient: HttpClient,
     private val clientConfig: OllamaClientConfig,
@@ -20,6 +25,11 @@ public class OllamaClient(
     httpTransport = HttpTransport(httpClient, clientConfig)
 ), AutoCloseable {
 
+    /**
+     * Builder for configuring and creating OllamaClient instances.
+     *
+     * @param httpClientEngineFactory The ktor HTTP client engine factory to use for the client.
+     */
     public open class Builder<T : HttpClientEngineConfig> internal constructor(
         private var httpClientEngineFactory: HttpClientEngineFactory<T>,
     ) {
@@ -95,6 +105,11 @@ public class OllamaClient(
             this.client = client
         }
 
+        /**
+         * Builds and returns a new OllamaClient instance with the configured settings.
+         *
+         * @return A new OllamaClient instance
+         */
         public fun build(): OllamaClient = OllamaClient(
             httpClient = client ?: HttpClient(httpClientEngineFactory) {
                 defaultRequest {
@@ -115,6 +130,9 @@ public class OllamaClient(
         )
     }
 
+    /**
+     * Closes the underlying HTTP client and releases resources.
+     */
     override fun close() {
         httpClient.close()
     }

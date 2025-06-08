@@ -4,8 +4,46 @@ import kotlinx.coroutines.flow.Flow
 
 public interface OllamaApi {
 
+    /**
+     * Sends a chat request.
+     *
+     * This is a function that gives you control over both the model's behavior and the conversation context.
+     *
+     * Example:
+     * ```kotlin
+     * val request = chatRequest {
+     *   model("tinyllama")
+     *   messages(listOf(Message(role = USER, content = "Why is the sky blue?")))
+     * }
+     *
+     * val response = ollamaClient.chat(request)
+     * ```
+     *
+     * @param chatRequest The fully configured request object containing all parameters for the API call
+     * @return A [ChatResponse] containing the model's response
+     */
     public suspend fun chat(chatRequest: ChatRequest): ChatResponse
 
+    /**
+     * Streams chat responses chunk by chunk from the Ollama API.
+     *
+     * This is a function that gives you control over both the model's behavior and the conversation context.
+     *
+     * Example:
+     * ```kotlin
+     * val request = chatRequest {
+     *   model("tinyllama")
+     *   messages(listOf(Message(role = USER, content = "Why is the sky blue?")))
+     * }
+     *
+     * val response = ollamaClient.chatStream(request).collect { chunk ->
+     *   print(chunk.response ?: "")
+     * }
+     * ```
+     *
+     * @param chatRequest The fully configured request object containing all parameters for the API call
+     * @return A [Flow] of [ChatResponse] objects representing incremental updates
+     */
     public fun chatStream(chatRequest: ChatRequest): Flow<ChatResponse>
 
     /**

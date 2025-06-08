@@ -31,6 +31,10 @@ public data class ChatRequest(
     @SerialName(value = "tools")
     public val tools: List<Tool>? = null,
 
+    /** (for thinking models) should the model think before responding? */
+    @SerialName(value = "think")
+    val think: Boolean? = null,
+
     /** The format to return a response in. Currently, the only accepted value is json. */
     @SerialName(value = "format")
     public val format: Format? = null,

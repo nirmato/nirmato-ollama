@@ -35,6 +35,10 @@ public data class ChatCompletionRequest(
     @SerialName(value = "images")
     val images: List<String>? = null,
 
+    /** (for thinking models) should the model think before responding? */
+    @SerialName(value = "think")
+    val think: Boolean? = null,
+
     /** The format to return a response in. Format can be json or a JSON schema */
     @SerialName(value = "format")
     val format: Format? = null,

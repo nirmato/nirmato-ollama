@@ -19,6 +19,10 @@ public data class Message(
     @Required
     val content: String,
 
+    /** (for thinking models) should the model think before responding? */
+    @SerialName(value = "thinking")
+    val thinking: Boolean? = null,
+
     /** A list of Base64-encoded images to include in the message (for multimodal models such as llava). */
     @SerialName(value = "images")
     val images: List<String>? = null,

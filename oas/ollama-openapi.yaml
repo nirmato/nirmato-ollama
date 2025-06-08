@@ -3,7 +3,7 @@ openapi: 3.1.0
 info:
     title: Ollama API
     description: API Spec for Ollama API. Please see https://github.com/ollama/ollama/blob/main/docs/api.md for more details.
-    version: 0.7.1
+    version: 0.9.0
 
 servers:
     -   url: http://localhost:11434/api
@@ -68,14 +68,14 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/ChatCompletionRequest'
+                            $ref: '#/components/schemas/ChatRequest'
             responses:
                 '200':
                     description: Successful operation.
                     content:
                         application/x-ndjson:
                             schema:
-                                $ref: '#/components/schemas/ChatCompletionResponse'
+                                $ref: '#/components/schemas/ChatResponse'
     /embed:
         post:
             operationId: generateEmbed
@@ -303,6 +303,10 @@ components:
                         type: string
                         description: Base64-encoded image (for multimodal models such as llava)
                         example: iVBORw0KGgoAAAANSUhEUgAAAAkAAAANCAIAAAD0YtNRAAAABnRSTlMA/AD+APzoM1ogAAAAWklEQVR4AWP48+8PLkR7uUdzcMvtU8EhdykHKAciEXL3pvw5FQIURaBDJkARoDhY3zEXiCgCHbNBmAlUiyaBkENoxZSDWnOtBmoAQu7TnT+3WuDOA7KBIkAGAGwiNeqjusp/AAAAAElFTkSuQmCC
+                think:
+                    type: boolean
+                    description: (for thinking models) should the model think before responding?
+                    example: true
                 format:
                     description: The format to return a response in. Currently, the only accepted value is json.
                     $ref: '#/components/schemas/ResponseFormat'
@@ -558,7 +562,7 @@ components:
                         type: integer
                         format: int64
                     example: [ 1, 2, 3 ]
-        ChatCompletionRequest:
+        ChatRequest:
             type: object
             description: Request to generate a predicted chat completion for a prompt.
             properties:
@@ -576,6 +580,10 @@ components:
                     description: The list of tools in JSON for the model to use if supported.
                     items:
                         $ref: '#/components/schemas/Tool'
+                think:
+                    type: boolean
+                    description: (for thinking models) should the model think before responding?
+                    example: true
                 format:
                     description: The format to return a response in. Currently, the only accepted value is json.
                     $ref: '#/components/schemas/ResponseFormat'
@@ -592,7 +600,7 @@ components:
             required:
                 - model
                 - messages
-        ChatCompletionResponse:
+        ChatResponse:
             type: object
             description: The response class for the chat endpoint.
             properties:
@@ -729,6 +737,10 @@ components:
                     type: string
                     description: The content of the message
                     example: Why is the sky blue?
+                thinking:
+                    type: boolean
+                    description: (for thinking models) the model's thinking process
+                    example: true
                 images:
                     type: array
                     description: a list of Base64-encoded images to include in the message (for multimodal models such as llava)

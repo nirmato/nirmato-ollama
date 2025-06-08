@@ -40,7 +40,6 @@ public class MavenPublishConfigurerPlugin : Plugin<Project> {
 
         configureKotlinJvmPublishing()
         configureKotlinMultiplatformPublishing(project)
-        configureDokkaPublishing()
 //        configurePublications(project)
 
         if (project.gradleBooleanProperty("org.gradle.publications.signing.enabled").get()) {
@@ -276,27 +275,3 @@ private fun Project.fixOverlappingOutputsForSigningTask() {
     }
 }
 
-private fun Project.configureDokkaPublishing() {
-    if (project.plugins.hasPlugin("org.jetbrains.dokka")) {
-        project.configure<PublishingExtension> {
-            // configureEach reacts on new publications being registered and configures them too
-            publications.configureEach {
-                if (this is MavenPublication) {
-                    val publication = this
-                    val dokkaJar = project.tasks.register("${publication.name}DokkaJar", Jar::class) {
-                        group = JavaBasePlugin.DOCUMENTATION_GROUP
-                        description = "Assembles Kotlin docs with Dokka into a Javadoc jar"
-                        archiveClassifier.set("javadoc")
-                        from(project.tasks.named("dokkaHtml"))
-
-                        // each archive name should be distinct, to avoid implicit dependency issues.
-                        // we use the same format as the sources Jar tasks.
-                        // https://youtrack.jetbrains.com/issue/KT-46466
-                        archiveBaseName.set("${archiveBaseName.get()}-${publication.name}")
-                    }
-                    artifact(dokkaJar)
-                }
-            }
-        }
-    }
-}

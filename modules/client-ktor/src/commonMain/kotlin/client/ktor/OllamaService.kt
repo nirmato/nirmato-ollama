@@ -36,20 +36,24 @@ public class OllamaService(
 ) : OllamaApi {
 
     public override suspend fun chat(chatRequest: ChatRequest): ChatResponse {
+        val request = if (chatRequest.stream == true) chatRequest.copy(stream = false) else chatRequest
+
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "chat")
-            setBody(ChatRequest.builder(chatRequest).stream(false).build())
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
     }
 
     public override fun chatStream(chatRequest: ChatRequest): Flow<ChatResponse> {
+        val request = if (chatRequest.stream == false) chatRequest.copy(stream = true) else chatRequest
+
         return httpTransport.handleFlow<ChatResponse> {
             method = HttpMethod.Post
             url(path = "chat")
-            setBody(ChatRequest.builder(chatRequest).stream(true).build())
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {
@@ -60,20 +64,24 @@ public class OllamaService(
     }
 
     public override suspend fun chatCompletion(chatCompletionRequest: ChatCompletionRequest): ChatCompletionResponse {
+        val request = if (chatCompletionRequest.stream == true) chatCompletionRequest.copy(stream = false) else chatCompletionRequest
+
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(ChatCompletionRequest.builder(chatCompletionRequest).stream(false).build())
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
     }
 
     public override fun chatCompletionStream(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse> {
+        val request = if (chatCompletionRequest.stream == false) chatCompletionRequest.copy(stream = true) else chatCompletionRequest
+
         return httpTransport.handleFlow<ChatCompletionResponse> {
             method = HttpMethod.Post
             url(path = "generate")
-            setBody(ChatCompletionRequest.builder(chatCompletionRequest).stream(true).build())
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Text.EventStream)
             headers {
@@ -154,10 +162,12 @@ public class OllamaService(
      * @see #createModel(CreateModelRequest)
      */
     public override fun createModelStream(createModelRequest: CreateModelRequest): Flow<ProgressResponse> {
+        val request = if (createModelRequest.stream == false) createModelRequest.copy(stream = true) else createModelRequest
+
         return httpTransport.handleFlow {
             method = HttpMethod.Post
             url(path = "create")
-            setBody(CreateModelRequest.builder(createModelRequest).stream(true).build())
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -205,10 +215,12 @@ public class OllamaService(
      * Cancelled pulls are resumed from where they left off, and multiple calls will share the same download progress.
      */
     public override suspend fun pullModel(pullModelRequest: PullModelRequest): ProgressResponse {
+        val request = if (pullModelRequest.stream == true) pullModelRequest.copy(stream = false) else pullModelRequest
+
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "pull")
-            setBody(pullModelRequest)
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -218,10 +230,12 @@ public class OllamaService(
      * @see #pullModel(PullModelRequest)
      */
     public override fun pullModelStream(pullModelRequest: PullModelRequest): Flow<ProgressResponse> {
+        val request = if (pullModelRequest.stream == false) pullModelRequest.copy(stream = true) else pullModelRequest
+
         return httpTransport.handleFlow {
             method = HttpMethod.Post
             url(path = "pull")
-            setBody(PullModelRequest.builder(pullModelRequest).stream(true).build())
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -233,10 +247,12 @@ public class OllamaService(
      * @param pushModelRequest
      */
     public override suspend fun pushModel(pushModelRequest: PushModelRequest): ProgressResponse {
+        val request = if (pushModelRequest.stream == true) pushModelRequest.copy(stream = false) else pushModelRequest
+
         return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "push")
-            setBody(PushModelRequest.builder(pushModelRequest).stream(true).build())
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }
@@ -246,10 +262,12 @@ public class OllamaService(
      * @see #pushModel(PushModelRequest)
      */
     public override fun pushModelStream(pushModelRequest: PushModelRequest): Flow<ProgressResponse> {
+        val request = if (pushModelRequest.stream == false) pushModelRequest.copy(stream = true) else pushModelRequest
+
         return httpTransport.handleFlow {
             method = HttpMethod.Post
             url(path = "push")
-            setBody(PushModelRequest.builder(pushModelRequest).stream(true).build())
+            setBody(request)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }

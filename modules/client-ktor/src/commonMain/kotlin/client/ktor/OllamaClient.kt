@@ -1,51 +1,126 @@
 package org.nirmato.ollama.client.ktor
 
-import client.api.OllamaApi
+import kotlinx.serialization.json.ClassDiscriminatorMode
+import kotlinx.serialization.json.Json
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
 import io.ktor.http.ContentType
-import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
-import org.nirmato.ollama.api.ChatApi
-import org.nirmato.ollama.api.CompletionsApi
-import org.nirmato.ollama.api.EmbedApi
-import org.nirmato.ollama.api.ModelsApi
-import org.nirmato.ollama.api.MonitoringApi
-import org.nirmato.ollama.api.VersionApi
-import org.nirmato.ollama.client.ktor.internal.http.JsonLenient
-import org.nirmato.ollama.client.ktor.internal.http.KtorHttpClient
+import io.ktor.http.contentType
+import io.ktor.serialization.kotlinx.json.json
+import org.nirmato.ollama.api.OllamaApi
 
-/**
- * Implementation of [OllamaClient].
- *
- * @param httpClient http transport layer
- */
-public class OllamaClient private constructor(private val httpClient: KtorHttpClient) : OllamaApi,
-    ChatApi by ChatClient(httpClient),
-    CompletionsApi by CompletionsClient(httpClient),
-    EmbedApi by EmbedClient(httpClient),
-    ModelsApi by ModelsClient(httpClient),
-    MonitoringApi by MonitoringClient(httpClient),
-    VersionApi by VersionClient(httpClient) {
+public class OllamaClient(
+    private val httpClient: HttpClient,
+    private val clientConfig: OllamaClientConfig,
+) : OllamaApi by OllamaService(
+    httpTransport = HttpTransport(httpClient, clientConfig)
+), AutoCloseable {
 
-    public companion object {
-        public operator fun <T : HttpClientEngineConfig> invoke(
-            httpClientEngineFactory: HttpClientEngineFactory<T>,
-            block: HttpClientConfig<T>.() -> Unit = {},
-        ): OllamaClient {
-            val httpClient = HttpClient(httpClientEngineFactory) {
+    public open class Builder<T : HttpClientEngineConfig> internal constructor(
+        private var httpClientEngineFactory: HttpClientEngineFactory<T>,
+    ) {
+        /**
+         * Base URL for the Ollama API.
+         */
+        protected var ollamaBaseUrl: String = "http://localhost:11434/api/"
+
+        /**
+         * JSON configuration for serialization and deserialization.
+         */
+        protected var jsonConfig: Json = Json {
+            classDiscriminatorMode = ClassDiscriminatorMode.NONE
+            encodeDefaults = true
+            explicitNulls = false
+            ignoreUnknownKeys = true
+            isLenient = true
+            prettyPrint = false
+        }
+
+        protected var client: HttpClient? = null
+
+        protected var httpClientConfig: HttpClientConfig<T>.() -> Unit = {}
+
+        /**
+         * Configures the JSON serialization and deserialization configuration.
+         *
+         * Example:
+         * ```kotlin
+         * val client = OllamaClient {
+         *     jsonConfig {
+         *         prettyPrint = false
+         *         ignoreUnknownKeys = true
+         *     }
+         * }
+         * ```
+         *
+         * @param block Configuration block for JSON configuration.
+         * @return This builder for chaining
+         */
+        public fun jsonConfig(block: Json.() -> Unit) {
+            jsonConfig = jsonConfig.apply(block)
+        }
+
+        public fun jsonConfig(json: Json) {
+            jsonConfig = json
+        }
+
+        /**
+         * Configures the underlying HTTP client with custom settings.
+         *
+         * Use this method for advanced customization of the HTTP client.
+         *
+         * Example:
+         * ```kotlin
+         * val client = OllamaClient(CIO) {
+         *     httpClient {
+         *         install(HttpTimeout) {
+         *             requestTimeoutMillis = 60000
+         *         }
+         *     }
+         * }
+         * ```
+         *
+         * @param httpClientConfig Configuration block for the HTTP client
+         * @return This builder for chaining
+         */
+        public fun httpClient(httpClientConfig: HttpClientConfig<T>.() -> Unit) {
+            this.httpClientConfig = httpClientConfig
+        }
+
+        public fun httpClient(client: HttpClient) {
+            this.client = client
+        }
+
+        public fun build(): OllamaClient = OllamaClient(
+            httpClient = client ?: HttpClient(httpClientEngineFactory) {
+                defaultRequest {
+                    url(ollamaBaseUrl)
+                    contentType(ContentType.Application.Json)
+                }
+
                 install(ContentNegotiation) {
-                    register(ContentType.Application.Json, KotlinxSerializationConverter(JsonLenient))
+                    json(jsonConfig)
                 }
 
                 expectSuccess = true
 
-                block()
-            }
+                httpClientConfig(this)
+            },
 
-            return OllamaClient(KtorHttpClient(httpClient))
-        }
+            clientConfig = OllamaClientConfig(jsonConfig),
+        )
+    }
+
+    override fun close() {
+        httpClient.close()
+    }
+
+    public companion object {
+        public operator fun <T : HttpClientEngineConfig> invoke(httpClientEngineFactory: HttpClientEngineFactory<T>, block: Builder<T>.() -> Unit = {}): OllamaClient =
+            Builder(httpClientEngineFactory).apply(block).build()
     }
 }

@@ -1,17 +1,19 @@
 package org.nirmato.ollama.client.samples
 
 import kotlinx.coroutines.runBlocking
+import org.nirmato.ollama.client.ktor.OllamaClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.defaultRequest
 import org.nirmato.ollama.api.ChatRequest.Companion.chatRequest
 import org.nirmato.ollama.api.Message
 import org.nirmato.ollama.api.Role.USER
-import org.nirmato.ollama.client.ktor.OllamaClient
 
 fun main() = runBlocking {
     val ollamaClient = OllamaClient(CIO) {
-        defaultRequest {
-            url("http://localhost:11434/api/")
+        httpClient {
+            defaultRequest {
+                url("http://localhost:11434/api/")
+            }
         }
     }
 

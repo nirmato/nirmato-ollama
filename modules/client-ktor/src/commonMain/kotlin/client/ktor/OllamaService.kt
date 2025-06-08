@@ -1,36 +1,118 @@
 package org.nirmato.ollama.client.ktor
 
 import kotlinx.coroutines.flow.Flow
+import org.nirmato.ollama.api.OllamaApi
 import io.ktor.client.request.accept
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.content.ByteArrayContent
 import io.ktor.http.contentType
+import io.ktor.http.headers
+import org.nirmato.ollama.api.ChatRequest
+import org.nirmato.ollama.api.ChatResponse
 import org.nirmato.ollama.api.CheckBlobRequest
+import org.nirmato.ollama.api.CompletionRequest
+import org.nirmato.ollama.api.CompletionResponse
 import org.nirmato.ollama.api.CopyModelRequest
 import org.nirmato.ollama.api.CreateBlobRequest
 import org.nirmato.ollama.api.CreateModelRequest
 import org.nirmato.ollama.api.DeleteModelRequest
+import org.nirmato.ollama.api.EmbedRequest
+import org.nirmato.ollama.api.EmbedResponse
 import org.nirmato.ollama.api.ListModelsResponse
-import org.nirmato.ollama.api.ModelsApi
+import org.nirmato.ollama.api.MonitoringResponse
 import org.nirmato.ollama.api.ProgressResponse
 import org.nirmato.ollama.api.PullModelRequest
 import org.nirmato.ollama.api.PushModelRequest
 import org.nirmato.ollama.api.ShowModelRequest
 import org.nirmato.ollama.api.ShowModelResponse
-import org.nirmato.ollama.client.ktor.internal.http.KtorHttpClient
-import org.nirmato.ollama.client.ktor.internal.http.handleFlow
-import org.nirmato.ollama.client.ktor.internal.http.perform
+import org.nirmato.ollama.api.VersionResponse
 
-public open class ModelsClient internal constructor(private val httpClient: KtorHttpClient) : ModelsApi {
+public class OllamaService(
+    public val httpTransport: HttpTransport,
+) : OllamaApi {
+    /**
+     * Generate the next message in a chat with a provided model.
+     * This is a streaming endpoint, so there will be a series of responses.
+     * The final response object will include statistics and additional data from the request.
+     */
+    public override suspend fun chat(chatRequest: ChatRequest): ChatResponse {
+        return httpTransport.handleRequest {
+            method = HttpMethod.Post
+            url(path = "chat")
+            setBody(ChatRequest.builder(chatRequest).stream(false).build())
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
+        }
+    }
+
+    public override fun chatStream(chatRequest: ChatRequest): Flow<ChatResponse> {
+        return httpTransport.handleFlow<ChatResponse> {
+            method = HttpMethod.Post
+            url(path = "chat")
+            setBody(ChatRequest.builder(chatRequest).stream(true).build())
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Text.EventStream)
+            headers {
+                append(HttpHeaders.CacheControl, "no-cache")
+                append(HttpHeaders.Connection, "keep-alive")
+            }
+        }
+    }
+
+    /**
+     * Generate a response for a given prompt with a provided model.
+     * This is a streaming endpoint, so there will be a series of responses. The final response object will include statistics and additional data from the request.
+     */
+    public override suspend fun completion(completionRequest: CompletionRequest): CompletionResponse {
+        return httpTransport.handleRequest {
+            method = HttpMethod.Post
+            url(path = "generate")
+            setBody(CompletionRequest.builder(completionRequest).stream(false).build())
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
+        }
+    }
+
+    /**
+     * @see #completion
+     */
+    public override fun completionStream(completionRequest: CompletionRequest): Flow<CompletionResponse> {
+        return httpTransport.handleFlow<CompletionResponse> {
+            method = HttpMethod.Post
+            url(path = "generate")
+            setBody(CompletionRequest.builder(completionRequest).stream(true).build())
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Text.EventStream)
+            headers {
+                append(HttpHeaders.CacheControl, "no-cache")
+                append(HttpHeaders.Connection, "keep-alive")
+            }
+        }
+    }
+
+    /**
+     * Generate embeddings from a model.
+     */
+    public override suspend fun generateEmbed(generateEmbedRequest: EmbedRequest): EmbedResponse {
+        return httpTransport.handleRequest {
+            method = HttpMethod.Post
+            url(path = "embed")
+            setBody(generateEmbedRequest)
+            contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
+        }
+    }
+
     /**
      * Ensures that the file blob used for a FROM or ADAPTER field exists on the server.
      * This is checking your Ollama server and not Ollama.ai.
      */
     public override suspend fun checkBlob(checkBlobRequest: CheckBlobRequest) {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Head
             url(path = "blobs/${checkBlobRequest.digest}")
             contentType(ContentType.Application.Json)
@@ -41,7 +123,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * Creates a model with another name from an existing model.
      */
     public override suspend fun copyModel(copyModelRequest: CopyModelRequest) {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "copy")
             setBody(copyModelRequest)
@@ -53,7 +135,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * Create a blob from a file. Returns the server file path.
      */
     public override suspend fun createBlob(createBlobRequest: CreateBlobRequest) {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "blobs/${createBlobRequest.digest}")
             setBody(ByteArrayContent(createBlobRequest.body.value, ContentType.Application.OctetStream))
@@ -70,7 +152,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * @param createModelRequest Create a new model from a Modelfile.
      */
     public override suspend fun createModel(createModelRequest: CreateModelRequest): ProgressResponse {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "create")
             setBody(createModelRequest)
@@ -83,7 +165,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * @see #createModel(CreateModelRequest)
      */
     public override fun createModelStream(createModelRequest: CreateModelRequest): Flow<ProgressResponse> {
-        return httpClient.handleFlow {
+        return httpTransport.handleFlow {
             method = HttpMethod.Post
             url(path = "create")
             setBody(CreateModelRequest.builder(createModelRequest).stream(true).build())
@@ -96,7 +178,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * Delete a model and its data.
      */
     public override suspend fun deleteModel(deleteModelRequest: DeleteModelRequest) {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Delete
             url(path = "delete")
             setBody(deleteModelRequest)
@@ -109,7 +191,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * List models that are available locally.
      */
     public override suspend fun listModels(): ListModelsResponse {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Get
             url(path = "tags")
             contentType(ContentType.Application.Json)
@@ -121,7 +203,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * List models that are running.
      */
     public override suspend fun listRunningModels(): ListModelsResponse {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Get
             url(path = "ps")
             contentType(ContentType.Application.Json)
@@ -134,7 +216,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * Cancelled pulls are resumed from where they left off, and multiple calls will share the same download progress.
      */
     public override suspend fun pullModel(pullModelRequest: PullModelRequest): ProgressResponse {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "pull")
             setBody(pullModelRequest)
@@ -147,7 +229,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * @see #pullModel(PullModelRequest)
      */
     public override fun pullModelStream(pullModelRequest: PullModelRequest): Flow<ProgressResponse> {
-        return httpClient.handleFlow {
+        return httpTransport.handleFlow {
             method = HttpMethod.Post
             url(path = "pull")
             setBody(PullModelRequest.builder(pullModelRequest).stream(true).build())
@@ -162,7 +244,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * @param pushModelRequest
      */
     public override suspend fun pushModel(pushModelRequest: PushModelRequest): ProgressResponse {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "push")
             setBody(PushModelRequest.builder(pushModelRequest).stream(true).build())
@@ -175,7 +257,7 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * @see #pushModel(PushModelRequest)
      */
     public override fun pushModelStream(pushModelRequest: PushModelRequest): Flow<ProgressResponse> {
-        return httpClient.handleFlow {
+        return httpTransport.handleFlow {
             method = HttpMethod.Post
             url(path = "push")
             setBody(PushModelRequest.builder(pushModelRequest).stream(true).build())
@@ -190,11 +272,27 @@ public open class ModelsClient internal constructor(private val httpClient: Ktor
      * @param showModelRequest
      */
     public override suspend fun showModel(showModelRequest: ShowModelRequest): ShowModelResponse {
-        return httpClient.perform {
+        return httpTransport.handleRequest {
             method = HttpMethod.Post
             url(path = "show")
             setBody(showModelRequest)
             contentType(ContentType.Application.Json)
+            accept(ContentType.Application.Json)
+        }
+    }
+
+    public override suspend fun getMonitoring(): MonitoringResponse {
+        return httpTransport.handleRequest {
+            method = HttpMethod.Get
+            url(path = "version")
+            accept(ContentType.Application.Json)
+        }
+    }
+
+    public override suspend fun getVersion(): VersionResponse {
+        return httpTransport.handleRequest {
+            method = HttpMethod.Get
+            url(path = "version")
             accept(ContentType.Application.Json)
         }
     }

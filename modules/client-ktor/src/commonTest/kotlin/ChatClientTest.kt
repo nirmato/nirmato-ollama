@@ -27,10 +27,11 @@ internal class ChatClientTest {
     @Test
     fun chat_withNoStreaming_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                             "model": "tinyllama",
                             "created_at": "2025-01-05T01:33:06.981491109Z",
                             "message": {
@@ -46,11 +47,12 @@ internal class ChatClientTest {
                             "eval_count": 142,
                             "eval_duration": 2029000000
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -67,16 +69,18 @@ internal class ChatClientTest {
     @Test
     fun chat_withStreaming_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{ "model": "tinyllama", "created_at": "2025-01-05T01:33:06.981491109Z", "message": { "role": "assistant", "content": "The sky blue color is not an inherent characteristic of the sun but rather a result of the atmosphere and the environment above it." }, "done_reason": "stop", "done": true, "total_duration": 3375883588, "load_duration": 1025258177, "prompt_eval_count": 40, "prompt_eval_duration": 263000000, "eval_count": 142, "eval_duration": 2029000000 }
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{ "model": "tinyllama", "created_at": "2025-01-05T01:33:06.981491109Z", "message": { "role": "assistant", "content": "The sky blue color is not an inherent characteristic of the sun but rather a result of the atmosphere and the environment above it." }, "done_reason": "stop", "done": true, "total_duration": 3375883588, "load_duration": 1025258177, "prompt_eval_count": 40, "prompt_eval_duration": 263000000, "eval_count": 142, "eval_duration": 2029000000 }
                         { "model": "tinyllama", "created_at": "2025-01-05T01:33:06.981491109Z", "message": { "role": "assistant", "content": "The sky blue color is not an inherent characteristic of the sun but rather a result of the atmosphere and the environment above it." }, "done_reason": "stop", "done": true, "total_duration": 3375883588, "load_duration": 1025258177, "prompt_eval_count": 40, "prompt_eval_duration": 263000000, "eval_count": 142, "eval_duration": 2029000000 }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -93,10 +97,11 @@ internal class ChatClientTest {
     @Test
     fun chat_withImages_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                             "model": "llava",
                             "created_at": "2025-01-05T13:08:56.341574689Z",
                             "message": {
@@ -112,11 +117,12 @@ internal class ChatClientTest {
                             "eval_count": 83,
                             "eval_duration": 6998000000
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -144,10 +150,11 @@ internal class ChatClientTest {
     @Test
     fun chat_withJsonStructuredOutput_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                             "model": "llama3.2",
                             "created_at": "2025-01-05T01:39:34.325843522Z",
                             "message": {
@@ -163,11 +170,12 @@ internal class ChatClientTest {
                             "eval_count": 13,
                             "eval_duration": 486000000
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -191,10 +199,11 @@ internal class ChatClientTest {
     @Test
     fun chat_withSchemaStructuredOutput_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                             "model": "llama3.2",
                             "created_at": "2025-01-05T01:39:34.325843522Z",
                             "message": {
@@ -210,11 +219,12 @@ internal class ChatClientTest {
                             "eval_count": 13,
                             "eval_duration": 486000000
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -253,10 +263,11 @@ internal class ChatClientTest {
     @Test
     fun chat_withTools_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                             "model": "llama3.2",
                             "created_at": "2025-01-05T12:59:55.141725984Z",
                             "message": {
@@ -282,11 +293,12 @@ internal class ChatClientTest {
                             "eval_count": 25,
                             "eval_duration": 951000000
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }

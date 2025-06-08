@@ -1,7 +1,5 @@
 package org.nirmato.ollama.api
 
-import io.ktor.http.HttpStatusCode
-
 /**
  * Represents an exception thrown when an invalid request is made to the Ollama API.
  */

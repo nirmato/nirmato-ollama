@@ -15,8 +15,10 @@ class CopyTest {
     @Test
     fun copyAndGetAndShow_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(CIO) {
-            defaultRequest {
-                url("http://localhost:11434/api/")
+            httpClient {
+                defaultRequest {
+                    url("http://localhost:11434/api/")
+                }
             }
         }
 

@@ -15,10 +15,11 @@ internal class EmbedClientTest {
     @Test
     fun generateEmbed_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                           "model": "all-minilm",
                           "embeddings": [[
                             0.010071029, -0.0017594862, 0.05007221, 0.04692972, 0.054916814,
@@ -28,11 +29,12 @@ internal class EmbedClientTest {
                             0.017194884, 0.09032035, -0.051705178, 0.09951512, 0.09072481
                           ]]
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }

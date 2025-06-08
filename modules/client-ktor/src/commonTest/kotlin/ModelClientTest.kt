@@ -24,15 +24,17 @@ internal class ModelClientTest {
     @Test
     fun createModel_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{"status":"success"}""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{"status":"success"}""",
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -50,21 +52,23 @@ internal class ModelClientTest {
     @Test
     fun createModelFlow_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{"status":"using existing layer sha256:2af3b81862c6be03c769683af18efdadb2c33f60ff32ab6f83e42c043d6c7816"}
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{"status":"using existing layer sha256:2af3b81862c6be03c769683af18efdadb2c33f60ff32ab6f83e42c043d6c7816"}
                             |{"status":"using existing layer sha256:af0ddbdaaa26f30d54d727f9dd944b76bdb926fdaf9a58f63f78c532f57c191f"}
                             |{"status":"using existing layer sha256:1741cf59ce26ff01ac614d31efc700e21e44dd96aed60a7c91ab3f47e440ef94"}
                             |{"status":"using existing layer sha256:fa956ab37b8c21152f975a7fcdd095c4fee8754674b21d9b44d710435697a00d"}
                             |{"status":"writing manifest"}
                             |{"status":"success"}
                         """.trimMargin(),
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -82,9 +86,11 @@ internal class ModelClientTest {
     @Test
     fun checkBlob_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respondOk()
+            httpClient {
+                engine {
+                    addHandler {
+                        respondOk()
+                    }
                 }
             }
         }
@@ -100,10 +106,11 @@ internal class ModelClientTest {
     @Test
     fun listModels_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                             "models": [
                                 {
                                     "name": "codellama:13b",
@@ -121,11 +128,12 @@ internal class ModelClientTest {
                                 }
                             ]
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -138,10 +146,11 @@ internal class ModelClientTest {
     @Test
     fun listRunningModels_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                             "models": [
                                 {
                                     "name": "mistral:latest",
@@ -163,11 +172,12 @@ internal class ModelClientTest {
                                 }
                             ]
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -180,10 +190,11 @@ internal class ModelClientTest {
     @Test
     fun showModelInfo_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                             "modelfile": "# Modelfile generated by \"ollama show\"\n",
                             "details": {
                                 "parent_model": "",
@@ -223,11 +234,12 @@ internal class ModelClientTest {
                                 "vision"
                             ]
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -245,9 +257,11 @@ internal class ModelClientTest {
     @Test
     fun copyModel_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respondOk()
+            httpClient {
+                engine {
+                    addHandler {
+                        respondOk()
+                    }
                 }
             }
         }
@@ -263,9 +277,11 @@ internal class ModelClientTest {
     @Test
     fun deleteModel_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respondOk()
+            httpClient {
+                engine {
+                    addHandler {
+                        respondOk()
+                    }
                 }
             }
         }
@@ -280,17 +296,19 @@ internal class ModelClientTest {
     @Test
     fun pullModel_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                           "status": "pulling manifest"
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -307,13 +325,15 @@ internal class ModelClientTest {
     @Test
     fun pushModel_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        "{ \"status\": \"retrieving manifest\" }",
-                        HttpStatusCode.OK,
-                        headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
-                    )
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            "{ \"status\": \"retrieving manifest\" }",
+                            HttpStatusCode.OK,
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
+                        )
+                    }
                 }
             }
         }

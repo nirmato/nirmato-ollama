@@ -16,23 +16,25 @@ internal class VersionClientTest {
     @Test
     fun version_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
                           "version": "1.2.3"
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
-            }
 
-            install(Logging) {
-                level = LogLevel.ALL
-                logger = Logger.DEFAULT
+                install(Logging) {
+                    level = LogLevel.ALL
+                    logger = Logger.DEFAULT
+                }
             }
         }
 

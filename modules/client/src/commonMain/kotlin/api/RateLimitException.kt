@@ -1,7 +1,5 @@
 package org.nirmato.ollama.api
 
-import io.ktor.http.HttpStatusCode
-
 /**
  * Represents an exception thrown when the Ollama API rate limit is exceeded.
  */

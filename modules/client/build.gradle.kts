@@ -41,17 +41,12 @@ kotlin {
                 implementation(libraries.kotlinx.coroutines.core)
                 implementation(libraries.kotlinx.serialization.core)
                 implementation(libraries.kotlinx.serialization.json)
-                implementation(libraries.ktor.client.content.negotiation)
-                implementation(libraries.ktor.client.core)
-                implementation(libraries.ktor.client.logging)
-                implementation(libraries.ktor.serialization.kotlinx.json)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(libraries.kotlin.test)
-                implementation(libraries.ktor.client.mock)
                 implementation(libraries.kotlinx.coroutines.test)
             }
         }

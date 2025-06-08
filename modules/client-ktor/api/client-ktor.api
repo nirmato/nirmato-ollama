@@ -1,27 +1,17 @@
-public abstract interface class client/api/OllamaApi : org/nirmato/ollama/api/ChatApi, org/nirmato/ollama/api/CompletionsApi, org/nirmato/ollama/api/EmbedApi, org/nirmato/ollama/api/ModelsApi, org/nirmato/ollama/api/MonitoringApi, org/nirmato/ollama/api/VersionApi {
-}
-
-public abstract interface class org/nirmato/ollama/api/ChatApi {
+public abstract interface class org/nirmato/ollama/api/OllamaApi {
 	public abstract fun chat (Lorg/nirmato/ollama/api/ChatRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun chatStream (Lorg/nirmato/ollama/api/ChatRequest;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class org/nirmato/ollama/api/CompletionsApi {
+	public abstract fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun completionStream (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class org/nirmato/ollama/api/EmbedApi {
-	public abstract fun generateEmbed (Lorg/nirmato/ollama/api/EmbedRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public abstract interface class org/nirmato/ollama/api/ModelsApi {
-	public abstract fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun createModelStream (Lorg/nirmato/ollama/api/CreateModelRequest;)Lkotlinx/coroutines/flow/Flow;
 	public abstract fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun generateEmbed (Lorg/nirmato/ollama/api/EmbedRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getMonitoring (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getVersion (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -31,54 +21,25 @@ public abstract interface class org/nirmato/ollama/api/ModelsApi {
 	public abstract fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public abstract interface class org/nirmato/ollama/api/MonitoringApi {
-	public abstract fun getMonitoring (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+public final class org/nirmato/ollama/client/ktor/HttpTransport {
+	public fun <init> (Lio/ktor/client/HttpClient;Lorg/nirmato/ollama/client/ktor/OllamaClientConfig;)V
+	public final fun cancellableFlow (Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/flow/Flow;
+	public final fun getClientConfig ()Lorg/nirmato/ollama/client/ktor/OllamaClientConfig;
+	public final fun handleRequest (Lio/ktor/util/reflect/TypeInfo;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun handleRequest (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public abstract interface class org/nirmato/ollama/api/VersionApi {
-	public abstract fun getVersion (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+public final class org/nirmato/ollama/client/ktor/HttpTransportKt {
+	public static final field MAX_READ_LINE I
 }
 
-public class org/nirmato/ollama/client/ktor/ChatClient : org/nirmato/ollama/api/ChatApi {
-	public fun chat (Lorg/nirmato/ollama/api/ChatRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun chatStream (Lorg/nirmato/ollama/api/ChatRequest;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public class org/nirmato/ollama/client/ktor/CompletionsClient : org/nirmato/ollama/api/CompletionsApi {
-	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun completionStream (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public class org/nirmato/ollama/client/ktor/EmbedClient : org/nirmato/ollama/api/EmbedApi {
-	public fun generateEmbed (Lorg/nirmato/ollama/api/EmbedRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public class org/nirmato/ollama/client/ktor/ModelsClient : org/nirmato/ollama/api/ModelsApi {
-	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun createModelStream (Lorg/nirmato/ollama/api/CreateModelRequest;)Lkotlinx/coroutines/flow/Flow;
-	public fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun pullModelStream (Lorg/nirmato/ollama/api/PullModelRequest;)Lkotlinx/coroutines/flow/Flow;
-	public fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun pushModelStream (Lorg/nirmato/ollama/api/PushModelRequest;)Lkotlinx/coroutines/flow/Flow;
-	public fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public class org/nirmato/ollama/client/ktor/MonitoringClient : org/nirmato/ollama/api/MonitoringApi {
-	public fun getMonitoring (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public final class org/nirmato/ollama/client/ktor/OllamaClient : client/api/OllamaApi, org/nirmato/ollama/api/ChatApi, org/nirmato/ollama/api/CompletionsApi, org/nirmato/ollama/api/EmbedApi, org/nirmato/ollama/api/ModelsApi, org/nirmato/ollama/api/MonitoringApi, org/nirmato/ollama/api/VersionApi {
+public final class org/nirmato/ollama/client/ktor/OllamaClient : java/lang/AutoCloseable, org/nirmato/ollama/api/OllamaApi {
 	public static final field Companion Lorg/nirmato/ollama/client/ktor/OllamaClient$Companion;
-	public synthetic fun <init> (Lorg/nirmato/ollama/client/ktor/internal/http/KtorHttpClient;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lio/ktor/client/HttpClient;Lorg/nirmato/ollama/client/ktor/OllamaClientConfig;)V
 	public fun chat (Lorg/nirmato/ollama/api/ChatRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun chatStream (Lorg/nirmato/ollama/api/ChatRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun close ()V
 	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun completionStream (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -96,6 +57,22 @@ public final class org/nirmato/ollama/client/ktor/OllamaClient : client/api/Olla
 	public fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun pushModelStream (Lorg/nirmato/ollama/api/PushModelRequest;)Lkotlinx/coroutines/flow/Flow;
 	public fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public class org/nirmato/ollama/client/ktor/OllamaClient$Builder {
+	public final fun build ()Lorg/nirmato/ollama/client/ktor/OllamaClient;
+	protected final fun getClient ()Lio/ktor/client/HttpClient;
+	protected final fun getHttpClientConfig ()Lkotlin/jvm/functions/Function1;
+	protected final fun getJsonConfig ()Lkotlinx/serialization/json/Json;
+	protected final fun getOllamaBaseUrl ()Ljava/lang/String;
+	public final fun httpClient (Lio/ktor/client/HttpClient;)V
+	public final fun httpClient (Lkotlin/jvm/functions/Function1;)V
+	public final fun jsonConfig (Lkotlin/jvm/functions/Function1;)V
+	public final fun jsonConfig (Lkotlinx/serialization/json/Json;)V
+	protected final fun setClient (Lio/ktor/client/HttpClient;)V
+	protected final fun setHttpClientConfig (Lkotlin/jvm/functions/Function1;)V
+	protected final fun setJsonConfig (Lkotlinx/serialization/json/Json;)V
+	protected final fun setOllamaBaseUrl (Ljava/lang/String;)V
 }
 
 public final class org/nirmato/ollama/client/ktor/OllamaClient$Companion {
@@ -103,7 +80,35 @@ public final class org/nirmato/ollama/client/ktor/OllamaClient$Companion {
 	public static synthetic fun invoke$default (Lorg/nirmato/ollama/client/ktor/OllamaClient$Companion;Lio/ktor/client/engine/HttpClientEngineFactory;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lorg/nirmato/ollama/client/ktor/OllamaClient;
 }
 
-public class org/nirmato/ollama/client/ktor/VersionClient : org/nirmato/ollama/api/VersionApi {
+public final class org/nirmato/ollama/client/ktor/OllamaClientConfig {
+	public fun <init> ()V
+	public fun <init> (Lkotlinx/serialization/json/Json;)V
+	public synthetic fun <init> (Lkotlinx/serialization/json/Json;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getJsonConfig ()Lkotlinx/serialization/json/Json;
+}
+
+public final class org/nirmato/ollama/client/ktor/OllamaService : org/nirmato/ollama/api/OllamaApi {
+	public fun <init> (Lorg/nirmato/ollama/client/ktor/HttpTransport;)V
+	public fun chat (Lorg/nirmato/ollama/api/ChatRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun chatStream (Lorg/nirmato/ollama/api/ChatRequest;)Lkotlinx/coroutines/flow/Flow;
+	public fun checkBlob (Lorg/nirmato/ollama/api/CheckBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun completion (Lorg/nirmato/ollama/api/CompletionRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun completionStream (Lorg/nirmato/ollama/api/CompletionRequest;)Lkotlinx/coroutines/flow/Flow;
+	public fun copyModel (Lorg/nirmato/ollama/api/CopyModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun createBlob (Lorg/nirmato/ollama/api/CreateBlobRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun createModel (Lorg/nirmato/ollama/api/CreateModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun createModelStream (Lorg/nirmato/ollama/api/CreateModelRequest;)Lkotlinx/coroutines/flow/Flow;
+	public fun deleteModel (Lorg/nirmato/ollama/api/DeleteModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun generateEmbed (Lorg/nirmato/ollama/api/EmbedRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getHttpTransport ()Lorg/nirmato/ollama/client/ktor/HttpTransport;
+	public fun getMonitoring (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getVersion (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun listRunningModels (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun pullModel (Lorg/nirmato/ollama/api/PullModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun pullModelStream (Lorg/nirmato/ollama/api/PullModelRequest;)Lkotlinx/coroutines/flow/Flow;
+	public fun pushModel (Lorg/nirmato/ollama/api/PushModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun pushModelStream (Lorg/nirmato/ollama/api/PushModelRequest;)Lkotlinx/coroutines/flow/Flow;
+	public fun showModel (Lorg/nirmato/ollama/api/ShowModelRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 

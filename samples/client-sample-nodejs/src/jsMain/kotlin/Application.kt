@@ -9,8 +9,10 @@ import org.nirmato.ollama.client.ktor.OllamaClient
 
 suspend fun main() {
     val ollamaClient = OllamaClient(Js) {
-        defaultRequest {
-            url("http://localhost:11434/api/")
+        httpClient {
+            defaultRequest {
+                url("http://localhost:11434/api/")
+            }
         }
     }
 

@@ -16,23 +16,25 @@ internal class MonitoringClientTest {
     @Test
     fun monitoring_validRequest_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
-            engine {
-                addHandler {
-                    respond(
-                        content = """{
-                          "status": "ok"
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
+                          "status": "500"
                         }""",
-                        status = HttpStatusCode.OK,
-                        headers {
-                            append(HttpHeaders.ContentType, "application/json")
-                        }
-                    )
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
                 }
-            }
 
-            install(Logging) {
-                level = LogLevel.ALL
-                logger = Logger.DEFAULT
+                install(Logging) {
+                    level = LogLevel.ALL
+                    logger = Logger.DEFAULT
+                }
             }
         }
 

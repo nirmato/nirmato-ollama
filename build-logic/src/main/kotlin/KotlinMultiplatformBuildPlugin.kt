@@ -16,7 +16,6 @@ import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxNightly
 import build.gradle.plugins.build.KarmaBrowserTarget.FirefoxNightlyHeadless
 import build.gradle.plugins.build.KarmaBrowserTarget.Ie
 import build.gradle.plugins.build.KarmaBrowserTarget.Opera
-import build.gradle.plugins.build.KarmaBrowserTarget.PhantomJs
 import build.gradle.plugins.build.KarmaBrowserTarget.Safari
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -367,7 +366,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
             FirefoxDeveloperHeadless -> useFirefoxDeveloperHeadless()
             FirefoxNightly -> useFirefoxNightly()
             FirefoxNightlyHeadless -> useFirefoxNightlyHeadless()
-            PhantomJs -> usePhantomJS()
             Safari -> useSafari()
             Opera -> useOpera()
             Ie -> useIe()

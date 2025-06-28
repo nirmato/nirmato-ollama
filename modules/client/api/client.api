@@ -58,6 +58,7 @@ public final class org/nirmato/ollama/api/ChatCompletionRequest$$serializer : ko
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatCompletionRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ChatCompletionRequest$ChatCompletionRequestBuilder {
@@ -129,6 +130,7 @@ public final class org/nirmato/ollama/api/ChatCompletionResponse$$serializer : k
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatCompletionResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ChatCompletionResponse$Companion {
@@ -170,6 +172,7 @@ public final class org/nirmato/ollama/api/ChatRequest$$serializer : kotlinx/seri
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ChatRequest$ChatRequestBuilder {
@@ -234,6 +237,7 @@ public final class org/nirmato/ollama/api/ChatResponse$$serializer : kotlinx/ser
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ChatResponse$Companion {
@@ -260,6 +264,7 @@ public final class org/nirmato/ollama/api/CheckBlobRequest$$serializer : kotlinx
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CheckBlobRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/CheckBlobRequest$CheckBlobRequestBuilder {
@@ -296,6 +301,7 @@ public final class org/nirmato/ollama/api/CopyModelRequest$$serializer : kotlinx
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CopyModelRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/CopyModelRequest$Companion {
@@ -333,6 +339,7 @@ public final class org/nirmato/ollama/api/CreateBlobRequest$$serializer : kotlin
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CreateBlobRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/CreateBlobRequest$Companion {
@@ -389,6 +396,7 @@ public final class org/nirmato/ollama/api/CreateModelRequest$$serializer : kotli
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CreateModelRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/CreateModelRequest$Companion {
@@ -473,6 +481,7 @@ public final class org/nirmato/ollama/api/DeleteModelRequest$$serializer : kotli
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/DeleteModelRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/DeleteModelRequest$Companion {
@@ -534,6 +543,7 @@ public final class org/nirmato/ollama/api/EmbedRequest$$serializer : kotlinx/ser
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/EmbedRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/EmbedRequest$Companion {
@@ -582,6 +592,7 @@ public final class org/nirmato/ollama/api/EmbedResponse$$serializer : kotlinx/se
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/EmbedResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/EmbedResponse$Companion {
@@ -619,6 +630,7 @@ public final class org/nirmato/ollama/api/EmbeddedInput$EmbeddedList$$serializer
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize-V95jd0I (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/EmbeddedInput$EmbeddedList$Companion {
@@ -648,6 +660,7 @@ public final class org/nirmato/ollama/api/EmbeddedInput$EmbeddedText$$serializer
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize-OBcofNQ (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/EmbeddedInput$EmbeddedText$Companion {
@@ -676,6 +689,7 @@ public final class org/nirmato/ollama/api/FailureResponse$$serializer : kotlinx/
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/FailureResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/FailureResponse$Companion {
@@ -713,6 +727,7 @@ public final class org/nirmato/ollama/api/Format$FormatSchema$$serializer : kotl
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize-EGuWGvI (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/Format$FormatSchema$Companion {
@@ -742,6 +757,7 @@ public final class org/nirmato/ollama/api/Format$FormatType$$serializer : kotlin
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize-9sTMrZo (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/Format$FormatType$Companion {
@@ -776,6 +792,7 @@ public final class org/nirmato/ollama/api/ListModelsResponse$$serializer : kotli
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ListModelsResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ListModelsResponse$Companion {
@@ -811,6 +828,7 @@ public final class org/nirmato/ollama/api/Message$$serializer : kotlinx/serializ
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Message;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/Message$Companion {
@@ -863,6 +881,7 @@ public final class org/nirmato/ollama/api/ModelDetails$$serializer : kotlinx/ser
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ModelDetails;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ModelDetails$Companion {
@@ -889,6 +908,7 @@ public final class org/nirmato/ollama/api/MonitoringResponse$$serializer : kotli
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/MonitoringResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/MonitoringResponse$Companion {
@@ -969,6 +989,7 @@ public final class org/nirmato/ollama/api/OllamaModel$$serializer : kotlinx/seri
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/OllamaModel;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/OllamaModel$Companion {
@@ -1055,6 +1076,7 @@ public final class org/nirmato/ollama/api/Options$$serializer : kotlinx/serializ
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Options;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/Options$Companion {
@@ -1088,6 +1110,7 @@ public final class org/nirmato/ollama/api/ProcessResponse$$serializer : kotlinx/
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProcessResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ProcessResponse$Companion {
@@ -1128,6 +1151,7 @@ public final class org/nirmato/ollama/api/ProcessResponse$ProcessModel$$serializ
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProcessResponse$ProcessModel;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ProcessResponse$ProcessModel$Companion {
@@ -1162,6 +1186,7 @@ public final class org/nirmato/ollama/api/ProgressResponse$$serializer : kotlinx
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProgressResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ProgressResponse$Companion {
@@ -1197,6 +1222,7 @@ public final class org/nirmato/ollama/api/PullModelRequest$$serializer : kotlinx
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/PullModelRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/PullModelRequest$Companion {
@@ -1246,6 +1272,7 @@ public final class org/nirmato/ollama/api/PushModelRequest$$serializer : kotlinx
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/PushModelRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/PushModelRequest$Companion {
@@ -1306,6 +1333,7 @@ public final class org/nirmato/ollama/api/ShowModelRequest$$serializer : kotlinx
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ShowModelRequest;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ShowModelRequest$Companion {
@@ -1354,6 +1382,7 @@ public final class org/nirmato/ollama/api/ShowModelResponse$$serializer : kotlin
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ShowModelResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ShowModelResponse$Companion {
@@ -1382,6 +1411,7 @@ public final class org/nirmato/ollama/api/Tool$$serializer : kotlinx/serializati
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/Tool$Companion {
@@ -1413,6 +1443,7 @@ public final class org/nirmato/ollama/api/Tool$ToolFunction$$serializer : kotlin
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool$ToolFunction;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/Tool$ToolFunction$Companion {
@@ -1444,6 +1475,7 @@ public final class org/nirmato/ollama/api/Tool$ToolParameters$$serializer : kotl
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool$ToolParameters;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/Tool$ToolParameters$Companion {
@@ -1470,6 +1502,7 @@ public final class org/nirmato/ollama/api/ToolCall$$serializer : kotlinx/seriali
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ToolCall;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ToolCall$Companion {
@@ -1498,6 +1531,7 @@ public final class org/nirmato/ollama/api/ToolCall$FunctionCall$$serializer : ko
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ToolCall$FunctionCall;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/ToolCall$FunctionCall$Companion {
@@ -1529,6 +1563,7 @@ public final class org/nirmato/ollama/api/VersionResponse$$serializer : kotlinx/
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/VersionResponse;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class org/nirmato/ollama/api/VersionResponse$Companion {

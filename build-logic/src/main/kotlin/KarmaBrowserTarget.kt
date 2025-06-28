@@ -21,7 +21,6 @@ public sealed class KarmaBrowserTarget(
     public object FirefoxDeveloperHeadless : KarmaBrowserTarget(KarmaBrowser.Firefox, KarmaBrowserChannel.Developer, true)
     public object FirefoxNightly : KarmaBrowserTarget(KarmaBrowser.Firefox, KarmaBrowserChannel.Nightly, false)
     public object FirefoxNightlyHeadless : KarmaBrowserTarget(KarmaBrowser.Firefox, KarmaBrowserChannel.Nightly, true)
-    public object PhantomJs : KarmaBrowserTarget(KarmaBrowser.PhantomJs, KarmaBrowserChannel.Release, true)
     public object Safari : KarmaBrowserTarget(KarmaBrowser.Safari, KarmaBrowserChannel.Release, false)
     public object Opera : KarmaBrowserTarget(KarmaBrowser.Opera, KarmaBrowserChannel.Release, false)
     public object Ie : KarmaBrowserTarget(KarmaBrowser.Ie, KarmaBrowserChannel.Release, false)
@@ -36,7 +35,6 @@ public sealed class KarmaBrowserTarget(
             FirefoxAuroraHeadless,
             FirefoxDeveloperHeadless,
             FirefoxNightlyHeadless,
-            PhantomJs,
             // GUI
             Chrome,
             ChromeCanary,

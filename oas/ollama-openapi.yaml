@@ -3,7 +3,7 @@ openapi: 3.1.0
 info:
     title: Ollama API
     description: API Spec for Ollama API. Please see https://github.com/ollama/ollama/blob/main/docs/api.md for more details.
-    version: 0.9.0
+    version: 0.9.3
 
 servers:
     -   url: http://localhost:11434/api

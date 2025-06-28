@@ -1,7 +1,7 @@
 # nirmato-ollama
 
 [![Klibs](https://img.shields.io/badge/klibs-0.2.0-%237F52FF.svg?logo=kotlin&color=blue)](https://klibs.io/project/nirmato/nirmato-ollama)
-![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.1.21-blue.svg?logo=kotlin)
+![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.2.0-blue.svg?logo=kotlin)
 ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
 An Ollama client SDK that allows you to easily interact with Ollama API.

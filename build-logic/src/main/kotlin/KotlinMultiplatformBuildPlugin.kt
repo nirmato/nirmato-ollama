@@ -30,7 +30,6 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JsSourceMapEmbedMode
@@ -44,11 +43,17 @@ import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
 import org.jetbrains.kotlin.gradle.dsl.withWasmCompilerArguments
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin
 import org.jetbrains.kotlin.gradle.targets.js.testing.karma.KotlinKarma
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootEnvSpec
-import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+import org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsEnvSpec
+import org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsPlugin
+import org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnPlugin
+import org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnRootEnvSpec
+import org.jetbrains.kotlin.gradle.targets.wasm.yarn.WasmYarnRootExtension
 
 public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
@@ -76,13 +81,18 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
             || project.gradleBooleanProperty("kotlin.targets.wasmWasi.enabled").get()
         ) {
             applyKotlinWasmJsImplicitDependencyWorkaround()
+
+            configureWasmYarn()
+
+            project.disableDefaultWasmJsRepositories()
+            rootProject.disableDefaultWasmJsRepositories()
         }
 
-        if (project.gradleBooleanProperty("kotlin.targets.js.enabled").get()
-            || project.gradleBooleanProperty("kotlin.targets.wasmJs.enabled").get()
-            || project.gradleBooleanProperty("kotlin.targets.wasmWasi.enabled").get()
-        ) {
+        if (project.gradleBooleanProperty("kotlin.targets.js.enabled").get()) {
             configureYarn()
+
+            project.disableDefaultJsRepositories()
+            rootProject.disableDefaultJsRepositories()
         }
 
         if (isLinux) {
@@ -102,22 +112,58 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
     }
 
     private fun Project.configureYarn() {
-        rootProject.plugins.withType<YarnPlugin> {
-            yarn.apply {
+        rootProject.plugins.withType<YarnPlugin>().configureEach {
+            rootProject.extensions.configure<YarnRootExtension> {
                 lockFileDirectory = rootDir.resolve("gradle/js")
                 reportNewYarnLock = true
                 yarnLockAutoReplace = true
                 yarnLockMismatchReport = YarnLockMismatchReport.FAIL
             }
         }
+    }
 
-        rootProject.the<YarnRootEnvSpec>().apply {
-            download = false
-            ignoreScripts = false
+    private fun Project.configureWasmYarn() {
+        rootProject.plugins.withType<WasmYarnPlugin>().configureEach {
+            rootProject.extensions.configure<WasmYarnRootExtension> {
+                lockFileDirectory = rootDir.resolve("gradle/wasm")
+                reportNewYarnLock = true
+                yarnLockAutoReplace = true
+                yarnLockMismatchReport = YarnLockMismatchReport.FAIL
+            }
+        }
+    }
+
+    // TODO remove after https://youtrack.jetbrains.com/issue/KT-68533
+    private fun Project.disableDefaultJsRepositories() {
+        plugins.withType<NodeJsPlugin> {
+            extensions.configure<NodeJsEnvSpec> {
+                downloadBaseUrl = null
+                download = false
+            }
         }
 
-        rootProject.the<NodeJsEnvSpec>().apply {
-            download = false
+        plugins.withType<YarnPlugin>() {
+            extensions.configure<YarnRootEnvSpec> {
+                downloadBaseUrl = null
+                download = false
+            }
+        }
+    }
+
+    // TODO remove after https://youtrack.jetbrains.com/issue/KT-68533
+    private fun Project.disableDefaultWasmJsRepositories() {
+        plugins.withType<WasmNodeJsPlugin> {
+            extensions.configure<WasmNodeJsEnvSpec> {
+                downloadBaseUrl = null
+                download = false
+            }
+        }
+
+        plugins.withType<WasmYarnPlugin>() {
+            extensions.configure<WasmYarnRootEnvSpec> {
+                downloadBaseUrl = null
+                download = false
+            }
         }
     }
 

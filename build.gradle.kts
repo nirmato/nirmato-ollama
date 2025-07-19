@@ -1,3 +1,5 @@
+import org.gradle.api.provider.gradleBooleanProperty
+
 plugins {
     alias(libraries.plugins.kotlinx.serialization) apply false
     alias(libraries.plugins.kotlinx.bcv)
@@ -27,9 +29,12 @@ apiValidation {
         listOf(
             "bom",
             "version-catalog",
-            "client-sample-cio",
         )
     )
+
+    if (providers.gradleBooleanProperty("kotlin.targets.jvm.enabled").get()) {
+        ignoredProjects.add("client-sample-cio")
+    }
 
     nonPublicMarkers.add("org.nirmato.ollama.annotations.InternalApi")
 }

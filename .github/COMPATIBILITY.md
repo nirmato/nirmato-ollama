@@ -2,17 +2,11 @@
 
 ## Compatibility of dependencies
 
-| Version  | Kotlin Language & API |
-|----------|-----------------------|
-| 1.0.x    | 2.0                   |
-| < 1.0.0  | 1.8                   |
-
-## Compatibility table with Ollama API
-
-| Version | Ollama API |
-|---------|------------|
-| 1.0.x   | 0.9.0      |
-| < 1.0.0 | 0.9.0      |
+| nirmato-ollama | Java   | Kotlin Language & API | Ollama API |
+|----------------|--------|-----------------------|------------|
+| 0.2.0          | 11     | 1.8                   | 0.9.0      |
+| 0.1.1          | 11     | 1.8                   | 0.5.7      |
+| 0.1.0          | 11     | 1.8                   | 0.5.7      |
 
 ## Supported Platforms
 

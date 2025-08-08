@@ -958,8 +958,8 @@ public abstract class org/nirmato/ollama/api/OllamaIOException : org/nirmato/oll
 public final class org/nirmato/ollama/api/OllamaModel {
 	public static final field Companion Lorg/nirmato/ollama/api/OllamaModel$Companion;
 	public fun <init> ()V
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;Ljava/lang/Long;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;Ljava/lang/Long;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component3 ()Lkotlinx/datetime/Instant;
@@ -967,8 +967,9 @@ public final class org/nirmato/ollama/api/OllamaModel {
 	public final fun component5 ()Ljava/lang/Long;
 	public final fun component6 ()Ljava/lang/String;
 	public final fun component7 ()Lorg/nirmato/ollama/api/ModelDetails;
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;)Lorg/nirmato/ollama/api/OllamaModel;
-	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/OllamaModel;Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;ILjava/lang/Object;)Lorg/nirmato/ollama/api/OllamaModel;
+	public final fun component8 ()Ljava/lang/Long;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;Ljava/lang/Long;)Lorg/nirmato/ollama/api/OllamaModel;
+	public static synthetic fun copy$default (Lorg/nirmato/ollama/api/OllamaModel;Ljava/lang/String;Ljava/lang/String;Lkotlinx/datetime/Instant;Lkotlinx/datetime/Instant;Ljava/lang/Long;Ljava/lang/String;Lorg/nirmato/ollama/api/ModelDetails;Ljava/lang/Long;ILjava/lang/Object;)Lorg/nirmato/ollama/api/OllamaModel;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getDetails ()Lorg/nirmato/ollama/api/ModelDetails;
 	public final fun getDigest ()Ljava/lang/String;
@@ -977,6 +978,7 @@ public final class org/nirmato/ollama/api/OllamaModel {
 	public final fun getModifiedAt ()Lkotlinx/datetime/Instant;
 	public final fun getName ()Ljava/lang/String;
 	public final fun getSize ()Ljava/lang/Long;
+	public final fun getSizeVram ()Ljava/lang/Long;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }

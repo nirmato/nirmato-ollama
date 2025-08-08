@@ -39,4 +39,8 @@ public data class OllamaModel(
 
     @SerialName(value = "details")
     val details: ModelDetails? = null,
+
+    /** The model's digest. */
+    @SerialName(value = "size_vram")
+    val sizeVram: Long? = null,
 )

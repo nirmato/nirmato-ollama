@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
     title: Ollama API
-    description: API Spec for Ollama API. Please see https://github.com/ollama/ollama/blob/main/docs/api.md for more details.
+    description: Ollama is an open-source tool that runs large language models (LLMs) directly on a local machine.
     version: 0.9.3
 
 servers:

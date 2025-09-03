@@ -19,4 +19,7 @@ public enum class ModelCapability {
 
     @SerialName("embedding")
     Embedding,
+
+    @SerialName("thinking")
+    Thinking,
 }

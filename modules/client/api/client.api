@@ -840,6 +840,7 @@ public final class org/nirmato/ollama/api/ModelCapability : java/lang/Enum {
 	public static final field Completion Lorg/nirmato/ollama/api/ModelCapability;
 	public static final field Embedding Lorg/nirmato/ollama/api/ModelCapability;
 	public static final field Insert Lorg/nirmato/ollama/api/ModelCapability;
+	public static final field Thinking Lorg/nirmato/ollama/api/ModelCapability;
 	public static final field Tools Lorg/nirmato/ollama/api/ModelCapability;
 	public static final field Vision Lorg/nirmato/ollama/api/ModelCapability;
 	public static fun valueOf (Ljava/lang/String;)Lorg/nirmato/ollama/api/ModelCapability;

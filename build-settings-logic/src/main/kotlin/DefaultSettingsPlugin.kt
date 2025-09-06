@@ -7,6 +7,7 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.resolve.RepositoriesMode
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.assign
 import org.gradle.util.GradleVersion
 
@@ -67,8 +68,13 @@ public class DefaultSettingsPlugin : Plugin<Settings> {
         }
     }
 
+    private fun currentJavaVersion(): JavaLanguageVersion {
+        return JavaLanguageVersion.of(JavaVersion.current().majorVersion)
+    }
+
     private companion object {
-        val MINIMUM_GRADLE_VERSION: GradleVersion = GradleVersion.version("8.13")
-        val MINIMUM_JAVA_VERSION: JavaVersion = JavaVersion.toVersion("11")
+        val MINIMUM_GRADLE_VERSION: GradleVersion = GradleVersion.version("9.0.0")
+        val MINIMUM_JAVA_VERSION: JavaVersion = JavaVersion.toVersion("17")
+        const val PLUGIN_ID: String = "build-settings-default"
     }
 }

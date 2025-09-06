@@ -246,10 +246,10 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         configure<KotlinMultiplatformExtension> {
             jvmToolchain {
                 languageVersion = project.providers.provider {
-                    JavaLanguageVersion.of(
-                        project.getProperty("kotlin.javaToolchain.mainJvmCompiler")
-                            ?: throw StopExecutionException("Property \"kotlin.javaToolchain.mainJvmCompiler\" is not found")
-                    )
+                    val version = project.getProperty("kotlin.javaToolchain.mainJvmCompiler")
+                        ?: throw StopExecutionException("Property \"kotlin.javaToolchain.mainJvmCompiler\" is not found")
+
+                    JavaLanguageVersion.of(version)
                 }
             }
         }

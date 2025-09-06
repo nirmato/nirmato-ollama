@@ -7,7 +7,7 @@ import org.gradle.api.tasks.wrapper.Wrapper
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType
 import org.gradle.kotlin.dsl.named
 
-public class WrapperConfigurerPlugin : Plugin<Project> {
+public class WrapperBuildPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
         if (project != rootProject) {
             throw StopExecutionException("Gradle wrapper plugin should only be applied to the root project.")

@@ -43,13 +43,13 @@ kotlin {
 
 gradlePlugin {
     plugins {
-        register("DefaultProjectPlugin") {
-            id = "build-project-default"
-            implementationClass = "build.gradle.plugins.build.DefaultProjectPlugin"
+        register("ProjectBuildPlugin") {
+            id = "build-project"
+            implementationClass = "build.gradle.plugins.build.ProjectBuildPlugin"
         }
-        register("MavenPublishingPlugin") {
-            id = "build-maven-publishing-configurer"
-            implementationClass = "build.gradle.plugins.build.MavenPublishConfigurerPlugin"
+        register("MavenPublishBuildPlugin") {
+            id = "build-maven-publish"
+            implementationClass = "build.gradle.plugins.build.MavenPublishBuildPlugin"
         }
         register("KotlinMultiplatformBuildPlugin") {
             id = "build-kotlin-multiplatform"
@@ -59,13 +59,13 @@ gradlePlugin {
             id = "build-assembler"
             implementationClass = "build.gradle.plugins.build.AssemblerPlugin"
         }
-        register("WrapperConfigurerPlugin") {
-            id = "build-wrapper-configurer"
-            implementationClass = "build.gradle.plugins.build.WrapperConfigurerPlugin"
+        register("WrapperBuildPlugin") {
+            id = "build-wrapper"
+            implementationClass = "build.gradle.plugins.build.WrapperBuildPlugin"
         }
-        register("DetektConfigurerPlugin") {
-            id = "build-detekt-configurer"
-            implementationClass = "build.gradle.plugins.build.DetektConfigurerPlugin"
+        register("DetektBuildPlugin") {
+            id = "build-detekt"
+            implementationClass = "build.gradle.plugins.build.DetektBuildPlugin"
         }
     }
 }

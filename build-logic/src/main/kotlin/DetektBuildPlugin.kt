@@ -9,9 +9,9 @@ import org.gradle.api.tasks.StopExecutionException
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.withType
 
-public class DetektConfigurerPlugin : Plugin<Project> {
+public class DetektBuildPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
-        if (rootProject != this) {
+        if (this != rootProject) {
             throw StopExecutionException("Gradle wrapper plugin should only be applied to the root project.")
         }
 
@@ -56,7 +56,7 @@ public class DetektConfigurerPlugin : Plugin<Project> {
     }
 
     public companion object {
-        public const val PLUGIN_ID: String = "build-detekt-configurer"
+        public const val PLUGIN_ID: String = "build-detekt"
         public const val DETEKT_PLUGIN_ID: String = "io.gitlab.arturbosch.detekt"
     }
 }

@@ -2,9 +2,9 @@ plugins {
     alias(libraries.plugins.kotlinx.serialization)
     alias(libraries.plugins.kotlinx.kover)
 
+    id("build-project")
     id("build-kotlin-multiplatform")
-    id("build-project-default")
-    id("build-maven-publishing-configurer")
+    id("build-maven-publish")
 }
 
 description = "Ollama client API"

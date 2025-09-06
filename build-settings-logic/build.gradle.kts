@@ -36,9 +36,7 @@ kotlin {
     }
 
     jvmToolchain {
-        languageVersion = project.providers.provider {
-            JavaLanguageVersion.of(getGradleProperty("kotlin.javaToolchain.mainJvmCompiler"))
-        }
+        languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
     }
 }
 
@@ -60,11 +58,4 @@ tasks {
         failOnWarning.set(true)
         enableStricterValidation.set(true)
     }
-}
-
-internal fun getGradleProperty(key: String, environmentKey: String? = null): String {
-    val gradleValue = providers.gradleProperty(key).get().takeIf { value -> value.isNotBlank() }
-    val systemValue = System.getProperty(key)?.takeIf { value -> value.isNotBlank() }
-    val environmentValue = environmentKey?.let { System.getenv(it) }?.takeIf { value -> value.isNotBlank() }
-    return environmentValue ?: systemValue ?: gradleValue ?: throw StopExecutionException("Property $key is not found")
 }

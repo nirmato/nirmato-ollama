@@ -32,7 +32,7 @@ import org.gradle.plugins.signing.type.AbstractSignatureType
 import org.gradle.plugins.signing.type.SignatureType
 import org.gradle.plugins.signing.type.pgp.ArmoredSignatureType
 
-public class MavenPublishConfigurerPlugin : Plugin<Project> {
+public class MavenPublishBuildPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
         configurePublishPlugin(project)
 
@@ -248,7 +248,7 @@ public class MavenPublishConfigurerPlugin : Plugin<Project> {
     }
 
     public companion object {
-        public const val PLUGIN_ID: String = "build-maven-publishing-configurer"
+        public const val PLUGIN_ID: String = "build-maven-publish"
         public const val MAVEN_PUBLISH_PLUGIN_ID: String = "maven-publish"
     }
 }

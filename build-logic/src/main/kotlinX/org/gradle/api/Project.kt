@@ -4,6 +4,7 @@ import org.gradle.api.artifacts.ExternalModuleDependencyBundle
 import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.StopExecutionException
 import org.gradle.kotlin.dsl.getByType
 
 internal val Project.librariesCatalog
@@ -49,3 +50,9 @@ public fun Project.gradleStringProperty(name: String): Provider<String> = provid
 
 public fun Project.gradleBooleanProperty(name: String): Provider<Boolean> = gradleStringProperty(name).map { it.toBoolean() }.orElse(false)
 
+public fun Project.getGradleProperty(key: String, environmentKey: String? = null): String {
+    val gradleValue = providers.gradleProperty(key).get().takeIf { value -> value.isNotBlank() }
+    val systemValue = System.getProperty(key)?.takeIf { value -> value.isNotBlank() }
+    val environmentValue = environmentKey?.let { System.getenv(it) }?.takeIf { value -> value.isNotBlank() }
+    return environmentValue ?: systemValue ?: gradleValue ?: throw StopExecutionException("Property $key is not found")
+}

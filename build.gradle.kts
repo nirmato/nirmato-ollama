@@ -5,9 +5,9 @@ plugins {
     alias(libraries.plugins.kotlinx.bcv)
     alias(libraries.plugins.detekt)
 
-    id("build-project-default")
-    id("build-wrapper-configurer")
-    id("build-detekt-configurer")
+    id("build-project")
+    id("build-wrapper")
+    id("build-detekt")
 }
 
 description = "Root Project"

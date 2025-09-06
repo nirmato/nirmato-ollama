@@ -22,14 +22,13 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.attributes.java.TargetJvmVersion
-import org.gradle.api.getProperty
 import org.gradle.api.gradleBooleanProperty
 import org.gradle.api.gradleStringProperty
-import org.gradle.api.tasks.StopExecutionException
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JsSourceMapEmbedMode
@@ -37,6 +36,7 @@ import org.jetbrains.kotlin.gradle.dsl.JsSourceMapNamesPolicy
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptionsBuilder.JvmDefaultOption
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.dsl.withCommonCompilerArguments
 import org.jetbrains.kotlin.gradle.dsl.withJvmCompilerArguments
@@ -243,14 +243,9 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
     }
 
     private fun Project.configureJvmToolchain() {
-        configure<KotlinMultiplatformExtension> {
+        extensions.getByType<KotlinProjectExtension>().apply {
             jvmToolchain {
-                languageVersion = project.providers.provider {
-                    val version = project.getProperty("kotlin.javaToolchain.mainJvmCompiler")
-                        ?: throw StopExecutionException("Property \"kotlin.javaToolchain.mainJvmCompiler\" is not found")
-
-                    JavaLanguageVersion.of(version)
-                }
+                languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
             }
         }
     }

@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 plugins {
     kotlin("multiplatform")
 
-    id("build-project-default")
+    id("build-project")
 }
 
 description = "Ollama Client using Ktor Js engine"

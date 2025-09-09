@@ -50,14 +50,14 @@ public final class org/nirmato/ollama/api/ChatCompletionRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ChatCompletionRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ChatCompletionRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ChatCompletionRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ChatCompletionRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ChatCompletionRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatCompletionRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatCompletionRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -122,14 +122,14 @@ public final class org/nirmato/ollama/api/ChatCompletionResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ChatCompletionResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ChatCompletionResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ChatCompletionResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ChatCompletionResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ChatCompletionResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatCompletionResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatCompletionResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -164,14 +164,14 @@ public final class org/nirmato/ollama/api/ChatRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ChatRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ChatRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ChatRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ChatRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ChatRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -229,14 +229,14 @@ public final class org/nirmato/ollama/api/ChatResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ChatResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ChatResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ChatResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ChatResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ChatResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ChatResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -256,14 +256,14 @@ public final class org/nirmato/ollama/api/CheckBlobRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/CheckBlobRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/CheckBlobRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/CheckBlobRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/CheckBlobRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/CheckBlobRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CheckBlobRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CheckBlobRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -293,14 +293,14 @@ public final class org/nirmato/ollama/api/CopyModelRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/CopyModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/CopyModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/CopyModelRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/CopyModelRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/CopyModelRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CopyModelRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CopyModelRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -331,14 +331,14 @@ public final class org/nirmato/ollama/api/CreateBlobRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/CreateBlobRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/CreateBlobRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/CreateBlobRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/CreateBlobRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/CreateBlobRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CreateBlobRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CreateBlobRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -388,14 +388,14 @@ public final class org/nirmato/ollama/api/CreateModelRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/CreateModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/CreateModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/CreateModelRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/CreateModelRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/CreateModelRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CreateModelRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/CreateModelRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -453,6 +453,7 @@ public final class org/nirmato/ollama/api/CreateModelRequest$Quantize : java/lan
 	public static final field Q4_K_M Lorg/nirmato/ollama/api/CreateModelRequest$Quantize;
 	public static final field Q4_K_S Lorg/nirmato/ollama/api/CreateModelRequest$Quantize;
 	public static final field Q8_0 Lorg/nirmato/ollama/api/CreateModelRequest$Quantize;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lorg/nirmato/ollama/api/CreateModelRequest$Quantize;
 	public static fun values ()[Lorg/nirmato/ollama/api/CreateModelRequest$Quantize;
 }
@@ -473,14 +474,14 @@ public final class org/nirmato/ollama/api/DeleteModelRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/DeleteModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/DeleteModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/DeleteModelRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/DeleteModelRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/DeleteModelRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/DeleteModelRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/DeleteModelRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -503,6 +504,7 @@ public final class org/nirmato/ollama/api/DoneReason : java/lang/Enum {
 	public static final field LENGTH Lorg/nirmato/ollama/api/DoneReason;
 	public static final field LOAD Lorg/nirmato/ollama/api/DoneReason;
 	public static final field STOP Lorg/nirmato/ollama/api/DoneReason;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getValue ()Ljava/lang/String;
 	public fun toString ()Ljava/lang/String;
 	public static fun valueOf (Ljava/lang/String;)Lorg/nirmato/ollama/api/DoneReason;
@@ -535,14 +537,14 @@ public final class org/nirmato/ollama/api/EmbedRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/EmbedRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/EmbedRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/EmbedRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/EmbedRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/EmbedRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/EmbedRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/EmbedRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -584,14 +586,14 @@ public final class org/nirmato/ollama/api/EmbedResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/EmbedResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/EmbedResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/EmbedResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/EmbedResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/EmbedResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/EmbedResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/EmbedResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -622,14 +624,14 @@ public final class org/nirmato/ollama/api/EmbeddedInput$EmbeddedList : org/nirma
 	public final synthetic fun unbox-impl ()Ljava/util/List;
 }
 
-public final class org/nirmato/ollama/api/EmbeddedInput$EmbeddedList$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/EmbeddedInput$EmbeddedList$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/EmbeddedInput$EmbeddedList$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-mLLiRYM (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-mLLiRYM (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-V95jd0I (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public final fun serialize-V95jd0I (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -652,14 +654,14 @@ public final class org/nirmato/ollama/api/EmbeddedInput$EmbeddedText : org/nirma
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/EmbeddedInput$EmbeddedText$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/EmbeddedInput$EmbeddedText$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/EmbeddedInput$EmbeddedText$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-5ERFP2I (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-5ERFP2I (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-OBcofNQ (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-OBcofNQ (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -681,14 +683,14 @@ public final class org/nirmato/ollama/api/FailureResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/FailureResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/FailureResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/FailureResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/FailureResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/FailureResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/FailureResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/FailureResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -719,14 +721,14 @@ public final class org/nirmato/ollama/api/Format$FormatSchema : org/nirmato/olla
 	public final synthetic fun unbox-impl ()Lkotlinx/serialization/json/JsonObject;
 }
 
-public final class org/nirmato/ollama/api/Format$FormatSchema$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/Format$FormatSchema$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/Format$FormatSchema$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-GNE0Kn0 (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonObject;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-GNE0Kn0 (Lkotlinx/serialization/encoding/Decoder;)Lkotlinx/serialization/json/JsonObject;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-EGuWGvI (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
+	public final fun serialize-EGuWGvI (Lkotlinx/serialization/encoding/Encoder;Lkotlinx/serialization/json/JsonObject;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -749,14 +751,14 @@ public final class org/nirmato/ollama/api/Format$FormatType : org/nirmato/ollama
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/Format$FormatType$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/Format$FormatType$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/Format$FormatType$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize-p86XIzY (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize-p86XIzY (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize-9sTMrZo (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public final fun serialize-9sTMrZo (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -784,14 +786,14 @@ public final class org/nirmato/ollama/api/ListModelsResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ListModelsResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ListModelsResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ListModelsResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ListModelsResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ListModelsResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ListModelsResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ListModelsResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -820,14 +822,14 @@ public final class org/nirmato/ollama/api/Message {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/Message$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/Message$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/Message$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Message;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Message;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Message;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Message;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -843,6 +845,7 @@ public final class org/nirmato/ollama/api/ModelCapability : java/lang/Enum {
 	public static final field Thinking Lorg/nirmato/ollama/api/ModelCapability;
 	public static final field Tools Lorg/nirmato/ollama/api/ModelCapability;
 	public static final field Vision Lorg/nirmato/ollama/api/ModelCapability;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lorg/nirmato/ollama/api/ModelCapability;
 	public static fun values ()[Lorg/nirmato/ollama/api/ModelCapability;
 }
@@ -874,14 +877,14 @@ public final class org/nirmato/ollama/api/ModelDetails {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ModelDetails$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ModelDetails$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ModelDetails$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ModelDetails;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ModelDetails;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ModelDetails;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ModelDetails;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -901,14 +904,14 @@ public final class org/nirmato/ollama/api/MonitoringResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/MonitoringResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/MonitoringResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/MonitoringResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/MonitoringResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/MonitoringResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/MonitoringResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/MonitoringResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -984,14 +987,14 @@ public final class org/nirmato/ollama/api/OllamaModel {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/OllamaModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/OllamaModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/OllamaModel$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/OllamaModel;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/OllamaModel;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/OllamaModel;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/OllamaModel;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1071,14 +1074,14 @@ public final class org/nirmato/ollama/api/Options {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/Options$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/Options$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/Options$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Options;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Options;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Options;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Options;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1105,14 +1108,14 @@ public final class org/nirmato/ollama/api/ProcessResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ProcessResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ProcessResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ProcessResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ProcessResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ProcessResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProcessResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProcessResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1146,14 +1149,14 @@ public final class org/nirmato/ollama/api/ProcessResponse$ProcessModel {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ProcessResponse$ProcessModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ProcessResponse$ProcessModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ProcessResponse$ProcessModel$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ProcessResponse$ProcessModel;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ProcessResponse$ProcessModel;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProcessResponse$ProcessModel;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProcessResponse$ProcessModel;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1181,14 +1184,14 @@ public final class org/nirmato/ollama/api/ProgressResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ProgressResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ProgressResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ProgressResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ProgressResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ProgressResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProgressResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ProgressResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1217,14 +1220,14 @@ public final class org/nirmato/ollama/api/PullModelRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/PullModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/PullModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/PullModelRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/PullModelRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/PullModelRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/PullModelRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/PullModelRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1267,14 +1270,14 @@ public final class org/nirmato/ollama/api/PushModelRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/PushModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/PushModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/PushModelRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/PushModelRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/PushModelRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/PushModelRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/PushModelRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1307,6 +1310,7 @@ public final class org/nirmato/ollama/api/Role : java/lang/Enum {
 	public static final field SYSTEM Lorg/nirmato/ollama/api/Role;
 	public static final field TOOL Lorg/nirmato/ollama/api/Role;
 	public static final field USER Lorg/nirmato/ollama/api/Role;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getValue ()Ljava/lang/String;
 	public static fun valueOf (Ljava/lang/String;)Lorg/nirmato/ollama/api/Role;
 	public static fun values ()[Lorg/nirmato/ollama/api/Role;
@@ -1328,14 +1332,14 @@ public final class org/nirmato/ollama/api/ShowModelRequest {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ShowModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ShowModelRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ShowModelRequest$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ShowModelRequest;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ShowModelRequest;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ShowModelRequest;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ShowModelRequest;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1377,14 +1381,14 @@ public final class org/nirmato/ollama/api/ShowModelResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ShowModelResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ShowModelResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ShowModelResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ShowModelResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ShowModelResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ShowModelResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ShowModelResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1406,14 +1410,14 @@ public final class org/nirmato/ollama/api/Tool {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/Tool$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/Tool$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/Tool$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Tool;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Tool;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1438,14 +1442,14 @@ public final class org/nirmato/ollama/api/Tool$ToolFunction {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/Tool$ToolFunction$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/Tool$ToolFunction$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/Tool$ToolFunction$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Tool$ToolFunction;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Tool$ToolFunction;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool$ToolFunction;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool$ToolFunction;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1470,14 +1474,14 @@ public final class org/nirmato/ollama/api/Tool$ToolParameters {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/Tool$ToolParameters$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/Tool$ToolParameters$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/Tool$ToolParameters$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Tool$ToolParameters;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/Tool$ToolParameters;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool$ToolParameters;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/Tool$ToolParameters;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1497,14 +1501,14 @@ public final class org/nirmato/ollama/api/ToolCall {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ToolCall$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ToolCall$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ToolCall$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ToolCall;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ToolCall;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ToolCall;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ToolCall;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1526,14 +1530,14 @@ public final class org/nirmato/ollama/api/ToolCall$FunctionCall {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/ToolCall$FunctionCall$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/ToolCall$FunctionCall$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/ToolCall$FunctionCall$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ToolCall$FunctionCall;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/ToolCall$FunctionCall;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ToolCall$FunctionCall;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/ToolCall$FunctionCall;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
@@ -1558,14 +1562,14 @@ public final class org/nirmato/ollama/api/VersionResponse {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class org/nirmato/ollama/api/VersionResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class org/nirmato/ollama/api/VersionResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lorg/nirmato/ollama/api/VersionResponse$$serializer;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/VersionResponse;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/nirmato/ollama/api/VersionResponse;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/VersionResponse;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/nirmato/ollama/api/VersionResponse;)V
 	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 

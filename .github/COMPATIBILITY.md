@@ -2,11 +2,12 @@
 
 ## Compatibility of dependencies
 
-| nirmato-ollama | Java   | Kotlin Language & API | Ollama API |
-|----------------|--------|-----------------------|------------|
-| 0.2.0          | 11     | 1.8                   | 0.9.0      |
-| 0.1.1          | 11     | 1.8                   | 0.5.7      |
-| 0.1.0          | 11     | 1.8                   | 0.5.7      |
+| nirmato-ollama | Java         | Kotlin Language & API | Ollama API |
+|----------------|--------------|-----------------------|------------|
+| 0.3.0          | 11 or higher | 2.0 or higher         | 0.9.0      |
+| 0.2.0          | 11 or higher | 1.8 or higher         | 0.9.0      |
+| 0.1.1          | 11 or higher | 1.8 or higher         | 0.5.7      |
+| 0.1.0          | 11 or higher | 1.8 or higher         | 0.5.7      |
 
 ## Supported Platforms
 

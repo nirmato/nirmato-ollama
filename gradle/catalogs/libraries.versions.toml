@@ -1,6 +1,6 @@
 [versions]
 detekt = "1.23.8"
-gradle-foojay = "0.10.0"
+foojay-resolver = "1.0.0"
 gradle-maven-publish-plugin = "0.32.0"
 kotlin = "2.2.0"
 kotlinx-bcv = "0.17.0"
@@ -13,7 +13,7 @@ ktor = "3.2.2"
 
 [libraries]
 detekt-gradle-plugin = { module= "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-foojay-resolver = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-foojay" }
+foojay-resolver = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "foojay-resolver" }
 gradle-maven-publish-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "gradle-maven-publish-plugin" }
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlin" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

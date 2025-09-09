@@ -16,14 +16,6 @@ dependencies {
     implementation(libraries.foojay.resolver)
 }
 
-sourceSets {
-    main {
-        kotlin {
-            srcDirs("src/main/kotlinX")
-        }
-    }
-}
-
 kotlin {
     explicitApi()
 
@@ -35,20 +27,30 @@ kotlin {
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
 
+    coreLibrariesVersion = providers.gradleProperty("kotlin.compilerOptions.apiVersion").map(KotlinVersion::fromVersion).get().toString()
+
     jvmToolchain {
         languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
+    }
+
+    sourceSets {
+        main {
+            kotlin {
+                srcDirs("src/main/kotlinX")
+            }
+        }
     }
 }
 
 gradlePlugin {
     plugins {
-        register("DefaultSettingsPlugin") {
-            id = "build-settings-default"
-            implementationClass = "build.gradle.plugins.settings.DefaultSettingsPlugin"
+        register("ProjectSettingsPlugin") {
+            id = "build-settings"
+            implementationClass = "build.gradle.plugins.settings.ProjectSettingsPlugin"
         }
-        register("FoojayConfigurerPlugin") {
-            id = "build-foojay"
-            implementationClass = "build.gradle.plugins.settings.FoojayBuildPlugin"
+        register("FoojayToolchainsSettingsPlugin") {
+            id = "build-foojay-toolchains"
+            implementationClass = "build.gradle.plugins.settings.FoojayToolchainsSettingsPlugin"
         }
     }
 }

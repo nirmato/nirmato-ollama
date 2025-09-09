@@ -1,5 +1,7 @@
 package build.gradle.plugins.build
 
+import kotlin.text.get
+import kotlin.toString
 import build.gradle.plugins.build.KarmaBrowserTarget.Chrome
 import build.gradle.plugins.build.KarmaBrowserTarget.ChromeCanary
 import build.gradle.plugins.build.KarmaBrowserTarget.ChromeCanaryHeadless
@@ -247,6 +249,8 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
             jvmToolchain {
                 languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
             }
+
+            coreLibrariesVersion = providers.gradleProperty("kotlin.compilerOptions.apiVersion").map(KotlinVersion::fromVersion).get().toString()
         }
     }
 

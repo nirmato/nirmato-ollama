@@ -17,14 +17,6 @@ dependencies {
     implementation(libraries.gradle.maven.publish.plugin)
 }
 
-sourceSets {
-    main {
-        kotlin {
-            srcDirs("src/main/kotlinX")
-        }
-    }
-}
-
 kotlin {
     explicitApi()
 
@@ -36,8 +28,18 @@ kotlin {
         freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
     }
 
+    coreLibrariesVersion = providers.gradleProperty("kotlin.compilerOptions.apiVersion").map(KotlinVersion::fromVersion).get().toString()
+
     jvmToolchain {
         languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
+    }
+
+    sourceSets {
+        main {
+            kotlin {
+                srcDirs("src/main/kotlinX")
+            }
+        }
     }
 }
 

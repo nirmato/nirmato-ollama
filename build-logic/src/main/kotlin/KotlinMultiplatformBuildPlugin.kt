@@ -249,8 +249,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
             jvmToolchain {
                 languageVersion = providers.gradleProperty("kotlin.javaToolchain.mainJvmCompiler").map(JavaLanguageVersion::of)
             }
-
-            coreLibrariesVersion = providers.gradleProperty("kotlin.compilerOptions.apiVersion").map(KotlinVersion::fromVersion).get().toString()
         }
     }
 

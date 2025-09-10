@@ -3,7 +3,7 @@ openapi: 3.1.0
 info:
     title: Ollama API
     description: Ollama is an open-source tool that runs large language models (LLMs) directly on a local machine.
-    version: 0.9.3
+    version: 0.11.10
 
 servers:
     -   url: http://localhost:11434/api
@@ -755,6 +755,9 @@ components:
                         type:
                             $ref: '#/components/schemas/ToolCall'
                         description: The tool to use
+                tool_name:
+                    type: string
+                    description: The name of the tool that was executed to inform the model of the result
             required:
                 - role
                 - content

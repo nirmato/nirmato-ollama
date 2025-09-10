@@ -17,10 +17,13 @@ import org.nirmato.ollama.api.Format.FormatSchema
 import org.nirmato.ollama.api.Format.FormatType
 import org.nirmato.ollama.api.Message
 import org.nirmato.ollama.api.Options
-import org.nirmato.ollama.api.Role.USER
+import org.nirmato.ollama.api.Role
+import org.nirmato.ollama.api.Role.*
 import org.nirmato.ollama.api.Tool
 import org.nirmato.ollama.api.Tool.ToolFunction
 import org.nirmato.ollama.api.Tool.ToolParameters
+import org.nirmato.ollama.api.ToolCall
+import org.nirmato.ollama.api.ToolCall.FunctionCall
 
 internal class ChatClientTest {
 
@@ -67,6 +70,153 @@ internal class ChatClientTest {
     }
 
     @Test
+    fun chat_withNoStreamingWithTools_returnSuccess() = runTest {
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
+                            "model": "tinyllama",
+                            "created_at": "2025-01-05T01:33:06.981491109Z",
+                            "message": {
+                                "role": "assistant",
+                                "content": "The sky blue color is not an inherent characteristic of the sun but rather a result of the atmosphere and the environment above it."
+                            },
+                            "tool_calls": [{
+                              "function": {
+                                "name": "get_weather",
+                                  "arguments": {
+                                    "city": "Tokyo"
+                                  }
+                              }
+                            }],
+                            "done_reason": "stop",
+                            "done": true,
+                            "total_duration": 3375883588,
+                            "load_duration": 1025258177,
+                            "prompt_eval_count": 40,
+                            "prompt_eval_duration": 263000000,
+                            "eval_count": 142,
+                            "eval_duration": 2029000000
+                        }""",
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
+                }
+            }
+        }
+
+        val chatRequest = chatRequest {
+            model("mock-model")
+            messages(listOf(Message(role = USER, content = "Why is the sky blue?")))
+            tools(
+                listOf(
+                    Tool(
+                        type = "function",
+                        function = ToolFunction(
+                            name = "get_weather",
+                            description = "Get the current weather for a city",
+                            parameters = ToolParameters(
+                                required = listOf("city"),
+                                properties = mapOf(
+                                    "city" to buildJsonObject {
+                                        put("type", "string")
+                                        put("description", "The city to get the weather for, e.g. San Francisco, CA")
+                                    }
+                                )
+                            )
+                        )
+                    )
+                ))
+        }
+        val response = ollamaClient.chat(chatRequest)
+
+        println(response.toString())
+    }
+
+    @Test
+    fun chat_withNoStreamingWithToolsWithHistory_returnSuccess() = runTest {
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """{
+                              "model": "llama3.2",
+                              "created_at": "2025-07-07T20:43:37.688511Z",
+                              "message": {
+                                "role": "assistant",
+                                "content": "The current temperature in Toronto is 11°C."
+                              },
+                              "done_reason": "stop",
+                              "done": true,
+                              "total_duration": 890771750,
+                              "load_duration": 707634750,
+                              "prompt_eval_count": 94,
+                              "prompt_eval_duration": 91703208,
+                              "eval_count": 11,
+                              "eval_duration": 90282125
+                            }""",
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
+                }
+            }
+        }
+
+        val chatRequest = chatRequest {
+            model("mock-model")
+            messages(
+                listOf(
+                    Message(role = USER, content = "What is the weather in Toronto?"),
+                    Message(
+                        role = ASSISTANT,
+                        content = "",
+                        tools = listOf(
+                            ToolCall(
+                                function = FunctionCall(
+                                    name = "get_temperature",
+                                    arguments = mapOf("city" to JsonPrimitive("Toronto"))
+                                )
+                            )
+                        )
+                    ),
+                    Message(role = TOOL, content = "11 degrees celsius", toolName = "get_temperature")
+                )
+            )
+            tools(
+                listOf(
+                    Tool(
+                        type = "function",
+                        function = ToolFunction(
+                            name = "get_weather",
+                            description = "Get the current weather for a city",
+                            parameters = ToolParameters(
+                                required = listOf("city"),
+                                properties = mapOf(
+                                    "city" to buildJsonObject {
+                                        put("type", "string")
+                                        put("description", "The city to get the weather for, e.g. San Francisco, CA")
+                                    }
+                                )
+                            )
+                        )
+                    )
+                ))
+        }
+        val response = ollamaClient.chat(chatRequest)
+
+        println(response.toString())
+    }
+
+    @Test
     fun chat_withStreaming_returnSuccess() = runTest {
         val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
             httpClient {
@@ -89,6 +239,55 @@ internal class ChatClientTest {
             model("mock-model")
             messages(listOf(Message(role = USER, content = "Why is the sky blue?")))
         }
+        val response = ollamaClient.chatStream(chatRequest)
+
+        response.collect { println(it) }
+    }
+
+    @Test
+    fun chat_withStreamingWithTools_returnSuccess() = runTest {
+        val ollamaClient = OllamaClient(MockHttpClientEngineFactory()) {
+            httpClient {
+                engine {
+                    addHandler {
+                        respond(
+                            content = """
+                                { "model": "llama3.2", "created_at": "2025-07-07T20:22:19.184789Z", "message": { "role": "assistant", "content": "", "tool_calls": [ { "function": { "name": "get_weather", "arguments": { "city": "Tokyo" } } } ] }, "done": false }
+                                { "model": "llama3.2", "created_at": "2025-07-07T20:22:20.184789Z", "message": { "role": "assistant", "content": "", "tool_calls": [ { "function": { "name": "get_weather", "arguments": { "city": "Tokyo" } } } ] }, "done": true }""",
+                            status = HttpStatusCode.OK,
+                            headers {
+                                append(HttpHeaders.ContentType, "application/json")
+                            }
+                        )
+                    }
+                }
+            }
+        }
+
+        val chatRequest = chatRequest {
+            model("mock-model")
+            messages(listOf(Message(role = USER, content = "Why is the sky blue?")))
+            tools(
+                listOf(
+                    Tool(
+                        type = "function",
+                        function = ToolFunction(
+                            name = "get_weather",
+                            description = "Get the current weather for a city",
+                            parameters = ToolParameters(
+                                required = listOf("city"),
+                                properties = mapOf(
+                                    "city" to buildJsonObject {
+                                        put("type", "string")
+                                        put("description", "The city to get the weather for, e.g. San Francisco, CA")
+                                    }
+                                )
+                            )
+                        )
+                    )
+                ))
+        }
+
         val response = ollamaClient.chatStream(chatRequest)
 
         response.collect { println(it) }

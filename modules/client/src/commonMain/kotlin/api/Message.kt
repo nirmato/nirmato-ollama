@@ -30,4 +30,7 @@ public data class Message(
     /** A list of tools in JSON the model wants to use. */
     @SerialName(value = "tool_calls")
     val tools: List<ToolCall>? = null,
+
+    @SerialName(value = "tool_name")
+    val toolName: String? = null,
 )

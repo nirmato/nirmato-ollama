@@ -25,7 +25,7 @@ Add the dependency to your Gradle configuration:
 implementation("org.nirmato.ollama:nirmato-ollama-client-ktor:0.2.0")
 
 // example using ktor CIO engine
-implementation("io.ktor:ktor-client-cio:3.2.3")
+implementation("io.ktor:ktor-client-cio:3.1.3")
 ```
 
 or to your Maven pom:
@@ -41,7 +41,7 @@ or to your Maven pom:
 <dependency>
     <groupId>io.ktor</groupId>
     <artifactId>ktor-client-cio</artifactId>
-    <version>3.2.3</version>
+    <version>3.1.3</version>
 </dependency>
 ```
 

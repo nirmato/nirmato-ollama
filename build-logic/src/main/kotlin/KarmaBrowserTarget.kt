@@ -58,6 +58,7 @@ public sealed class KarmaBrowserTarget(
                     return it
                 }
             }
+
             throw GradleException("Unknown KarmaBrowserTarget")
         }
     }

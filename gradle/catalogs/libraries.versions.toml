@@ -2,7 +2,7 @@
 detekt = "1.23.8"
 foojay-resolver = "1.0.0"
 gradle-maven-publish-plugin = "0.32.0"
-kotlin = "2.2.0"
+kotlin = "2.2.20"
 kotlinx-bcv = "0.17.0"
 kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.6.2"

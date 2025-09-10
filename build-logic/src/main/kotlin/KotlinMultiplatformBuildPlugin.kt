@@ -1,7 +1,5 @@
 package build.gradle.plugins.build
 
-import kotlin.text.get
-import kotlin.toString
 import build.gradle.plugins.build.KarmaBrowserTarget.Chrome
 import build.gradle.plugins.build.KarmaBrowserTarget.ChromeCanary
 import build.gradle.plugins.build.KarmaBrowserTarget.ChromeCanaryHeadless
@@ -141,6 +139,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
             extensions.configure<NodeJsEnvSpec> {
                 downloadBaseUrl = null
                 download = false
+                version = "22.19.0"
             }
         }
 
@@ -433,6 +432,8 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                             useKarma {
                                 configureKarma(defaultKarmaBrowserTarget())
                             }
+
+                            failOnNoDiscoveredTests = false
                         }
                     }
 
@@ -443,6 +444,9 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                             }
                         }
                     }
+
+                    useEsModules()
+                    generateTypeScriptDefinitions()
 
                     binaries.executable()
                     binaries.library()
@@ -480,10 +484,17 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                             wasmDebugInfo()
                             wasmDebugFriendly()
                             wasmDebuggerCustomFormatters()
+                            wasmKClassFqn()
+                            wasmEnableArrayRangeChecks()
                         }
                     }
 
-                    browser()
+                    browser {
+                        testTask {
+                            failOnNoDiscoveredTests = false
+                        }
+                    }
+
                     nodejs {
                         testTask {
                             useKarma {
@@ -491,6 +502,8 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                             }
                         }
                     }
+
+                    generateTypeScriptDefinitions()
 
                     binaries.executable()
                     binaries.library()

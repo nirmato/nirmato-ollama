@@ -118,6 +118,8 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 reportNewYarnLock = true
                 yarnLockAutoReplace = true
                 yarnLockMismatchReport = YarnLockMismatchReport.FAIL
+
+                resolution("tmp", "0.2.4")
             }
         }
     }
@@ -129,6 +131,8 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 reportNewYarnLock = true
                 yarnLockAutoReplace = true
                 yarnLockMismatchReport = YarnLockMismatchReport.FAIL
+
+                resolution("tmp", "0.2.4")
             }
         }
     }

@@ -57,13 +57,16 @@ public class ProjectSettingsPlugin : Plugin<Settings> {
 
     private fun requireMinimumGradleVersion() {
         if (GradleVersion.current() < MINIMUM_GRADLE_VERSION) {
-            throw GradleException("You need Gradle version ${MINIMUM_GRADLE_VERSION.baseVersion} or higher, but was ${GradleVersion.current().baseVersion}")
+            throw GradleException(
+                "This build requires Gradle to be run with at least version ${MINIMUM_GRADLE_VERSION.baseVersion} " +
+                    "but was ${GradleVersion.current().baseVersion}"
+            )
         }
     }
 
     private fun requireJavaRuntimeVersion() {
-        if (JavaVersion.current() < MINIMUM_JAVA_VERSION) {
-            throw GradleException("You need Java version $MINIMUM_JAVA_VERSION or higher, but was ${JavaVersion.current()}")
+        if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_21)) {
+            throw GradleException("This build requires Gradle to be run with at least Java $MINIMUM_JAVA_VERSION but was ${JavaVersion.current()}")
         }
     }
 

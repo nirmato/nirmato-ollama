@@ -68,7 +68,7 @@ runs:
                     ${{ runner.os }}-konan-
 
         -   if: matrix.os == 'Windows'
-            uses: msys2/setup-msys2@fb197b72ce45fb24f17bf3f807a388985654d1f2 #v2.27.0
+            uses: msys2/setup-msys2@fb197b72ce45fb24f17bf3f807a388985654d1f2 #v2.29.0
             with:
                 release: false
                 install: mingw-w64-x86_64-openssl

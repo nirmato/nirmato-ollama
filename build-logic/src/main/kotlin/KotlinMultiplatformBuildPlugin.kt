@@ -60,7 +60,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         apply<KotlinMultiplatformPluginWrapper>()
 
         configureJvmToolchain()
-        configureKotlinSourceSets()
         configureAllTargets()
         configureTargets()
     }
@@ -361,17 +360,6 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
         if (project.plugins.hasPlugin("org.jetbrains.kotlinx.binary-compatibility-validator")) {
             val jvmApiCheck = project.tasks.named("jvmApiCheck")
             dependsOn(jvmApiCheck)
-        }
-    }
-
-    private fun Project.configureKotlinSourceSets() {
-        configure<KotlinMultiplatformExtension> {
-            sourceSets.configureEach {
-                languageSettings.apply {
-                    apiVersion = project.gradleStringProperty("kotlin.compilerOptions.apiVersion").get()
-                    languageVersion = project.gradleStringProperty("kotlin.compilerOptions.languageVersion").get()
-                }
-            }
         }
     }
 

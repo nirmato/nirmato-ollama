@@ -2,6 +2,8 @@ name: CI Pull Request
 
 on:
     workflow_dispatch:
+    schedule:
+        -   cron: '0 0 1 * *'
 
 concurrency:
     group: ci-codeql-${{ github.workflow }}-${{ github.ref }}

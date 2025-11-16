@@ -1,4 +1,4 @@
-name: CI Pull Request
+name: CI CodeQL Analysis
 
 on:
     workflow_dispatch:

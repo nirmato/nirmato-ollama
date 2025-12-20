@@ -98,7 +98,7 @@ public class KotlinJvmCompilerOptionsBuilder : KotlinCommonCompilerOptionsBuilde
     public fun jspecifyAnnotations(jSpecifyAnnotationOption: JSpecifyAnnotationOption): Boolean = arguments.add("-Xjspecify-annotations=${jSpecifyAnnotationOption.value}")
 
     /** Specify the JVM default method generation strategy. */
-    public fun jvmDefault(jvmDefaultOption: JvmDefaultOption): Boolean = arguments.add("-Xjvm-default=${jvmDefaultOption.value}")
+    public fun jvmDefault(jvmDefaultOption: JvmDefaultOption): Boolean = arguments.add("-jvm-default=${jvmDefaultOption.value}")
 
     /** Default script extension. */
     public fun defaultScriptExtension(extension: String): Boolean = arguments.add("-Xdefault-script-extension=$extension")
@@ -212,8 +212,9 @@ public class KotlinJvmCompilerOptionsBuilder : KotlinCommonCompilerOptionsBuilde
     }
 
     public enum class JvmDefaultOption(public val value: String) {
-        ALL("all"),
-        ALL_COMPATIBILITY("all-compatibility"),
+        DISABLE("disable"),
+        ENABLE("enable"),
+        NO_COMPATIBILITY("no-compatibility"),
     }
 
     public enum class SupportCompatqualOption(public val value: String) {

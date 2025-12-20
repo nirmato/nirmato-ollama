@@ -582,7 +582,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                     compilerOptions {
                         withJvmCompilerArguments {
                             requiresJsr305()
-                            jvmDefault(JvmDefaultOption.ALL_COMPATIBILITY)
+                            jvmDefault(JvmDefaultOption.ENABLE)
                             jdkRelease(jvmVersion.majorVersion)
                         }
                         this.javaParameters = true

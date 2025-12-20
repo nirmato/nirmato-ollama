@@ -1,6 +1,6 @@
 package org.nirmato.ollama.api
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

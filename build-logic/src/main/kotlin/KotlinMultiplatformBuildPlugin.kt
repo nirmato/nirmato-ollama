@@ -119,6 +119,8 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 yarnLockMismatchReport = YarnLockMismatchReport.FAIL
 
                 resolution("tmp", "0.2.4")
+                resolution("node-forge", "1.3.3")
+                resolution("js-yaml", "4.1.1")
             }
         }
     }

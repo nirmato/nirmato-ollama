@@ -1,4 +1,4 @@
 # JitPack configuration file
 # See https://docs.jitpack.io/building/#java-version
 jdk:
-  - openjdk21
+  - openjdk17

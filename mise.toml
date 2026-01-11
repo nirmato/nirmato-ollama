@@ -1,0 +1,3 @@
+[tools]
+java = "zulu-17"
+node = "25"

@@ -19,7 +19,7 @@ public interface OllamaApi {
     /**
      * Sends a chat request.
      *
-     * This is a function that gives you control over both the model's behavior and the conversation context.
+     * Generate the next chat message in a conversation between a user and an assistant.
      *
      * Example:
      * ```kotlin
@@ -37,9 +37,9 @@ public interface OllamaApi {
     public suspend fun chat(chatRequest: ChatRequest): ChatResponse
 
     /**
-     * Streams chat responses chunk by chunk from the Ollama API.
+     * Streams chat responses chunk by chunk.
      *
-     * This is a function that gives you control over both the model's behavior and the conversation context.
+     * Generate the next chat message in a conversation between a user and an assistant.
      *
      * Example:
      * ```kotlin
@@ -103,7 +103,7 @@ public interface OllamaApi {
     public fun chatCompletionStream(chatCompletionRequest: ChatCompletionRequest): Flow<ChatCompletionResponse>
 
     /**
-     * Generates an embedding for the given input request.
+     * Generates vector embedding representing the input text.
      *
      * Interacts with the Ollama API to create embeddings, which are vector representations of input data.
      * Embeddings are commonly used in machine learning tasks such as similarity search, clustering, and classification.

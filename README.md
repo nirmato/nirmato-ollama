@@ -1,12 +1,12 @@
 # nirmato-ollama
 
 [![Klibs](https://img.shields.io/badge/klibs-0.2.0-%237F52FF.svg?logo=kotlin&color=blue)](https://klibs.io/project/nirmato/nirmato-ollama)
-![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.2.20-blue.svg?logo=kotlin)
+![![kotlin](https://kotlinlang.org/)](https://img.shields.io/badge/kotlin--multiplatform-2.3.0-blue.svg?logo=kotlin)
 ![![License](https://github.com/nirmato/nirmato-ollama/blob/main/LICENSE.md)](https://img.shields.io/github/license/nirmato/nirmato-ollama)
 
 An Ollama client SDK that allows you to easily interact with the Ollama API.
 
-The supported API follows the OpenAPI definition [Ollama API](oas/ollama-openapi.yaml) described in [Ollama API Docs](https://github.com/ollama/ollama/blob/main/docs/api.md).
+The supported API follows the [Ollama OpenAPI](https://docs.ollama.com/api).
 
 <a href="https://www.buymeacoffee.com/kkadete" target="_blank">
     <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="width: 128px;" >

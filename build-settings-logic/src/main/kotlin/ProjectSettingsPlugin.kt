@@ -65,14 +65,14 @@ public class ProjectSettingsPlugin : Plugin<Settings> {
     }
 
     private fun requireJavaRuntimeVersion() {
-        if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_21)) {
+        if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {
             throw GradleException("This build requires Gradle to be run with at least Java $MINIMUM_JAVA_VERSION but was ${JavaVersion.current()}")
         }
     }
 
     private companion object {
         const val PLUGIN_ID: String = "build-settings"
-        val MINIMUM_GRADLE_VERSION: GradleVersion = GradleVersion.version("9.0.0")
+        val MINIMUM_GRADLE_VERSION: GradleVersion = GradleVersion.version("9.2.1")
         val MINIMUM_JAVA_VERSION: JavaVersion = JavaVersion.toVersion("17")
     }
 }

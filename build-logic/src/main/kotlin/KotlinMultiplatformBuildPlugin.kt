@@ -122,6 +122,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 resolution("node-forge", "1.3.3")
                 resolution("js-yaml", "4.1.1")
                 resolution("qs", "6.14.1")
+                resolution("diff", "8.0.3")
             }
         }
     }

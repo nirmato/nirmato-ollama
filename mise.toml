@@ -1,3 +1,29 @@
 [tools]
 java = "zulu-17"
 node = "25"
+gradle = "9.2.1"
+"npm:yarn" = "1.22.22"
+
+[tasks.setup]
+description = "Setup git"
+run = "git config --get core.filemode && git config --local core.filemode false"
+
+[tasks.clean]
+description = "Clean the project"
+run = "gradlew clean"
+
+[tasks.test]
+description = "Test the project"
+run = "gradlew test"
+
+[tasks.build]
+description = "Build the project"
+run = "gradlew build"
+
+[tasks.yarnUpdate]
+description = "Update Yarn dependencies"
+run = [
+    "rm -f ./gradle/js/yarn.lock",
+    "rm -f ./gradle/wasm/yarn.lock",
+    "gradlew kotlinUpgradeYarnLock kotlinWasmUpgradeYarnLock"
+]

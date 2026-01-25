@@ -123,6 +123,7 @@ public class KotlinMultiplatformBuildPlugin : Plugin<Project> {
                 resolution("js-yaml", "4.1.1")
                 resolution("qs", "6.14.1")
                 resolution("diff", "8.0.3")
+                resolution("lodash", "^4.17.23")
             }
         }
     }
